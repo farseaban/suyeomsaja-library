@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro'
+import PostRow from '../../components/PostRow.astro'
+import { loadPosts, seriesNames } from '../../lib/posts'
+
+export function getStaticPaths() {
+  return seriesNames(loadPosts()).map((name) => ({ params: { name }, props: { name } }))
+}
+const { name } = Astro.props as { name: string }
+const posts = loadPosts().filter((p) => p.kicker === name).reverse()
+---
+<Base title={name} bodyClass="p-list">
+  <div class="wrap" slot="hero">
+    <header class="page-head"><p class="s-label">코너</p><h1>{name}</h1><p>글 {posts.length}편 · 쓴 순서대로</p></header>
+  </div>
+  <div class="wrap">
+    <ol class="rows numbered">{posts.map((p) => <PostRow post={p} />)}</ol>
+  </div>
+</Base>

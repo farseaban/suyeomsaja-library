@@ -1,0 +1,22 @@
+---
+import Chip from './Chip.astro'
+import { activeCategories, loadPosts } from '../lib/posts'
+import { url } from '../lib/url'
+
+// 분야별 서가 — 글 제목 색인(1면 · 분야 페이지의 '다른 분야' · 404). 분야 순서는 머리띠와 같고 글이 있는 분야만.
+// 서가 링크에는 화면 전환 이름을 주지 않는다(같은 페이지의 목록 행과 이름이 겹친다).
+interface Props { exclude?: string }
+const { exclude } = Astro.props
+const posts = loadPosts()
+const shelves = activeCategories(posts)
+  .filter((c) => c.slug !== exclude)
+  .map((c) => ({ cat: c, posts: posts.filter((p) => p.category === c.name) }))
+---
+<div class="shelf-grid">
+  {shelves.map(({ cat, posts: mine }) => (
+    <section class="shelf">
+      <p class="shelf-h"><Chip name={cat.name} slug={cat.slug} color={cat.color} /><span class="shelf-n">{mine.length}편</span></p>
+      <ul>{mine.slice(0, 3).map((p) => <li><a href={url(`posts/${p.slug}`)}>{p.title}</a></li>)}</ul>
+    </section>
+  ))}
+</div>

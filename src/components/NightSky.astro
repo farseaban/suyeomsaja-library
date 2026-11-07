@@ -1,0 +1,12 @@
+---
+// 모든 페이지 밤 구역(.s-top)의 바탕 — 새벽 그러데이션 위에 별·별자리·달이 레이어마다 다른 빠르기로 돈다.
+// 달 자리는 CSS가 정한다(.s-sky-moon은 크기 0인 자리 표시). drag는 1면만 — 하늘을 끌 수 있는 페이지라는 표지다.
+interface Props { drag?: boolean }
+const { drag = false } = Astro.props
+---
+<div class="s-sky" aria-hidden="true" data-drag={drag ? '' : undefined}>
+  <canvas class="s-sky-stars"></canvas><i class="s-sky-moon"></i>
+</div>
+<script>
+  import '../scripts/sky'
+</script>

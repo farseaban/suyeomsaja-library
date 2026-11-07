@@ -1,0 +1,26 @@
+---
+import { SITE } from '../config/site'
+import { activeCategories, loadPosts } from '../lib/posts'
+import { url } from '../lib/url'
+
+// 저녁으로 닫는다 — 종이 → 새벽빛 → 밤. 문구는 모두 SITE에서 읽는다.
+const posts = loadPosts()
+const cats = activeCategories(posts).map((c) => ({ ...c, count: posts.filter((p) => p.category === c.name).length }))
+// 사이트 설명은 화면에서만 두 줄로 가른다(뒷줄 앞에 줄표를 되붙여 글자는 원문 그대로)
+const [descHead, ...descRest] = SITE.description.split(' — ')
+---
+<footer class="footer">
+  <div class="wrap f-grid">
+    <div class="f-brand">
+      <a class="name s-serif" href={url('/')}>{SITE.name}</a>
+      <p class="s-serif"><span>{descHead}</span>{descRest.length > 0 && <Fragment>{' '}<span>— {descRest.join(' — ')}</span></Fragment>}</p>
+    </div>
+    <nav class="f-cats" aria-label="분야">
+      {cats.map((c) => <a href={url(`category/${c.slug}`)}>{c.name} <span class="f-n">{c.count}편</span></a>)}
+    </nav>
+    <nav class="f-util" aria-label="꼬리말 메뉴">
+      <a href={url('all')}>모든 글</a><a href={url('about')}>소개</a><a href={url('search')}>검색</a><a href={url('rss.xml')}>RSS</a>
+    </nav>
+  </div>
+  <div class="wrap f-base"><span>© {new Date().getFullYear()} {SITE.author}</span><span>{SITE.artCredit}</span></div>
+</footer>

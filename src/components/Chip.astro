@@ -1,0 +1,10 @@
+---
+import type { PaletteKey } from '../config/site'
+import { url } from '../lib/url'
+
+// 분야 칩 — 분야 이름이 글줄 안에 나오는 곳. 색은 면으로, 글자는 잉크색으로.
+// 그 밖의 속성(data-pagefind-ignore 등)은 링크에 그대로 넘긴다.
+interface Props { name: string; slug: string; color: PaletteKey; [attr: `data-${string}`]: unknown }
+const { name, slug, color, ...rest } = Astro.props
+---
+<a class={`s-chip s-cat-${color}`} href={url(`category/${slug}`)} {...rest}>{name}</a>

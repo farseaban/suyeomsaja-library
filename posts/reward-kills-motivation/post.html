@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상을 주면 왜 흥미가 식을까 — 과잉정당화 효과</title>
+<meta name="description" content="좋아서 하던 일에 상을 걸면 왜 흥미가 식을까. 1971년 퍼즐 실험과 1973년 유치원 실험, 그리고 학계가 갈린 메타분석 논쟁을 원 논문으로 짚고, 어떤 상이 흥미를 깎고 어떤 상은 괜찮은지 가려 본다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  .kicker{font-size:14px;color:var(--lav-d);font-weight:700;letter-spacing:.02em}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:#FFF8E0;border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:#FDF0EA;border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:#FDF0EA}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:#F2F7FC;border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .faq dt{font-weight:800;margin-top:1.2em}
+  .faq dd{margin:.35em 0 0}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:#FFF8E0}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<div class="kicker">마음 읽기</div>
+<h1>상을 주면 왜 흥미가 식을까 — 과잉정당화 효과(Overjustification Effect)</h1>
+<div class="meta">2026-11-06 · 약 15분 분량 · 글 반창모</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"이거 다 하면 상 줄게."</p>
+<p>아이에게, 학생에게, 직원에게 우리는 이 말을 숨 쉬듯 합니다. 책 한 권에 스티커 한 장, 문제집 한 권에 게임 삼십 분, 목표를 넘기면 성과급. 상을 걸면 사람은 더 합니다. 틀린 말이 아닙니다. 상이 걸려 있는 동안에는요.</p>
+<p>1970년대 초, 미국 스탠퍼드 대학 구내의 한 유치원 교실에 여러 색 사인펜과 흰 종이가 놓였습니다. 탁자 맞은편 벽은 한쪽에서만 들여다보이는 거울이었고, 그 뒤에 연구자들이 앉아 있었습니다. 그들이 알고 싶었던 것은 상을 줄 때 벌어지는 일이 아니었습니다. 상이 끝난 다음에 벌어지는 일이었습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>그리고 결정적으로 — <strong>좋아서 하던 일에 상을 약속하면, 사람은 그 일을 '상 때문에 하는 일'로 다시 읽습니다.</strong> 그래서 상이 사라지면 손도 멈춥니다.</p>
+<p>이 글은 아이의 공부에, 교실의 칭찬 스티커에, 팀의 성과급에 상을 걸어 본 분들을 위해 씁니다. 결론부터 말씀드리면, 이 현상은 실험으로 거듭 확인됐지만 모든 상이 그런 것은 아닙니다. 예고 없이 건넨 상과 말로 한 인정은 달랐고, 이것이 얼마나 큰일인지를 두고는 학계가 오래 다퉜습니다. 심리학은 이 현상을 <strong>과잉정당화 효과(Overjustification Effect)</strong>라고 부릅니다.</p>
+
+<!-- 2. 유치원 실험 -->
+<h2>거울 뒤에서 본 사인펜 탁자</h2>
+<p>무대는 스탠퍼드의 빙 유치원이고, 아이들은 생후 40개월에서 64개월, 그러니까 만 세 살에서 다섯 살 남짓이었습니다. 마크 레퍼, 데이비드 그린, 리처드 니스벳 세 연구자는 먼저 사흘 동안 수업 첫 한 시간씩 사인펜을 탁자에 내놓고, 어느 아이가 얼마나 오래 그리는지를 거울 뒤에서 쟀습니다. 사인펜은 평소 교실에 없던 물건이었습니다. 그리고 누가 시키지 않아도 사인펜을 붙잡던 아이들만 골랐습니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>.</p>
+<p>그다음 아이들을 한 명씩 '깜짝 방'으로 데려가 6분 동안 그림을 그리게 했습니다. 다만 방에 들어가기 전에 들은 말이 달랐습니다.</p>
+<ul>
+  <li><b>상을 약속받은 아이들</b> — 큰 금색 별과 빨간 리본이 달리고 이름 쓰는 칸이 있는 '참 잘했어요 상(Good Player Award)'을 먼저 보여 주고, 그림을 그려 주면 받을 수 있다고 했습니다. 아이들은 대개 신이 나서 받고 싶다고 답했습니다.</li>
+  <li><b>뜻밖에 상을 받은 아이들</b> — 상 이야기는 듣지 못한 채 그림을 그렸고, 다 그린 뒤에 똑같은 상을 받았습니다.</li>
+  <li><b>상이 없던 아이들</b> — 상을 기대하지도 받지도 않았습니다.</li>
+</ul>
+<p>진짜 측정은 그로부터 일이 주 뒤였습니다. 교사들이 사인펜을 다시 교실 탁자에 놓았고, 누가 어느 무리였는지 모르는 관찰자들이 거울 뒤에서 다시 시간을 쟀습니다. 세 반에서는 관찰을 하루씩 건너뛰어야 했는데, 논문이 적어 둔 사유 가운데 하나는 교실에 느닷없이 염소가 나타난 일이었습니다<sup class="fn"><a id="cite-1c" href="#ref-1">[1]</a></sup>.</p>
+<p>끝까지 남은 아이는 51명이었습니다. 상을 약속받았던 18명은 사인펜이 놓여 있던 시간의 8.59%만 그림을 그렸습니다. 상 없이 그렸던 15명은 16.73%, 뜻밖에 상을 받았던 18명은 18.09%였습니다. 약속받은 아이들만 절반쯤으로 줄어든 것입니다<sup class="fn"><a id="cite-1d" href="#ref-1">[1]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">상이 끝난 뒤 유치원생이 사인펜 그림에 쓴 시간의 비율</title>
+<desc id="d-1">일이 주 뒤 교실에서 사인펜을 다시 내놓았을 때 상을 약속받았던 아이들은 그 시간의 8.59퍼센트만 그림을 그렸고, 상 없이 그렸던 아이들은 16.73퍼센트, 뜻밖에 상을 받았던 아이들은 18.09퍼센트를 그렸다.</desc>
+<rect width="680" height="300" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">상이 끝난 뒤, 다시 사인펜을 잡은 시간</text>
+<text x="32" y="68" font-size="13" fill="#6E6B7B">사인펜이 놓여 있던 시간 가운데 그림을 그린 비율</text>
+<g font-size="15" font-weight="700" fill="#33313F">
+  <text x="32" y="118">상을 약속받은 아이</text>
+  <text x="32" y="178">상 없이 그린 아이</text>
+  <text x="32" y="238">뜻밖에 상 받은 아이</text>
+</g>
+<g font-size="12" fill="#6E6B7B">
+  <text x="32" y="136">18명</text>
+  <text x="32" y="196">15명</text>
+  <text x="32" y="256">18명</text>
+</g>
+<rect x="200" y="98" width="163" height="34" rx="8" fill="#F6CCD8" stroke="#B24E6E"/>
+<rect x="200" y="158" width="318" height="34" rx="8" fill="#E9E6F1" stroke="#9A96AA"/>
+<rect x="200" y="218" width="344" height="34" rx="8" fill="#E9E6F1" stroke="#9A96AA"/>
+<text x="375" y="121" font-size="16" font-weight="800" fill="#B24E6E">8.59%</text>
+<text x="530" y="181" font-size="16" font-weight="700" fill="#6E6B7B">16.73%</text>
+<text x="556" y="241" font-size="16" font-weight="700" fill="#6E6B7B">18.09%</text>
+<text x="32" y="284" font-size="12" fill="#6E6B7B">자료: Lepper 등(1973)[1]으로 재구성 · 최종 표본 51명</text>
+</svg>
+<figcaption>일이 주 뒤 사인펜을 다시 내놓았을 때, 상을 약속받았던 아이들은 그 시간의 8.59%만 그림을 그렸고 상 없이 그렸던 아이들(16.73%)과 뜻밖에 상을 받았던 아이들(18.09%)은 그 두 배쯤을 그렸습니다.</figcaption>
+</figure>
+<p>여기서 눈여겨볼 것이 둘 있습니다. 첫째, 똑같은 상을 받았는데도 뜻밖에 받은 아이들은 흥미가 줄지 않았습니다. 흥미를 깎은 것은 상이라는 물건이 아니라 '상을 받으려고 그린다'는 약속이었다는 뜻입니다. 둘째, 그 약속은 그림에도 흔적을 남겼습니다. 깜짝 방에서 그린 그림의 장수는 세 무리가 비슷했지만, 누가 그렸는지 모르는 심사자 세 명이 5점 만점으로 매긴 점수는 약속받은 아이들이 2.18점으로, 뜻밖에 받은 아이들(2.85점)과 상이 없던 아이들(2.69점)보다 낮았습니다<sup class="fn"><a id="cite-1e" href="#ref-1">[1]</a></sup>.</p>
+
+<!-- 3. 데시의 퍼즐 -->
+<h2>두 해 앞서, 퍼즐 하나에 1달러</h2>
+<p>유치원 실험에는 선배가 있었습니다. 1971년 심리학자 에드워드 데시가 발표한 퍼즐 실험입니다. 그는 대학생 24명을 세 번씩 실험실로 불러 '소마'라는 입체 퍼즐을 풀게 했습니다. 작은 정육면체 27개를 일곱 조각으로 붙여 놓은 것으로, 조각을 맞춰 종이에 그려진 모양을 만드는 놀이입니다. 두 번째 방문 때 절반인 12명에게만 모양 하나를 맞출 때마다 1달러를 줬고, 세 번째 방문 때는 예산이 한 번 치밖에 없었다며 다시 돈을 주지 않았습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>.</p>
+<p>데시가 잰 것도 퍼즐 성적이 아니었습니다. 매번 중간에 실험자는 몇 분만 자리를 비우겠다며, 그동안 하고 싶은 것을 하라고 말하고 방을 나갔습니다. 탁자에는 퍼즐과 함께 『뉴요커』 『타임』 『플레이보이』 최신 호가 놓여 있었습니다. 그리고 8분 동안, 학생이 퍼즐을 얼마나 만지는지를 거울 너머에서 초 단위로 쟀습니다<sup class="fn"><a id="cite-2b" href="#ref-2">[2]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 350" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">데시의 1971년 퍼즐 실험에서 자유 시간 8분 가운데 퍼즐에 쓴 평균 시간</title>
+<desc id="d-2">돈을 받은 집단은 자유 시간에 퍼즐을 만진 시간이 248.2초에서 돈을 받던 날 313.9초로 늘었다가 돈이 끊긴 날 198.5초로 줄었고, 돈을 받지 않은 집단은 213.9초, 205.7초, 241.8초였다.</desc>
+<rect width="680" height="350" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">혼자 남은 8분, 퍼즐을 만진 시간</text>
+<g stroke="#E4E0DA" stroke-width="1">
+  <path d="M110 250 L620 250"/><path d="M110 210 L620 210"/><path d="M110 170 L620 170"/><path d="M110 130 L620 130"/><path d="M110 90 L620 90"/>
+</g>
+<g font-size="12" fill="#6E6B7B" text-anchor="end">
+  <text x="100" y="254">150초</text><text x="100" y="214">200초</text><text x="100" y="174">250초</text><text x="100" y="134">300초</text><text x="100" y="94">350초</text>
+</g>
+<rect x="300" y="78" width="120" height="184" rx="10" fill="#F8E8B0" opacity="0.55"/>
+<text x="360" y="72" font-size="12" font-weight="700" text-anchor="middle" fill="#A9861F">이날만 퍼즐 하나에 1달러</text>
+<polyline points="170,198.9 360,205.4 550,176.6" fill="none" stroke="#9A96AA" stroke-width="3"/>
+<polyline points="170,171.4 360,118.9 550,211.2" fill="none" stroke="#B24E6E" stroke-width="3"/>
+<g fill="#9A96AA"><circle cx="170" cy="198.9" r="5"/><circle cx="360" cy="205.4" r="5"/><circle cx="550" cy="176.6" r="5"/></g>
+<g fill="#B24E6E"><circle cx="170" cy="171.4" r="5"/><circle cx="360" cy="118.9" r="5"/><circle cx="550" cy="211.2" r="5"/></g>
+<g font-size="13" font-weight="700" text-anchor="middle">
+  <text x="170" y="159" fill="#B24E6E">248.2초</text>
+  <text x="360" y="106" fill="#B24E6E">313.9초</text>
+  <text x="550" y="233" fill="#B24E6E">198.5초</text>
+  <text x="170" y="220" fill="#6E6B7B">213.9초</text>
+  <text x="360" y="227" fill="#6E6B7B">205.7초</text>
+  <text x="550" y="164" fill="#6E6B7B">241.8초</text>
+</g>
+<g font-size="14" font-weight="700" text-anchor="middle" fill="#33313F">
+  <text x="170" y="284">첫 번째 방문</text><text x="360" y="284">두 번째 방문</text><text x="550" y="284">세 번째 방문</text>
+</g>
+<g font-size="13" font-weight="700">
+  <rect x="32" y="304" width="14" height="14" rx="3" fill="#F6CCD8" stroke="#B24E6E"/><text x="52" y="316" fill="#B24E6E">돈을 받은 집단(12명)</text>
+  <rect x="210" y="304" width="14" height="14" rx="3" fill="#E9E6F1" stroke="#9A96AA"/><text x="230" y="316" fill="#6E6B7B">받지 않은 집단(12명)</text>
+</g>
+<text x="32" y="338" font-size="12" fill="#6E6B7B">자료: Deci(1971)[2]의 표 1로 재구성 · 자유 시간은 480초</text>
+</svg>
+<figcaption>돈을 받은 집단은 자유 시간에 퍼즐을 만진 시간이 248.2초에서 돈을 받던 날 313.9초로 늘었다가 돈이 끊긴 날 198.5초로 처음보다 줄었고, 돈을 받지 않은 집단은 213.9초, 205.7초, 241.8초로 오히려 조금 늘었습니다.</figcaption>
+</figure>
+<p>그림은 말끔하지만, 근거의 무게는 정직하게 달아야 합니다. 참가자는 24명뿐이었고, 두 집단의 차이는 통계적으로 느슨한 기준(유의수준 .10)에서만 의미가 있었습니다. 데시 자신이 논문에 그렇게 적고 증거가 더 필요하다고 덧붙였습니다. 함께 실린 현장 실험도 대학 신문에서 제목을 뽑던 학생 8명이 전부였습니다<sup class="fn"><a id="cite-2c" href="#ref-2">[2]</a></sup>. 이 현상의 출발점은 생각보다 조촐했습니다.</p>
+<p>한 가지 더 눈에 띄는 대목이 있습니다. 데시는 회차가 끝날 때마다 퍼즐이 얼마나 재미있었는지를 9점 만점으로 물었는데, 평균은 7.25점에서 8.00점 사이였고 집단이나 회차에 따른 차이가 없었습니다<sup class="fn"><a id="cite-2d" href="#ref-2">[2]</a></sup>. 돈을 받았던 학생들도 퍼즐이 재미없어졌다고 말하지는 않았습니다. 다만 혼자 남았을 때 손이 덜 갔습니다. 말로 답한 흥미와 몸이 보인 흥미가 어긋난 것입니다.</p>
+<p>같은 논문의 세 번째 실험은 덜 알려져 있습니다. 돈 대신 "아주 잘하셨어요" 같은 말을 건넨 것입니다. 이번에는 결과가 반대였습니다. 칭찬을 들은 집단은 자유 시간에 퍼즐을 만진 시간이 134.0초에서 129.3초로 거의 그대로였고, 아무 말도 듣지 못한 집단은 246.8초에서 64.7초로 줄었습니다. 다만 두 집단의 출발점이 꽤 달랐고, 그 차이를 보정하면 효과는 약해집니다<sup class="fn"><a id="cite-2e" href="#ref-2">[2]</a></sup>. 돈과 말은 다르게 작동하리라는 것이 데시의 가설이었고, 결과도 그쪽을 가리켰습니다.</p>
+<blockquote class="quote">
+  <p>돈은 어떤 활동에 대한 내재적 동기를 '매수해 버리는' 식으로 작동할 수 있다.</p>
+  <cite>— Deci, <i>Journal of Personality and Social Psychology</i> 1971 (번역)<sup class="fn"><a id="cite-2f" href="#ref-2">[2]</a></sup></cite>
+</blockquote>
+<p>데시는 이 물음을 평생 붙들었습니다. 로체스터 대학에서 리처드 라이언과 함께 자기결정이론을 세웠고, 2026년 2월 여든세 살로 세상을 떠났습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>.</p>
+
+<!-- 4. 원리 -->
+<h2>왜 식을까 — 사람은 자기 행동을 보고 자기 마음을 읽는다</h2>
+<p>흔한 설명은 이렇습니다. 상에 맛을 들여서, 욕심이 생겨서, 상 없이는 시시해져서. 그럴듯하지만 실험과 맞지 않습니다. 같은 상을 뜻밖에 받은 아이들은 멀쩡했으니까요.</p>
+<p>레퍼와 동료들의 설명은 다릅니다. 우리는 남의 행동을 보고 그 사람의 속마음을 짐작합니다. 돈을 받고 전단을 돌리는 사람을 보면 '전단 돌리기를 좋아하나 보다'라고 생각하지 않습니다. 그런데 사람은 자기 자신에게도 같은 추리를 합니다. 내가 왜 이 일을 하는지를, 내가 놓인 상황을 보고 읽어 내는 것입니다. 하고 싶어서 하던 일에 바깥의 이유가 충분하고도 남게 붙으면 — 이것이 '과잉정당화'라는 이름의 뜻입니다 — 사람은 "나는 상 때문에 그렸구나" 하고 읽습니다. 그 자체로 목적이던 일이 다른 것을 얻는 수단으로 자리를 옮기는 것입니다<sup class="fn"><a id="cite-1f" href="#ref-1">[1]</a></sup>.</p>
+<p>비유하자면 가격표와 같습니다. 놀이에 가격표가 붙는 순간 놀이는 아르바이트로 읽히고, 아르바이트는 돈이 끊기면 그만두는 일입니다.</p>
+<p>데시와 라이언은 이 생각을 더 다듬었습니다. 상에는 두 얼굴이 있다는 것입니다. 받는 사람이 상을 '내 행동을 조종하는 장치'로 읽으면 스스로 정해서 한다는 느낌이 깎이면서 흥미가 줄고, '내가 잘하고 있다는 소식'으로 읽으면 유능하다는 느낌이 채워지면서 흥미가 오히려 자랍니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>.</p>
+<div class="key"><span class="label">핵심 —</span> 흥미를 깎는 것은 상이라는 물건이 아니라 상이 전하는 말입니다. "이걸 하면 줄게"는 '너는 이것 때문에 하는 거야'로 들리고, "정말 잘했구나"는 '너는 이걸 잘하는구나'로 들립니다. 같은 스티커 한 장이 어느 쪽 말을 싣느냐에 따라 다르게 작동합니다.</div>
+
+<!-- 5. 논쟁 -->
+<h2>얼마나 큰일인가 — 학계는 갈라졌다</h2>
+<p>여기서 이야기를 끝내면 통쾌하지만 반쪽입니다. 이 효과가 실제로 얼마나 크고 얼마나 흔한지를 두고 심리학자들은 격하게 맞섰습니다.</p>
+<p>먼저 반론입니다. 1994년 주디 캐머런과 데이비드 피어스는 실험 96편을 한데 모아 분석하고, 전체적으로 보면 보상은 내재적 동기를 떨어뜨리지 않는다고 결론 내렸습니다. 칭찬은 오히려 동기를 높였고, 부정적인 효과는 '과제를 하기만 하면 주겠다고 예고한 물질적 보상' 한 가지에서만, 그것도 미미하게 나타났다는 것입니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>. 두 해 뒤 로버트 아이젠버거와 캐머런은 「보상의 해로운 효과 — 현실인가 신화인가」라는 논문에서, 해로운 효과는 매우 제한되고 쉽게 피할 수 있는 조건에서만 생긴다고 못 박았습니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>.</p>
+<p>1999년 데시, 리처드 케스트너, 라이언이 실험 128편으로 맞받았습니다. 하기만 하면 주는 상, 끝내면 주는 상, 잘하면 주는 상이 모두 자유 시간의 자발적 참여를 뚜렷이 줄였다고 보고하고, 앞선 분석들과 방법이며 결과가 어디서 달라졌는지를 조목조목 따졌습니다. 저자들은 예고된 물질적 보상의 효과를 '중간 크기'라고 불렀습니다<sup class="fn"><a id="cite-4b" href="#ref-4">[4]</a></sup>. 같은 호에 논평을 실은 레퍼와 동료들은 같은 문헌을 다룬 분석들이 극적으로 상반된 결론을 냈다는 사실 자체를 짚으면서, 데시 쪽이 문헌을 더 정확히 담았다고 보았습니다. 그러면서도 이렇게 복잡한 연구들을 기계적으로 평균 내는 일의 위험을 함께 경고했습니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>.</p>
+<p>캐머런 쪽은 2001년 「신화는 계속된다」는 부제를 단 논문으로 다시 반박했습니다. 원래 흥미가 낮은 과제에서는 보상이 자발적 참여를 높이고, 흥미가 높은 과제에서도 부정적 효과는 보상이 물질적이고, 미리 예고되고, 성과 수준과 느슨하게 묶여 있을 때만 나타난다는 것입니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>. 2014년의 한 종합 분석은 이 논쟁에 40년 넘는 연구와 메타분석 아홉 편이 쏟아졌다고 적었습니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>.</p>
+<p>그런데 양쪽의 지도를 겹쳐 놓으면 뜻밖에 넓은 합의 지대가 보입니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">보상 논쟁에서 양쪽이 동의하는 곳과 갈리는 곳</title>
+<desc id="d-3">맞선 두 진영은 칭찬과 예고 없는 상이 흥미를 깎지 않고 흥미로운 일에 하기만 하면 준다고 예고한 물질적 보상은 흥미를 깎는다는 데 동의하며, 효과의 크기와 성과에 묶은 보상의 효과와 현상을 부르는 이름에서 갈린다.</desc>
+<rect width="680" height="400" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">두 진영의 지도를 겹치면</text>
+<rect x="32" y="66" width="300" height="290" rx="14" fill="#CDEBDD" stroke="#3F8F6E"/>
+<text x="182" y="98" font-size="17" font-weight="800" text-anchor="middle" fill="#3F8F6E">같은 말을 하는 곳</text>
+<g font-size="15" font-weight="700" fill="#33313F" text-anchor="middle">
+  <text x="182" y="140">말로 한 칭찬·인정</text>
+  <text x="182" y="222">예고 없이 건넨 상</text>
+  <text x="182" y="296">흥미로운 일에</text>
+  <text x="182" y="316">"하기만 하면 줄게"</text>
+</g>
+<g font-size="14" fill="#3F8F6E" text-anchor="middle" font-weight="700">
+  <text x="182" y="164">흥미를 깎지 않는다</text>
+  <text x="182" y="246">흥미를 깎지 않는다</text>
+  <text x="182" y="340">흥미를 깎는다</text>
+</g>
+<g stroke="#3F8F6E" stroke-width="1" opacity="0.45"><path d="M56 184 L308 184"/><path d="M56 266 L308 266"/></g>
+<rect x="348" y="66" width="300" height="290" rx="14" fill="#FBD9C6" stroke="#C06A45"/>
+<text x="498" y="98" font-size="17" font-weight="800" text-anchor="middle" fill="#C06A45">갈리는 곳</text>
+<g font-size="15" font-weight="700" fill="#33313F" text-anchor="middle">
+  <text x="498" y="140">효과의 크기</text>
+  <text x="498" y="222">성과에 묶은 보상</text>
+  <text x="498" y="304">현상에 붙이는 이름</text>
+</g>
+<g font-size="14" fill="#C06A45" text-anchor="middle" font-weight="700">
+  <text x="498" y="164">미미하다 / 중간쯤 된다</text>
+  <text x="498" y="246">무해하거나 이롭다 / 그래도 깎는다</text>
+  <text x="498" y="328">신화 / 뚜렷한 잠식</text>
+</g>
+<g stroke="#C06A45" stroke-width="1" opacity="0.45"><path d="M372 184 L624 184"/><path d="M372 266 L624 266"/></g>
+<text x="32" y="384" font-size="12" fill="#6E6B7B">자료: Cameron·Pierce(1994)[5], Deci 등(1999)[4], Cameron 등(2001)[8]으로 재구성</text>
+</svg>
+<figcaption>맞선 두 진영은 칭찬과 예고 없는 상이 흥미를 깎지 않고 흥미로운 일에 "하기만 하면 준다"고 예고한 물질적 보상은 흥미를 깎는다는 데 동의하며, 효과의 크기와 성과에 묶은 보상의 효과, 그리고 이 현상을 부르는 이름에서 갈립니다.</figcaption>
+</figure>
+<p>그러니 "보상은 동기를 죽인다"도, "그건 신화다"도 절반만 맞는 문장입니다. 싸움은 주로 얼마나 크냐, 얼마나 흔하냐를 두고 벌어졌고, 어떤 상이 깎고 어떤 상은 괜찮은지에 대해서는 두 진영이 꽤 비슷한 그림을 그렸습니다.</p>
+
+<!-- 6. 어떤 보상이 -->
+<h2>그래서, 어떤 상이 깎고 어떤 상은 괜찮은가</h2>
+<p>데시 등의 1999년 분석은 보상을 종류별로 나눠 효과 크기를 냈습니다. 숫자는 보상이 끝난 뒤 자유 시간에 그 활동을 얼마나 더 또는 덜 했는지를 뜻합니다. 음수면 덜 하게 됐다는 뜻이고, 0에서 멀수록 효과가 큽니다<sup class="fn"><a id="cite-4c" href="#ref-4">[4]</a></sup>.</p>
+<table>
+  <thead><tr><th>어떤 보상인가</th><th>효과 크기(d)</th><th>읽는 법</th></tr></thead>
+  <tbody>
+    <tr class="hl"><td>하기만 하면 주겠다고 예고한 상</td><td>−0.40</td><td>깎는다</td></tr>
+    <tr class="hl"><td>끝내면 주겠다고 예고한 상</td><td>−0.36</td><td>깎는다</td></tr>
+    <tr class="hl"><td>잘하면 주겠다고 예고한 상</td><td>−0.28</td><td>깎는다</td></tr>
+    <tr><td>그 일과 상관없이 주는 돈(참가비 등)</td><td>−0.14</td><td>뚜렷한 효과 없음</td></tr>
+    <tr><td>예고 없이 건넨 물질적 상</td><td>0.01</td><td>효과 없음</td></tr>
+    <tr><td>말로 한 긍정적 피드백</td><td>+0.33</td><td>높인다</td></tr>
+  </tbody>
+</table>
+<div class="key"><span class="label">핵심 —</span> 이 표에서 읽어야 할 것은 숫자의 크기보다 부호가 바뀌는 자리입니다. 선은 '물질이냐 말이냐'보다 '미리 걸었느냐'에서 먼저 그어집니다. 예고하지 않은 상은 그 일을 '상 때문에 한 일'로 다시 읽게 만들 틈이 없습니다.</div>
+<p>앞서 본 말과 몸의 어긋남은 여기서도 되풀이됩니다. 하기만 하면 주는 상의 효과는 자유 시간의 행동으로 재면 −0.40이었지만, 스스로 답한 흥미로 재면 −0.15에 그쳤습니다<sup class="fn"><a id="cite-4d" href="#ref-4">[4]</a></sup>. 상을 받은 사람에게 "재미가 줄었니" 하고 물어서는 이 변화를 다 잡아내기 어렵다는 뜻입니다.</p>
+<p>미리 말씀드려야 할 것이 세 가지 있습니다.</p>
+<h3>칭찬도 아이에게는 덜 통합니다</h3>
+<p>같은 분석에서 말로 한 보상은 대학생의 자발적 참여를 높였지만(0.43), 아이들에게서는 뚜렷한 효과가 없었습니다(0.11). 반대로 물질적 보상의 해는 아이들(−0.39)에게서 대학생(−0.27)보다 컸습니다<sup class="fn"><a id="cite-4e" href="#ref-4">[4]</a></sup>. 상에 더 취약한 쪽은 어른이 아니라 아이였습니다. 칭찬 연구를 종합한 2002년의 검토는 칭찬도 흥미를 깎거나, 높이거나, 아무 영향이 없을 수 있다고 정리합니다. 칭찬이 이로운 것은 아이가 그 말을 진심으로 받아들일 때, 그리고 그 말이 노력처럼 스스로 바꿀 수 있는 원인을 짚고, 스스로 정한다는 느낌을 북돋우고, 남과의 비교에 기대지 않고, 닿을 만한 기준을 전할 때입니다<sup class="fn"><a id="cite-10" href="#ref-10">[10]</a></sup>. "네가 반에서 제일이야"보다 "색을 이렇게 섞어 볼 생각을 했구나"가 이 조건에 가깝습니다.</p>
+<h3>성과급이 '통보'가 될 때</h3>
+<p>잘한 만큼 주는 보상은 유능하다는 소식을 함께 싣기 때문에, 위 표에서도 해가 덜한 편입니다. 그런데 같은 분석에서 가장 큰 숫자가 나온 곳이 바로 여기였습니다. 성과에 따라 주되 최고액에 못 미치는 보상을 받은 경우, 효과 크기는 −0.88까지 벌어졌습니다(연구 7편 가운데 동떨어진 1편을 뺀 값)<sup class="fn"><a id="cite-4f" href="#ref-4">[4]</a></sup>. 이때 보상은 '당신은 모자랐다'는 통보로 읽힙니다. 연구 편수가 적으니 숫자 자체보다 방향으로 읽는 편이 안전합니다.</p>
+<h3>흥미가 없던 일은 다른 이야기입니다</h3>
+<p>이 모든 실험은 이미 좋아서 하던 일을 다뤘습니다. 레퍼와 동료들은 논문 끝에서 과잉 일반화를 직접 경계했습니다. 상을 걸면 흥미가 언제나, 혹은 대개 줄어든다는 뜻이 아니며, 처음 흥미가 아주 낮은 일이나 어느 정도 익숙해져야 재미가 드러나는 일에는 바깥의 유인이 쓸모가 있다고 적었습니다<sup class="fn"><a id="cite-1g" href="#ref-1">[1]</a></sup>. 반대 진영의 분석도 흥미 낮은 과제에서는 보상이 자발적 참여를 높인다고 봅니다<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>. 구구단이나 악기의 첫 석 달처럼 재미가 나중에 오는 일이라면, 상은 그 문턱을 넘기는 디딤돌이 될 수 있습니다.</p>
+<p>일터도 흑백이 아닙니다. 학교·직장·운동 분야 연구 183편, 21만 2천여 명의 자료를 모은 2014년 분석은 내재적 동기와 인센티브가 반드시 적대적이지는 않다고 결론 내립니다. 다만 맡는 몫이 달랐습니다. 일의 질은 내재적 동기가, 일의 양은 인센티브가 더 잘 예측했습니다<sup class="fn"><a id="cite-9b" href="#ref-9">[9]</a></sup>.</p>
+<h3>결과를 뒤집어 읽으면</h3>
+<p>이 연구들이 처방을 직접 시험한 것은 아닙니다. 그래도 결과를 뒤집어 놓으면 조심할 순서는 보입니다. 이미 좋아서 하는 일에는 상을 미리 걸지 않습니다. 그래도 무언가 주고 싶다면 일이 끝난 뒤에, 약속 없이 건넵니다. 말은 "잘했다"에서 멈추지 않고 무엇을 어떻게 해냈는지를 짚습니다. 그리고 성과급처럼 미리 걸 수밖에 없는 보상이라면, 그것이 덜 받은 사람에게 어떤 말로 들릴지를 먼저 따져 봅니다.</p>
+
+<!-- 7. 도파민 -->
+<h2>도파민 이야기는 어디까지 맞을까</h2>
+<p>요즘은 이 현상을 "보상이 도파민을 고갈시켜서"라고 설명하는 글이 흔합니다. 확인되는 데까지만 가 보겠습니다.</p>
+<p>신경과학자 볼프람 슐츠가 정리한 바에 따르면, 중뇌의 도파민 신경세포 대부분은 보상 그 자체가 아니라 예상과 실제의 차이에 반응합니다. 예상보다 좋으면 활동이 늘고, 완전히 예상한 보상에는 평소 수준을 유지하고, 예상보다 못하면 활동이 줄어듭니다. 이것을 <strong>보상 예측 오차(reward prediction error)</strong>라고 합니다. 학습이 진행되면 이 반응은 보상에서 보상을 예고하는 신호 쪽으로 옮겨 갑니다<sup class="fn"><a id="cite-11" href="#ref-11">[11]</a></sup>. 또 켄트 베리지와 테리 로빈슨은 무언가를 '원하는' 회로와 '좋아하는' 회로가 따로 있고, 도파민이 맡는 것은 원하는 쪽이며, 좋아하는 느낌은 도파민에 달려 있지 않다고 정리했습니다<sup class="fn"><a id="cite-12" href="#ref-12">[12]</a></sup>. 그러니 '도파민은 쾌락 물질'이라는 요약부터 낡은 것입니다.</p>
+<p>이 지식을 보상의 잠식 효과와 직접 이어 본 연구는 많지 않습니다. 눈에 띄는 것이 일본 연구진이 주축이 된 2010년의 뇌 영상 실험입니다. 학생 28명에게 스톱워치를 정확히 5초에 멈추는 게임을 시키고, 절반에게는 성공할 때마다 200엔을 줬습니다. 두 번째 회차를 앞두고는 두 집단 모두에게 이번에는 성과에 따른 돈이 없다고 알렸습니다. 그 뒤 혼자 남은 3분 동안, 돈을 받았던 집단은 이 게임을 덜 했습니다. 그리고 첫 회차에서 성공 신호에 반응하던 뇌 앞쪽 선조체의 활동이, 돈을 받았던 집단에서만 두 번째 회차에 크게 줄었습니다. 연구진은 뇌의 가치 평가 체계가 과제 자체의 값과 바깥 보상의 값을 한데 묶어 셈하기 때문이라고 풀이합니다<sup class="fn"><a id="cite-13" href="#ref-13">[13]</a></sup>. 돈이 빠지자 '성공했다'는 사실의 값도 함께 빠졌다는 것입니다.</p>
+<p>다만 이 연구는 28명을 본 한 편이고, 뇌 영상이 잰 것은 혈류 신호이지 도파민이 아닙니다. "상을 주면 도파민이 바닥난다"는 식의 설명은 이 연구들이 보여 준 범위를 넘어섭니다. 지금 말할 수 있는 것은, 데시가 '인지적 재평가'라고 부른 그 다시 읽기와 같은 방향의 흔적이 뇌의 가치 평가 영역에서도 보였다는 정도입니다.</p>
+
+<!-- 9. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>상을 걸어 본 일을 자책할 필요는 없습니다. "다 하면 줄게"는 대개 사랑과 조급함이 섞인 말이고, 싫은 일의 문턱을 넘길 때는 실제로 쓸모가 있습니다.</p>
+    <p>다만 그 아이가, 그 동료가 이미 좋아서 하고 있던 일이라면 한 번 멈춰 볼 만합니다. <strong>"상을 주기 전에 물을 것은 얼마짜리 상이냐가 아니라, 이 상이 무슨 말을 하느냐입니다."</strong> '이것 때문에 해라'로 들릴 상은 아껴 두고, '네가 한 것을 봤다'로 들릴 말은 아끼지 않는 편이 좋습니다.</p>
+    <p>유치원 아이들은 금색 별을 받고 싶어 했습니다. 일이 주 뒤 사인펜을 덜 잡은 것은 별이 싫어져서가 아니라, 그림이 '별을 받는 일'이 되어 버렸기 때문이었습니다.</p>
+  </blockquote>
+</section>
+
+<!-- 10. 정리 -->
+<hr>
+<p>정리하자면 이렇습니다. 좋아서 하던 일에 상을 미리 걸면, 사람은 그 일을 상 때문에 하는 일로 다시 읽고, 상이 끝나면 전보다 덜 하게 됩니다. 1971년의 퍼즐 실험과 1973년의 유치원 실험이 보인 이 현상은 이후 백 편이 넘는 실험으로 검토됐고, 크기와 범위를 두고는 수십 년 동안 평가가 갈렸습니다. 그래도 양쪽이 함께 가리키는 것이 있습니다. 예고 없이 건넨 상과 진심 어린 말은 흥미를 깎지 않고, 흥미가 없던 일에는 상이 디딤돌이 될 수 있다는 점입니다.</p>
+<p>오늘 누군가에게 상을 걸려던 참이라면 먼저 물어보세요. 그 사람은 상이 없을 때에도 이미 그 일을 하고 있었나요.</p>
+
+<!-- 11. 꼬리 -->
+<p class="disclaimer">이 글은 일반적인 정보 제공을 위한 것입니다. 여기 소개한 연구는 대부분 실험실과 교실에서 짧은 기간 관찰한 결과이며, 개별 아이의 발달이나 조직의 보상 제도를 정할 때는 상황을 아는 전문가와 상의하시기 바랍니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">Lepper, M. R., Greene, D., Nisbett, R. E. Undermining children's intrinsic interest with extrinsic reward: A test of the "overjustification" hypothesis. <i>Journal of Personality and Social Psychology</i> 28(1): 129–137, 1973. <a href="https://doi.org/10.1037/h0035519">DOI</a> · <a href="https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Motivation/Lepper_et_al_Undermining_Childrens_Intrinsic_Interest.pdf">원문 PDF</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">Deci, E. L. Effects of externally mediated rewards on intrinsic motivation. <i>Journal of Personality and Social Psychology</i> 18(1): 105–115, 1971. <a href="https://selfdeterminationtheory.org/SDT/documents/1971_Deci.pdf">원문 PDF</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">Monhegan Museum of Art &amp; History. Remembering Edward L. Deci, 2026. <a href="https://monheganmuseum.org/remembering-ed-deci/">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Deci, E. L., Koestner, R., Ryan, R. M. A meta-analytic review of experiments examining the effects of extrinsic rewards on intrinsic motivation. <i>Psychological Bulletin</i> 125(6): 627–668, 1999. <a href="https://pubmed.ncbi.nlm.nih.gov/10589297/">PubMed</a> · <a href="https://selfdeterminationtheory.org/SDT/documents/1999_DeciKoestnerRyan_Meta.pdf">원문 PDF</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">Cameron, J., Pierce, W. D. Reinforcement, reward, and intrinsic motivation: A meta-analysis. <i>Review of Educational Research</i> 64(3): 363–423, 1994. <a href="https://doi.org/10.3102/00346543064003363">DOI</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Eisenberger, R., Cameron, J. Detrimental effects of reward: Reality or myth? <i>American Psychologist</i> 51(11): 1153–1166, 1996. <a href="https://pubmed.ncbi.nlm.nih.gov/8937264/">PubMed</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Lepper, M. R., Henderlong, J., Gingras, I. Understanding the effects of extrinsic rewards on intrinsic motivation — uses and abuses of meta-analysis: Comment on Deci, Koestner, and Ryan (1999). <i>Psychological Bulletin</i> 125(6): 669–676, 1999. <a href="https://pubmed.ncbi.nlm.nih.gov/10589298/">PubMed</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">Cameron, J., Banko, K. M., Pierce, W. D. Pervasive negative effects of rewards on intrinsic motivation: The myth continues. <i>The Behavior Analyst</i> 24(1): 1–44, 2001. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2731358/">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">Cerasoli, C. P., Nicklin, J. M., Ford, M. T. Intrinsic motivation and extrinsic incentives jointly predict performance: A 40-year meta-analysis. <i>Psychological Bulletin</i> 140(4): 980–1008, 2014. <a href="https://pubmed.ncbi.nlm.nih.gov/24491020/">PubMed</a> <a class="back" href="#cite-9">↩</a></li>
+    <li id="ref-10">Henderlong, J., Lepper, M. R. The effects of praise on children's intrinsic motivation: A review and synthesis. <i>Psychological Bulletin</i> 128(5): 774–795, 2002. <a href="https://pubmed.ncbi.nlm.nih.gov/12206194/">PubMed</a> <a class="back" href="#cite-10">↩</a></li>
+    <li id="ref-11">Schultz, W. Dopamine reward prediction error coding. <i>Dialogues in Clinical Neuroscience</i> 18(1): 23–32, 2016. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4826767/">링크</a> <a class="back" href="#cite-11">↩</a></li>
+    <li id="ref-12">Berridge, K. C., Robinson, T. E. Liking, wanting, and the incentive-sensitization theory of addiction. <i>American Psychologist</i> 71(8): 670–679, 2016. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5171207/">링크</a> <a class="back" href="#cite-12">↩</a></li>
+    <li id="ref-13">Murayama, K., Matsumoto, M., Izuma, K., Matsumoto, K. Neural basis of the undermining effect of monetary reward on intrinsic motivation. <i>PNAS</i> 107(49): 20911–20916, 2010. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3000299/">링크</a> <a class="back" href="#cite-13">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>

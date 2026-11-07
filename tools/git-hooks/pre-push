@@ -1,0 +1,57 @@
+#!/bin/sh
+# 공개 저장소로 나가는 마지막 관문. publish 브랜치의 현재 커밋만 나가고, 나갈 이력 전체를 검사한다.
+# 작업 폴더가 아니라 커밋 자체를 읽는다. 지운 내용도 이력에는 남아 공개되기 때문이다.
+# 금칙어 목록은 공개되면 안 되므로 깃이 무시하는 .superpowers/banned-terms.txt에 둔다. 조금이라도 불확실하면 막는다.
+# 설치: cp tools/git-hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+# 고치면 다시 복사한다(테스트가 두 파일이 같은지 본다). 링크로 걸지 않는 까닭은, 가리키는 파일이 없으면 깃이 훅을 조용히 건너뛰기 때문이다.
+
+terms=.superpowers/banned-terms.txt
+
+refuse() {
+  echo "푸시 거부: $1" >&2
+  exit 1
+}
+
+# 0이면 찾은 것, 1이면 없는 것, 그 밖은 검사 자체가 실패한 것이다
+found_or_fail() {
+  case "$1" in
+    0) refuse "$2" ;;
+    1) ;;
+    *) refuse "검사를 끝내지 못했다: $2" ;;
+  esac
+}
+
+refs=$(cat)
+[ -n "$refs" ] || exit 0
+
+publish=$(git rev-parse -q --verify refs/heads/publish) || refuse "publish 브랜치가 없다"
+main=$(git rev-parse -q --verify refs/heads/main) || refuse "main 브랜치가 없어 옛 이력을 가려낼 수 없다"
+[ -s "$terms" ] || refuse "금칙어 목록($terms)이 없거나 비어 있다"
+
+while read -r _local_ref local_sha _remote_ref _remote_sha; do
+  # 이름이 아니라 커밋으로 판단한다. main:publish 처럼 이름만 바꿔도 걸린다. 원격 브랜치 삭제도 여기서 걸린다
+  [ "$local_sha" = "$publish" ] || refuse "publish 브랜치의 현재 커밋만 올릴 수 있다"
+done <<EOF
+$refs
+EOF
+
+roots=$(git rev-list --max-parents=0 "$main") && [ -n "$roots" ] || refuse "main의 시작 커밋을 찾지 못했다"
+for root in $roots; do
+  git merge-base --is-ancestor "$root" "$publish"
+  found_or_fail $? "publish 브랜치에 main의 옛 이력이 섞였다"
+done
+
+commits=$(git rev-list "$publish") && [ -n "$commits" ] || refuse "올릴 커밋을 읽지 못했다"
+for commit in $commits; do
+  names=$(git -c core.quotepath=false ls-tree -r --name-only "$commit") || refuse "커밋 $commit 을 읽지 못했다"
+  printf '%s\n' "$names" | grep -q '^docs/superpowers/'
+  found_or_fail $? "커밋 $commit 에 설계 문서(docs/superpowers)가 들어 있다"
+  printf '%s\n' "$names" | grep -q -F -f "$terms"
+  found_or_fail $? "커밋 $commit 의 파일 이름에 금칙어가 있다"
+  git grep -q -F -f "$terms" "$commit"
+  found_or_fail $? "커밋 $commit 의 내용에 금칙어가 있다"
+done
+
+log=$(git log --format='%an%n%ae%n%cn%n%ce%n%B' "$publish") || refuse "커밋 기록을 읽지 못했다"
+printf '%s\n' "$log" | grep -q -F -f "$terms"
+found_or_fail $? "커밋 메시지나 작성자에 금칙어가 있다"

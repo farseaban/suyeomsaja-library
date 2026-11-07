@@ -1,0 +1,20 @@
+---
+import type { Post } from '../lib/posts'
+import { url } from '../lib/url'
+import Chip from './Chip.astro'
+import Title from './Title.astro'
+
+// 목록 행 — 메타 칸(칩) · 제목과 요약 · 날짜. showCat=false면 메타 칸을 그리지 않는다(분야 페이지: 모든 행이 같은 분야).
+// 휴대폰에서는 마크업을 그대로 두고 grid 자리 이름으로 칩과 날짜를 한 줄에 세운다(site.css).
+interface Props { post: Post; showCat?: boolean }
+const { post, showCat = true } = Astro.props
+const when = post.date.replaceAll('-', '.')
+---
+<li class={showCat ? 'row' : 'row row-plain'}>
+  {showCat && <p class="row-m"><Chip name={post.category} slug={post.categorySlug} color={post.color} /></p>}
+  <div class="row-b">
+    <a class="t" href={url(`posts/${post.slug}`)} style={`view-transition-name:t-${post.slug}`}><Title title={post.title} /></a>
+    <div class="d">{post.description}</div>
+  </div>
+  <span class="when">{when}{post.minutes ? ` · ${post.minutes}분` : ''}</span>
+</li>

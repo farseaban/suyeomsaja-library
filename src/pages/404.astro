@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro'
+import SecHead from '../components/SecHead.astro'
+import Shelf from '../components/Shelf.astro'
+import { url } from '../lib/url'
+---
+<Base title="찾는 글이 없습니다" bodyClass="p-404">
+  <div class="wrap" slot="hero">
+    <header class="page-head"><h1>찾는 글이 없습니다</h1><p>주소가 바뀌었거나 아직 없는 글입니다.</p></header>
+  </div>
+  <div class="wrap s-narrow-left">
+    <p><a href={url('/')}>1면으로</a> · <a href={url('search')}>검색하기</a></p>
+  </div>
+  <div class="wrap">
+    <section class="s-sec">
+      <SecHead title="분야별" />
+      <Shelf />
+    </section>
+  </div>
+</Base>

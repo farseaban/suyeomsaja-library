@@ -1,0 +1,19 @@
+---
+import type { TocItem } from '../lib/toc'
+
+// 넓은 화면(1320px 이상)은 옆 목차, 그 아래는 글머리를 지나면 위에 붙는 읽기 띠(지금 읽는 절 + 접는 목차).
+interface Props { toc: TocItem[] }
+const { toc } = Astro.props
+---
+<nav class="s-toc" aria-label="목차">
+  <p class="s-label">목차</p>
+  {toc.map((t) => <a href={`#${t.id}`}>{t.text}</a>)}
+</nav>
+<div class="s-readbar"><span class="s-readbar-title" aria-hidden="true"></span>
+  <details class="s-toc-fold">
+    <summary>목차</summary>
+    <nav aria-label="목차">
+      {toc.map((t) => <a href={`#${t.id}`}>{t.text}</a>)}
+    </nav>
+  </details>
+</div>

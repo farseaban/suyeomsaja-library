@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro'
+import EditMode from '../../components/EditMode.astro'
+import { addHeadingIds } from '../../lib/toc'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { markBlocks, fileVersion } from '../../lib/edit'
+import { loadPosts } from '../../lib/posts'
+
+// 내 컴퓨터 전용 편집 화면 — `npm run edit`이 비밀값을 만든 개발 서버에서만 페이지가 생기고, 빌드에서는 한 장도 만들지 않는다.
+const token = process.env.SUYEOMSAJA_EDIT_TOKEN
+export function getStaticPaths() {
+  return process.env.SUYEOMSAJA_EDIT_TOKEN ? loadPosts().map((post) => ({ params: { slug: post.slug } })) : []
+}
+
+// 개발 서버가 경로 목록을 기억해 두므로, 글은 요청마다 새로 읽는다 — 저장 뒤 새로고침하면 고친 글이 보인다
+const post = loadPosts().find((p) => p.slug === Astro.params.slug)!
+const version = fileVersion(readFileSync(join(process.env.POSTS_DIR ?? 'posts', post.slug, 'post.html'), 'utf8'))
+// 각주 말풍선·도해 그리기 같은 꾸밈은 돌리지 않는다 — 꾸밈이 바꾼 글자가 원문에 섞여 저장되지 않게
+const body = markBlocks(addHeadingIds(post.articleHtml).html)
+---
+<Base title={`편집 — ${post.title}`}>
+  <style is:inline set:html={post.scopedCss} slot="head" />
+  <meta name="robots" content="noindex" slot="head" />
+  <div class="s-post" style={`--s-accent:var(--${post.color}-d)`}>
+    <div class="post-body"><article set:html={body} /></div>
+  </div>
+  <EditMode slug={post.slug} editing={true} token={token} version={version} />
+</Base>

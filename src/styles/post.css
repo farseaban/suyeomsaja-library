@@ -1,0 +1,133 @@
+/* 글 본문 덮어쓰기 — 글 자체 스타일(.post-body X)을 .s-post .post-body X로 덮는다(클래스 하나가 많아 순서와 상관없이 이긴다).
+   post.html은 한 글자도 고치지 않는다. 모든 규칙은 .s-post .post-body로 시작하고 !important를 쓰지 않는다.
+   이 파일은 편집 화면(/edit/<글>/)에도 걸린다 — 편집 화면도 .s-post .post-body 구조다. */
+
+/* ── 본문 칸 — 글 템플릿이 박아 둔 보조 글자 색과 글꼴 이름을 사이트 토큰으로 되돌린다 ── */
+.s-post .post-body{--sub:var(--s-sub);background:transparent;font-family:var(--sans);font-size:var(--t-18);line-height:1.8;line-break:strict;
+  width:100%;max-width:720px;margin-inline:auto;justify-self:center;
+  padding:36px max(20px,env(safe-area-inset-right)) var(--sp-6) max(20px,env(safe-area-inset-left))}
+@media (min-width:761px){ .s-post .post-body{max-width:652px} }
+/* 도해(<svg font-family="…">)도 같은 글꼴로 */
+.s-post .post-body svg{font-family:var(--sans)}
+.s-post .post-body p,.s-post .post-body li{text-wrap:pretty}
+.s-post .post-body a{color:var(--sky-ink)}
+.s-post .post-body .lead-quote{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.55;letter-spacing:-.015em;margin:0 0 1.3em;text-wrap:balance;color:var(--ink)}
+/* 절 제목 — 아래 선 대신 위에 분야 색 막대 */
+.s-post .post-body h2{font-family:var(--serif);font-weight:700;font-size:var(--t-24);line-height:1.4;letter-spacing:-.02em;margin:2.9em 0 .75em;padding:0;border:0;text-wrap:balance}
+.s-post .post-body h2::before{content:"";display:block;width:28px;height:3px;border-radius:2px;background:var(--s-accent);margin-bottom:16px}
+.s-post .post-body h3{line-height:1.45}
+/* 굵은 글자 — 무게 600 + 버터색 밑칠(글자 높이의 아래 30%). 줄이 바뀌어도 이어진다 */
+.s-post .post-body strong{font-weight:600;background:linear-gradient(transparent 70%,color-mix(in srgb,var(--butter) 82%,transparent) 70%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .06em}
+/* 한글 기울임은 읽기 나쁘다 — 강조는 무게로. 참고문헌·출처의 서명은 기울임 그대로 */
+.s-post .post-body em{font-style:normal;font-weight:600}
+.s-post .post-body .refs em,.s-post .post-body .refs i,.s-post .post-body cite i,.s-post .post-body p i{font-style:italic}
+.s-post .post-body hr{border:0;border-top:1px solid var(--line);margin:var(--sp-7) 0}
+/* 읽기 띠(46px)가 뜨는 폭: 목차로 건너뛴 절 제목과 각주 왕복 앵커가 띠 밑에 가리지 않게(46 + 18). 1320px 이상은 site.css의 값 */
+@media screen and (max-width:1319px){ .s-post .post-body [id]{scroll-margin-top:64px} }
+
+/* ── 각주 번호 ── */
+.s-post .post-body sup.fn{font-size:.72em;line-height:0;vertical-align:baseline;position:relative;top:-.55em;margin-left:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.s-post .post-body sup.fn a{font-weight:600;color:var(--s-accent-ink);padding:8px 5px;margin:-8px -4px}
+.s-post .post-body sup.fn + sup.fn{margin-left:3px}
+/* 각주 번호가 혼자 다음 줄 머리로 넘어가지 않게 — 번호 앞에 폭 없는 붙임표(U+2060)를 두어 앞 낱말과 함께 넘긴다 */
+.s-post .post-body sup.fn::before{content:"\2060"}
+
+/* ── 도해 ── */
+.s-post .post-body figure{margin:44px 0}
+.s-post .post-body figcaption{font-size:var(--t-13);line-height:1.65;margin:12px 0 0;padding-left:12px;border-left:2px solid var(--line);max-width:36em;color:var(--sub)}
+/* 도해 안 글자: 선·도형용 -d 색으로 쓴 글자를 같은 계열의 글자용 -ink 색으로 바꾼다(대비).
+   fill 속성 값을 글자 그대로 맞춰 잡는 방식이라, 새 글에서 fill 표기가 달라지면(축약 hex, rgb(), style 속성) 조용히 빠진다 — 그때는 이 목록에 더한다 */
+.s-post .post-body svg text[fill="#A9861F" i],.s-post .post-body svg tspan[fill="#A9861F" i],.s-post .post-body svg g[fill="#A9861F" i] text:not([fill]){fill:var(--butter-ink)}
+.s-post .post-body svg text[fill="#C06A45" i],.s-post .post-body svg tspan[fill="#C06A45" i],.s-post .post-body svg g[fill="#C06A45" i] text:not([fill]){fill:var(--peach-ink)}
+.s-post .post-body svg text[fill="#3F8F6E" i],.s-post .post-body svg tspan[fill="#3F8F6E" i],.s-post .post-body svg g[fill="#3F8F6E" i] text:not([fill]){fill:var(--mint-ink)}
+.s-post .post-body svg text[fill="#7466C2" i],.s-post .post-body svg tspan[fill="#7466C2" i],.s-post .post-body svg g[fill="#7466C2" i] text:not([fill]){fill:var(--lav-ink)}
+.s-post .post-body svg text[fill="#3E7DB0" i],.s-post .post-body svg tspan[fill="#3E7DB0" i],.s-post .post-body svg g[fill="#3E7DB0" i] text:not([fill]){fill:var(--sky-ink)}
+.s-post .post-body svg text[fill="#B24E6E" i],.s-post .post-body svg tspan[fill="#B24E6E" i],.s-post .post-body svg g[fill="#B24E6E" i] text:not([fill]){fill:var(--rose-ink)}
+.s-post .post-body svg text[fill="#6E6B7B" i],.s-post .post-body svg tspan[fill="#6E6B7B" i],.s-post .post-body svg g[fill="#6E6B7B" i] text:not([fill]){fill:var(--sub)}
+.s-post .post-body svg text[fill="#9A96AA" i],.s-post .post-body svg tspan[fill="#9A96AA" i]{fill:var(--sub-2)}
+
+/* ── 인용 — 상자가 아니라 남의 목소리(명조) ── */
+.s-post .post-body blockquote.quote{margin:36px 0;padding:2px 0 2px 22px;background:none;border-left:2px solid var(--s-accent);border-radius:0}
+.s-post .post-body blockquote.quote p{font-family:var(--serif);font-weight:500;font-size:1.04em;line-height:1.75;letter-spacing:-.01em;margin:0 0 .5em}
+.s-post .post-body blockquote.quote cite{font-size:var(--t-13);line-height:1.5}
+
+/* ── 핵심 · 주의 상자 — 막대 없는 옅은 면 ── */
+.s-post .post-body .key,.s-post .post-body .caution{border:0;border-radius:var(--radius);padding:20px 24px;margin:36px 0;font-size:1em;line-height:1.75}
+.s-post .post-body .key{background:color-mix(in srgb,var(--butter) 42%,var(--paper))}
+.s-post .post-body .caution{background:color-mix(in srgb,var(--peach) 38%,var(--paper))}
+.s-post .post-body .key .label{font-weight:700;color:var(--butter-ink)}
+
+/* ── 표 ── */
+.s-post .post-body table{font-size:15px;line-height:1.55;font-variant-numeric:tabular-nums;margin:36px 0}
+.s-post .post-body th{background:none;border-bottom:1px solid var(--ink);font-size:var(--t-13);letter-spacing:.02em;white-space:nowrap;padding:8px 12px 10px}
+.s-post .post-body td{vertical-align:top;padding:12px}
+.s-post .post-body tr.hl td{background:color-mix(in srgb,var(--s-accent-tint) 32%,var(--paper))}
+.s-post .post-body th:first-child,.s-post .post-body td:first-child{padding-left:0}
+/* 첫 열의 왼쪽 여백을 없앴으니 강조 행의 면은 왼쪽으로 12px 내어 칠한다 */
+.s-post .post-body tr.hl td:first-child{box-shadow:-12px 0 0 color-mix(in srgb,var(--s-accent-tint) 32%,var(--paper))}
+
+/* ── 필자 한마디 — 글의 맺음. 명조로 결을 바꾼다 ── */
+.s-post .post-body .expert-note blockquote{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;font-family:var(--serif);font-weight:500;font-size:17px;line-height:1.9;letter-spacing:-.01em}
+.s-post .post-body .expert-note blockquote strong{font-weight:700}
+.s-post .post-body .disclaimer{background:none;border-radius:0;padding:16px 0 0;border-top:1px solid var(--line);font-size:var(--t-13);line-height:1.65;margin-top:var(--sp-6)}
+
+/* ── 참고문헌 — 제목은 구역 머리 문법(위 1px 잉크색 선) ── */
+.s-post .post-body .refs{font-size:var(--t-14);line-height:1.7;margin-top:var(--sp-7)}
+.s-post .post-body .refs h3{font-size:var(--t-13);letter-spacing:.06em;border-top:1px solid var(--ink);padding-top:14px;margin:0 0 10px}
+.s-post .post-body .refs ol{font-variant-numeric:tabular-nums;color:var(--sub)}
+.s-post .post-body .refs li{margin:10px 0;overflow-wrap:anywhere}
+.s-post .post-body .refs a{display:inline-block;padding:4px 6px;margin:-4px -2px}
+/* 돌아가기 화살표(↩) — 가변 글꼴 조각에 없는 글자라 기기 글꼴로 떨어진다. 그림 문자 글꼴이 잡히기 전에 기기의 기호 글꼴을 먼저 거치게 하고, 글자 꼴을 청한다 */
+.s-post .post-body .refs a.back{min-width:32px;padding:4px 8px;margin-left:8px;text-align:center;font-family:'Pretendard Variable','Pretendard','Apple Symbols','Segoe UI Symbol',sans-serif;font-variant-emoji:text}
+.s-post .post-body .refs li:target{background:var(--butter-tint)}
+
+/* ── 넓은 화면: 도해 · 상자 · 필자 한마디는 글줄(612px)보다 좌우 34px씩 넓게 숨 쉰다 ── */
+@media (min-width:761px){
+  .s-post .post-body figure{margin-inline:-34px}
+  .s-post .post-body figcaption{margin-left:34px}
+  .s-post .post-body .key,.s-post .post-body .caution{margin-inline:-34px;padding:22px 34px}
+  .s-post .post-body .expert-note blockquote{margin-inline:-34px;padding:28px 34px}
+}
+
+/* ── 휴대폰 ── */
+@media (max-width:760px){
+  .s-post .post-body{font-size:17px;line-height:1.75;padding-top:var(--sp-5)}
+  .s-post .post-body .lead-quote{font-size:20px;line-height:1.5}
+  .s-post .post-body h2{font-size:var(--t-21);margin-top:2.6em}
+  .s-post .post-body figure{margin:36px 0}
+  .s-post .post-body blockquote.quote{padding-left:16px}
+  .s-post .post-body .key,.s-post .post-body .caution{padding:16px 18px;line-height:1.7}
+  .s-post .post-body .expert-note blockquote{padding:20px;font-size:16px;line-height:1.85}
+  .s-post .post-body table{font-size:14px;line-height:1.5}
+  .s-post .post-body th,.s-post .post-body td{padding:8px}
+}
+/* 가로 밀기 · 표 카드는 화면에만 건다 — A4 세로는 여백을 빼면 약 673px이라 max-width:760px가 인쇄에도 걸린다 */
+@media screen and (max-width:760px){
+  /* 도해: 본문 칸 밖으로 풀어 가로로 밀어 본다(600px 폭이면 도해 속 글자를 읽을 수 있다). 왼쪽 끝은 본문 글줄(20px)에 맞는다 */
+  .s-post .post-body .s-fig-scroll{overflow-x:auto;margin-inline:-20px;padding-inline:20px;scroll-padding-inline:20px;scrollbar-width:none;scroll-snap-type:x proximity;
+    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+  .s-post .post-body .s-fig-scroll::-webkit-scrollbar{display:none}
+  .s-post .post-body .s-fig-scroll svg{width:600px;max-width:none;scroll-snap-align:start}
+  /* 문장형 표: 머리는 화면에서만 숨기고(읽기 프로그램에는 남긴다) 행을 카드로 쌓는다. 칸마다 그 열의 머리글이 라벨로 붙는다 */
+  .s-post .post-body table[data-prose] thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .s-post .post-body table[data-prose],.s-post .post-body table[data-prose] tbody,.s-post .post-body table[data-prose] tr,.s-post .post-body table[data-prose] td{display:block}
+  .s-post .post-body table[data-prose] tr{padding:14px 0;border-bottom:1px solid var(--line)}
+  .s-post .post-body table[data-prose] tr.hl{padding-inline:12px;margin-inline:-12px;border-bottom-color:transparent;border-radius:var(--radius);background:color-mix(in srgb,var(--s-accent-tint) 32%,var(--paper))}
+  .s-post .post-body table[data-prose] td{padding:2px 0;border:0;line-height:1.6;background:none;box-shadow:none}
+  .s-post .post-body table[data-prose] td:first-child{font-family:var(--serif);font-weight:500;font-size:var(--t-16);padding-left:0}
+  .s-post .post-body table[data-prose] td[data-label]:not(:first-child)::before{content:attr(data-label);display:block;font-size:var(--t-12);font-weight:700;letter-spacing:.06em;color:var(--sub);margin-top:10px}
+}
+
+/* ── 인쇄(본문) — 틀의 인쇄 규칙은 site.css 끝에 있다 ── */
+@media print{
+  .s-post .post-body{font-size:11pt;line-height:1.6;padding-top:0}
+  .s-post .post-body a{color:#000}
+  .s-post .post-body .refs a[href^="http"]::after{content:" " attr(href);font-size:8.5pt;word-break:break-all}
+  .s-post .post-body .refs a.back{display:none}
+  .s-post .post-body figure,.s-post .post-body .key,.s-post .post-body .caution,.s-post .post-body blockquote,.s-post .post-body table{break-inside:avoid}
+  .s-post .post-body h2{break-after:avoid}
+  .s-post .post-body .key,.s-post .post-body .caution,.s-post .post-body strong{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* 가로 밀기는 화면에만 걸려 있다 — 종이에서는 도해가 칸 폭에 맞춰 통째로 찍힌다 */
+  .s-post .post-body .s-fig-scroll{overflow:visible}
+  .s-post .post-body .s-fig-scroll svg{width:100%;max-width:100%}
+}

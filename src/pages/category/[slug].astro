@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro'
+import PostRow from '../../components/PostRow.astro'
+import SecHead from '../../components/SecHead.astro'
+import Shelf from '../../components/Shelf.astro'
+import { activeCategories, loadPosts } from '../../lib/posts'
+import type { Category } from '../../config/site'
+
+export function getStaticPaths() {
+  return activeCategories(loadPosts()).map((cat) => ({ params: { slug: cat.slug }, props: { cat } }))
+}
+const { cat } = Astro.props as { cat: Category }
+const posts = loadPosts().filter((p) => p.category === cat.name)
+---
+<Base title={cat.name} bodyClass="p-list" dawn={cat.color}>
+  <div class="wrap" slot="hero">
+    <header class="page-head"><p class="s-label">분야</p><h1>{cat.name}</h1><p>글 {posts.length}편</p></header>
+  </div>
+  <div class="wrap">
+    <ul class="rows">{posts.map((p) => <PostRow post={p} showCat={false} />)}</ul>
+    <section class="s-sec">
+      <SecHead title="다른 분야" />
+      <Shelf exclude={cat.slug} />
+    </section>
+  </div>
+</Base>

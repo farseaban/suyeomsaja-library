@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>비극의 주인공은 운명에 졌나, 성격에 졌나 — 하마르티아</title>
+<meta name="description" content="오이디푸스는 운명에 졌을까, 성격에 졌을까. 소포클레스의 두 작품, 아리스토텔레스의 하마르티아 번역 논쟁, 헤라클레이토스의 '성격이 운명', 브래들리와 밀턴을 원문으로 따라가며 그 물음이 시대마다 책임을 나누는 안경이었음을 짚는다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  .kicker{font-size:14px;color:var(--lav-d);font-weight:700;letter-spacing:.02em}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:#FFF8E0;border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:#FDF0EA;border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:#FDF0EA}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:#F2F7FC;border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .faq dt{font-weight:800;margin-top:1.2em}
+  .faq dd{margin:.35em 0 0}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:#FFF8E0}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<div class="kicker">고전 읽기</div>
+<h1>비극의 주인공은 운명에 졌을까, 성격에 졌을까 — 하마르티아(hamartia)</h1>
+<div class="meta">2026-11-05 · 약 9분 분량 · 글 반창모</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"그리스 비극은 운명의 비극이고, 셰익스피어의 비극은 성격의 비극이다."</p>
+<p>문학 시간에 한 번쯤 들어 본 정리입니다. 오이디푸스는 신탁이 정해 둔 길을 끝내 피하지 못해 무너졌고, 햄릿은 망설이는 성격 때문에, 맥베스는 야망 때문에 무너졌다는 것입니다. 고대는 파멸의 원인을 사람 바깥에 두었고, 근대는 그것을 사람 안으로 옮겼다는 깔끔한 화살표입니다.</p>
+<p>그런데 『오이디푸스 왕』의 마지막 장면을 펼치면 이 화살표가 흔들립니다. 스스로 눈을 찌른 오이디푸스가 무대에 다시 나오자 코러스가 묻습니다. 어떻게 그런 짓을 할 수 있었느냐, 어느 신령(다이몬)이 그대를 부추겼느냐고요<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>. 오이디푸스의 대답은 한 문장 안에 원인 둘을 나란히 세웁니다.</p>
+<blockquote class="quote">
+  <p>"아폴론이었소, 친구들이여, 아폴론이 이 끔찍한 고통을 이루었소. 그러나 이 눈을 친 손은 다른 누구도 아닌, 가련한 나 자신의 손이었소."</p>
+  <cite>— 소포클레스, 『오이디푸스 왕』 1329~1332행 무렵 (Jebb 판 영역에서 번역)<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup></cite>
+</blockquote>
+<p>신이 했고, 내가 했습니다. 작품은 둘 중 하나를 고르지 않습니다. 고르는 쪽은 언제나 읽는 사람이었어요.</p>
+<p>이 글은 '운명이냐 성격이냐'를 시험 문제처럼 외워 온 분들을 위해 씁니다. 결론부터 말씀드리면 이렇습니다. <strong>주인공이 운명 때문에 무너졌느냐 성격 때문에 무너졌느냐는 작품에 적힌 사실이라기보다, 시대마다 '누구에게 책임을 지울지' 정하려고 고쳐 쓰는 안경입니다.</strong> 그 안경이 가장 또렷하게 드러나는 곳이 아리스토텔레스가 쓴 낱말 하나, <strong>하마르티아(hamartia)</strong>입니다.</p>
+
+<!-- 2. 같은 사람, 두 대답 -->
+<h2>같은 오이디푸스, 두 개의 대답</h2>
+<p>『오이디푸스 왕』은 기원전 429년 무렵 처음 상연된 것으로 보는데, 이 연대부터가 확실하지 않습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>. 소포클레스는 그 뒤 오이디푸스를 한 번 더 무대에 세웁니다. 기원전 406년 죽음을 얼마 앞두고 쓴 『콜로노스의 오이디푸스』로, 작가가 세상을 떠난 뒤인 기원전 401년에 같은 이름의 손자가 상연했습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>.</p>
+<p>늙고 눈먼 오이디푸스는 여기서 전혀 다른 말을 합니다. 그를 끌고 가려는 크레온이 지난 죄를 들추자, 오이디푸스는 변론문 같은 긴 대사로 맞섭니다. 살인도, 어머니와의 혼인도, 내가 고른 일이 아니었다. 아마 오래전부터 이 집안에 노여워한 신들의 뜻이었을 것이다. 아버지를 죽일 때 그가 누구인지 몰랐는데, 모르고 한 일을 어떻게 탓할 수 있느냐<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>.</p>
+<p>첫 작품의 오이디푸스는 아폴론을 말하면서도 손은 내 손이었다고 했습니다. 둘째 작품의 오이디푸스는 책임을 묻는 사람 앞에서 '내 뜻이 아니었다'를 앞세웁니다. 같은 사건, 같은 작가, 같은 인물입니다. 달라진 것은 그가 선 자리, 곧 누가 누구에게 책임을 묻는 자리인가입니다. 물론 모르고 했다는 사정이 저질러진 일의 무게까지 지워 주지는 않는다는 점도 연구자들은 짚습니다<sup class="fn"><a id="cite-3b" href="#ref-3">[3]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 396" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">같은 오이디푸스, 두 개의 대답</title>
+<desc id="d-1">『오이디푸스 왕』의 오이디푸스는 아폴론과 자기 손을 함께 원인으로 대지만, 수십 년 뒤 『콜로노스의 오이디푸스』의 그는 책임을 묻는 크레온 앞에서 자기가 고른 일이 아니었고 모르고 한 일이었다고 변론한다.</desc>
+<rect width="680" height="396" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">같은 오이디푸스, 두 개의 대답</text>
+<rect x="32" y="70" width="300" height="276" rx="14" fill="#F6CCD8" stroke="#B24E6E"/>
+<rect x="348" y="70" width="300" height="276" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/>
+<g font-size="16" font-weight="800">
+  <text x="52" y="102" fill="#B24E6E">『오이디푸스 왕』</text>
+  <text x="368" y="102" fill="#3E7DB0">『콜로노스의 오이디푸스』</text>
+</g>
+<g font-size="12" fill="#6E6B7B">
+  <text x="52" y="134">상연</text><text x="368" y="134">상연</text>
+  <text x="52" y="184">묻는 사람</text><text x="368" y="184">묻는 사람</text>
+  <text x="52" y="234">대답</text><text x="368" y="234">대답</text>
+  <text x="52" y="304">책임은 어디에</text><text x="368" y="304">책임은 어디에</text>
+</g>
+<g font-size="14" fill="#33313F">
+  <text x="52" y="154">기원전 429년 무렵(불확실)</text>
+  <text x="368" y="154">기원전 401년, 작가 사후</text>
+  <text x="52" y="204">코러스 — "어느 다이몬이 부추겼나"</text>
+  <text x="368" y="204">크레온 — 지난 죄를 들춘다</text>
+  <text x="52" y="254">"아폴론이 이 고통을 이루었다.</text>
+  <text x="52" y="274">그러나 눈을 친 손은 내 손"</text>
+  <text x="368" y="254">"내가 고른 일이 아니었다.</text>
+  <text x="368" y="274">모르고 한 일을 어찌 탓하나"</text>
+</g>
+<g font-size="15" font-weight="800">
+  <text x="52" y="326" fill="#B24E6E">신과 나, 둘 다</text>
+  <text x="368" y="326" fill="#3E7DB0">신들의 뜻, 나는 몰랐다</text>
+</g>
+<text x="32" y="378" font-size="12" fill="#6E6B7B">자료: 소포클레스 원문(Perseus, Jebb 판)[1][4], 위키백과[2][3]로 재구성</text>
+</svg>
+<figcaption>『오이디푸스 왕』의 오이디푸스는 아폴론과 자기 손을 함께 원인으로 대지만, 『콜로노스의 오이디푸스』의 그는 책임을 묻는 크레온 앞에서 자기가 고른 일이 아니었고 모르고 한 일이었다고 변론합니다.</figcaption>
+</figure>
+
+<!-- 3. 하마르티아 -->
+<h2>하마르티아 — 빗나간 화살인가, 금 간 성품인가</h2>
+<p>오이디푸스를 비극의 본보기로 꼽은 사람은 아리스토텔레스입니다. 기원전 335년 무렵 쓴 것으로 보는 『시학』<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup> 13장에서 그는 가장 좋은 비극의 주인공을 이렇게 그립니다. 아주 뛰어나게 선하거나 정의롭지는 않은 사람, 그러나 악덕이나 사악함 때문이 아니라 어떤 하마르티아 때문에 행운에서 불행으로 떨어지는 사람. 그리고 그 예로 오이디푸스와 티에스테스를 듭니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>.</p>
+<p>그리스어 원문은 '악덕(모크테리아) 때문이 아니라 어떤 하마르티아 때문에'라고 쓰고, 몇 줄 뒤 '악덕 때문이 아니라 큰 하마르티아 때문에'라고 같은 대비를 한 번 더 합니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>. 하마르티아는 '과녁을 빗나가다, 잘못하다'라는 뜻의 동사에서 나온 말입니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>. 적어도 문장의 짜임으로는, 하마르티아는 악덕이 아닌 무엇입니다.</p>
+<p>그런데 영어 번역자들은 이 한 낱말을 서로 다르게 옮겼습니다. 1895년에 번역을 처음 펴낸 부처(S. H. Butcher)<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>는 "어떤 잘못이나 약점(error or frailty)"이라고 두 말을 겹쳐 썼습니다<sup class="fn"><a id="cite-6b" href="#ref-6">[6]</a></sup>. 1909년 『시학』 판본을 낸 바이워터(Ingram Bywater)의 번역은 "판단의 착오(error of judgement)"입니다<sup class="fn"><a id="cite-9b" href="#ref-9">[9]</a></sup>. 1932년 파이프(W. H. Fyfe)는 본문에 "그 사람 안의 어떤 결함(flaw)"이라고 쓰고, 각주에서 그것이 치명적인 실수, 곧 판단의 착오라는 뜻이라고 풀었습니다<sup class="fn"><a id="cite-10" href="#ref-10">[10]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">한 낱말, 세 가지 영어 번역</title>
+<desc id="d-2">아리스토텔레스의 하마르티아를 바이워터는 판단의 착오로, 부처는 잘못이나 약점으로, 파이프는 본문에서 결함으로 옮기고 각주에서 착오로 풀었으며, 같은 낱말이 신약성경에서는 죄를 뜻한다.</desc>
+<rect width="680" height="320" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">한 낱말, 세 가지 영어 번역</text>
+<g>
+  <rect x="35" y="72" width="170" height="78" rx="12" fill="#E9E6F1" stroke="#9A96AA"/>
+  <text x="120" y="96" font-size="13" font-weight="800" text-anchor="middle" fill="#33313F">바이워터 (1920 번역서)</text>
+  <text x="120" y="118" font-size="14" text-anchor="middle" fill="#33313F">error of judgement</text>
+  <text x="120" y="138" font-size="13" text-anchor="middle" fill="#6E6B7B">판단의 착오</text>
+  <rect x="255" y="72" width="170" height="78" rx="12" fill="#E9E6F1" stroke="#9A96AA"/>
+  <text x="340" y="96" font-size="13" font-weight="800" text-anchor="middle" fill="#33313F">부처 (1895)</text>
+  <text x="340" y="118" font-size="14" text-anchor="middle" fill="#33313F">error or frailty</text>
+  <text x="340" y="138" font-size="13" text-anchor="middle" fill="#6E6B7B">잘못이나 약점</text>
+  <rect x="445" y="72" width="170" height="78" rx="12" fill="#E9E6F1" stroke="#9A96AA"/>
+  <text x="530" y="96" font-size="13" font-weight="800" text-anchor="middle" fill="#33313F">파이프 (1932)</text>
+  <text x="530" y="118" font-size="14" text-anchor="middle" fill="#33313F">some flaw in him</text>
+  <text x="530" y="138" font-size="13" text-anchor="middle" fill="#6E6B7B">본문은 결함, 각주는 착오</text>
+</g>
+<g stroke="#9A96AA" stroke-width="1.5" stroke-dasharray="4 3">
+  <path d="M120 150 L120 196"/><path d="M340 150 L340 196"/><path d="M530 150 L530 196"/>
+</g>
+<path d="M60 200 L620 200" stroke="#C9C5D6" stroke-width="6" stroke-linecap="round"/>
+<circle cx="60" cy="200" r="9" fill="#F8E8B0" stroke="#A9861F" stroke-width="2"/>
+<circle cx="620" cy="200" r="9" fill="#F6CCD8" stroke="#B24E6E" stroke-width="2"/>
+<g fill="#7466C2"><circle cx="120" cy="200" r="6"/><circle cx="340" cy="200" r="6"/><circle cx="530" cy="200" r="6"/></g>
+<text x="44" y="234" font-size="15" font-weight="800" fill="#A9861F">앎의 착오</text>
+<text x="44" y="254" font-size="12" fill="#6E6B7B">몰라서 빗나간 화살</text>
+<text x="636" y="234" font-size="15" font-weight="800" text-anchor="end" fill="#B24E6E">성품의 결함 · 죄</text>
+<text x="636" y="254" font-size="12" text-anchor="end" fill="#6E6B7B">신약성경의 용례: 죄 (로마서 5:12)</text>
+<text x="32" y="300" font-size="12" fill="#6E6B7B">그림: 직접 제작 · 번역어는 각 판본[6][9][10], 신약 용례는 위키백과[8] · 축 위 위치는 필자의 배치</text>
+</svg>
+<figcaption>아리스토텔레스의 하마르티아를 바이워터는 '판단의 착오'로, 부처는 '잘못이나 약점'으로, 파이프는 본문에서 '결함'으로 옮겼고, 같은 낱말이 신약성경에서는 '죄'를 뜻합니다.</figcaption>
+</figure>
+<p>낱말 하나가 '착오'와 '결함' 사이를 오가는 데에는 이 말의 뒷이야기도 한몫했을지 모릅니다. 같은 하마르티아가 그리스어 신약성경에서는 '죄'를 가리킵니다. "모든 사람이 죄를 지었다"(로마서 5:12)의 그 죄입니다<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>. 이 낱말을 '죄'로 먼저 아는 독자에게 빗나간 화살은 성품에 난 금처럼 읽히기 쉬웠을 겁니다. 다만 이것은 짐작일 뿐이고, 번역의 역사가 실제로 그렇게 흘렀다고 단정하기에는 근거가 부족합니다.</p>
+<p>학계는 지금도 갈립니다. 20세기 중반의 하시(Phillip W. Harsh)는 하마르티아를 비극적 결함으로 보고, 오이디푸스가 세 갈래 길에서 분노에 휩쓸려 사람을 죽인 데에 도덕적 책임의 몫이 있다고 읽었습니다. 반대로 1963년 이저벨 하이드는 '비극적 결함'이라는 20세기의 읽기가 틀렸다고 따졌고, 1969년 브레머(J. M. Bremer)는 도덕적 결함이 아니라 지적인 착오로 읽었습니다. 1978년 골든(Leon Golden)은 주로 앎의 문제이되 도덕의 요소가 섞일 수 있다는 절충을 내놓았습니다<sup class="fn"><a id="cite-8c" href="#ref-8">[8]</a></sup>. '비극적 결함'이라는 읽기가 언제 생겼는지조차 자료마다 다르게 적습니다. 한 자료는 악덕을 벌하는 '시적 정의'를 앞세운 프랑스 신고전주의 연극을 들고<sup class="fn"><a id="cite-8d" href="#ref-8">[8]</a></sup>, 다른 자료는 낭만주의 시대의 이해라고 적습니다<sup class="fn"><a id="cite-5b" href="#ref-5">[5]</a></sup>.</p>
+<div class="key"><span class="label">핵심 —</span> 하마르티아를 '착오'로 읽으면 오이디푸스는 몰랐기 때문에 무너진 사람이고, '결함'으로 읽으면 성미 때문에 무너진 사람입니다. 원문은 그대로입니다. 바뀌는 것은 그의 파멸을 두고 그 자신에게 얼마만큼 책임을 지울 것인가입니다.</div>
+
+<!-- 4. 헤라클레이토스 -->
+<h2>"성격이 운명이다"는 원래 그리스 말이었다</h2>
+<p>'성격이 운명'이라는 말은 흔히 셰익스피어 이후 근대의 구호처럼 쓰입니다. 그런데 이 말의 가장 오래된 꼴은 소포클레스보다도 앞선 그리스 철학자에게 있습니다. 기원전 500년 무렵 활동한 에페소스의 헤라클레이토스입니다<sup class="fn"><a id="cite-11" href="#ref-11">[11]</a></sup>. 그의 단편 B119는 단 세 낱말입니다. 에토스 안트로포이 다이몬(ἦθος ἀνθρώπῳ δαίμων)<sup class="fn"><a id="cite-12" href="#ref-12">[12]</a></sup>.</p>
+<p>이 세 낱말은 '사람의 성격이 그의 운명이다', '성격이 곧 운명이다', '사람의 성격은 그를 지키는 신령이다' 등으로 갈라져 옮겨집니다. 다이몬은 개인의 운명을 다스리는 힘, 그래서 그 사람의 몫이나 운수를 뜻하는 말입니다<sup class="fn"><a id="cite-11b" href="#ref-11">[11]</a></sup>. 스탠퍼드 철학 백과의 헤라클레이토스 항목은 이렇게 설명합니다. 사람들은 좋은 신령이 붙으면 운이 좋고 나쁜 신령이 붙으면 불행하다고 여겼는데, 헤라클레이토스는 '사람'이라는 낱말을 고리 삼아 운을 그 사람의 성격, 곧 윤리적 태도의 함수로 바꿔 놓았다는 것입니다<sup class="fn"><a id="cite-12b" href="#ref-12">[12]</a></sup>.</p>
+<p>앞서 코러스가 오이디푸스에게 던진 물음을 떠올려 보세요. "어느 다이몬이 그대를 부추겼소?" 헤라클레이토스식으로 답하면, 그 다이몬은 하늘 어딘가가 아니라 오이디푸스의 성격 안에 있습니다. 그러니 '그리스는 운명, 셰익스피어는 성격'이라는 구분은 출발부터 어긋납니다. 그리스 안에 이미 두 대답이 다 있었습니다. 다만 이 단편의 다이몬을 운명으로 옮길지 신령으로 옮길지부터 번역이 갈리는 만큼, 이 세 낱말 역시 한 가지 뜻으로 못 박혀 있지는 않습니다.</p>
+
+<!-- 5. 셰익스피어와 브래들리 -->
+<h2>셰익스피어에게 '비극적 결함'을 씌운 안경</h2>
+<p>'셰익스피어 비극은 성격의 비극'이라는 정리를 이야기할 때 자주 불려 나오는 책이 있습니다. 브래들리(A. C. Bradley)가 리버풀·글래스고·옥스퍼드에서 가르친 내용을 강의 형식 그대로 묶어 1904년에 낸 『셰익스피어 비극』입니다<sup class="fn"><a id="cite-13" href="#ref-13">[13]</a></sup>. 셰익스피어식 비극을 설명하는 그의 문장은 단호합니다.</p>
+<blockquote class="quote">
+  <p>"비극의 재앙은 그냥 일어나지도, 위에서 내려지지도 않는다. 그것은 주로 행위에서, 그것도 사람의 행위에서 나온다."</p>
+  <cite>— A. C. 브래들리, 『셰익스피어 비극』(1904) 제1강 (번역)<sup class="fn"><a id="cite-13b" href="#ref-13">[13]</a></sup></cite>
+</blockquote>
+<p>그는 이어서 비극의 중심이 '성격에서 나오는 행위'에 있다고 말하고, 주인공의 비극적 기질은 곧 그의 위대함이기도 해서 그 상황에서는 그에게 치명적이 된다고 씁니다<sup class="fn"><a id="cite-13c" href="#ref-13">[13]</a></sup>. 성격이 운명이라는 공식에 이만큼 잘 맞는 문장도 드뭅니다.</p>
+<p>그런데 브래들리를 직접 읽으면 그는 생각보다 조심스럽습니다. 그는 비극의 첫째 면으로 높은 자리에서 떨어지는 사람을 보며 느끼는 인간의 무력함, 그리고 운명의 전능함, 어쩌면 변덕을 꼽았습니다. 행위에서 재앙이 나온다는 면은 둘째 면이고, 그는 이것이 "한 면일 뿐이며, 첫째 면에 더해지는 것이지 그것을 대신하는 것이 아니"라고 덧붙입니다. 주인공을 무너뜨리는 것도 결함 하나로 부르지 않고 "치명적인 불완전함 또는 착오"라고 함께 씁니다<sup class="fn"><a id="cite-13d" href="#ref-13">[13]</a></sup>. 하이드가 1963년에 문제 삼은 것도 브래들리 전체가 아니라 그의 한 서술이 오해를 낳는다는 점이었습니다<sup class="fn"><a id="cite-8e" href="#ref-8">[8]</a></sup>.</p>
+<p>그럼에도 브래들리의 안경이 무엇을 보려 했는지는 이아고에서 잘 드러납니다. 오셀로를 파멸로 모는 이아고를 두고, 브래들리보다 앞선 비평가 콜리지는 '동기 없는 악의(motiveless malignity)'라는 말을 남겼습니다. 브래들리는 이 표현을 "오해를 부르는 말"이라 부르고, 이아고의 행동은 "이해할 수 있다"고 맞섭니다<sup class="fn"><a id="cite-13e" href="#ref-13">[13]</a></sup>. 악마 같은 악의조차 성격으로 풀려야 한다는 것, 그것이 1904년 강의실의 안경이었습니다.</p>
+<p>흥미롭게도 그보다 44년 앞서 이 공식에 금을 그은 사람은 소설가였습니다. 조지 엘리엇은 1860년 세 권으로 나온 『플로스강의 물방앗간』<sup class="fn"><a id="cite-14" href="#ref-14">[14]</a></sup>에 이렇게 씁니다.</p>
+<blockquote class="quote">
+  <p>"'성격은' 하고 노발리스는 그의 미심쩍은 경구 하나에서 말한다, '성격은 운명이다.' 그러나 우리 운명의 전부는 아니다."</p>
+  <cite>— 조지 엘리엇, 『플로스강의 물방앗간』 6권 6장 (번역)<sup class="fn"><a id="cite-15" href="#ref-15">[15]</a></sup></cite>
+</blockquote>
+<p>엘리엇은 곧바로 햄릿을 끌어옵니다. 햄릿은 생각이 많고 우유부단했고, 그래서 위대한 비극이 생겼다. 하지만 아버지가 천수를 누리고 숙부가 일찍 죽었다면, 햄릿은 오필리아와 결혼해 독백 몇 번과 장인에 대한 무례 몇 번을 남기고도 멀쩡한 사람이라는 평판으로 삶을 마쳤을 수도 있다<sup class="fn"><a id="cite-15b" href="#ref-15">[15]</a></sup>. 같은 성격도 어떤 상황에 놓이느냐에 따라 비극이 되기도 하고 안 되기도 한다는 말입니다.</p>
+
+<!-- 6. 밀턴 -->
+<h2>밀턴 — 신이 직접 변론에 나선 서사시</h2>
+<p>책임을 누구에게 지울 것인가를 아예 작품의 목적으로 내건 사람은 밀턴입니다. 1667년 열 권으로 나왔다가 1674년 열두 권으로 다시 짠 『실낙원』<sup class="fn"><a id="cite-16" href="#ref-16">[16]</a></sup>은 첫머리에서 자기 일을 "신의 길이 옳음을 사람들에게 밝히는 것(justify the ways of God to men)"이라고 적습니다(1권 26행)<sup class="fn"><a id="cite-17" href="#ref-17">[17]</a></sup>. 정당함을 입증한다는, 변론에 어울리는 동사입니다.</p>
+<p>3권에서 신은 아직 일어나지 않은 타락을 내다보며 말합니다. 인간은 사탄의 번지르르한 거짓말에 귀를 기울이고 넘어질 것이다. 그리고 스스로 묻습니다. "누구의 잘못인가?" 대답도 스스로 합니다. 그 자신의 잘못 말고 누구의 잘못이겠느냐고요(3권 96~97행).</p>
+<blockquote class="quote">
+  <p>"나는 그를 바르고 의롭게 지었다. 설 수 있을 만큼 넉넉하게, 그러나 넘어질 자유도 있게."</p>
+  <cite>— 존 밀턴, 『실낙원』 3권 98~99행 (번역)<sup class="fn"><a id="cite-17b" href="#ref-17">[17]</a></sup></cite>
+</blockquote>
+<p>이어지는 대목은 더 정교합니다. 내가 미리 알았다 해도 그 미리 앎은 그들의 잘못에 아무 영향을 주지 않았고, 내가 몰랐더라도 그 일은 똑같이 확실했으리라(3권 117~119행). 그들은 스스로 자기 타락을 정했다(128행)<sup class="fn"><a id="cite-17c" href="#ref-17">[17]</a></sup>. 신은 예지와 자유를 한자리에 놓으면서, 책임만은 깔끔하게 사람 쪽으로 넘깁니다. 운명이냐 성격이냐는 물음이 여기서는 '누구의 잘못인가'라는 맨얼굴로 나옵니다.</p>
+<p>그리고 다음 시대는 이 판결문을 거꾸로 읽었습니다. 블레이크는 밀턴이 "자기도 모르게 악마의 편"이었다고 썼고, 블레이크·바이런·셸리·해즐릿 같은 낭만주의 비평가들은 사탄을 이 시의 영웅으로 읽었습니다<sup class="fn"><a id="cite-16b" href="#ref-16">[16]</a></sup>. 신이 공들여 피고석에 세운 쪽을, 낭만주의는 주인공 자리에 다시 세운 셈입니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 600" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">책임을 어디에 두었나 — 2,500년 가까운 흔들림</title>
+<desc id="d-3">기원전 500년 무렵의 헤라클레이토스부터 1963년의 하이드까지, 파멸의 책임은 바깥의 신, 사람의 성품, 앎의 착오 사이를 한 방향으로 나아가지 않고 오갔다.</desc>
+<rect width="680" height="600" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">책임을 어디에 두었나 — 2,500년 가까운 흔들림</text>
+<g font-size="13" fill="#33313F">
+  <rect x="32" y="64" width="16" height="16" rx="4" fill="#CFE3F6" stroke="#3E7DB0"/><text x="56" y="77">바깥(신·상황)</text>
+  <rect x="176" y="64" width="16" height="16" rx="4" fill="#F8E8B0" stroke="#A9861F"/><text x="200" y="77">둘 다 · 앎의 착오</text>
+  <rect x="340" y="64" width="16" height="16" rx="4" fill="#F6CCD8" stroke="#B24E6E"/><text x="364" y="77">사람의 성품</text>
+</g>
+<path d="M176 108 L176 516" stroke="#E4E0DA" stroke-width="3"/>
+<g font-size="13" font-weight="700" fill="#6E6B7B" text-anchor="end">
+  <text x="160" y="124">기원전 500년 무렵</text>
+  <text x="160" y="180">기원전 429년 무렵</text>
+  <text x="160" y="236">기원전 401년</text>
+  <text x="160" y="292">기원전 335년 무렵</text>
+  <text x="160" y="348">1667년</text>
+  <text x="160" y="404">1860년</text>
+  <text x="160" y="460">1904년</text>
+  <text x="160" y="516">1963년</text>
+</g>
+<g stroke-width="2">
+  <circle cx="176" cy="120" r="8" fill="#F6CCD8" stroke="#B24E6E"/>
+  <circle cx="176" cy="176" r="8" fill="#F8E8B0" stroke="#A9861F"/>
+  <circle cx="176" cy="232" r="8" fill="#CFE3F6" stroke="#3E7DB0"/>
+  <circle cx="176" cy="288" r="8" fill="#F8E8B0" stroke="#A9861F"/>
+  <circle cx="176" cy="344" r="8" fill="#F6CCD8" stroke="#B24E6E"/>
+  <circle cx="176" cy="400" r="8" fill="#F8E8B0" stroke="#A9861F"/>
+  <circle cx="176" cy="456" r="8" fill="#F6CCD8" stroke="#B24E6E"/>
+  <circle cx="176" cy="512" r="8" fill="#F8E8B0" stroke="#A9861F"/>
+</g>
+<g font-size="15" font-weight="800">
+  <text x="198" y="118" fill="#B24E6E">헤라클레이토스 단편 B119</text>
+  <text x="198" y="174" fill="#A9861F">소포클레스 『오이디푸스 왕』</text>
+  <text x="198" y="230" fill="#3E7DB0">소포클레스 『콜로노스의 오이디푸스』</text>
+  <text x="198" y="286" fill="#A9861F">아리스토텔레스 『시학』</text>
+  <text x="198" y="342" fill="#B24E6E">밀턴 『실낙원』</text>
+  <text x="198" y="398" fill="#A9861F">엘리엇 『플로스강의 물방앗간』</text>
+  <text x="198" y="454" fill="#B24E6E">브래들리 『셰익스피어 비극』</text>
+  <text x="198" y="510" fill="#A9861F">하이드, 「비극적 결함은 비극적 착오인가」</text>
+</g>
+<g font-size="13" fill="#33313F">
+  <text x="198" y="138">사람의 성격이 그의 다이몬 — 운을 성격 쪽으로 옮기다</text>
+  <text x="198" y="194">"아폴론이 이루었고, 눈을 친 손은 내 손"</text>
+  <text x="198" y="250">"내가 고른 일이 아니다, 모르고 한 일이다"</text>
+  <text x="198" y="306">악덕이 아니라 하마르티아 때문에 무너진다</text>
+  <text x="198" y="362">"누구의 잘못인가? 그 자신의 잘못" — 예지와 자유를 함께</text>
+  <text x="198" y="418">성격은 운명이지만, 운명의 전부는 아니다</text>
+  <text x="198" y="474">재앙은 주로 성격에서 나온 행위에서 온다</text>
+  <text x="198" y="530">'비극적 결함'이라는 20세기의 읽기는 틀렸다</text>
+</g>
+<text x="32" y="580" font-size="12" fill="#6E6B7B">자료: 각 원문[1][4][6][12][13][15][17]과 위키백과[8]로 재구성 · 색 분류는 필자의 해석</text>
+</svg>
+<figcaption>기원전 500년 무렵의 헤라클레이토스부터 1963년의 하이드까지, 파멸의 책임은 '운명에서 성격으로' 한 방향으로 옮겨 간 것이 아니라 바깥의 신, 사람의 성품, 앎의 착오 사이를 오갔습니다.</figcaption>
+</figure>
+<p>이렇게 늘어놓고 보면 교과서의 화살표, 곧 '운명에서 성격으로'는 한 줄로 그어지지 않습니다. 고대 그리스 안에 이미 성격을 다이몬이라 부른 철학자와, 모르고 한 일이라고 변론하는 주인공이 함께 있었습니다. 근대에도 성격을 앞세운 비평가와 상황을 앞세운 소설가가 함께 있었습니다. 시계추는 시대마다, 그리고 같은 시대 안에서도 누가 무엇을 따지느냐에 따라 흔들렸습니다.</p>
+
+<!-- 9. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>'그리스는 운명, 셰익스피어는 성격'이라고 외운 것이 잘못은 아닙니다. 큰 흐름을 한 줄로 쥐여 주는 요약은 처음 고전에 들어설 때 쓸모가 있으니까요.</p>
+    <p>다만 그 한 줄은 작품에서 캐낸 사실이 아니라 작품 위에 얹은 안경에 가깝습니다. <strong>"운명이냐 성격이냐"는 원인을 묻는 척하면서, 사실은 책임을 누구에게 맡길지를 묻습니다.</strong> 오이디푸스는 같은 사건을 두고 한 번은 "내 손"이라 했고, 한 번은 "내 뜻이 아니었다"고 했습니다. 고전이 오래 읽히는 까닭 하나는, 그 두 대답을 다 품고 있어서일 겁니다.</p>
+  </blockquote>
+</section>
+
+<!-- 10. 정리 -->
+<hr>
+<p>정리하자면 이렇습니다. 소포클레스의 오이디푸스는 신과 자기 손을 한 문장에 함께 세웠고, 말년의 작품에서는 같은 일을 두고 모르고 한 일이라고 변론했습니다. 아리스토텔레스의 하마르티아는 번역자에 따라 '착오'도 되고 '결함'도 되며, 학계는 지금도 갈립니다. '성격이 운명'이라는 말은 셰익스피어가 아니라 헤라클레이토스의 세 낱말에서 시작됐고, 1904년의 브래들리는 그것을 셰익스피어 읽기의 중심에 놓았으며, 그보다 앞서 엘리엇은 "운명의 전부는 아니다"라고 단서를 달았습니다. 밀턴의 신은 아예 '누구의 잘못인가'를 묻고 스스로 판결을 내립니다.</p>
+<p>누군가의 실패를 두고 "원래 그런 사람이라서"라는 말이 나오려 할 때 한 번 물어보세요. 나는 지금 원인을 찾는 중일까요, 책임을 맡길 사람을 찾는 중일까요.</p>
+
+<!-- 11. 꼬리 -->
+<p class="disclaimer">이 글은 일반적인 정보 제공을 위한 것입니다. 고전 인용은 퍼블릭 도메인 영역본과 원문을 바탕으로 우리말로 옮긴 것이며, 행 번호는 판본에 따라 조금씩 다를 수 있습니다. 하마르티아의 뜻은 지금도 학계에서 갈리는 문제입니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">Sophocles. <i>Oedipus Tyrannus</i>, ed. Sir Richard Jebb (그리스어 원문 1327~1328행, 영역 1329~1335행). Perseus Digital Library. <a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0192:line=1329">영역</a> · <a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0191:line=1321">원문</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">위키백과. Oedipus Rex (초연 연대 "c. 429 BC", 매우 불확실하다고 명시). <a href="https://en.wikipedia.org/wiki/Oedipus_Rex">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">위키백과. Oedipus at Colonus (집필·상연 연대, 무지와 죄책에 관한 해석). <a href="https://en.wikipedia.org/wiki/Oedipus_at_Colonus">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Sophocles. <i>Oedipus at Colonus</i>, ed. Sir Richard Jebb (960~977행). Perseus Digital Library. <a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0190:line=960">링크</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">위키백과. Poetics (Aristotle) (집필 연대 "c. 335 BCE", 하마르티아 항목). <a href="https://en.wikipedia.org/wiki/Poetics_(Aristotle)">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Aristotle. <i>The Poetics of Aristotle</i>, trans. S. H. Butcher, 13장. Project Gutenberg #1974. <a href="https://www.gutenberg.org/ebooks/1974">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Aristotle. <i>Poetics</i> 1453a (그리스어 원문). Perseus Digital Library. <a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0055:section=1453a">링크</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">위키백과. Hamartia (어원, 신약성경 용례, Harsh·Hyde 1963·Bremer 1969·Golden 1978의 해석 정리; Hyde, I. "The Tragic Flaw: Is It a Tragic Error?", <i>The Modern Language Review</i> 58(3): 321–325, 1963 인용). <a href="https://en.wikipedia.org/wiki/Hamartia">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">Aristotle. <i>On the Art of Poetry</i>, trans. Ingram Bywater, preface by Gilbert Murray. Oxford: Clarendon Press, 1920 (서문에 Butcher 1895·1898, Bywater 1909 판본 언급). Project Gutenberg #6763. <a href="https://www.gutenberg.org/ebooks/6763">링크</a> <a class="back" href="#cite-9">↩</a></li>
+    <li id="ref-10">Aristotle. <i>Poetics</i> 1453a, trans. W. H. Fyfe (1932). Perseus Digital Library. <a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0056:section=1453a">링크</a> <a class="back" href="#cite-10">↩</a></li>
+    <li id="ref-11">위키백과. Heraclitus (활동 연대 "fl. c. 500 BC", ethos anthropoi daimon의 번역들과 daimon의 뜻). <a href="https://en.wikipedia.org/wiki/Heraclitus">링크</a> <a class="back" href="#cite-11">↩</a></li>
+    <li id="ref-12">Graham, D. W. Heraclitus. <i>Stanford Encyclopedia of Philosophy</i>, substantive revision 2023-12-08 (2절, B119). <a href="https://plato.stanford.edu/entries/heraclitus/">링크</a> <a class="back" href="#cite-12">↩</a></li>
+    <li id="ref-13">Bradley, A. C. <i>Shakespearean Tragedy: Lectures on Hamlet, Othello, King Lear, Macbeth</i>. London: Macmillan, 1904 (초판; 구텐베르크본은 1919년 쇄). Project Gutenberg #16966. <a href="https://www.gutenberg.org/ebooks/16966">링크</a> <a class="back" href="#cite-13">↩</a></li>
+    <li id="ref-14">위키백과. The Mill on the Floss (1860년 4월 4일, 세 권으로 초판). <a href="https://en.wikipedia.org/wiki/The_Mill_on_the_Floss">링크</a> <a class="back" href="#cite-14">↩</a></li>
+    <li id="ref-15">Eliot, George. <i>The Mill on the Floss</i>, Book VI, Chapter VI. Project Gutenberg #6688. <a href="https://www.gutenberg.org/ebooks/6688">링크</a> <a class="back" href="#cite-15">↩</a></li>
+    <li id="ref-16">위키백과. Paradise Lost (1667년 10권·1674년 12권, 낭만주의의 사탄 읽기와 블레이크의 평). <a href="https://en.wikipedia.org/wiki/Paradise_Lost">링크</a> <a class="back" href="#cite-16">↩</a></li>
+    <li id="ref-17">Milton, John. <i>Paradise Lost</i>, Book 1 (26행), Book 3 (96~128행). The John Milton Reading Room, Dartmouth College. <a href="https://milton.host.dartmouth.edu/reading_room/pl/book_3/text.shtml">링크</a> <a class="back" href="#cite-17">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro'
+import PostRow from '../components/PostRow.astro'
+import { loadPosts } from '../lib/posts'
+const posts = loadPosts()
+---
+<Base title="모든 글" bodyClass="p-list">
+  <div class="wrap" slot="hero">
+    <header class="page-head"><h1>모든 글</h1><p>글 {posts.length}편 · 최근 순</p></header>
+  </div>
+  <div class="wrap">
+    <ul class="rows">{posts.map((p) => <PostRow post={p} />)}</ul>
+  </div>
+</Base>

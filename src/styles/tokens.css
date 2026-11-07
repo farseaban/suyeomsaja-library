@@ -1,0 +1,33 @@
+/* 색은 이 파일에만 정의한다. site.css·post.css의 선언 값에 6자리 hex를 쓰지 않는다 */
+:root {
+  color-scheme:only light;
+  /* 무채색 — 면은 따뜻하게(종이), 글자·도형은 보랏빛(밤) */
+  --night:#212029;            /* 하늘 꼭대기 · 꼬리말 바닥 · 브라우저 틀 */
+  --ink:#33313F; --sub:#5C5969; --sub-2:#6E6B7B; --line:#E4E0DA; --line-strong:#8C877F;
+  --paper:#FFFFFF; --card:#FBF9F6;
+  /* 글 템플릿이 .post-body에서 --sub를 옛 값으로 덮어쓴다 — 본문에서 되돌릴 때 이 별칭을 참조한다(값이 아니라 참조) */
+  --s-sub:var(--sub);
+  /* 분야 6색 — 면(파스텔) / 선·도형(-d, 글자에 쓰지 않는다) / 종이 위 글자(-ink) */
+  --lav:#D9D3F7;    --lav-d:#7466C2;    --lav-ink:#5F50A9;
+  --mint:#CDEBDD;   --mint-d:#3F8F6E;   --mint-ink:#1D7253;
+  --peach:#FBD9C6;  --peach-d:#C06A45;  --peach-ink:#9D4B25;
+  --sky:#CFE3F6;    --sky-d:#3E7DB0;    --sky-ink:#28689A;
+  --butter:#F8E8B0; --butter-d:#A9861F; --butter-ink:#846200;
+  --rose:#F6CCD8;   --rose-d:#B24E6E;   --rose-ink:#9C3A5C;
+  --butter-tint:#FFF8E0;
+  /* 밤 위의 글자 3단 */
+  --on-night:#FFFFFF; --on-night-2:#D9D3F7; --on-night-3:#B9B4D0;
+  /* 밤 위의 지식 구체 */
+  --s-orb-dot:#DCD6FF; --s-orb-word:#FFFFFF;
+  /* 지평선과 강조 — 분야·글 페이지는 body에서 그 분야 색으로 바꾼다 */
+  --s-dawn:var(--peach); --s-accent:var(--lav-d); --s-accent-ink:var(--lav-ink); --s-accent-tint:var(--lav);
+  --glow:.64;                 /* 새벽 띠의 배율(1 = 360px) */
+  /* 글꼴 */
+  --serif:'Noto Serif KR', Georgia, serif;
+  --sans:'Pretendard Variable','Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  /* 크기 9단 */
+  --t-12:12px; --t-13:13px; --t-14:14px; --t-16:16px; --t-18:18px; --t-21:21px; --t-24:24px; --t-36:36px; --t-46:46px;
+  /* 간격 9단 · 격자 · 모서리 */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+  --gutter:32px; --radius:12px; --radius-s:4px;
+}

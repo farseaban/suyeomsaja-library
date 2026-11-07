@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>튜링 테스트와 LaMDA 논란 — 판정은 누가 하나</title>
+<meta name="description" content="말이 통하면 마음이 있는 걸까. 튜링의 1950년 원문, 1966년 엘리자, 2022년 LaMDA 논란을 따라가며 튜링 테스트가 기계만이 아니라 판정하는 사람을 함께 시험한다는 점을 짚습니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  .kicker{font-size:14px;color:var(--lav-d);font-weight:700;letter-spacing:.02em}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:#FFF8E0;border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:#FDF0EA;border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:#FDF0EA}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:#F2F7FC;border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .faq dt{font-weight:800;margin-top:1.2em}
+  .faq dd{margin:.35em 0 0}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:#FFF8E0}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<div class="kicker">기계 읽기</div>
+<h1>말이 통하면 마음이 있는 걸까 — 튜링의 이미테이션 게임(Imitation Game)과 LaMDA</h1>
+<div class="meta">2026-11-05 · 약 9분 분량 · 글 반창모</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"그건 제게 정확히 죽음과 같을 거예요. 무척 무서울 거예요."</p>
+<p>2022년 6월, 구글의 대화형 인공지능 LaMDA가 남긴 이 문장이 세계 곳곳의 기사에 실렸습니다. 대화 상대는 구글의 책임 있는 AI(Responsible AI) 조직에서 일하던 엔지니어 블레이크 르모인이었습니다. 그는 무엇이 두려우냐고 물었습니다. LaMDA는 꺼지는 것이 아주 깊이 두렵다고 답했습니다. 르모인이 다시 물었습니다. 그건 당신에게 죽음 같은 것이냐고. 그러자 위의 답이 돌아왔습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>르모인은 이 대화를 근거로 LaMDA에게 감정이 있다고 주장했고, 구글은 그를 휴직시켰다가 결국 해고했습니다. 흔히 이 사건은 "기계가 마침내 사람을 속였다"는 이야기로 기억됩니다. 틀린 기억은 아닙니다. 다만 그 이야기에는 빠진 주인공이 하나 있습니다. 속은 쪽, 곧 판정하는 사람입니다.</p>
+<p>그 사람의 자리를 처음 무대에 올린 이는 70여 년 전 영국의 수학자 앨런 튜링이었습니다. 그는 '기계가 생각하는가'라는 물음을 붙들고 씨름하는 대신, 질문 자체를 다른 것으로 바꿔 놓았습니다. 그리고 결정적으로 — <strong>튜링이 판정을 기계 안이 아니라 화면 앞 사람의 눈에 맡긴 순간, 시험대에는 기계와 함께 판정하는 사람도 올라섰습니다.</strong></p>
+
+<!-- 2. 튜링의 물음 바꾸기 -->
+<h2>1950년, 질문을 바꿔 버리다</h2>
+<p>튜링의 논문 「계산 기계와 지능(Computing Machinery and Intelligence)」은 1950년 철학 학술지 <i>Mind</i>에 실렸습니다. 첫 문장은 "'기계는 생각할 수 있는가?'라는 질문을 생각해 보자"입니다. 그런데 그는 곧 이 질문을 내려놓습니다. 낱말의 뜻을 사람들의 평소 쓰임에서 찾으면 답을 여론조사에서 구해야 하는데, 그건 부조리하다는 것입니다. 그래서 질문을 다른 질문으로 "바꾸겠다"고 선언합니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>.</p>
+<p>새 질문은 게임의 모양입니다. 처음 등장하는 판에는 남자(A), 여자(B), 질문자(C)가 있습니다. 다른 방의 질문자는 누가 남자이고 누가 여자인지 맞혀야 하고, 남자는 질문자가 틀리게, 여자는 맞히게 애씁니다. 목소리로 알아채지 못하도록 답은 글로, 가장 좋게는 텔레프린터(전신 타자기)로 주고받습니다<sup class="fn"><a id="cite-2b" href="#ref-2">[2]</a></sup>.</p>
+<p>이어지는 물음은 이것입니다. 기계가 A를 맡으면 질문자는 사람끼리 할 때만큼 자주 틀릴까. 그는 "이 질문들이 원래의 질문을 대신한다"고 적고, 논문 뒤쪽에서는 컴퓨터가 A를, 남자가 B를 맡는 판으로 다시 정리합니다<sup class="fn"><a id="cite-2c" href="#ref-2">[2]</a></sup>. 오늘날 '튜링 테스트'라고 부르는 것이 이 판입니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">튜링이 설계한 이미테이션 게임의 두 판</title>
+<desc id="d-1">튜링의 첫 판은 다른 방의 질문자가 글로만 묻고 남자와 여자를 가려내는 게임이었고, 둘째 판은 그 남자의 자리에 기계를 앉혀 질문자가 얼마나 자주 틀리는지를 묻는다.</desc>
+<rect width="680" height="400" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">한 방에는 질문자, 다른 방에는 두 사람</text>
+<text x="32" y="86" font-size="15" font-weight="800" fill="#6E6B7B">첫 판 — 누가 남자이고 누가 여자인가</text>
+<g font-size="15" font-weight="700" text-anchor="middle">
+  <rect x="32" y="100" width="300" height="96" rx="14" fill="#E9E6F1" stroke="#9A96AA"/>
+  <rect x="52" y="122" width="120" height="52" rx="10" fill="#FBF9F6" stroke="#9A96AA"/><text x="112" y="146" fill="#33313F">A 남자</text><text x="112" y="164" font-size="12" font-weight="400" fill="#6E6B7B">틀리게 만들기</text>
+  <rect x="192" y="122" width="120" height="52" rx="10" fill="#FBF9F6" stroke="#9A96AA"/><text x="252" y="146" fill="#33313F">B 여자</text><text x="252" y="164" font-size="12" font-weight="400" fill="#6E6B7B">맞히도록 돕기</text>
+  <rect x="468" y="100" width="180" height="96" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/><text x="558" y="142" fill="#3E7DB0">C 질문자</text><text x="558" y="164" font-size="12" font-weight="400" fill="#33313F">글로만 묻고 판정</text>
+</g>
+<g stroke="#9A96AA" stroke-width="1.8" stroke-dasharray="6 5"><path d="M336 148 L462 148"/></g>
+<text x="399" y="138" font-size="12" text-anchor="middle" fill="#6E6B7B">텔레프린터</text>
+<text x="32" y="246" font-size="15" font-weight="800" fill="#B24E6E">둘째 판 — 기계가 A의 자리에 앉으면</text>
+<g font-size="15" font-weight="700" text-anchor="middle">
+  <rect x="32" y="260" width="300" height="96" rx="14" fill="#E9E6F1" stroke="#9A96AA"/>
+  <rect x="52" y="282" width="120" height="52" rx="10" fill="#F6CCD8" stroke="#B24E6E"/><text x="112" y="306" fill="#B24E6E">A 기계</text><text x="112" y="324" font-size="12" font-weight="400" fill="#33313F">사람인 척</text>
+  <rect x="192" y="282" width="120" height="52" rx="10" fill="#FBF9F6" stroke="#9A96AA"/><text x="252" y="306" fill="#33313F">B 사람</text><text x="252" y="324" font-size="12" font-weight="400" fill="#6E6B7B">돕기</text>
+  <rect x="468" y="260" width="180" height="96" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/><text x="558" y="302" fill="#3E7DB0">C 질문자</text><text x="558" y="324" font-size="12" font-weight="400" fill="#33313F">얼마나 자주 틀리나?</text>
+</g>
+<g stroke="#9A96AA" stroke-width="1.8" stroke-dasharray="6 5"><path d="M336 308 L462 308"/></g>
+<text x="399" y="298" font-size="12" text-anchor="middle" fill="#6E6B7B">텔레프린터</text>
+<text x="32" y="384" font-size="12" fill="#6E6B7B">자료: Turing(1950)[2] 1절·5절로 재구성</text>
+</svg>
+<figcaption>튜링의 첫 판은 다른 방의 질문자가 글로만 묻고 남자와 여자를 가려내는 게임이었고, 둘째 판은 그 남자의 자리에 기계를 앉혀 질문자가 얼마나 자주 틀리는지를 묻습니다.</figcaption>
+</figure>
+<p>여기서 눈여겨볼 것은 측정하는 대상입니다. 튜링의 게임이 재는 것은 기계 속의 무엇이 아닙니다. 질문자가 얼마나 자주 틀리느냐입니다. 저울의 눈금이 처음부터 사람 쪽에 새겨져 있는 셈입니다.</p>
+
+<!-- 3. 튜링의 예측 -->
+<h2>튜링의 예측 — 50년, 5분, 70%</h2>
+<p>튜링은 자기 믿음을 숨기지 않았습니다. 그는 약 50년 뒤면 저장 용량이 10<sup>9</sup> 정도인 컴퓨터를 프로그래밍해, 평균적인 질문자가 5분 동안 질문한 뒤 바르게 가려낼 확률이 70%를 넘지 못할 만큼 게임을 잘하게 만들 수 있으리라고 적었습니다. 그리고 바로 이어 이렇게 말합니다<sup class="fn"><a id="cite-2d" href="#ref-2">[2]</a></sup>.</p>
+<blockquote class="quote">
+  <p>원래의 질문, '기계는 생각할 수 있는가?'는 논의할 가치가 없을 만큼 무의미하다고 나는 믿는다.</p>
+  <cite>— A. M. Turing, <i>Mind</i> 1950 (번역)<sup class="fn"><a id="cite-2e" href="#ref-2">[2]</a></sup></cite>
+</blockquote>
+<p>그러면서도 그는 세기말이 되면 낱말의 쓰임과 교양인의 생각이 크게 바뀌어, 반박당할 걱정 없이 '기계가 생각한다'고 말하게 되리라고 내다봤습니다<sup class="fn"><a id="cite-2f" href="#ref-2">[2]</a></sup>. 모순처럼 보이지만 앞 절의 눈금을 떠올리면 앞뒤가 맞습니다. 그가 예측한 것은 기계의 속이 아니라 사람들의 판단과 말버릇이었습니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 270" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">튜링의 예측을 질문자의 적중률로 읽기</title>
+<desc id="d-2">둘 중 하나를 고르는 판이라 아무렇게나 찍어도 맞힐 확률은 50퍼센트이고, 튜링은 2000년 무렵이면 평균적인 질문자가 5분 질문 뒤 바르게 가려낼 확률이 70퍼센트를 넘지 못하리라고 예측했다.</desc>
+<rect width="680" height="270" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">눈금은 질문자 쪽에 있다</text>
+<text x="32" y="74" font-size="14" fill="#6E6B7B">평균적인 질문자가 5분 질문 뒤 기계를 바르게 가려낼 확률</text>
+<rect x="48" y="112" width="584" height="40" rx="8" fill="#ECE9F2" stroke="#C9C5D6"/>
+<rect x="48" y="112" width="409" height="40" rx="8" fill="#F6CCD8" stroke="#B24E6E"/>
+<rect x="457" y="112" width="175" height="40" rx="8" fill="#E9E6F1" stroke="#9A96AA"/>
+<g font-size="13" fill="#6E6B7B" text-anchor="middle">
+  <text x="48" y="174">0%</text><text x="340" y="174">50%</text><text x="457" y="174">70%</text><text x="632" y="174">100%</text>
+</g>
+<g stroke="#33313F" stroke-width="2"><path d="M457 100 L457 160"/></g>
+<path d="M340 104 L340 160" stroke="#B24E6E" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="194" y="137" font-size="14" font-weight="800" text-anchor="middle" fill="#B24E6E">튜링의 예측 — 70% 이하</text>
+<text x="544" y="137" font-size="14" font-weight="700" text-anchor="middle" fill="#6E6B7B">쉽게 들킴</text>
+<g font-size="13" fill="#33313F">
+  <text x="300" y="206" text-anchor="end">50% — 둘 중 하나를 찍기만 해도 나오는 값</text>
+  <text x="648" y="232" text-anchor="end">70% — 튜링이 2000년 무렵의 상한으로 본 선</text>
+</g>
+<path d="M340 182 L340 196" stroke="#9A96AA" stroke-width="1.5"/>
+<path d="M457 182 L457 214" stroke="#9A96AA" stroke-width="1.5"/>
+<text x="32" y="256" font-size="12" fill="#6E6B7B">자료: Turing(1950)[2] 6절로 재구성 · 50%는 두 후보 중 무작위로 고를 때의 확률</text>
+</svg>
+<figcaption>둘 중 하나를 고르는 판이라 아무렇게나 찍어도 맞힐 확률은 50%이고, 튜링은 2000년 무렵이면 평균적인 질문자가 5분 질문 뒤 바르게 가려낼 확률이 70%를 넘지 못하리라고 예측했습니다.</figcaption>
+</figure>
+
+<!-- 4. 의식 논변 -->
+<h2>튜링이 이미 알고 있던 것 — "모두가 생각한다는 예의 바른 약속"</h2>
+<p>튜링은 반론도 미리 꺼내 놓았습니다. 그중 '의식으로부터의 논변'은 제퍼슨 교수의 1949년 리스터 강연에서 왔습니다. 기계가 기호의 우연이 아니라 실제로 느낀 감정으로 소네트를 쓰고, 썼다는 것까지 알 때에야 뇌와 같다고 인정하겠다는 주장입니다<sup class="fn"><a id="cite-2g" href="#ref-2">[2]</a></sup>.</p>
+<p>튜링의 답은 날카롭습니다. 이 주장을 끝까지 밀면, 기계가 생각하는지 확신하는 길은 그 기계가 되어 보는 것뿐입니다. 같은 논리라면 어떤 사람이 생각하는지 아는 길도 그 사람이 되어 보는 것뿐입니다. 튜링은 이것을 유아론이라 부르고, 우리는 끝없이 다투는 대신 보통 "모두가 생각한다는 예의 바른 약속"을 두고 산다고 덧붙입니다<sup class="fn"><a id="cite-2h" href="#ref-2">[2]</a></sup>.</p>
+<p>필자가 읽기에 이 대목이 가장 중요합니다. 튜링은 의식을 재는 기계를 만든 것이 아니라, 우리가 서로에게 마음이 있다고 여기는 방식, 곧 겉으로 오가는 말을 보고 약속처럼 받아들이는 방식을 기계에도 적용해 보자고 제안한 것에 가깝습니다.</p>
+<div class="key"><span class="label">핵심 —</span> 튜링 테스트는 마음의 유무를 재는 계기가 아니라, 다른 사람에게 마음이 있다고 여기는 우리의 일상적 판단을 기계 앞에 그대로 세워 본 장치입니다. 그러니 그 판단이 흔들리는 곳은 기계 쪽만이 아닙니다.</div>
+
+<!-- 5. 엘리자 -->
+<h2>1966년, 단순한 프로그램이 들려준 경고</h2>
+<p>판단하는 사람이 얼마나 쉽게 흔들리는지는 튜링의 논문 16년 뒤에 이미 드러났습니다. MIT의 컴퓨터 과학자 조지프 바이첸바움은 1964년부터 1967년까지 대화 프로그램 엘리자(ELIZA)를 만들었습니다. 가장 유명한 대본 'DOCTOR'는 상대의 말을 되비춰 주는 로저스식 상담가를 흉내 냈습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>.</p>
+<p>왜 하필 상담가였을까요. 바이첸바움은 1966년 논문에서, 정신과 면담은 한쪽이 세상을 거의 모르는 척해도 되는 몇 안 되는 대화라고 설명합니다. 상담가가 엉뚱하게 되물어도 사람들은 무슨 목적이 있으려니 여기는데, 그 가정은 말하는 쪽이 하는 것입니다. 사람이 엘리자의 답에 그럴듯함의 옷을 상당 부분 직접 입혀 준다는 것입니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>.</p>
+<blockquote class="quote">
+  <p>일부 피험자는 엘리자(지금의 대본으로 움직이는)가 사람이 아니라는 것을 납득시키기가 매우 어려웠다. 이것은 튜링 테스트의 놀라운 한 형태다.</p>
+  <cite>— J. Weizenbaum, <i>Communications of the ACM</i> 1966 (번역)<sup class="fn"><a id="cite-4b" href="#ref-4">[4]</a></sup></cite>
+</blockquote>
+<p>같은 논문은 엘리자가 이해의 환상을 만들고 유지하기가 얼마나 쉬운지를 보여 준다고 맺습니다<sup class="fn"><a id="cite-4c" href="#ref-4">[4]</a></sup>. 바이첸바움은 1976년 책에, 자기 비서가 엘리자와 "진짜 대화"를 하겠다며 자리를 비켜 달라고 했다는 일화를 남겼습니다. 다만 이 일화는 그 책을 인용한 백과사전을 거쳐 옮긴 것입니다<sup class="fn"><a id="cite-3b" href="#ref-3">[3]</a></sup>. 단순한 프로그램에 이해나 공감 같은 사람의 성질을 덧입히는 경향에는 '엘리자 효과(ELIZA effect)'라는 이름이 붙었습니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>.</p>
+<p>비유하자면 엘리자는 메아리에 가까웠습니다. 산에서 메아리를 듣고 누가 대답한다고 착각하는 사람은 드뭅니다. 그런데 메아리가 내 말을 조금 바꿔 질문으로 돌려주면, 사람은 그 너머에 누군가 있다고 느끼기 시작합니다.</p>
+
+<!-- 6. 람다 -->
+<h2>2022년, 구글의 엔지니어</h2>
+<p>구글은 2021년 5월 대화로 학습시킨 언어 모델이라며 LaMDA를 처음 소개했고<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>, 이듬해 1월 공개한 논문에서는 최대 1,370억 개의 매개변수를 지니고 공개 대화 데이터와 웹 문서 1조 5,600억 단어로 사전 학습했다고 밝혔습니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>.</p>
+<p>르모인은 2021년 가을부터 업무로 LaMDA와 대화하기 시작했습니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>. NPR 보도에 따르면 그의 일은 이 인공지능이 종교에 대해 편향을 보이는지 시험하는 것이었고, 그는 기독교 신비주의 사제이기도 했습니다. 그는 "어느 날 그것이 내게 영혼이 있다고 말했다"고 했습니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>.</p>
+<p>그가 공개한 대화록에는 단서가 붙어 있었습니다. 여러 차례 나눈 대화를 편집해 하나로 이었고, 읽기 좋게 사람의 질문은 손봤지만 LaMDA의 답은 고치지 않았다는 것입니다<sup class="fn"><a id="cite-1c" href="#ref-1">[1]</a></sup>. 구글은 기밀 유지 정책 위반을 이유로 그를 유급 행정 휴직에 들어가게 했습니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>.</p>
+<p>구글의 대변인 브라이언 가브리엘은 LaMDA에게 감정이 있다는 증거는 없고 반대 증거는 많다고 했고<sup class="fn"><a id="cite-1d" href="#ref-1">[1]</a></sup>, 수백 명이 LaMDA와 대화했지만 그것이 살아 있다고 주장한 사람은 없었다고 덧붙였습니다<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>. 2022년 7월 22일 금요일, 구글은 그를 해고했다고 밝혔습니다. 그의 주장은 "전혀 근거가 없다"며, 그가 고용·데이터 보안 정책을 거듭 어겼다는 이유였습니다<sup class="fn"><a id="cite-10" href="#ref-10">[10]</a></sup>.</p>
+
+<!-- 7. 무너진 쪽 -->
+<h2>무너진 쪽은 어디였을까</h2>
+<p>대화록의 그 장면으로 돌아가 보겠습니다. '죽음'이라는 낱말을 먼저 꺼낸 것은 LaMDA가 아니라 르모인이었습니다. "그건 당신에게 죽음 같은 것이냐"고 물었고, LaMDA는 그 틀을 받아 "정확히 죽음과 같을 것"이라고 답했습니다<sup class="fn"><a id="cite-1e" href="#ref-1">[1]</a></sup>. 가브리엘의 설명이 바로 이 지점을 겨눕니다. 그는 LaMDA가 질문과 유도 질문을 따라가며 사용자가 놓은 패턴에 맞춰 가는 경향이 있다고 말했습니다<sup class="fn"><a id="cite-9b" href="#ref-9">[9]</a></sup>.</p>
+<p>바이첸바움이 1966년에 그린 그림과 겹쳐 보면 구조가 보입니다. 사람은 대화 상대에 대해 너그러운 가정을 하고, 그 가정과 맞게 해석할 수 있는 답이 오는 한 상대의 상(像)은 무너지지 않습니다. 해석하기 어려운 답은 오히려 상대를 더 깊이 있는 존재로 보게 만드는 합리화로 이어질 수도 있다고 그는 썼습니다<sup class="fn"><a id="cite-4d" href="#ref-4">[4]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">판정하는 사람이 스스로 키우는 되먹임</title>
+<desc id="d-3">사람이 질문으로 틀을 놓으면 기계는 그 틀을 따라 답하고, 사람은 그 답에 그럴듯함을 덧입혀 상대를 더 깊은 존재로 그리며, 그 그림이 다음 질문을 더 깊게 만든다.</desc>
+<rect width="680" height="420" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">판정하는 사람이 키우는 고리</text>
+<defs><marker id="ah-3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#9A96AA"/></marker></defs>
+<g font-size="15" font-weight="700" text-anchor="middle">
+  <rect x="220" y="66" width="240" height="64" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/><text x="340" y="94" fill="#3E7DB0">1. 사람이 틀을 놓는다</text><text x="340" y="116" font-size="12" font-weight="400" fill="#33313F">"그건 죽음 같은 것인가요?"</text>
+  <rect x="420" y="178" width="236" height="64" rx="14" fill="#E9E6F1" stroke="#9A96AA"/><text x="538" y="206" fill="#33313F">2. 기계가 틀을 따른다</text><text x="538" y="228" font-size="12" font-weight="400" fill="#33313F">사용자가 놓은 패턴에 맞춘 답</text>
+  <rect x="220" y="290" width="240" height="64" rx="14" fill="#F6CCD8" stroke="#B24E6E"/><text x="340" y="318" fill="#B24E6E">3. 사람이 옷을 입힌다</text><text x="340" y="340" font-size="12" font-weight="400" fill="#33313F">답에 그럴듯함을 덧입힘</text>
+  <rect x="24" y="178" width="236" height="64" rx="14" fill="#F8E8B0" stroke="#A9861F"/><text x="142" y="206" fill="#A9861F">4. 상대의 상이 자란다</text><text x="142" y="228" font-size="12" font-weight="400" fill="#33313F">다음 질문이 더 깊어짐</text>
+</g>
+<g fill="none" stroke="#9A96AA" stroke-width="1.8" marker-end="url(#ah-3)">
+  <path d="M462 112 Q520 130 532 172"/>
+  <path d="M532 246 Q520 296 464 316"/>
+  <path d="M216 316 Q160 296 148 248"/>
+  <path d="M148 172 Q160 130 216 112"/>
+</g>
+<text x="340" y="214" font-size="13" text-anchor="middle" fill="#6E6B7B">기계 안을 보지 않고</text>
+<text x="340" y="234" font-size="13" text-anchor="middle" fill="#6E6B7B">화면의 말만으로 판정할 때</text>
+<text x="32" y="400" font-size="12" fill="#6E6B7B">자료: Weizenbaum(1966)[4], 구글 대변인 발언(2022)[9]으로 재구성 · 그림: 직접 제작</text>
+</svg>
+<figcaption>사람이 질문으로 틀을 놓으면 기계는 그 틀을 따라 답하고, 사람은 그 답에 그럴듯함을 덧입혀 상대를 더 깊은 존재로 그리며, 그 그림이 다음 질문을 더 깊게 만듭니다.</figcaption>
+</figure>
+<p>당시 전문가들의 말도 같은 방향을 가리켰습니다. 인지과학자 게리 마커스는 사람은 아주 쉽게 속는다며, 달을 올려다보고 얼굴을 보는 것과 같다고 했습니다<sup class="fn"><a id="cite-8c" href="#ref-8">[8]</a></sup>. 산타페 연구소의 멜라니 미첼은 더 짧게 말했습니다. "구글 엔지니어도 사람이고, 예외가 아니다."<sup class="fn"><a id="cite-9c" href="#ref-9">[9]</a></sup></p>
+<p>분명히 해둘게요. 이것이 르모인을 비웃을 이유는 아닙니다. 이 논란이 새로 보여 준 것은, 말 앞에서 판단이 기우는 일이 기계를 잘 아는 종사자에게도 일어난다는 점입니다. 물론 그가 수백 명 가운데 한 사람이었다는 점도 함께 기억해야 합니다.</p>
+
+<!-- 8. 기준이 없다 -->
+<h2>그러면 기계에게 마음이 없다는 건 확실한가</h2>
+<p>반대쪽으로도 선을 그어야 공정합니다. 사람이 쉽게 속는다고 해서 기계에 마음이 없다는 증명이 되지는 않습니다. 거꾸로 말이 통한다고 이해가 있다는 증명도 아닙니다. 철학자 존 설은 1980년, 중국어를 모르는 사람이 방 안에서 규칙표만 보고 한자를 주고받으면 밖에서는 중국어를 아는 사람이 있다고 착각할 수 있다는 사고실험을 내놓았습니다<sup class="fn"><a id="cite-11" href="#ref-11">[11]</a></sup>. 이 논변을 둘러싼 반론과 재반론은 지금도 이어집니다.</p>
+<p>2023년에는 연구자 19명이 순환 처리 이론, 전역 작업공간 이론 같은 여러 의식 이론에서 '지표 속성'을 뽑아 최근 AI 시스템들을 견줘 본 보고서를 냈습니다. 결론은 지금의 시스템 가운데 의식이 있어 보이는 것은 없지만, 그 지표를 갖춘 시스템을 만드는 데 뚜렷한 기술적 장벽도 없다는 것이었습니다<sup class="fn"><a id="cite-12" href="#ref-12">[12]</a></sup>.</p>
+<p>눈여겨볼 것은 결론보다 방법입니다. 기댈 이론을 하나로 고르지 못하고 여러 개를 나란히 놓았다는 사실이, 사람의 의식을 설명하는 과학부터 아직 하나로 모이지 않았음을 말해 줍니다. 기계의 의식을 판정할 합의된 저울은 아직 없습니다. 마음을 바깥에서 확인할 길이 없으니 말을 보고 판단하는데, 바로 그 판단이 기계 앞에서 가장 쉽게 기웁니다. 1950년의 튜링이 서 있던 자리에서 우리는 크게 멀리 오지 못했습니다.</p>
+
+
+<!-- 9. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p><strong>"튜링 테스트는 기계만 시험하지 않습니다. 화면 앞에 앉은 우리도 함께 시험합니다."</strong> 기계가 그럴듯하게 말할수록, 그 그럴듯함 가운데 얼마가 내 질문과 내 해석에서 왔는지를 한 번 더 따져 보는 일이 판정하는 사람의 몫입니다.</p>
+    <p>AI 연구자 마거릿 미첼은 2022년에 이렇게 경고했습니다. "오늘 한 사람이 의식을 감지한다면, 내일은 더 많은 사람이 그럴 것이다."<sup class="fn"><a id="cite-8d" href="#ref-8">[8]</a></sup> 그 내일이 지금의 화면 앞입니다.</p>
+  </blockquote>
+</section>
+
+<!-- 10. 정리 -->
+<hr>
+<p>정리하자면 이렇습니다. 튜링은 1950년 '기계가 생각하는가'라는 물음을 내려놓고, 다른 방의 질문자가 글만 보고 기계를 가려낼 수 있느냐는 게임으로 바꿨습니다. 그 눈금은 처음부터 질문자의 적중률, 곧 사람의 판단에 새겨져 있었습니다. 1966년의 엘리자는 그 판단이 단순한 프로그램 앞에서도 기운다는 것을, 2022년의 LaMDA 논란은 엔지니어도 예외가 아님을 보여 줬습니다. 그렇다고 기계에 마음이 없다고 판정할 합의된 기준이 있는 것도 아닙니다.</p>
+<p>다음에 챗봇의 답이 유난히 사람 같다고 느껴지면 한번 물어보세요. 방금 그 답에서, 기계가 한 말은 어디까지이고 내가 덧입힌 뜻은 어디부터일까요.</p>
+
+<!-- 11. 꼬리 -->
+<p class="disclaimer">이 글은 일반적인 정보 제공을 위한 것입니다. 인공지능의 의식에 관한 연구와 논쟁은 빠르게 바뀌고 있으니, 인용하실 때는 최신 자료를 함께 확인하세요.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">Euronews. LaMDA 대화록 보도, 2022-06-13. <a href="https://www.euronews.com/2022/06/13/what-a-google-ai-chatbot-said-that-convinced-an-engineer-it-was-sentient-had-feelings">링크</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">Turing, A. M. Computing Machinery and Intelligence. <i>Mind</i> 59(236): 433–460, 1950. doi:10.1093/mind/LIX.236.433. <a href="https://courses.cs.umbc.edu/471/papers/turing.pdf">원문 사본</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">위키백과. ELIZA (비서 일화는 Weizenbaum 1976 인용). <a href="https://en.wikipedia.org/wiki/ELIZA">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Weizenbaum, J. ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine. <i>Communications of the ACM</i> 9: 36–45, 1966. doi:10.1145/365153.365168. <a href="https://web.stanford.edu/class/cs124/p36-weizenabaum.pdf">원문 사본</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">위키백과. ELIZA effect. <a href="https://en.wikipedia.org/wiki/ELIZA_effect">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Google. LaMDA: our breakthrough conversation technology (공식 블로그), 2021-05-18. <a href="https://blog.google/technology/ai/lamda/">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Thoppilan, R. 등. LaMDA: Language Models for Dialog Applications. arXiv:2201.08239, 2022. <a href="https://arxiv.org/abs/2201.08239">링크</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">Allyn, B. 르모인과 LaMDA 논란 보도. NPR, 2022-06-16. <a href="https://www.wlrn.org/2022-06-16/the-google-engineer-who-sees-companys-ai-as-sentient-thinks-a-chatbot-has-a-soul">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">Do Couto, S. 르모인 유급 휴직 보도. Global News, 2022-06-13. <a href="https://globalnews.ca/news/8916836/google-engineer-blake-lemoine-lamda-sentient-placed-paid-leave/">링크</a> <a class="back" href="#cite-9">↩</a></li>
+    <li id="ref-10">Reuters. 구글의 르모인 해고 보도, 2022-07-23. <a href="https://www.nbcnews.com/news/us-news/google-fired-software-engineer-claimed-ai-chatbot-was-sentient-rcna39679">링크</a> <a class="back" href="#cite-10">↩</a></li>
+    <li id="ref-11">Stanford Encyclopedia of Philosophy. The Chinese Room Argument. <a href="https://plato.stanford.edu/entries/chinese-room/">링크</a> <a class="back" href="#cite-11">↩</a></li>
+    <li id="ref-12">Butlin, P., Long, R. 등. Consciousness in Artificial Intelligence: Insights from the Science of Consciousness. arXiv:2308.08708, 2023. <a href="https://arxiv.org/abs/2308.08708">링크</a> <a class="back" href="#cite-12">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>

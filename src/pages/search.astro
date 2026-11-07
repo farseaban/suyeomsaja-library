@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro'
+import { url } from '../lib/url'
+const css = url('pagefind/pagefind-ui.css')
+const js = url('pagefind/pagefind-ui.js')
+---
+<Base title="검색" bodyClass="p-search">
+  <link slot="head" rel="stylesheet" href={css}>
+  <div class="wrap" slot="hero">
+    <header class="page-head"><h1>무엇이 궁금하세요?</h1><p>글 본문까지 찾습니다.</p></header>
+  </div>
+  <div class="wrap s-narrow-left">
+    <div id="search"></div>
+  </div>
+  <script is:inline src={js}></script>
+  <script>
+    // 모듈 스크립트는 문서를 다 읽은 뒤에 돌아, 위의 pagefind-ui.js와 #search가 이미 있다
+    const { PagefindUI } = window as unknown as { PagefindUI: new (options: object) => unknown }
+    new PagefindUI({ element: '#search', showSubResults: true, showImages: false,
+      translations: { placeholder: '무엇이 궁금하세요?', zero_results: '"[SEARCH_TERM]"에 맞는 글이 없습니다' } })
+  </script>
+</Base>
+<style is:global>.pagefind-ui{--pagefind-ui-font:var(--sans);--pagefind-ui-primary:var(--ink);--pagefind-ui-border:var(--line-strong);--pagefind-ui-border-width:1px;--pagefind-ui-tag:var(--card)}</style>

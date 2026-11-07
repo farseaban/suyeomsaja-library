@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets'
+import KnowledgeOrb from './KnowledgeOrb.astro'
+import fig from '../assets/character/full-night.png'
+import { SITE } from '../config/site'
+// 1면 대표 글의 그림 자리 — 구체는 밤 속에 뜨고, 로봇 곁의 주인공은 지평선(새벽 띠) 위에 선다.
+// 그림은 원반을 지운 판(full-night.png, tools/clear_disc.py). 그림이 덮는 왼쪽 아래에는 낱말을 띄우지 않는다.
+// 그림은 그대로 두고 위에 움직이는 조각(눈꺼풀·말풍선 마디·회로 빛)을 얹는다. 좌표는 그림 픽셀(723×928, full-lead.png와 같다).
+const nodes = [
+  [73, 583, 0], [111, 547, 1], [111, 580, 1], [111, 615, 1],
+  [153, 519, 2], [153, 552, 2], [153, 585, 2], [153, 619, 2],
+  [194, 544, 3], [194, 579, 3], [194, 612, 3],
+]
+const wires = [
+  'M606 481V412L640 376', 'M576 481V450',
+  'M556 592V630L513 662', 'M580 592V645L513 697', 'M606 592V650L627 662',
+  'M529 532H469L451 546', 'M529 550H484L467 562',
+]
+---
+<div class="s-scene">
+  <KnowledgeOrb avoid="0,0.48,0.48,1" />
+  <div class="s-scene-fig">
+    <div class="s-fig">
+      <Image src={fig} alt={`로봇 곁에 선 ${SITE.author}`} widths={[220, 300, 440, 723]} sizes="(max-width:760px) 144px, (max-width:1023px) 21vw, 202px" loading="eager" />
+      <svg class="s-fig-live" viewBox="0 0 723 928" aria-hidden="true">
+        <defs><filter id="s-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" /></filter></defs>
+        <g class="s-wires">
+          {wires.map((d, i) => <path d={d} pathLength="100" style={`animation-delay:${(i * 0.37).toFixed(2)}s`} />)}
+        </g>
+        <g class="s-nodes">
+          {nodes.map(([x, y, col]) => <circle cx={x} cy={y} r="9" style={`animation-delay:${(col * 0.22).toFixed(2)}s`} />)}
+        </g>
+        <g class="s-lid s-lid-man">
+          <path d="M203 350H288V398Q246 410 203 396Z" fill="#FFE3D4" />
+          <path d="M203 396Q246 410 288 398" fill="none" stroke="#2F2B29" stroke-width="7" stroke-linecap="round" />
+        </g>
+        <g class="s-lid s-lid-man">
+          <path d="M352 338H466V384Q408 398 352 382Z" fill="#FFE3D4" />
+          <path d="M352 382Q408 398 466 384" fill="none" stroke="#2F2B29" stroke-width="7" stroke-linecap="round" />
+        </g>
+        <g class="s-lid s-lid-bot">
+          <ellipse cx="160" cy="745" rx="11" ry="13" fill="#3CAFD5" />
+          <ellipse cx="213" cy="740" rx="11" ry="13" fill="#3CAFD5" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+<script>
+  import { ORB_SPIN } from '../lib/orb'
+  // 주인공이 구체가 도는 쪽·마우스 쪽으로 살짝 기운다(최대 ±1.5°). 장면이 화면 밖이거나 탭이 숨으면 기울기도 깜빡임도 멈춘다.
+  const el = document.querySelector<HTMLElement>('.s-scene-fig')
+  if (el && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let lean = 0, mouse = 0, lastYaw: number | undefined, lastT: number | undefined, visible = true, running = false
+    addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') mouse = e.clientX / innerWidth - 0.5 }, { passive: true })
+    const tick = (now: number) => {
+      if (!visible || document.hidden) { running = false; return }
+      const yaw = (globalThis as { __orbYaw?: number }).__orbYaw
+      const dt = lastT === undefined ? 0 : Math.min(0.05, (now - lastT) / 1000)
+      // 구체가 초당 도는 각 — 저절로 도는 빠르기(ORB_SPIN)보다 빠르거나 느린 만큼만 기운다
+      const rate = yaw === undefined || lastYaw === undefined || dt <= 0 ? ORB_SPIN : (yaw - lastYaw) / dt
+      lastYaw = yaw
+      lastT = now
+      const target = Math.max(-1.5, Math.min(1.5, (rate - ORB_SPIN) * 2 + mouse * 1.5))
+      lean += (target - lean) * (1 - Math.exp(-3.7 * dt))
+      el.style.setProperty('--lean', `${lean.toFixed(2)}deg`)
+      requestAnimationFrame(tick)
+    }
+    const sync = () => {
+      const on = visible && !document.hidden
+      el.classList.toggle('s-paused', !on)
+      if (on && !running) { running = true; lastYaw = lastT = undefined; requestAnimationFrame(tick) }
+    }
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync() }).observe(el.closest('.s-scene') ?? el)
+    document.addEventListener('visibilitychange', sync)
+    sync()
+  }
+</script>

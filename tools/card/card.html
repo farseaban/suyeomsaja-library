@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap">
+<style>
+
+html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+.card{position:relative;width:1200px;height:630px;
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--ink) 65%,black) 0,var(--ink) 34%,color-mix(in srgb,var(--lav-d) 40%,var(--ink)) 54%,color-mix(in srgb,var(--lav-d) 45%,var(--lav)) 70%,var(--lav) 82%,color-mix(in srgb,var(--lav) 40%,var(--peach)) 91%,var(--peach) 100%)}
+canvas{position:absolute;inset:0}
+.glow{position:absolute;right:40px;bottom:-120px;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--peach) 70%,var(--butter)) 0,transparent 66%);opacity:.55}
+.fig{position:absolute;right:130px;bottom:-6px;height:540px}
+.txt{position:absolute;left:84px;top:168px;width:600px}
+.name{font:700 76px/1.15 'Noto Serif KR',serif;color:var(--paper);letter-spacing:-.01em;margin:0}
+.desc{font:500 27px/1.55 Pretendard,sans-serif;color:var(--lav);margin:26px 0 0}
+.post .txt{top:96px;width:600px}
+.card.post{background:linear-gradient(to bottom,color-mix(in srgb,var(--ink) 65%,black) 0,var(--ink) 48%,color-mix(in srgb,var(--lav-d) 40%,var(--ink)) 74%,color-mix(in srgb,var(--lav-d) 45%,var(--lav)) 86%,var(--lav) 94%,var(--peach) 100%)}
+.post .fig{height:470px;right:66px}
+.post .glow{right:-20px}
+.site{font:700 22px/1 'Noto Serif KR',serif;color:var(--lav);margin:0 0 22px}
+.cat{display:inline-block;font:600 19px/1 Pretendard,sans-serif;padding:9px 16px;border-radius:999px;margin:0 0 22px}
+.title{font:700 58px/1.28 'Noto Serif KR',serif;color:var(--paper);margin:0;letter-spacing:-.015em;word-break:keep-all}
+.by{font:600 20px/1 Pretendard,sans-serif;color:color-mix(in srgb,var(--lav) 70%,var(--paper));margin:40px 0 0;letter-spacing:.04em}
+</style></head>
+<body><div class="card">
+<canvas id="c" width="1200" height="630"></canvas>
+<div class="glow"></div>
+<img class="fig" src="../../src/assets/character/full-lead.png">
+<div class="txt" id="site">
+  <h1 class="name">수염사자의 서재</h1>
+  <p class="desc">책은 얼어붙은 바다를 깨뜨리는<br>도끼여야 한다 — 카프카</p>
+  <p class="by">글 반창모</p>
+</div>
+<div class="txt" id="post" hidden>
+  <p class="site">수염사자의 서재</p>
+  <span class="cat"></span>
+  <h1 class="title"></h1>
+  <p class="by">글 반창모</p>
+</div>
+</div>
+<script>
+// 공유 카드 틀 — tools/make-cards.ts가 #{"title","category","color"}를 붙여 연다. 비우면 사이트 카드.
+const p=location.hash.length>1?JSON.parse(decodeURIComponent(location.hash.slice(1))):null
+if(p){document.querySelector('.card').classList.add('post');site.hidden=true;post.hidden=false
+  const cat=post.querySelector('.cat'),t=post.querySelector('.title')
+  cat.textContent=p.category;cat.style.background=`var(--${p.color})`;cat.style.color=`var(--${p.color}-d)`
+  t.textContent=p.title
+  // 세 줄 안에 들도록 글씨를 줄인다
+  document.fonts.ready.then(()=>{let s=58;while(t.scrollHeight>s*1.28*3+4&&s>34){s-=2;t.style.fontSize=s+'px'}document.body.dataset.ready='1'})
+}else document.fonts.ready.then(()=>document.body.dataset.ready='1')
+const c=document.getElementById('c'),x=c.getContext('2d')
+let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647
+// 별 — 위쪽일수록 촘촘하고 밝다
+for(let i=0;i<260;i++){const px=r()*1200,py=Math.pow(r(),1.6)*400,a=(1-py/420)*(.35+.6*r()),rad=r()<.08?1.6:.5+r()*.8
+  x.fillStyle=`rgba(255,255,255,${a.toFixed(2)})`;x.beginPath();x.arc(px,py,rad,0,7);x.fill()}
+// 무작위 별자리 셋
+const lines=[[[700,70],[748,104],[812,92],[860,128]],[[260,64],[302,40],[350,58],[338,104]],[[1010,250],[1050,226],[1094,240]]]
+x.strokeStyle='rgba(217,211,247,.38)';x.lineWidth=1
+for(const g of lines){x.beginPath();g.forEach(([a,b],i)=>i?x.lineTo(a,b):x.moveTo(a,b));x.stroke()
+  for(const[a,b]of g){x.fillStyle='rgba(255,255,255,.9)';x.beginPath();x.arc(a,b,1.8,0,7);x.fill()}}
+// 초승달 — 별도 캔버스에서 깎아 붙인다
+const m=document.createElement('canvas');m.width=m.height=120;const mx=m.getContext('2d')
+mx.fillStyle='#F8E8B0';mx.beginPath();mx.arc(60,60,26,0,7);mx.fill()
+mx.globalCompositeOperation='destination-out';mx.beginPath();mx.arc(72,52,24,0,7);mx.fill()
+const g=x.createRadialGradient(1060,92,0,1060,92,70);g.addColorStop(0,'rgba(248,232,176,.28)');g.addColorStop(1,'rgba(248,232,176,0)')
+x.fillStyle=g;x.beginPath();x.arc(1060,92,70,0,7);x.fill();x.drawImage(m,1000,32)
+</script>
+</body></html>

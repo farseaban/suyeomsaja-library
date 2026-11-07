@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>장기 기증 동의율 12%와 99%를 가른 기본값과 넛지의 한계</title>
+<meta name="description" content="독일 12%, 오스트리아 99.98%. 장기 기증 동의율을 가른 것은 국민성이 아니라 신청서의 기본값이었다. 퇴직연금 자동 가입, 2022년 넛지 메타분석 논쟁, 동의율과 실제 기증 사이의 간극까지 원 연구의 숫자로 읽는다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  .kicker{font-size:14px;color:var(--lav-d);font-weight:700;letter-spacing:.02em}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:#FFF8E0;border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:#FDF0EA;border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:#FDF0EA}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:#F2F7FC;border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .faq dt{font-weight:800;margin-top:1.2em}
+  .faq dd{margin:.35em 0 0}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:#FFF8E0}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<div class="kicker">돈 읽기</div>
+<h1>장기 기증 동의율은 왜 12%와 99%로 갈렸을까 — 기본값(Default)과 넛지(Nudge)</h1>
+<div class="meta">2026-11-06 · 약 16분 분량 · 글 반창모</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"장기 기증이요? 좋은 일이죠. 등록은… 아직 안 했네요."</p>
+<p>1998년 네덜란드 정부는 장기 기증 등록부를 새로 만들면서 편지를 1,200만 통 넘게 부쳤습니다. 인구 1,580만 명인 나라였으니 국민 넷 중 셋에게 한 통씩 돌아가는 양입니다. 기증 의사를 등록해 달라는 편지였고, 대대적인 교육 홍보도 함께 벌였습니다. 결과는 허탈했습니다. 동의율은 움직이지 않았습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>그런데 국경 너머 벨기에의 동의율은 98%였습니다. 네덜란드는 27.5%였습니다. 독일은 12%, 이웃 오스트리아는 99.98%였습니다. 2003년 11월 학술지 『사이언스』에 실린 두 쪽짜리 글이 이 숫자들을 막대그래프 한 장에 세웠습니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>.</p>
+<p>그리고 결정적으로 — <strong>동의율을 10%대와 90%대로 가른 것은 국민성이 아니라 신청서의 기본값 한 칸이었습니다.</strong> 아무것도 하지 않으면 기증자가 되는 나라와, 아무것도 하지 않으면 기증자가 아닌 나라의 차이였습니다.</p>
+<p>이 글은 약관의 체크 칸을, 회사가 정해 준 연금 상품을, 미리 채워져 있는 선택지를 별생각 없이 넘겨 본 분들을 위해 씁니다. 결론부터 말씀드리면 기본값의 힘은 진짜입니다. 다만 그 힘은 서류 위에서 가장 세고, 서류 밖으로 나갈수록 약해집니다. 그리고 기본값을 포함한 '부드러운 개입' 전체의 효과는 처음 알려진 것보다 작다는 반론이 2022년에 나왔습니다. 이야기의 주인공은 <strong>기본값(default)</strong>과, 그것을 정책 도구로 만든 이름 <strong>넛지(nudge)</strong>입니다.</p>
+
+<!-- 2. 막대그래프 -->
+<h2>막대그래프 한 장 — 겹치지 않는 두 무리</h2>
+<p>글을 쓴 사람은 미국 컬럼비아 대학의 에릭 존슨과 대니얼 골드스타인입니다. 출발점은 미국의 간극이었습니다. 글의 첫 문장은 1995년 이후 미국에서 4만 5천 명 넘는 사람이 맞는 장기를 기다리다 숨졌다는 것입니다. 그런데 한 여론조사에서 미국인의 85%가 장기 기증에 찬성했지만 기증 카드에 서명한 사람은 28%였습니다<sup class="fn"><a id="cite-1c" href="#ref-1">[1]</a></sup>. 좋은 일이라고 생각하는 것과 서류에 이름을 올리는 것 사이가 그만큼 멀었습니다.</p>
+<p>유럽에는 두 가지 제도가 있었습니다. 스스로 등록해야 기증자가 되는 명시적 동의, 흔히 옵트인(opt-in)이라 부르는 방식이 하나입니다. 거부 의사를 등록하지 않으면 동의한 것으로 보는 추정 동의, 곧 옵트아웃(opt-out)이 다른 하나입니다. 두 사람은 각국 등록 기관에 문의해 '유효 동의율'을 구했습니다. 옵트인 나라에서는 등록한 사람의 비율이고, 옵트아웃 나라에서는 거부 등록을 하지 않은 사람의 비율입니다<sup class="fn"><a id="cite-1d" href="#ref-1">[1]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 396" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">유럽 열한 나라의 장기 기증 유효 동의율</title>
+<desc id="d-1">스스로 등록해야 기증자가 되는 네 나라의 유효 동의율은 덴마크 4.25, 네덜란드 27.5, 영국 17.17, 독일 12퍼센트였고, 거부 등록을 하지 않으면 기증자로 보는 일곱 나라는 스웨덴 85.9퍼센트를 빼면 모두 98퍼센트를 넘었다.</desc>
+<rect width="680" height="396" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">기본값이 다르면 동의율이 다르다</text>
+<text x="32" y="68" font-size="13" fill="#6E6B7B">유럽 열한 나라의 장기 기증 유효 동의율(%)</text>
+<line x1="44" y1="300" x2="644" y2="300" stroke="#E4E0DA" stroke-width="2"/>
+<line x1="268" y1="84" x2="268" y2="356" stroke="#E4E0DA" stroke-width="2" stroke-dasharray="5 5"/>
+<g fill="#FBD9C6" stroke="#C06A45">
+  <rect x="60" y="291.5" width="36" height="8.5" rx="3"/>
+  <rect x="110" y="245" width="36" height="55" rx="3"/>
+  <rect x="160" y="265.7" width="36" height="34.3" rx="3"/>
+  <rect x="210" y="276" width="36" height="24" rx="3"/>
+</g>
+<g fill="#CFE3F6" stroke="#3E7DB0">
+  <rect x="292" y="100" width="36" height="200" rx="3"/>
+  <rect x="342" y="104" width="36" height="196" rx="3"/>
+  <rect x="392" y="100.2" width="36" height="199.8" rx="3"/>
+  <rect x="442" y="100.1" width="36" height="199.9" rx="3"/>
+  <rect x="492" y="101" width="36" height="199" rx="3"/>
+  <rect x="542" y="100.7" width="36" height="199.3" rx="3"/>
+  <rect x="592" y="128.2" width="36" height="171.8" rx="3"/>
+</g>
+<g font-size="12" font-weight="700" text-anchor="middle" fill="#C06A45">
+  <text x="78" y="285">4.25</text>
+  <text x="128" y="239">27.5</text>
+  <text x="178" y="259">17.17</text>
+  <text x="228" y="270">12</text>
+</g>
+<g font-size="12" font-weight="700" text-anchor="middle" fill="#3E7DB0">
+  <text x="310" y="94">99.98</text>
+  <text x="360" y="94">98</text>
+  <text x="410" y="94">99.91</text>
+  <text x="460" y="94">99.97</text>
+  <text x="510" y="94">99.5</text>
+  <text x="560" y="94">99.64</text>
+  <text x="610" y="122">85.9</text>
+</g>
+<g font-size="11.5" text-anchor="middle" fill="#33313F">
+  <text x="78" y="320">덴마크</text>
+  <text x="128" y="320">네덜란드</text>
+  <text x="178" y="320">영국</text>
+  <text x="228" y="320">독일</text>
+  <text x="310" y="320">오스트리아</text>
+  <text x="360" y="320">벨기에</text>
+  <text x="410" y="320">프랑스</text>
+  <text x="460" y="320">헝가리</text>
+  <text x="510" y="320">폴란드</text>
+  <text x="560" y="320">포르투갈</text>
+  <text x="610" y="320">스웨덴</text>
+</g>
+<text x="153" y="348" font-size="13" font-weight="800" text-anchor="middle" fill="#C06A45">등록해야 기증자(옵트인)</text>
+<text x="460" y="348" font-size="13" font-weight="800" text-anchor="middle" fill="#3E7DB0">거부 등록을 안 하면 기증자(옵트아웃)</text>
+<text x="32" y="380" font-size="12" fill="#6E6B7B">자료: Johnson &amp; Goldstein(2003)[1]으로 재구성 · 옵트아웃 쪽은 거부 등록을 하지 않은 비율</text>
+</svg>
+<figcaption>스스로 등록해야 기증자가 되는 네 나라의 유효 동의율은 4.25~27.5%였고, 거부 등록을 하지 않으면 기증자로 보는 일곱 나라는 스웨덴(85.9%)을 빼면 모두 98%를 넘었습니다.</figcaption>
+</figure>
+<p>두 무리는 겹치는 구간이 없었고, 사이가 거의 60%포인트 벌어졌습니다<sup class="fn"><a id="cite-1e" href="#ref-1">[1]</a></sup>. 독일과 오스트리아, 네덜란드와 벨기에처럼 붙어 있는 나라들이 양쪽으로 갈렸으니 문화나 인심으로 설명하기는 어렵습니다.</p>
+<p>여기서 한 가지 짚어 둘게요. 옵트아웃 나라의 99%는 "국민 99%가 기증하겠다고 손을 들었다"는 뜻이 아닙니다. "거부한다고 등록한 사람이 1%가 안 된다"는 뜻입니다. 같은 그래프 안에서 두 색깔의 막대는 서로 다른 것을 재고 있습니다. 이 구분은 뒤에서 다시 중요해집니다.</p>
+<p>서류 쓰기가 귀찮아서 생긴 차이일 수도 있습니다. 그래서 두 사람은 온라인 실험을 붙였습니다. 161명에게 다른 주(州)로 막 이사했다고 상상하게 한 뒤, 한 무리에는 "이곳의 기본은 비기증자", 다른 무리에는 "기본은 기증자"라고 알려 주고 그대로 둘지 바꿀지를 물었습니다. 셋째 무리는 기본값 없이 골랐습니다. 바꾸는 데 드는 수고는 마우스 클릭 한 번이었습니다. 기증에 동의한 비율은 차례로 42%, 82%, 79%였습니다<sup class="fn"><a id="cite-1f" href="#ref-1">[1]</a></sup>. 수고가 거의 없어도 기본값은 선택을 두 배 가까이 갈랐습니다.</p>
+<p>왜 그럴까요. 두 사람은 세 가지를 꼽았습니다. 사람들은 기본값을 정책 당국의 권고로 읽습니다. 결정에는 품이 들지만 기본값을 받아들이는 데는 품이 들지 않습니다. 그리고 기본값이 '지금 상태'가 되면 거기서 벗어나는 일이 손실처럼 느껴집니다<sup class="fn"><a id="cite-1g" href="#ref-1">[1]</a></sup>. 비유하자면 기본값은 물길입니다. 둑을 쌓아 막지는 않지만, 물은 대개 파 놓은 쪽으로 흐릅니다.</p>
+
+<!-- 3. 연금 -->
+<h2>월급 명세서에서도 같은 일이 벌어졌다</h2>
+<p>같은 현상은 돈 문제에서 먼저 관찰됐습니다. 미국의 의료·보험 분야 대기업 한 곳이 1998년 4월 1일 퇴직연금인 401(k)의 가입 방식을 바꿨습니다. 그전에는 직원이 직접 신청해야 가입됐고, 그 뒤로는 신입 직원이 거부하지 않는 한 자동으로 가입됐습니다. 연금의 경제적 조건은 달라지지 않았습니다. 브리짓 매드리언과 데니스 셰이가 이 회사의 기록을 분석했습니다. 입사 3~15개월 직원의 가입률은 신청제 아래에서 37%, 자동 가입 아래에서 86%였습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">퇴직연금 신청제와 자동 가입의 비교</title>
+<desc id="d-2">직접 신청해야 가입되던 때 퇴직연금 가입률은 37퍼센트였고 자동 가입으로 바뀐 뒤에는 86퍼센트였지만, 자동 가입 세대의 61퍼센트는 회사가 정한 납입률 3퍼센트와 머니마켓펀드 전액 투자를 그대로 두었다.</desc>
+<rect width="680" height="330" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">문 안으로 들이고, 그 자리에 붙들다</text>
+<text x="32" y="68" font-size="13" fill="#6E6B7B">한 미국 기업의 401(k), 1998년 4월 가입 방식 변경 전후</text>
+<rect x="32" y="88" width="296" height="196" rx="14" fill="#E9E6F1" stroke="#9A96AA"/>
+<text x="180" y="120" font-size="16" font-weight="800" text-anchor="middle" fill="#6E6B7B">직접 신청해야 가입</text>
+<text x="180" y="150" font-size="13" text-anchor="middle" fill="#6E6B7B">가입률</text>
+<text x="180" y="190" font-size="34" font-weight="800" text-anchor="middle" fill="#33313F">37%</text>
+<text x="180" y="222" font-size="13" text-anchor="middle" fill="#6E6B7B">납입률 3%·머니마켓펀드 전액인 직원</text>
+<text x="180" y="258" font-size="26" font-weight="800" text-anchor="middle" fill="#33313F">1%</text>
+<rect x="352" y="88" width="296" height="196" rx="14" fill="#F6CCD8" stroke="#B24E6E"/>
+<text x="500" y="120" font-size="16" font-weight="800" text-anchor="middle" fill="#B24E6E">자동 가입(거부하면 탈퇴)</text>
+<text x="500" y="150" font-size="13" text-anchor="middle" fill="#33313F">가입률</text>
+<text x="500" y="190" font-size="34" font-weight="800" text-anchor="middle" fill="#B24E6E">86%</text>
+<text x="500" y="222" font-size="13" text-anchor="middle" fill="#33313F">납입률 3%·머니마켓펀드 전액인 직원</text>
+<text x="500" y="258" font-size="26" font-weight="800" text-anchor="middle" fill="#B24E6E">61%</text>
+<text x="32" y="312" font-size="12" fill="#6E6B7B">자료: Madrian &amp; Shea(2001)[2]으로 재구성 · 가입률은 입사 3~15개월 직원 기준</text>
+</svg>
+<figcaption>직접 신청해야 가입되던 때 37%였던 퇴직연금 가입률은 자동 가입 뒤 86%가 됐지만, 자동 가입 세대의 61%는 회사가 정해 둔 납입률 3%와 머니마켓펀드 전액 투자를 그대로 두었습니다.</figcaption>
+</figure>
+<p>이 논문에는 덜 알려진 절반이 있습니다. 자동 가입된 직원의 기본 설정은 급여의 3%를 머니마켓펀드에 전액 넣는 것이었습니다. 자동 가입 세대의 61%가 이 설정에서 한 발짝도 움직이지 않았습니다. 신청제로 들어온 직원 가운데 이 조합을 고른 사람은 1%뿐이었습니다. 저자들은 이것을 '나쁜 소식'이라고 적었습니다. 가입은 늘었지만 열 명 중 여섯은 낮은 납입률과 보수적인 상품에 그대로 머물렀기 때문입니다<sup class="fn"><a id="cite-2b" href="#ref-2">[2]</a></sup>. 기본값은 사람을 문 안으로 들이는 데 강했고, 들어온 사람을 그 자리에 붙들어 두는 데도 똑같이 강했습니다.</p>
+<p>이런 관찰에 이름을 붙인 사람이 경제학자 리처드 세일러와 법학자 캐스 선스타인입니다. 두 사람은 2003년 논문에서 '자유주의적 개입주의(libertarian paternalism)'라는 말을 만들었습니다. 사람들이 스스로 보기에 더 나은 쪽으로 가도록 제도를 짜되, 원하면 빠져나올 자유는 남긴다는 뜻입니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>. 2008년에는 책 『넛지』에서 그 도구를 이렇게 정의했습니다.</p>
+<blockquote class="quote">
+  <p>넛지란, 우리가 쓰는 뜻으로는, 사람들의 행동을 예측 가능한 방식으로 바꾸는 선택 설계의 모든 측면이다.</p>
+  <cite>— 세일러·선스타인, 『넛지』 2008, 6쪽 (번역, 문장 앞부분)<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup></cite>
+</blockquote>
+<p>조건이 붙습니다. 어떤 선택지도 금지하지 않고, 경제적 유인을 크게 바꾸지 않으며, 피하기 쉽고 값싸야 합니다. 과일을 눈높이에 두는 것은 넛지이고 정크푸드를 금지하는 것은 넛지가 아닙니다<sup class="fn"><a id="cite-4b" href="#ref-4">[4]</a></sup>. 선택지가 놓이는 환경을 짜는 일이 '선택 설계(choice architecture)'이고, 기본값은 그 가운데 가장 단순한 도구입니다.</p>
+<p>생각은 빠르게 제도가 됐습니다. 2010년 영국 내각부에 행동 통찰팀(Behavioural Insights Team)이 생겼고<sup class="fn"><a id="cite-4c" href="#ref-4">[4]</a></sup>, 세일러는 2017년 노벨 경제학상을 받았습니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>. 한국도 2022년 7월 12일 확정기여형(DC)과 개인형(IRP) 퇴직연금에 사전지정운용제도, 이른바 디폴트옵션을 들였습니다. 가입자가 적립금을 굴릴 금융상품을 정하지 않으면 미리 정해 둔 방법으로 운용하는 제도입니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>. 가입 여부가 아니라 운용 방법에 기본값을 둔 것이니, 앞의 미국 회사로 치면 '머니마켓펀드 전액'이 적혀 있던 칸에 해당합니다.</p>
+
+<!-- 4. 근거의 강도 -->
+<h2>넛지는 얼마나 센가 — 숫자가 줄어든 2022년</h2>
+<p>넛지가 퍼지자 "그래서 평균적으로 얼마나 듣느냐"는 질문이 따라왔습니다. 2022년 1월 미국 국립과학원회보(PNAS)에 실린 제네바 대학 연구팀의 메타분석, 곧 여러 연구를 한데 합친 분석이 답을 냈습니다. 논문 212편에서 뽑은 효과 447개, 참여자 약 215만 명을 합친 평균 효과 크기는 d=0.43이었습니다. d는 두 집단의 평균 차이를 표준편차 단위로 나타낸 값이고, 저자들은 이 크기를 '작음과 중간 사이'라고 불렀습니다. 기법 가운데서는 기본값이 0.62로 가장 높은 축에 들었습니다. 영역별로는 음식 선택이 0.65로 가장 컸고 금융이 0.24로 가장 작았습니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>.</p>
+<p>같은 해 7월, 같은 학술지에 짧은 반박이 실렸습니다. 마이어(Maier) 등 여섯 연구자가 같은 자료에 출판 편향 보정을 걸었습니다. 출판 편향이란 효과가 나온 연구는 실리고 안 나온 연구는 서랍에 남는 쏠림입니다. 보정하자 평균 효과는 모든 추정치를 쓴 분석에서 d=0.04, 연구마다 가장 정밀한 추정치만 쓴 분석에서 0.11로 내려앉았습니다. 글의 제목은 "출판 편향을 보정하면 넛지의 증거는 없다"였습니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>.</p>
+<p>다만 이 제목은 저자들 스스로 한 걸음 물렀습니다. 뒤에 낸 답글에서 그들은 제목에 '전체적으로(overall)'라는 말을 넣었어야 했다고 적었습니다. 보정된 결과는 넛지가 듣는다는 증거도 안 듣는다는 증거도 아닌 '미정'이고, 금융을 뺀 모든 영역에서 연구마다 결과가 크게 흩어져 있으니 일부 넛지는 효과가 있을 수 있다는 것입니다. 이 결과를 모든 넛지가 무효라는 뜻으로 읽는 것은 "부재의 증거와 증거의 부재를 혼동하는 일"이라고 했습니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>.</p>
+<p>세 번째 숫자는 실험실 밖에서 왔습니다. 스테파노 델라비냐와 엘리자베스 리노스는 미국의 대형 넛지 전담 조직 두 곳이 수행한 무작위 실험 126건, 2,300만 명분을 빠짐없이 모았습니다. 잘된 실험만 골라 담을 수 없는 표본입니다. 평균 효과는 1.4%포인트였습니다. 학술지에 실린 넛지 실험들의 평균은 8.7%포인트였습니다. 두 사람은 이 차이의 약 70%를 선택적 출판으로 설명했습니다<sup class="fn"><a id="cite-10" href="#ref-10">[10]</a></sup>.</p>
+<table>
+  <tr><th>무엇을 모았나</th><th>평균 효과</th><th>읽는 법</th></tr>
+  <tr><td>학술 논문 212편(2022)<sup class="fn"><a id="cite-7b" href="#ref-7">[7]</a></sup></td><td>d = 0.43</td><td>작음과 중간 사이</td></tr>
+  <tr class="hl"><td>같은 자료, 출판 편향 보정(2022)<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup></td><td>d = 0.04~0.11</td><td>0에 가깝다, 다만 '미정'</td></tr>
+  <tr><td>학술지에 실린 넛지 실험<sup class="fn"><a id="cite-10b" href="#ref-10">[10]</a></sup></td><td>8.7%포인트</td><td>대조군보다 33.4% 증가</td></tr>
+  <tr class="hl"><td>넛지 조직 두 곳의 실험 126건 전부<sup class="fn"><a id="cite-10c" href="#ref-10">[10]</a></sup></td><td>1.4%포인트</td><td>대조군보다 8.0% 증가</td></tr>
+</table>
+<div class="key"><span class="label">핵심 —</span> 이 표에서 읽어야 할 것은 "넛지는 가짜"가 아닙니다. 발표 여부를 가리지 않고 모은 1.4%포인트도 통계적으로 뚜렷한 효과였습니다. 다만 논문으로 먼저 알려진 숫자의 6분의 1쯤입니다. 큰 숫자는 잘된 실험이 골라 실린 숫자였을 가능성이 큽니다.</div>
+<p>돈 문제로 좁히면 한 가지가 더 눈에 띕니다. 보정 전에도 금융은 넛지가 가장 덜 듣는 영역이었고, 보정 뒤에는 효과가 없다는 쪽의 증거가 가장 강하게 나온 영역이었습니다<sup class="fn"><a id="cite-8c" href="#ref-8">[8]</a></sup>. 그런데 넛지의 대표 성공 사례인 연금 자동 가입은 바로 그 금융 영역에 있습니다. 평균과 개별 사례는 다른 이야기입니다. 안내문의 문구를 다듬는 넛지와, 아무것도 하지 않았을 때의 상태 자체를 바꾸는 기본값을 한 숫자로 묶기 어렵다는 뜻으로도 읽을 수 있습니다.</p>
+<p>그렇다면 기본값만 따로 보면 어떨까요. 기본값 실험 58건, 참여자 7만 3,675명을 모은 2019년 메타분석에서 평균 효과는 d=0.68로 넛지 가운데서도 큰 편이었습니다. 그러나 효과가 없었던 연구가 여럿이고 반대 방향으로 나온 연구도 둘 있었습니다. 기본값은 사람들이 그것을 설계자의 권고로 받아들이거나 이미 가진 것으로 느낄 때 더 잘 들었고, 소비 영역에서 강하고 환경 영역에서 약했습니다<sup class="fn"><a id="cite-11" href="#ref-11">[11]</a></sup>. 기본값도 조건을 탄다는 뜻입니다.</p>
+<p>연금의 뒷이야기도 비슷합니다. 2024년에 나온 미국의 작업 논문 「생각보다 작았나?」는 자동 가입이 길게 보아 늘리는 저축을 소득의 0.6%, 납입률 자동 인상이 늘리는 저축을 0.3%로 추정했습니다. 직원들이 회사를 자주 옮기고, 옮길 때 적립금의 큰 몫을 찾아 쓰며, 자동 인상이 처음 돌아왔을 때 실제로 납입률을 올리는 사람이 40%에 그쳤기 때문입니다<sup class="fn"><a id="cite-12" href="#ref-12">[12]</a></sup>. 영국에서 직원 2~29명인 사업장 약 16만 곳에 자동 가입이 차례로 도입된 과정을 추적한 작업 논문은, 가입 뒤 한 달이 지날 때마다 연금 저축이 33~39파운드씩 늘었지만 신용대출 같은 무담보 빚도 7파운드씩 늘어 저축 증가분을 일부 깎았다고 보고했습니다<sup class="fn"><a id="cite-13" href="#ref-13">[13]</a></sup>. 두 편 모두 아직 작업 논문 단계라는 점은 감안해야 합니다.</p>
+
+<!-- 5. 동의율과 기증 -->
+<h2>동의율과 기증 사이 — 서류 밖에서 벌어지는 일</h2>
+<p>이제 처음의 막대그래프로 돌아갑니다. 존슨과 골드스타인이 붙인 제목은 "기본값은 생명을 구하는가"였습니다. 그렇다고 답하려면 동의율이 아니라 실제 기증이 늘어야 합니다. 두 사람도 알고 있었습니다. 등록된 잠재 기증자가 실제 기증에 이르지 못하는 까닭으로 가족의 반대, 기본값을 그대로 쓰기를 주저하는 의사, 받을 사람과의 불일치, 종교와 문화와 기반 시설의 차이를 들었습니다<sup class="fn"><a id="cite-1h" href="#ref-1">[1]</a></sup>.</p>
+<p>그래서 1991~2001년 각국의 실제 사망자 기증 건수를 따로 분석했습니다. 이식 기반 시설, 교육 수준, 종교를 통제한 회귀분석에서, 기증이 기본값인 나라의 기증률은 인구 100만 명당 14.1명에서 16.4명으로 16.3% 높았습니다<sup class="fn"><a id="cite-1i" href="#ref-1">[1]</a></sup>. 서류 위에서 60%포인트이던 차이가 병원에서는 16%가 된 것입니다. 같은 글에 함께 실린 다른 연구팀의 추정은 더 컸습니다. 동유럽을 포함해 더 많은 나라의 1999년 한 해를 본 분석에서는 10.8명 대 16.9명, 56.5% 차이였습니다<sup class="fn"><a id="cite-1k" href="#ref-1">[1]</a></sup>. 어느 나라를 표본에 넣느냐에 따라 답이 달라진다는 것을 첫 논문부터 보여 준 셈입니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">서류 위의 동의가 실제 기증에 이르기까지</title>
+<desc id="d-3">서류 위의 동의율은 두 제도 사이에 약 60퍼센트포인트 차이가 났지만, 가족의 반대와 의사의 주저, 받을 사람과의 불일치, 종교와 문화와 기반 시설을 거치고 나면 실제 사망자 기증률의 차이는 인구 100만 명당 14.1명 대 16.4명, 16.3퍼센트였다.</desc>
+<defs><marker id="ah-3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#9A96AA"/></marker></defs>
+<rect width="680" height="330" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">60%포인트가 16%가 되기까지</text>
+<text x="32" y="68" font-size="13" fill="#6E6B7B">서류 위의 동의와 실제 기증 사이에 놓인 것들</text>
+<rect x="32" y="96" width="176" height="176" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/>
+<text x="120" y="128" font-size="16" font-weight="800" text-anchor="middle" fill="#3E7DB0">서류 위의 동의</text>
+<text x="120" y="164" font-size="13" text-anchor="middle" fill="#33313F">옵트인 4.25~27.5%</text>
+<text x="120" y="186" font-size="13" text-anchor="middle" fill="#33313F">옵트아웃 85.9~99.98%</text>
+<text x="120" y="226" font-size="14" font-weight="800" text-anchor="middle" fill="#3E7DB0">차이 약 60%포인트</text>
+<g font-size="14" font-weight="700" text-anchor="middle" fill="#A9861F">
+  <rect x="252" y="96" width="176" height="36" rx="10" fill="#F8E8B0" stroke="#A9861F"/><text x="340" y="119">가족의 반대</text>
+  <rect x="252" y="143" width="176" height="36" rx="10" fill="#F8E8B0" stroke="#A9861F"/><text x="340" y="166">의사의 주저</text>
+  <rect x="252" y="190" width="176" height="36" rx="10" fill="#F8E8B0" stroke="#A9861F"/><text x="340" y="213">받을 사람과 불일치</text>
+  <rect x="252" y="237" width="176" height="36" rx="10" fill="#F8E8B0" stroke="#A9861F"/><text x="340" y="260">종교·문화·기반 시설</text>
+</g>
+<rect x="472" y="96" width="176" height="176" rx="14" fill="#F6CCD8" stroke="#B24E6E"/>
+<text x="560" y="128" font-size="16" font-weight="800" text-anchor="middle" fill="#B24E6E">실제 사망자 기증</text>
+<text x="560" y="164" font-size="13" text-anchor="middle" fill="#33313F">인구 100만 명당</text>
+<text x="560" y="186" font-size="13" text-anchor="middle" fill="#33313F">14.1명 대 16.4명</text>
+<text x="560" y="226" font-size="14" font-weight="800" text-anchor="middle" fill="#B24E6E">차이 16.3%</text>
+<g stroke="#9A96AA" stroke-width="2" fill="none">
+  <path d="M212 184 L246 184" marker-end="url(#ah-3)"/>
+  <path d="M432 184 L466 184" marker-end="url(#ah-3)"/>
+</g>
+<text x="32" y="312" font-size="12" fill="#6E6B7B">자료: Johnson &amp; Goldstein(2003)[1]으로 재구성 · 기증률은 1991~2001년 자료의 회귀 추정치</text>
+</svg>
+<figcaption>서류 위의 동의율은 두 제도 사이에 약 60%포인트 차이가 났지만, 가족의 반대와 의사의 주저 같은 관문을 지난 실제 사망자 기증률의 차이는 인구 100만 명당 14.1명 대 16.4명, 곧 16.3%였습니다.</figcaption>
+</figure>
+<p>그 뒤의 연구는 갈립니다. 2009년 영국의학저널(BMJ)의 체계적 문헌고찰은 질이 좋은 나라 간 비교 네 편에서 추정 동의가 기증 증가와 이어져 있었다고 정리했습니다. 증가 폭은 25~30%, 21~26%, 100만 명당 2.7명, 6.14명이었습니다. 그러면서도 결론은 조심스러웠습니다. 추정 동의만으로는 나라 사이의 차이를 설명하기 어렵고, 기증 가능한 사망자 수, 이식 체계의 조직과 기반 시설, 보건 투자, 대중의 태도가 함께 작용한다는 것입니다<sup class="fn"><a id="cite-14" href="#ref-14">[14]</a></sup>.</p>
+<p>48개국의 2000~2012년 자료를 본 2014년 연구에서는 옵트아웃 나라의 사망자 기증이 100만 명당 14.24명으로 옵트인 나라(9.98명)보다 많았습니다. 대신 살아 있는 사람의 기증은 옵트아웃 쪽이 적었습니다(5.49명 대 9.36명)<sup class="fn"><a id="cite-15" href="#ref-15">[15]</a></sup>. 반면 경제협력개발기구(OECD) 35개국의 2016년 자료를 본 2019년 연구에서는 사망자 기증(옵트아웃 20.3명, 옵트인 15.4명)에도, 전체 장기 이식 건수(63.6건 대 61.7건)에도 통계적으로 의미 있는 차이가 없었습니다. 생존 기증만 옵트아웃 쪽이 뚜렷이 적었습니다(4.8명 대 15.7명)<sup class="fn"><a id="cite-16" href="#ref-16">[16]</a></sup>.</p>
+<blockquote class="quote">
+  <p>이는 동의가 추정되는 환경에서도 장기 기증을 가로막는 다른 장벽들을 다뤄야 함을 시사한다.</p>
+  <cite>— Arshad 등, <i>Kidney International</i> 2019 (번역)<sup class="fn"><a id="cite-16b" href="#ref-16">[16]</a></sup></cite>
+</blockquote>
+<p>제도를 실제로 바꾼 곳을 추적한 연구도 있습니다. 영국 웨일스는 2015년 12월 1일 추정 동의를 시행했습니다. 시행 전후 21개월씩을 견주니 사망자 기증은 101명에서 104명으로 사실상 그대로였습니다. 동의율은 61.0%로 올랐지만 같은 기간 영국의 나머지 지역도 58.6%에서 63.1%로 올랐습니다. 그리고 법이 동의한 것으로 간주한 46건 가운데 18건, 39.1%에서 가족이 기증을 막았습니다. 본인이 생전에 뜻을 밝혀 둔 경우에는 87.2%가 기증 동의로 이어졌지만, 법이 동의로 간주한 경우에는 60.8%에 그쳤습니다<sup class="fn"><a id="cite-17" href="#ref-17">[17]</a></sup>. 기본값은 서류의 칸을 채웠지만 병상 곁의 가족까지 채우지는 못했습니다.</p>
+<p>사망자 기증이 100만 명당 34~35명으로 당시 세계에서 가장 높던 스페인도 흔히 추정 동의의 성공 사례로 꼽힙니다. 그러나 스페인 국립이식기구의 라파엘 마테산스를 포함한 세 저자는 2010년 BMJ 글에서, 스페인에는 거부 등록부가 없고 1979년에 만든 추정 동의 법을 알리는 일도 하지 않는다며 그 법은 사실상 잠들어 있다고 썼습니다<sup class="fn"><a id="cite-18" href="#ref-18">[18]</a></sup>.</p>
+<p>『넛지』의 저자 세일러 자신도 장기 기증에서는 기본값 뒤집기를 밀지 않았습니다. 앨 로스의 '마켓 디자인' 블로그가 전한 2009년 뉴욕타임스 칼럼에서 그는 '의무적 선택', 곧 운전면허를 갱신할 때 기증 여부를 반드시 묻는 방식을 권했습니다. 추정 동의 법이 있는 프랑스에서도 실제로는 의사들이 유족의 승낙을 구한다는 점을 들었습니다<sup class="fn"><a id="cite-19" href="#ref-19">[19]</a></sup>. 그렇다고 묻기만 하면 풀리는 것도 아닙니다. 존슨과 골드스타인의 글에는 의무적 선택을 시행한 미국 버지니아주에서 처음 질문받은 100만 명 가운데 약 24%가 "아직 정하지 못했다"고 답했다는 주석이 달려 있습니다<sup class="fn"><a id="cite-1j" href="#ref-1">[1]</a></sup>.</p>
+<div class="key"><span class="label">핵심 —</span> 기본값이 바꾸는 것은 '서류 위의 상태'입니다. 그 상태가 저축액이나 실제 기증 같은 결과로 이어지려면 서류 밖의 조건이 받쳐 줘야 합니다. 연금에서는 이직과 중도 인출이, 장기 기증에서는 가족과 병원의 체계가 그 조건이었습니다.</div>
+
+<!-- 9. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>기본값을 그대로 둔 것은 게으름이 아닙니다. 하루에 내려야 할 결정은 많고, 누군가 미리 채워 둔 칸은 "보통은 이렇게 합니다"라는 말처럼 읽힙니다. 그 말을 믿고 넘어가는 것은 대개 합리적인 절약입니다.</p>
+    <p><strong>"기본값은 비어 있는 칸이 아니라, 누군가 먼저 써 둔 답입니다."</strong> 그 답이 내 편에서 쓰였는지는 칸마다 다릅니다. 연금 자동 가입과 자동 결제 구독은 생김새가 같습니다.</p>
+    <p>그리고 기본값이 바꿔 주는 것은 출발선까지입니다. 가입된 연금에 얼마를 넣을지, 등록된 뜻을 가족이 아는지는 여전히 칸 밖의 일입니다.</p>
+  </blockquote>
+</section>
+
+<!-- 10. 정리 -->
+<hr>
+<p>정리하자면 이렇습니다. 2003년의 막대그래프는 장기 기증 동의율이 나라의 인심이 아니라 신청서의 기본값을 따라 갈린다는 것을 보여 줬고, 퇴직연금 자동 가입은 같은 힘을 가입률 37%와 86%로 보여 줬습니다. 그러나 2022년의 재분석과 대규모 현장 실험은 넛지의 평균 효과가 논문으로 알려진 것보다 훨씬 작다고 했고, 기본값이 올린 동의율이 실제 기증을 얼마나 늘리는지는 연구마다 답이 다릅니다. 기본값은 서류를 바꾸고, 서류 밖은 다른 것들이 바꿉니다.</p>
+<p>오늘 손대지 않고 넘긴 체크 칸이 있다면 물어보세요. 이 칸의 답은 누가, 누구 편에서 먼저 써 둔 것일까요.</p>
+
+<!-- 11. 꼬리 -->
+<p class="disclaimer">이 글은 일반적인 정보 제공을 위한 것이며 투자 조언이 아닙니다. 퇴직연금의 가입과 운용은 본인의 재무 상황을 고려해 판단하시고 필요하면 공인된 금융 전문가와 상의하세요. 장기 기증 제도에 관한 내용은 연구 결과를 소개한 것이며 특정 제도나 정책에 대한 찬반이 아닙니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">Johnson, E. J., Goldstein, D. Do Defaults Save Lives? <i>Science</i> 302(5649): 1338–1339, 2003-11-21. <a href="https://www.dangoldstein.com/papers/DefaultsScience.pdf">저자 공개본</a> · <a href="https://doi.org/10.1126/science.1091721">DOI</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">Madrian, B. C., Shea, D. F. The Power of Suggestion: Inertia in 401(k) Participation and Savings Behavior. <i>Quarterly Journal of Economics</i> 116(4): 1149–1187, 2001 (NBER Working Paper 7682, 2000). <a href="https://www.nber.org/papers/w7682">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">위키백과. Libertarian paternalism (백과; Thaler &amp; Sunstein, <i>American Economic Review</i> 2003 인용). <a href="https://en.wikipedia.org/wiki/Libertarian_paternalism">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">위키백과. Nudge theory (백과; Thaler &amp; Sunstein, <i>Nudge</i>, 2008, 6쪽 인용). <a href="https://en.wikipedia.org/wiki/Nudge_theory">링크</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">위키백과. Richard Thaler (백과). <a href="https://en.wikipedia.org/wiki/Richard_Thaler">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">고용노동부. 퇴직연금제도에 사전지정운용제도(디폴트옵션)가 도입됩니다 (보도자료), 2022-07-05. <a href="https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13711">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Mertens, S., Herberz, M., Hahnel, U. J. J., Brosch, T. The effectiveness of nudging: A meta-analysis of choice architecture interventions across behavioral domains. <i>PNAS</i> 119(1): e2107346118, 2022. 본문 수치는 2022년 5월 정정 공고 기준. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8740589/">링크</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9171817/">정정</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">Maier, M., Bartoš, F., Stanley, T. D., Shanks, D. R., Harris, A. J. L., Wagenmakers, E.-J. No evidence for nudging after adjusting for publication bias. <i>PNAS</i> 119(31): e2200300119, 2022. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9351501/">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">Maier 등. Rejoinder: No Evidence for Nudging After Adjusting for Publication Bias (저자 답글). <i>Bayesian Spectacles</i>. <a href="https://www.bayesianspectacles.org/rejoinder-no-evidence-for-nudging/">링크</a> <a class="back" href="#cite-9">↩</a></li>
+    <li id="ref-10">DellaVigna, S., Linos, E. RCTs to Scale: Comprehensive Evidence from Two Nudge Units. <i>Econometrica</i> 90(1): 81–116, 2022. <a href="https://www.econometricsociety.org/publications/econometrica/2022/01/01/rcts-scale-comprehensive-evidence-two-nudge-units">링크</a> <a class="back" href="#cite-10">↩</a></li>
+    <li id="ref-11">Jachimowicz, J. M., Duncan, S., Weber, E. U., Johnson, E. J. When and why defaults influence decisions: a meta-analysis of default effects. <i>Behavioural Public Policy</i> 3(2): 159–186, 2019. <a href="https://ideas.repec.org/a/cup/bpubpo/v3y2019i02p159-186_00.html">링크</a> <a class="back" href="#cite-11">↩</a></li>
+    <li id="ref-12">Choi, J. J., Laibson, D., Cammarota, J., Lombardo, R., Beshears, J. Smaller than We Thought? The Effect of Automatic Savings Policies. NBER Working Paper 32828, 2024. <a href="https://www.nber.org/papers/w32828">링크</a> <a class="back" href="#cite-12">↩</a></li>
+    <li id="ref-13">Beshears, J., Blakstad, M., Choi, J. J. 등. Does Pension Automatic Enrollment Increase Debt? Evidence from a Large-Scale Natural Experiment. NBER Working Paper 32100, 2024. <a href="https://www.nber.org/papers/w32100">링크</a> <a class="back" href="#cite-13">↩</a></li>
+    <li id="ref-14">Rithalia, A., McDaid, C., Suekarran, S., Myers, L., Sowden, A. Impact of presumed consent for organ donation on donation rates: a systematic review. <i>BMJ</i> 338: a3162, 2009. <a href="https://doi.org/10.1136/bmj.a3162">링크</a> <a class="back" href="#cite-14">↩</a></li>
+    <li id="ref-15">Shepherd, L., O'Carroll, R. E., Ferguson, E. An international comparison of deceased and living organ donation/transplant rates in opt-in and opt-out systems: a panel study. <i>BMC Medicine</i> 12: 131, 2014. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4175622/">링크</a> <a class="back" href="#cite-15">↩</a></li>
+    <li id="ref-16">Arshad, A., Anderson, B., Sharif, A. Comparison of organ donation and transplantation rates between opt-out and opt-in systems. <i>Kidney International</i> 95(6): 1453–1460, 2019. <a href="https://doi.org/10.1016/j.kint.2019.01.036">링크</a> <a class="back" href="#cite-16">↩</a></li>
+    <li id="ref-17">Noyes, J., McLaughlin, L., Morgan, K. 등. Short-term impact of introducing a soft opt-out organ donation system in Wales: before and after study. <i>BMJ Open</i> 9(4): e025159, 2019. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6500329/">링크</a> <a class="back" href="#cite-17">↩</a></li>
+    <li id="ref-18">Fabre, J., Murphy, P., Matesanz, R. Presumed consent: a distraction in the quest for increasing rates of organ donation. <i>BMJ</i> 341: c4973, 2010. <a href="https://www.bmj.com/content/341/bmj.c4973">링크</a> <a class="back" href="#cite-18">↩</a></li>
+    <li id="ref-19">Roth, A. Thaler on mandated choice (해설 블로그; Thaler의 뉴욕타임스 칼럼 "Opting in vs. Opting Out", 2009-09 소개). <i>Market Design</i>, 2009-09-27. <a href="https://marketdesigner.blogspot.com/2009/09/thaler-on-mandated-choice.html">링크</a> <a class="back" href="#cite-19">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>

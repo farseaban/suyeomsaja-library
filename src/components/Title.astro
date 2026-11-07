@@ -1,0 +1,8 @@
+---
+import { splitTitle } from '../lib/title'
+
+// 제목을 질문 줄(.s-tq)과 개념 줄(.s-tc)로 가른다. 줄표는 화면에 남긴다 — 글자(textContent)는 원제목과 같다.
+interface Props { title: string }
+const { q, c } = splitTitle(Astro.props.title)
+---
+<span class="s-tq">{q}</span>{c !== null && <Fragment>{' '}<span class="s-tc">— {c}</span></Fragment>}

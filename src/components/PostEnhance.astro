@@ -1,0 +1,12 @@
+---
+import type { PaletteKey } from '../config/site'
+
+interface Props { color: PaletteKey }
+const { color } = Astro.props
+---
+<div class="s-progress" aria-hidden="true" style={`--s-accent:var(--${color}-d)`}><i></i></div>
+<script>
+  import '../scripts/reading'
+  import '../scripts/footnotes'
+  import '../scripts/diagrams'
+</script>

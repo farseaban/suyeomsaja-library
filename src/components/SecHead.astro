@@ -1,0 +1,6 @@
+---
+// 구역 머리 — 위 1px 잉크색 선 + 라벨. 오른쪽에 링크 하나를 둘 수 있다.
+interface Props { title: string; more?: { href: string; text: string } }
+const { title, more } = Astro.props
+---
+<header class="s-sec-head"><h2 class="s-label">{title}</h2>{more && <a class="s-more" href={more.href}>{more.text}</a>}</header>

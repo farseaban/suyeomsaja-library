@@ -1,0 +1,445 @@
+/* ── 기본 ── */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--night)}
+body{margin:0;min-height:100dvh;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font-family:var(--sans);
+     font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body > main{flex:1 0 auto}
+::selection{background:var(--lav);color:var(--ink)}
+a{color:inherit;-webkit-tap-highlight-color:color-mix(in srgb,var(--lav) 45%,transparent)}
+/* 본문 틀 — 기본값이 휴대폰 값이다(머리띠보다 앞에는 760px 블록을 두지 않는다) */
+.wrap{margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right))}
+/* 761px 이상도 안전 영역을 따른다 — 눕힌 노치 휴대폰(844·932px)에서 틀이 노치 밑에 서지 않게 */
+@media (min-width:761px){ .wrap{max-width:1104px;padding-inline:max(32px,env(safe-area-inset-left)) max(32px,env(safe-area-inset-right))} }
+.s-serif{font-family:var(--serif);letter-spacing:-.015em}
+.s-label{font-size:var(--t-12);font-weight:700;letter-spacing:.06em;line-height:1.5}
+.s-muted{color:var(--sub)}
+/* 포커스 — 밤 구역과 꼬리말 안, 그리고 밤 위에 뜨는 건너뛰기 링크는 버터색 선 */
+:focus-visible{outline:2px solid var(--lav-ink);outline-offset:3px;border-radius:3px}
+.s-top :focus-visible,.footer :focus-visible,.s-skip:focus-visible{outline-color:var(--butter)}
+/* 건너뛰기 링크 — 평소 화면 밖, 포커스되면 왼쪽 위에 */
+.s-skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--ink);color:var(--paper);padding:10px 14px;border-radius:8px;font-size:14px;text-decoration:none}
+.s-skip:focus{top:12px}
+
+/* ── 분야 표시 — 띠와 칩, 두 형태만. .s-cat-{색}은 색 변수만 정의한다(글자색을 바꾸지 않는다) ── */
+.s-cat-lav{--c:var(--lav);--c-d:var(--lav-d);--c-ink:var(--lav-ink)}
+.s-cat-mint{--c:var(--mint);--c-d:var(--mint-d);--c-ink:var(--mint-ink)}
+.s-cat-peach{--c:var(--peach);--c-d:var(--peach-d);--c-ink:var(--peach-ink)}
+.s-cat-sky{--c:var(--sky);--c-d:var(--sky-d);--c-ink:var(--sky-ink)}
+.s-cat-butter{--c:var(--butter);--c-d:var(--butter-d);--c-ink:var(--butter-ink)}
+.s-cat-rose{--c:var(--rose);--c-d:var(--rose-d);--c-ink:var(--rose-ink)}
+/* 칩 — 분야 이름이 글줄 안에 나오는 곳. 색은 면으로, 글자는 잉크색으로(밤 위에서도 같은 값). ::after가 터치 영역을 44px로 넓힌다.
+   z-index:1 — 휴대폰 행에서 터치 영역 아래 3px가 제목 링크(화면 전환 이름 때문에 쌓임 맥락)에 덮이지 않게 한 층 올린다 */
+.s-chip{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:22px;padding:0 8px;border-radius:var(--radius-s);background:var(--c);color:var(--ink);font-size:var(--t-12);font-weight:700;line-height:1.5;letter-spacing:.04em;white-space:nowrap;text-decoration:none}
+.s-chip::after{content:"";position:absolute;inset:-11px -6px}
+.s-chip:hover{text-decoration:underline;text-underline-offset:3px}
+/* 띠 — 1면 '최근 글' 칸 머리에만. 분야 이름(왼쪽, 터치 높이 44px)과 '약 N분'(오른쪽). 글자는 잉크색 — 분야 -ink 색은 파스텔 위에서 턱걸이라 쓰지 않는다.
+   띠 → 제목 간격은 칸 제목의 위 여백으로 준다(1면 구획) */
+.s-band{display:flex;align-items:center;justify-content:space-between;gap:12px;height:32px;padding:0 12px;margin:0;border-radius:var(--radius-s);background:var(--c)}
+.s-band-cat{padding:13px 12px 13px 0;margin:-13px 0;color:var(--ink);font-size:var(--t-12);font-weight:700;line-height:1.5;letter-spacing:.06em;white-space:nowrap;text-decoration:none}
+.s-band-cat:hover{text-decoration:underline;text-underline-offset:3px}
+.s-band-min{color:color-mix(in srgb,var(--ink) 82%,var(--c));font-size:var(--t-12);font-weight:500;line-height:1.5;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ── 머리띠 — 두 단: 이름 + 기능 메뉴 / 분야 줄. 밤 위에 놓인다 ── */
+.masthead .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.masthead .name{font-family:var(--serif);font-weight:700;font-size:24px;letter-spacing:-.02em;color:var(--on-night);text-decoration:none;white-space:nowrap}
+.masthead .util{display:flex;align-items:center;font-size:15px}
+.masthead .util a{display:inline-flex;align-items:center;min-height:44px;padding-inline:11px;color:color-mix(in srgb,var(--paper) 86%,transparent);text-decoration:none;white-space:nowrap}
+.masthead .util a:hover,.masthead .util a[aria-current]{color:var(--on-night)}
+.masthead .util a[aria-current]:not(.search){text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px;text-decoration-color:var(--butter)}
+.masthead .util .search{flex:none;width:44px;justify-content:center;padding:0;margin-right:-13px}
+.masthead .shelfbar{display:flex;height:40px;margin-top:-4px}
+.masthead .links{display:flex;align-items:stretch;flex:1;min-width:0}
+.masthead .links{--fl:0px;--fr:28px}
+.masthead .cats{display:flex;align-items:stretch}
+.masthead .cats a{position:relative;display:inline-flex;align-items:center;min-height:40px;padding-inline:11px;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--on-night-2);text-decoration:none;white-space:nowrap}
+.masthead .cats a:first-child{padding-left:0}
+.masthead .cats a:hover,.masthead .cats a[aria-current]{color:var(--on-night)}
+/* 현재 분야 — 글자 폭만큼의 버터색 막대 */
+.masthead .cats a[aria-current]::after{content:"";position:absolute;left:11px;right:11px;bottom:6px;height:2px;background:var(--butter)}
+.masthead .cats a:first-child[aria-current]::after{left:0}
+@media (max-width:760px){
+  .masthead .bar{height:56px;gap:8px}
+  .masthead .name{font-size:22px}
+  .masthead .util a{padding-inline:8px}
+  .masthead .shelfbar{height:44px;margin-top:0;padding-right:0}
+  .masthead .links{overflow-x:auto;scrollbar-width:none;padding-right:20px;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 var(--fl),#000 calc(100% - var(--fr)),transparent 100%)}
+  .masthead .links::-webkit-scrollbar{display:none}
+  .masthead .links.scrolled{--fl:28px}
+  .masthead .links.at-end{--fr:0px}
+  .masthead .cats a{min-height:44px;padding-inline:5.5px;letter-spacing:0}
+  .masthead .cats a[aria-current]::after{left:5.5px;right:5.5px;bottom:8px}
+}
+@media (max-width:359px){
+  .masthead .name{font-size:19px}
+  .masthead .util{font-size:14px}
+  .masthead .util a{padding-inline:6px}
+  .masthead .util .search{width:40px;margin-right:-10px}
+}
+
+/* ── 밤 구역(.s-top) — 하늘 + 머리띠 + 그 페이지의 제목. 아래로 새벽빛을 거쳐 흰 종이에 닿는다 ── */
+.s-top{position:relative;z-index:0;color:var(--on-night)}
+/* 새벽 그러데이션: 바닥에서 위로, 각 지점 = 바닥에서의 거리 × --glow */
+.s-sky{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(to top,
+    var(--paper) 0,
+    color-mix(in srgb,var(--s-dawn) 42%,var(--paper)) calc(18px*var(--glow)),
+    var(--s-dawn) calc(50px*var(--glow)),
+    color-mix(in srgb,var(--lav) 55%,var(--s-dawn)) calc(88px*var(--glow)),
+    var(--lav) calc(120px*var(--glow)),
+    color-mix(in srgb,var(--lav-d) 36%,var(--lav)) calc(160px*var(--glow)),
+    color-mix(in srgb,var(--lav) 55%,var(--ink)) calc(205px*var(--glow)),
+    color-mix(in srgb,var(--lav-d) 52%,var(--ink)) calc(250px*var(--glow)),
+    color-mix(in srgb,var(--lav-d) 28%,var(--ink)) calc(300px*var(--glow)),
+    var(--ink) calc(360px*var(--glow)),
+    var(--night) 100%)}
+@supports (background:linear-gradient(in oklab,red,blue)){
+  .s-sky{background:linear-gradient(in oklab to top,
+      var(--paper) 0,
+      color-mix(in oklab,var(--s-dawn) 42%,var(--paper)) calc(18px*var(--glow)),
+      var(--s-dawn) calc(50px*var(--glow)),
+      color-mix(in oklab,var(--lav) 55%,var(--s-dawn)) calc(88px*var(--glow)),
+      var(--lav) calc(120px*var(--glow)),
+      color-mix(in oklab,var(--lav-d) 36%,var(--lav)) calc(160px*var(--glow)),
+      color-mix(in oklab,var(--lav) 55%,var(--ink)) calc(205px*var(--glow)),
+      color-mix(in oklab,var(--lav-d) 52%,var(--ink)) calc(250px*var(--glow)),
+      color-mix(in oklab,var(--lav-d) 28%,var(--ink)) calc(300px*var(--glow)),
+      var(--ink) calc(360px*var(--glow)),
+      var(--night) 100%)}
+}
+.s-sky-stars{display:block;width:100%;height:calc(100% - 180px*var(--glow))}
+/* 달 자리 — 크기 0인 자리 표시. 하늘 스크립트가 이 자리를 읽어 달을 그린다 */
+.s-sky-moon{position:absolute;left:min(80%,calc(50% + 432px));top:150px;width:0;height:0}
+/* 글자 한계선: 히어로의 글자는 새벽 띠가 시작되기 전에 끝난다. 그러데이션 정지점과 같은 배율(--glow)에 묶여 있다 — 한쪽만 바꾸지 않는다 */
+.s-hero{padding-bottom:calc(262px*var(--glow))}
+/* 안쪽 페이지의 제목(모든 글·분야·코너·검색·404·소개) */
+.s-hero .page-head{padding:var(--sp-6) 0 0}
+.s-hero .page-head .s-label{margin:0;min-height:18px;color:var(--on-night-2)}
+.s-hero .page-head h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.25;letter-spacing:-.025em;margin:6px 0 0;color:var(--on-night);text-wrap:balance}
+.s-hero .page-head p:not(.s-label){margin:10px 0 0;color:var(--on-night-2);font-size:var(--t-14);font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  :root{--glow:.46}
+  .s-sky-moon{left:calc(100% - 44px);top:127px}
+  .s-hero .page-head{padding-top:var(--sp-3)}
+  /* 달 밑으로 제목 줄이 들어가지 않게 — 휴대폰의 달은 틀 오른쪽 끝에서 37px 안쪽까지 온다. 긴 제목은 그 앞에서 줄을 바꾼다 */
+  .s-hero .page-head h1{font-size:30px;padding-right:48px}
+}
+/* 소개 — 주인공이 지평선에 선다. 여기에는 Base·NightSky의 요소를 건드리는 규칙만 둔다(이 페이지가 그리는 요소의 규칙은 about.astro의 scoped 블록).
+   글자 한계선 여백은 히어로가 아니라 그 안의 격자(.about-hero)가 진다 */
+.p-about{--glow:.9}
+.p-about .s-hero{padding-bottom:0}
+/* 달은 그림 왼쪽 끝에서 88px 왼쪽 — 달무리(반지름 85px)가 그림 상자에 닿지 않는다(1440px → 888, 820px → 436). 휴대폰은 안쪽 페이지 기본 자리 */
+@media (min-width:761px){ .p-about .s-sky-moon{left:calc(min(100% - 32px,50% + 520px) - 352px);top:160px} }
+@media (max-width:760px){
+  .p-about{--glow:.6}
+}
+
+/* ── 꼬리말 — 저녁으로 닫는다: 종이 → 새벽빛 → 밤 ── */
+.footer{margin-top:var(--sp-9);padding:112px 0 calc(36px + env(safe-area-inset-bottom,0px));color:var(--on-night-2);font-size:var(--t-14);
+  background:linear-gradient(to bottom,
+    var(--paper) 0,color-mix(in srgb,var(--s-dawn) 42%,var(--paper)) 7px,var(--s-dawn) 18px,color-mix(in srgb,var(--lav) 55%,var(--s-dawn)) 31px,var(--lav) 42px,
+    color-mix(in srgb,var(--lav-d) 36%,var(--lav)) 56px,color-mix(in srgb,var(--lav) 55%,var(--ink)) 72px,
+    color-mix(in srgb,var(--lav-d) 52%,var(--ink)) 88px,color-mix(in srgb,var(--lav-d) 28%,var(--ink)) 106px,var(--ink) 128px,var(--night) 100%)}
+.footer .f-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);gap:var(--gutter);padding-top:var(--sp-6)}
+.footer .name{font-size:20px;font-weight:700;color:var(--on-night);text-decoration:none}
+.footer .f-brand p{margin:12px 0 0;font-weight:500;font-size:var(--t-14);line-height:1.7;color:var(--on-night-2);max-width:26em}
+.footer .f-brand p span{display:block}
+.footer .f-brand p span + span{color:var(--on-night-3)}
+.footer a{color:var(--on-night-2);text-decoration:none}
+.footer a:hover{color:var(--on-night);text-decoration:underline;text-underline-offset:4px}
+.footer .f-cats{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--sp-5);align-content:start}
+.footer .f-cats a,.footer .f-util a{display:flex;align-items:center;justify-content:flex-start;min-height:34px}
+.footer .f-cats a{gap:8px}
+.footer .f-n{font-size:var(--t-12);color:var(--on-night-3);font-variant-numeric:tabular-nums}
+.footer .f-util{display:grid;align-content:start}
+/* 맨 아래 줄 — 위 선이 본문 틀의 내용 폭에만 그어지도록 안쪽 여백 대신 바깥 여백으로 틀에 맞춘다 */
+.footer .f-base{max-width:none;padding-inline:0;margin-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right));display:flex;justify-content:space-between;gap:16px;margin-top:var(--sp-7);padding-top:var(--sp-4);border-top:1px solid rgba(255,255,255,.12);font-size:var(--t-12);color:var(--on-night-3)}
+@media (min-width:761px){ .footer .f-base{margin-inline:max(32px,calc(50% - 520px),env(safe-area-inset-left)) max(32px,calc(50% - 520px),env(safe-area-inset-right))} }
+@media (max-width:760px){
+  .footer{margin-top:var(--sp-8)}
+  .footer .f-grid{grid-template-columns:1fr;gap:var(--sp-6);padding-top:var(--sp-5)}
+  .footer .f-cats{grid-template-columns:1fr 1fr 1fr;gap:0 var(--sp-4)}
+  .footer .f-cats a,.footer .f-util a{min-height:44px}
+  .footer .f-util{grid-template-columns:repeat(4,auto);justify-content:start;gap:0 var(--sp-5)}
+}
+
+/* ── 구역 머리 · 목록 · 서가 ── */
+/* 구역 머리(다른 분야 · 분야별 …) — 위 1px 잉크색 선 + 라벨 */
+.s-sec{margin-top:var(--sp-8)}
+.s-sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--ink);padding-top:14px}
+.s-sec-head h2{margin:0;font-family:var(--sans);font-size:var(--t-13);letter-spacing:.06em}
+.s-more{display:inline-block;padding:10px 0;margin:-10px 0;font-size:var(--t-14);font-weight:600;text-decoration:none}
+.s-more:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* 제목 조판 — 질문 줄(.s-tq)과 개념 줄(.s-tc). 첫 ' — '에서 두 줄로 가른다 */
+.s-tq{letter-spacing:-.02em}
+
+/* 목록 행 — 3칸: 칩 / 제목·요약 / 날짜. 분야 페이지(row-plain)는 칩 칸이 없어 제목이 페이지 제목과 같은 왼쪽 선에 선다 */
+.p-list main > .wrap{padding-top:var(--sp-2)}
+.rows{list-style:none;margin:var(--sp-2) 0 0;padding:0}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr) 132px;gap:0 var(--gutter);align-items:start;padding:22px 0 24px;border-bottom:1px solid var(--line)}
+.row-plain{grid-template-columns:minmax(0,1fr) 132px}
+.row-m{display:flex;align-items:center;gap:10px;margin:0;padding-top:4px}
+.row-b{min-width:0}
+.row .t{display:block;font-family:var(--serif);font-weight:700;text-decoration:none}
+.row .t .s-tq{display:block;font-size:var(--t-21);line-height:1.4;text-wrap:balance}
+.row .t .s-tc{display:block;margin-top:4px;font-size:15px;font-weight:500;line-height:1.5;letter-spacing:-.01em;color:var(--sub)}
+.row .t:hover .s-tq{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.row .d{margin-top:8px;max-width:42em;font-size:var(--t-14);line-height:1.65;color:var(--sub);text-wrap:pretty}
+.row .when{justify-self:end;padding-top:8px;font-size:var(--t-13);color:var(--sub);white-space:nowrap;font-variant-numeric:tabular-nums}
+/* 코너 — 순번(01, 02 …)은 제목 위 한 줄 */
+.numbered{counter-reset:n}
+.numbered .row{counter-increment:n}
+.numbered .row .row-b::before{content:counter(n,decimal-leading-zero);display:block;margin-bottom:2px;font-size:var(--t-12);font-weight:700;line-height:1.5;letter-spacing:.06em;color:var(--sub)}
+/* 순번 줄(18px + 2px)만큼 칩과 날짜를 내려 제목 첫 줄에 맞춘다 */
+@media (min-width:761px){ .numbered .row-m{padding-top:24px} .numbered .row .when{padding-top:28px} }
+@media (max-width:760px){
+  /* 마크업은 그대로 두고 grid 자리 이름으로 푼다: 첫 줄에 칩과 날짜, 둘째 줄에 제목·요약 */
+  .row{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"m when" "b b";column-gap:10px;align-items:center;padding:18px 0 20px}
+  .row-plain{grid-template-columns:minmax(0,1fr);grid-template-areas:"when" "b"}
+  .row-m{grid-area:m;padding-top:0}
+  .row-b{grid-area:b;margin-top:8px}
+  .row .when{grid-area:when;justify-self:start;padding-top:0;font-size:var(--t-12)}
+  .row .t .s-tq{font-size:20px;line-height:1.38}
+  .row .d{margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  /* 코너 순번은 메타 줄 맨 앞으로: 01 [칩] 날짜 */
+  .numbered .row .row-b::before{content:none}
+  .numbered .row .row-m::before{content:counter(n,decimal-leading-zero);font-size:var(--t-12);font-weight:700;line-height:1.5;letter-spacing:.06em;color:var(--sub)}
+}
+
+/* 분야별 서가 — 글 제목 색인(색면 타일이 아니다) */
+.shelf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 var(--gutter);margin-top:var(--sp-2)}
+.shelf{padding:18px 0 26px;border-bottom:1px solid var(--line)}
+.shelf-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px}
+.shelf-n{font-size:var(--t-12);color:var(--sub);font-variant-numeric:tabular-nums}
+.shelf ul{list-style:none;margin:0;padding:0}
+.shelf li a{display:block;padding:6px 0;font-family:var(--serif);font-weight:500;font-size:var(--t-16);line-height:1.5;letter-spacing:-.015em;text-decoration:none;text-wrap:pretty}
+.shelf li a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+@media (max-width:1023px){ .shelf-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:600px){ .shelf-grid{grid-template-columns:1fr} .shelf{padding:14px 0 18px} .shelf li a{padding:8px 0} }
+
+/* ── 1면 — 사이트 설명 · 머리기사 · 장면(구체와 주인공) · 최근 글 ── */
+/* 새벽 띠를 온전히(360px) 쓴다. 글자 한계선 여백은 히어로가 아니라 머리기사(.lead)가 진다 */
+.p-front{--glow:1}
+/* 1면 히어로는 가로로 끌면 하늘이 돈다(sky.ts) — 세로 스크롤과 두 손가락 확대는 브라우저에 그대로 둔다 */
+.p-front .s-hero{padding-bottom:0;touch-action:pan-y pinch-zoom}
+.p-front .s-hero.s-hero-plain{padding-bottom:calc(262px*var(--glow))}
+.s-standfirst{margin:var(--sp-6) 0 0;font-size:19px;font-weight:500;line-height:1.65;color:var(--on-night-2)}
+.s-standfirst span{display:block}
+.s-standfirst span:first-child{color:var(--on-night)}
+.s-hero .empty{margin:0;padding:var(--sp-9) 0 var(--sp-7);font-size:22px;text-align:center;color:var(--on-night-2)}
+.lead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding:var(--sp-7) 0 calc(262px*var(--glow));overflow-x:clip}
+.s-lead-text{min-width:0;align-self:center}
+.s-eyebrow{display:flex;align-items:center;gap:10px;margin:0}
+.s-eyebrow .s-label{color:var(--on-night-2)}
+.lead h1{margin:14px 0 20px;font-size:inherit;font-weight:700;line-height:inherit}
+.lead h1 a{display:block;color:var(--on-night);text-decoration:none}
+.lead h1 .s-tq{display:block;font-size:clamp(32px,3.3vw,46px);line-height:1.24;letter-spacing:-.025em;text-wrap:balance}
+.lead h1 .s-tc{display:block;margin-top:12px;font-size:22px;font-weight:500;line-height:1.45;letter-spacing:-.015em;color:var(--on-night-2)}
+.lead h1 a:hover .s-tq{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:8px}
+.lead .sum{margin:0;max-width:32em;font-size:var(--t-18);line-height:1.75;color:var(--on-night-2);text-wrap:pretty}
+.lead .when{margin:16px 0 0;font-size:var(--t-13);color:var(--on-night-2);font-variant-numeric:tabular-nums}
+/* 장면: 구체는 밤 속에 뜨고, 주인공은 지평선(새벽 띠) 위에 선다. 구체가 뒤, 주인공이 앞(포인터는 그림을 지나 구체로) */
+.s-scene{width:100%;margin:0 0 calc(-196px*var(--glow)) auto}
+.s-scene-fig{display:block;position:relative;width:48%;height:auto;margin:-52% 0 0 0;pointer-events:none;user-select:none;transform:rotate(var(--lean,0deg));transform-origin:50% 100%}
+.s-fig{position:relative;transform-origin:50% 100%;animation:s-breathe 4.2s ease-in-out infinite}
+.s-fig img{display:block;width:100%;height:auto}
+.s-fig-live{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+@keyframes s-breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.006,1.014) translateY(-1px)}}
+.s-lid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:s-blink 5.2s infinite}
+.s-lid-bot{animation-duration:6.7s;animation-delay:1.3s}
+@keyframes s-blink{0%,93%,100%{transform:scaleY(0)}95.5%{transform:scaleY(1)}}
+/* 움직임 예산: 말풍선 점·회로 빛은 9초에 한 번(2초 움직이고 7초 쉰다) */
+.s-nodes circle{fill:var(--paper);opacity:0;filter:url(#s-glow);animation:s-think 9s ease-in-out infinite}
+@keyframes s-think{0%,100%{opacity:0}4%{opacity:.8}10%{opacity:0}}
+.s-wires path{fill:none;stroke:var(--paper);stroke-width:6;stroke-linecap:round;stroke-dasharray:12 88;stroke-dashoffset:12;opacity:.9;filter:url(#s-glow);animation:s-flow 9s linear infinite}
+@keyframes s-flow{0%{stroke-dashoffset:12;opacity:0}3%{opacity:.85}21%{opacity:.85}25%,100%{stroke-dashoffset:-88;opacity:0}}
+/* 장면이 화면 밖이거나 탭이 숨으면 LeadScene 스크립트가 s-paused를 단다 */
+.s-paused .s-fig,.s-paused .s-lid,.s-paused .s-nodes circle,.s-paused .s-wires path{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.s-fig,.s-lid,.s-nodes circle,.s-wires path{animation:none}}
+/* 지식 구체 — 밤 바탕 위: 캔버스 뒤에 옅은 라벤더 빛. 점·선·낱말 색은 스크립트가 토큰(--s-orb-dot · --s-orb-word)에서 읽는다 */
+.s-orb{width:100%}
+.s-orb-canvas{display:block;width:100%;aspect-ratio:1;cursor:grab;touch-action:pan-y;background:radial-gradient(closest-side,rgba(200,192,244,.20),rgba(200,192,244,.07) 62%,transparent 74%)}
+.s-orb-canvas.s-orb-drag{cursor:grabbing}
+/* 최근 글 — 3열 격자. 칸 = 띠 · 제목 · 요약, 같은 행의 요약이 한 줄에 서도록 subgrid(row-gap:0을 빼면 줄 사이마다 40px 틈이 생긴다) */
+.front{padding-top:var(--sp-5)}
+.front > .s-sec:first-child{margin-top:var(--sp-4)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px var(--gutter);margin-top:20px}
+.cell{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:0;padding:0}
+.cell h3{margin:16px 0 10px;font-size:inherit;font-weight:700;line-height:inherit}
+.cell h3 a{display:block;text-decoration:none}
+.cell h3 .s-tq{display:block;font-size:var(--t-21);line-height:1.4;text-wrap:balance}
+.cell h3 .s-tc{display:block;margin-top:4px;font-size:15px;font-weight:500;line-height:1.5;letter-spacing:-.01em;color:var(--sub)}
+.cell h3 a:hover .s-tq{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.cell .sum{margin:0;font-size:var(--t-14);line-height:1.7;color:var(--sub);text-wrap:pretty;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:1023px){
+  .lead{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)}
+  .lead h1 .s-tc{font-size:19px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .p-front{--glow:.6}
+  /* 휴대폰 1면의 달은 사이트 설명 아래, 머리기사 위 줄 높이로 내려온다 */
+  .p-front .s-sky-moon{top:189px}
+  .s-standfirst{margin-top:var(--sp-3);font-size:14.5px;line-height:1.6}
+  /* 첫 화면(390×664)에 설명 · 제목 · 주인공 얼굴이 함께 들어오게: 글 → 장면 순서, 장면은 날짜 줄 위로 32px 끌어올린다 */
+  .lead{grid-template-columns:1fr;gap:0;padding:var(--sp-4) 0 calc(262px*var(--glow))}
+  .lead h1{margin:10px 0 14px}
+  /* 달 밑으로 제목 줄이 들어가지 않게 — 달은 틀 오른쪽 끝에서 37px 안쪽까지 온다(안쪽 페이지 제목과 같은 여백) */
+  .lead h1 .s-tq{font-size:30px;line-height:1.26;padding-right:48px}
+  .lead h1 .s-tc{margin-top:8px;font-size:17px}
+  .lead .sum{font-size:15px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .lead .when{margin-top:8px}
+  .s-scene{width:min(300px,84%);margin:-32px -6px calc(-200px*var(--glow)) auto}
+  .grid{grid-template-columns:1fr;gap:28px 0;margin-top:var(--sp-4)}
+  .cell{display:block}
+  .cell h3{margin:14px 0 8px}
+  .cell h3 .s-tq{font-size:20px;line-height:1.38}
+  .cell .sum{-webkit-line-clamp:2}
+}
+
+/* ── 글 틀 — 글머리(밤 위) · 읽기 장치 · 글 끝. 본문 조판은 post.css(.s-post .post-body …)에 있다 ── */
+/* 글 칸: 글머리 · 본문 · 글 끝이 같은 왼쪽 선에 선다(761px 이상 652px → 글줄 612px) */
+.s-post-head{max-width:720px;margin:0 auto;padding:var(--sp-6) 0 0;padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right))}
+.wrap-narrow{max-width:720px;margin:0 auto;padding:0 20px}
+/* 글 끝(글쓴이 · 꼬리표 줄 · 같은 분야 글 · 이전·다음)도 글머리·본문과 같은 좌우 여백 — 눕힌 노치 휴대폰(안전 영역)에서도 왼쪽 선이 맞는다 */
+.p-post .wrap-narrow{padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right))}
+@media (min-width:761px){
+  .s-post-head,.p-post .wrap-narrow{max-width:652px}
+  /* 달 밑으로 제목 줄이 들어가지 않게 — 761~1076px에서는 달(하늘 폭의 80%)이 글 칸 오른쪽 끝 위에 온다. 달 왼쪽 10px 앞에서 줄을 바꾼다(1110px부터 0) */
+  .s-post-head h1{padding-right:max(0px,calc(333px - 30vw))}
+}
+/* 글머리 — 칩 + 코너 이름 / 제목(질문 줄 · 개념 줄) / 메타 줄 */
+.s-post-k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0}
+.s-post-kicker{font-size:var(--t-12);font-weight:600;line-height:1.5;letter-spacing:.06em;color:var(--on-night-3)}
+/* 꾸밈이 든 제목은 가르지 않고 그대로 넣으므로 h1 자체에도 기본 크기를 준다 */
+.s-post-head h1{margin:14px 0 0;font-size:var(--t-36);font-weight:700;line-height:1.3;letter-spacing:-.025em;color:var(--on-night);text-wrap:balance}
+.s-post-head h1 .s-tq{display:block;letter-spacing:-.025em}
+.s-post-head h1 .s-tc{display:block;margin-top:10px;font-size:20px;font-weight:500;line-height:1.45;letter-spacing:-.015em;color:var(--on-night-2)}
+.s-post-meta{margin:18px 0 0;font-size:var(--t-13);line-height:1.5;color:var(--on-night-2);font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .s-post-head{padding-top:var(--sp-4)}
+  /* 휴대폰의 달은 틀 오른쪽 끝에서 37px 안쪽까지 온다 — 안쪽 페이지 제목·1면 머리기사와 같은 여백으로 그 앞에서 줄을 바꾼다 */
+  .s-post-head h1{margin-top:12px;font-size:26px;line-height:1.34;letter-spacing:-.03em;padding-right:48px}
+  .s-post-head h1 .s-tq{letter-spacing:-.03em}
+  .s-post-head h1 .s-tc{margin-top:8px;font-size:16px}
+  .s-post-meta{margin-top:14px}
+}
+
+/* 읽기 진행 막대 */
+.s-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:20;pointer-events:none}
+.s-progress i{display:block;height:100%;background:var(--s-accent);transform-origin:0 50%;transform:scaleX(0)}
+/* 목차로 건너뛴 자리 — 넓은 화면 값. 읽기 띠가 뜨는 폭(1319px 이하)의 값은 post.css에 있다 */
+.post-body h2[id]{scroll-margin-top:24px}
+/* 목차 — 옆 목차(1320px 이상)와 읽기 띠의 접는 목차 */
+.s-toc{display:none}
+.s-toc a,.s-toc-fold a{display:block;text-decoration:none;color:var(--sub);font-size:var(--t-13);line-height:1.5}
+.s-toc a:hover,.s-toc-fold a:hover{color:var(--ink)}
+.s-toc .s-label{margin:0 0 10px;padding-top:12px;border-top:1px solid var(--ink)}
+.s-toc a{padding:6px 0 6px 14px;border-left:1px solid var(--line)}
+.s-toc a[aria-current]{padding-left:13px;border-left:2px solid var(--s-accent);color:var(--ink);font-weight:600}
+/* 읽기 띠 — 1319px 이하. 밤 구역이 화면 위로 지나가면 내려오고(.on) 꼬리말에서 걷힌다. 왼쪽에 지금 읽는 절, 오른쪽에 목차 단추 */
+.s-readbar{position:fixed;top:0;left:0;right:0;z-index:15;height:46px;display:flex;align-items:center;gap:12px;
+  padding:0 max(6px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left));
+  background:color-mix(in srgb,var(--night) 94%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--on-night);
+  transform:translateY(-100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.s-readbar.on{transform:none;visibility:visible}
+.s-readbar-title{flex:1;min-width:0;font-family:var(--serif);font-weight:500;font-size:var(--t-14);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--on-night-2)}
+.s-toc-fold{flex:none}
+.s-toc-fold summary{display:flex;align-items:center;gap:8px;min-height:46px;padding:0 14px;list-style:none;cursor:pointer;color:var(--on-night);font-size:var(--t-13);font-weight:600}
+.s-toc-fold summary::-webkit-details-marker{display:none}
+/* 세 줄 그림 */
+.s-toc-fold summary::before{content:"";width:14px;height:10px;border-block:1.5px solid currentColor;background:linear-gradient(currentColor,currentColor) 0 50%/100% 1.5px no-repeat}
+.s-toc-fold summary:focus-visible{outline-color:var(--butter);outline-offset:-4px}
+.s-toc-fold nav{position:fixed;top:52px;right:max(8px,env(safe-area-inset-right));width:min(320px,calc(100vw - 16px));max-height:70vh;overflow:auto;padding:8px 18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 24px rgba(51,49,63,.14)}
+.s-toc-fold a{padding:11px 0 11px 12px;font-size:var(--t-14);border-left:2px solid transparent}
+.s-toc-fold a[aria-current]{border-left-color:var(--s-accent);color:var(--ink);font-weight:600}
+@media (min-width:1320px){
+  .s-post{display:grid;grid-template-columns:1fr min(720px,100%) 1fr}
+  .s-post > .post-body{grid-column:2;grid-row:1;min-width:0}
+  /* 위 34px — 목차 머리의 윗선이 본문 첫 줄과 맞는다 */
+  .s-toc{display:block;grid-column:3;grid-row:1;position:sticky;top:40px;align-self:start;max-width:220px;margin:34px 0 0 36px}
+  .s-readbar{display:none}
+}
+@media (prefers-reduced-motion:reduce){ .s-readbar{transition:none} }
+
+/* 각주 말풍선 — 종이 위에 뜬다. 머리 '각주 N'은 분야 색 글자 */
+.s-note{position:absolute;z-index:30;width:min(320px,calc(100vw - 32px));background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:var(--t-14);line-height:1.6;box-shadow:0 8px 24px rgba(51,49,63,.14);word-break:keep-all;overflow-wrap:anywhere}
+.s-note b{display:block;margin-bottom:4px;font-size:var(--t-12);letter-spacing:.06em;color:var(--s-accent-ink)}
+.s-note a{color:var(--sky-ink);text-decoration:underline;text-underline-offset:3px}
+.s-note:focus,.s-note:focus-visible{outline:none}
+/* 터치 기기: 읽던 줄을 가리지 않게 화면 바닥에 붙는 시트(자리는 여기서 정한다 — 스크립트는 left·top을 넣지 않는다) */
+@media (hover:none){
+  .s-note{position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;max-height:50vh;overflow:auto;border-radius:16px 16px 0 0;border-inline:0;border-bottom:0;
+    padding:18px 20px calc(18px + env(safe-area-inset-bottom,0px));font-size:15px;line-height:1.6;box-shadow:0 -8px 28px rgba(33,32,41,.22)}
+  /* 링크의 터치 영역만 넓힌다 — 줄 간격은 그대로 */
+  .s-note a{display:inline-block;padding:8px 0;margin:-8px 0}
+}
+
+/* 글 끝 — 글쓴이 → 분야·코너 → 같은 분야 글 → 이전·다음 → 댓글. 모두 괘선 문법 */
+/* 글쓴이 상자: 위 1px 잉크색 선, 얼굴 56px */
+.s-author{display:flex;align-items:center;gap:16px;margin-top:var(--sp-4);padding:20px 0 0;border-top:1px solid var(--ink)}
+.s-author-face{flex:none;width:56px;height:56px;border-radius:50%;background:var(--sky);overflow:hidden}
+.s-author-face img{display:block;width:100%;height:auto;margin-top:5px}
+.s-author p{margin:0}
+.s-author-name{font-size:17px;font-weight:700}
+.s-author-name a{text-decoration:none}
+.s-author-name a:hover{text-decoration:underline;text-underline-offset:4px}
+.s-author-bio{margin-top:4px;font-size:var(--t-14);line-height:1.65;color:var(--sub)}
+.s-author-credit{margin-top:2px;font-size:var(--t-12)}
+.post-after{margin-top:var(--sp-6)}
+/* 꼬리표 줄 — 칩 + 코너 링크 */
+.post-after .tags{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0}
+.post-after .tags .s-label{padding:8px 0;margin:-8px 0;color:var(--sub);text-decoration:none}
+.post-after .tags .s-label:hover{text-decoration:underline;text-underline-offset:3px}
+/* 같은 분야 글 — 모든 폭에서 1칸 꼴(날짜가 제목 위) */
+.post-after .s-sec{margin-top:var(--sp-7)}
+.post-after .row{grid-template-columns:minmax(0,1fr);grid-template-areas:"when" "b";padding:18px 0 20px}
+.post-after .row .when{grid-area:when;justify-self:start;padding-top:0;font-size:var(--t-12)}
+.post-after .row-b{grid-area:b;margin-top:8px}
+.post-after .row .d{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* 이전·다음 — 두 칸, 가운데 세로선. 오른쪽 칸도 왼쪽 맞춤 */
+.pn{display:grid;grid-template-columns:1fr 1fr;margin:var(--sp-7) 0 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.pn a{display:flex;flex-direction:column;gap:8px;min-width:0;padding:18px 0 22px;text-decoration:none}
+.pn a:first-child{padding-right:var(--gutter)}
+.pn a.r{padding-left:var(--gutter);border-left:1px solid var(--line)}
+.pn .s-tq{display:block;font-size:17px;font-weight:700;line-height:1.45;text-wrap:balance}
+.pn .s-tc{display:block;margin-top:4px;font-size:var(--t-14);font-weight:500;line-height:1.5;letter-spacing:-.01em;color:var(--sub)}
+.pn a:hover .s-tq{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+@media (max-width:600px){
+  .pn{grid-template-columns:1fr}
+  .pn a:first-child{padding-right:0}
+  .pn a.r{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  /* 이전 글이 없으면 빈 칸을 걷고, 다음 글 위에 선을 겹쳐 긋지 않는다 */
+  .pn > span{display:none}
+  .pn > span + a.r{border-top:0}
+}
+.comments{margin-top:var(--sp-7)}
+/* 터치 기기: 누르는 동안 제목 링크가 옅어진다 */
+@media (hover:none){ .row .t:active,.cell h3 a:active,.lead h1 a:active,.pn a:active,.shelf li a:active{opacity:.6} }
+
+/* ── 검색 · 404 — 본문 칸은 머리띠와 같은 왼쪽 선에 서고 내용만 680px로 좁힌다 ── */
+.s-narrow-left > *{max-width:680px}
+.p-search main{min-height:max(300px,38vh)}
+.p-search #search{margin-top:28px}
+/* 입력 글자 500 · 자리 글자 400(자리 글자가 이미 입력한 검색어처럼 보이지 않게) */
+.p-search .pagefind-ui .pagefind-ui__search-input{font-weight:500}
+.p-search .pagefind-ui .pagefind-ui__search-input::placeholder{font-weight:400;color:var(--sub);opacity:1}
+.p-404 .s-narrow-left p{margin:var(--sp-5) 0 0;font-size:var(--t-16)}
+.p-404 .s-narrow-left a{display:inline-block;padding:10px 0;font-weight:600;text-underline-offset:4px}
+@media (max-width:760px){ .p-search #search{margin-top:20px} }
+
+/* ── 화면 전환 — 목록의 제목이 글 페이지 제목 자리로 이어진다 ── */
+@view-transition{navigation:auto}
+::view-transition-group(*){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+
+/* ── 인쇄(틀) — 하늘·머리띠 메뉴·읽기 장치·꼬리말을 걷고 밤 구역의 글자를 검정으로. 본문의 인쇄 규칙은 post.css 끝에 있다 ── */
+@media print{
+  .s-sky,.masthead nav,.s-progress,.s-toc,.s-toc-fold,.s-readbar,.pn,.comments,.s-note,.footer,.s-skip{display:none !important}
+  html,body{background:#fff}
+  /* 밤 구역의 글자는 종이에서 전부 검정 — 글머리(제목·개념 줄·코너·메타·칩)뿐 아니라 안쪽 페이지의 설명 줄과 1면 머리기사도 흰 종이 위에서 읽혀야 한다 */
+  .s-top,.s-top *{color:#000 !important}
+  .s-hero{padding-bottom:16px}
+  body{font-size:11pt}
+  @page{margin:18mm 16mm}
+}

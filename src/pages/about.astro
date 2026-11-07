@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro'
+import { Image } from 'astro:assets'
+import fullNight from '../assets/character/full-night.png'
+import { SITE } from '../config/site'
+---
+<Base title="소개" bodyClass="p-about">
+  <div class="wrap" slot="hero">
+    <!-- 주인공이 지평선에 선다. 그림은 밤 구역에 서므로 1면과 같은, 원반을 지운 판이다 -->
+    <div class="about-hero">
+      <div>
+        <header class="page-head"><h1>소개</h1></header>
+        <blockquote class="s-about-quote"><p>책은 얼어붙은 바다를 깨뜨리는 도끼여야 한다.</p><p>— 프란츠 카프카</p></blockquote>
+      </div>
+      <figure class="s-about-fig">
+        <Image src={fullNight} alt={`${SITE.author} 캐릭터 그림`} widths={[264, 528, 723]} sizes="(max-width:760px) 200px, 264px" />
+        <figcaption>{SITE.artCredit}</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="wrap about">
+    <div class="about-text">
+      <!-- 소개 문장은 사용자 노션(반창모 페이지 Vision·자기소개) 원문 그대로. 직장·지역·구체 경력은 넣지 않는다(직업군 '교육자'는 사용자 허락). -->
+      <p class="s-serif"><b>창의적 개인에서 널리 세상을 이롭게 하는 시민으로</b></p>
+      <p>창의적인 개인이 넘쳐나는 세상을 꿈꿉니다. 누구나 창작자가 되어 서로 존중하고 소통하는 세상을 만들고자 합니다. 궁극적으로 창작자, 예술가가 가득한 시민 사회는 현대의 많은 사회 문제를 해결하는 교두보가 될 것임을 확신합니다.</p>
+      <p>교육자, 메이커, 프로그래머, 철학하는 사람</p>
+    </div>
+  </div>
+</Base>
+<style>
+/* 이 페이지가 직접 그리는 요소의 규칙만 둔다. Base·NightSky의 요소(body.p-about · .s-top · .s-hero · .s-sky-moon)에는
+   이 페이지의 cid가 붙지 않아 여기서는 잡히지 않는다 — 그 규칙(--glow · 히어로 여백 · 달 자리)은 site.css의 밤 구역 구획에 있다 */
+.about-hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:calc(262px*var(--glow))}
+/* 제목은 다른 안쪽 페이지와 같은 높이에서 시작한다(그림 칸이 더 길어져도 내려가지 않게) */
+.about-hero > div{align-self:start}
+.s-about-quote{margin:var(--sp-6) 0 0;padding:0;border:0;max-width:22em}
+.s-about-quote p{margin:0;font-family:var(--serif);font-weight:500;font-size:26px;line-height:1.5;letter-spacing:-.02em;color:var(--on-night);text-wrap:balance}
+.s-about-quote p + p{margin-top:12px;font-family:var(--sans);font-weight:400;font-size:var(--t-14);letter-spacing:0;color:var(--on-night-2)}
+/* 발이 새벽 띠 위에 놓인다 — 그림은 글자 한계선 아래로 236px × --glow 내려선다 */
+.s-about-fig{margin:var(--sp-7) 0 calc(-236px*var(--glow)) auto;width:min(264px,100%);text-align:center}
+.s-about-fig img{display:block;width:100%;height:auto}
+.s-about-fig figcaption{margin-top:2px;font-size:var(--t-12);color:var(--sub)}
+.about{padding-top:var(--sp-6)}
+.about-text{max-width:612px}
+.about-text p{font-size:var(--t-18);line-height:1.85;margin:20px 0 0;text-wrap:pretty}
+.about-text > p:first-child{margin-top:0;font-size:var(--t-24);line-height:1.45;letter-spacing:-.02em;text-wrap:balance}
+.about-text > p:last-child{font-size:var(--t-14);color:var(--sub);border-top:1px solid var(--line);padding-top:16px;margin-top:32px;letter-spacing:.02em}
+@media (max-width:760px){
+  .about-hero{grid-template-columns:1fr;gap:0}
+  .s-about-quote{margin-top:var(--sp-4)}
+  .s-about-quote p:first-child{font-size:21px}
+  .s-about-fig{width:200px;margin:var(--sp-4) 0 calc(-236px*var(--glow)) auto}
+  .about-text p{font-size:17px}
+  .about-text > p:first-child{font-size:21px}
+}
+</style>

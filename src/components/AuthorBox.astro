@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets'
+import face from '../assets/character/face.png'
+import { SITE } from '../config/site'
+import { url } from '../lib/url'
+// 글 끝, 본문 바로 아래 — 누가 썼는지를 얼굴 그림으로 보여 준다.
+---
+<div class="wrap-narrow"><aside class="s-author" aria-label="글쓴이">
+  <span class="s-author-face"><Image src={face} alt="" widths={[56, 112, 168]} sizes="56px" /></span>
+  <div>
+    <p class="s-author-name s-serif"><a href={url('about')}>{SITE.author}</a></p>
+    <p class="s-author-bio">{SITE.bio}</p>
+    <p class="s-author-credit s-muted">{SITE.artCredit}</p>
+  </div>
+</aside></div>
