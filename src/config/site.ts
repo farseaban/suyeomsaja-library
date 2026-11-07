@@ -12,17 +12,17 @@ export type PaletteKey = (typeof PALETTE)[number]
 export type Category = { slug: string; name: string; color: PaletteKey }
 
 // 분야 추가·수정은 이 목록 한 곳에서 한다. 순서는 머리띠·꼬리말·서가에 나오는 순서다.
-// 색은 분야마다 명시한다 — 뜻이 가까운 분야끼리 한 색(철학·심리 / 경제·기술·AI / 역사·교육).
+// 분야는 학문 이름이 아니라 독자가 얻으러 오는 것으로 묶는다(서점의 생활 제안형 진열).
+// 이름만 보고 안에 무엇이 있을지 맞힐 수 있어야 한다 — 맞지 않는 글은 다른 서가로 보낸다.
+// 색은 분야마다 명시한다 — 뜻이 가까운 분야끼리 한 색(돈·AI).
 const CATEGORY_LIST: [slug: string, name: string, color: PaletteKey][] = [
-  ['philosophy', '철학', 'lav'],
-  ['history', '역사', 'butter'],
-  ['literature', '문학', 'peach'],
-  ['economy', '경제', 'sky'],
-  ['education', '교육', 'butter'],
-  ['nature', '생물·자연', 'mint'],
-  ['psychology', '심리', 'lav'],
-  ['tech', '기술·AI', 'sky'],
-  ['art', '예술', 'rose'],
+  ['fact-check', '진실 혹은 거짓', 'peach'],
+  ['learning', '일과 학습의 기술', 'butter'],
+  ['philosophy', '철학의 아름다움', 'lav'],
+  ['classics', '다시 보는 고전과 예술', 'rose'],
+  ['economy', '돈과 세상의 원리', 'sky'],
+  ['tech', 'AI와 기술의 현재', 'sky'],
+  ['nature', '인류와 생명의 수수께끼', 'mint'],
 ]
 
 export const CATEGORIES: Category[] = CATEGORY_LIST.map(([slug, name, color]) => ({ slug, name, color }))

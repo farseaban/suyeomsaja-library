@@ -68,11 +68,11 @@ describe('build output', () => {
     // 대표 글 위 줄 = 그 분야의 칩 + '새 글' 라벨
     const eye = parse(html('index.html')).querySelector('.s-hero .lead .s-eyebrow')!
     const chip = eye.querySelector('a.s-chip')!
-    expect(chip.text).toBe('생물·자연')
+    expect(chip.text).toBe('인류와 생명의 수수께끼')
     expect(chip.getAttribute('class')).toBe('s-chip s-cat-mint')
     expect(chip.getAttribute('href')).toBe(`${BASE}category/nature/`)
     expect(eye.querySelector('.s-label')!.text).toBe('새 글')
-    expect(eye.text.replace(/\s+/g, ' ').trim()).toBe('생물·자연 새 글')
+    expect(eye.text.replace(/\s+/g, ' ').trim()).toBe('인류와 생명의 수수께끼 새 글')
   })
   it('leaks no personal email, ads or trackers, and no comments without config', () => {
     const all = files.filter((f) => /\.(html|xml|js|css)$/.test(f)).map((f) => readFileSync(f, 'utf8')).join('\n')
@@ -258,7 +258,7 @@ describe('site frame', () => {
     expect(cur('all/index.html', '.util a')).toEqual(['모든 글'])
     expect(cur('about/index.html', '.util a')).toEqual(['소개'])
     expect(parse(html('search/index.html')).querySelector('.masthead .util a.search')!.getAttribute('aria-current')).toBe('page')
-    expect(cur('category/economy/index.html', '.cats a')).toEqual(['경제'])
+    expect(cur('category/economy/index.html', '.cats a')).toEqual(['돈과 세상의 원리'])
     expect(cur('category/economy/index.html', '.util a')).toEqual([])
     expect(cur('index.html', 'a')).toEqual([])
     expect(cur('posts/sample-econ/index.html', 'a')).toEqual([])
@@ -690,7 +690,7 @@ describe('knowledge sphere', () => {
     expect(cv).toHaveLength(1)
     expect(cv[0].getAttribute('aria-hidden')).toBe('true')
     const fields = JSON.parse(cv[0].getAttribute('data-fields')!)
-    expect(fields).toHaveLength(9)
+    expect(fields).toHaveLength(7)
     expect(fields.find((f: { slug: string }) => f.slug === 'economy').words).toContain('공정가치')
     for (const f of files.filter((f) => f.endsWith('.html') && !f.endsWith(`${OUT}/index.html`)))
       expect(readFileSync(f, 'utf8')).not.toContain('s-orb')
@@ -847,7 +847,7 @@ describe('post page', () => {
   it('closes the post with the field chip and the corner, then the neighbours with split titles', () => {
     const root = post('sample-philo')
     const tags = root.querySelector('.post-after .tags')!
-    expect(tags.querySelector('a.s-chip.s-cat-lav')!.text).toBe('철학')
+    expect(tags.querySelector('a.s-chip.s-cat-lav')!.text).toBe('철학의 아름다움')
     const pn = root.querySelectorAll('.post-after nav.pn a')
     expect(pn).toHaveLength(2)
     expect(pn.map((a) => a.querySelector('.s-tq')!.text)).toEqual(['꽃은 번식을 어떻게 설계하는가', '장부의 손실을 읽는 법'])

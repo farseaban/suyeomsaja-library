@@ -27,19 +27,17 @@ describe('loadPosts', () => {
 })
 
 describe('field colours', () => {
-  // 설계서 §4.4 — 순번이 아니라 분야마다 명시한다. 뜻이 가까운 분야끼리 한 색.
+  // 분야는 학문 이름이 아니라 독자가 얻으러 오는 것으로 묶는다(11/07 사용자 결정). 색은 분야마다 명시한다.
   const TABLE: [slug: string, name: string, color: string][] = [
-    ['philosophy', '철학', 'lav'],
-    ['history', '역사', 'butter'],
-    ['literature', '문학', 'peach'],
-    ['economy', '경제', 'sky'],
-    ['education', '교육', 'butter'],
-    ['nature', '생물·자연', 'mint'],
-    ['psychology', '심리', 'lav'],
-    ['tech', '기술·AI', 'sky'],
-    ['art', '예술', 'rose'],
+    ['fact-check', '진실 혹은 거짓', 'peach'],
+    ['learning', '일과 학습의 기술', 'butter'],
+    ['philosophy', '철학의 아름다움', 'lav'],
+    ['classics', '다시 보는 고전과 예술', 'rose'],
+    ['economy', '돈과 세상의 원리', 'sky'],
+    ['tech', 'AI와 기술의 현재', 'sky'],
+    ['nature', '인류와 생명의 수수께끼', 'mint'],
   ]
-  it('assigns each of the nine fields its colour, in the same menu order', () => {
+  it('assigns each of the seven shelves its colour, in the same menu order', () => {
     expect(CATEGORIES.map((c) => [c.slug, c.name, c.color])).toEqual(TABLE)
   })
   it('uses palette colours only', () => {
@@ -57,7 +55,7 @@ describe('pickFeatured', () => {
 
 describe('lists', () => {
   it('shows only categories with posts, in config order', () => {
-    expect(activeCategories(posts).map((c) => c.name)).toEqual(['철학', '경제', '생물·자연'])
+    expect(activeCategories(posts).map((c) => c.name)).toEqual(['철학의 아름다움', '돈과 세상의 원리', '인류와 생명의 수수께끼'])
   })
   it('collects series names', () => expect(seriesNames(posts)).toEqual(['숫자 읽기 · 사례로 읽기', '자연 읽기']))
   it('finds date neighbors', () => {

@@ -13,7 +13,7 @@ describe('joinBase', () => {
 })
 
 describe('CATEGORIES', () => {
-  it('cycles the six pastel pairs', () => expect(CATEGORIES[6].color).toBe('lav'))
+  it('gives the seventh shelf its own pastel pair', () => expect(CATEGORIES[6].color).toBe('mint'))
   it('has unique names and slugs', () => {
     expect(new Set(CATEGORIES.map((c) => c.name)).size).toBe(CATEGORIES.length)
     expect(new Set(CATEGORIES.map((c) => c.slug)).size).toBe(CATEGORIES.length)
