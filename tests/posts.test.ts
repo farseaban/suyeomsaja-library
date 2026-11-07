@@ -26,6 +26,14 @@ describe('loadPosts', () => {
   it('returns [] for a missing folder', () => expect(loadPosts('no/such/dir')).toEqual([]))
 })
 
+// 서가 이름이 무엇을 얻는 글인지 말해 준다. '몸 읽기 · 통념 깨기' 같은 연재 표시는 그 위에 추상어를 다시 얹어
+// 뺐다(11/07 사용자 결정). 기능은 진짜 연재를 시작할 때를 위해 남긴다 — 그때 이 시험을 고친다.
+describe('published posts', () => {
+  it('carry no series kicker', () => {
+    expect(loadPosts().filter((p) => p.kicker !== null).map((p) => `${p.slug}: ${p.kicker}`)).toEqual([])
+  })
+})
+
 describe('field colours', () => {
   // 분야는 학문 이름이 아니라 독자가 얻으러 오는 것으로 묶는다(11/07 사용자 결정). 색은 분야마다 명시한다.
   const TABLE: [slug: string, name: string, color: string][] = [
