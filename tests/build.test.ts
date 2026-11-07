@@ -653,33 +653,23 @@ describe('front page', () => {
     for (const fn of ['dragAngle', 'coast', 'touchDrags', 'bandR', 'textPress']) expect(src, fn).toContain(fn)
     expect(src).not.toMatch(/classList\.contains\('p-front'\)|body\.className/)
   })
-  it('stands the figure on the horizon after the text on phones — no reordering, no sun behind', () => {
+  it('sets the sphere after the text on phones — no reordering, no sun behind', () => {
     const css = siteCss()
     expect(css).not.toMatch(/\.s-scene\{[^}]*order:/)
     expect(rules(css).filter((r) => r.sel.startsWith('.s-scene::before'))).toEqual([])
     expect(of('.s-scene')).toMatch(/margin:00calc\(-196px\*var\(--glow\)\)auto/)
     expect(of('.s-scene', phone)).toMatch(/width:min\(300px,84%\)/)
     expect(of('.s-scene', phone)).toMatch(/margin:-32px-6pxcalc\(-200px\*var\(--glow\)\)auto/)
-    expect(of('.s-scene-fig')).toMatch(/width:48%/)
-    expect(of('.s-scene-fig')).toMatch(/margin:-52%000?(;|$)/)
     // 휴대폰 첫 화면: 요약은 3줄에서 자른다
     expect(of('.lead .sum', phone)).toMatch(/-webkit-line-clamp:3/)
   })
-  it('lights the sphere for the night ground and slows the circuit lights to once in nine seconds', () => {
+  it('lights the sphere for the night ground', () => {
     expect(of('.s-orb-canvas')).toMatch(/background:radial-gradient\(closest-side,rgba\(200,192,244,\.2\d?\),rgba\(200,192,244,\.07\)62%,transparent74%\)/)
-    const css = siteCss()
-    expect(css).toMatch(/\.s-nodes circle\{[^}]*animation:s-think 9s/)
-    expect(css).toMatch(/\.s-wires path\{[^}]*animation:s-flow 9s/)
     const src = readFileSync('src/scripts/orb.ts', 'utf8')
     expect(src).toContain("'--s-orb-dot'")
     expect(src).toContain("'--s-orb-word'")
     expect(src).toContain('ORB_SPIN')
     expect(src).not.toMatch(/AUTO_SPIN\s*=\s*0\.0022/)
-    // 주인공 기울기는 ±1.5°, 구체와 같은 자전 기준값을 쓴다
-    const scene = readFileSync('src/components/LeadScene.astro', 'utf8')
-    expect(scene).toContain('ORB_SPIN')
-    expect(scene).not.toContain('0.0022')
-    expect(scene).toMatch(/Math\.max\(-1\.5, Math\.min\(1\.5,/)
   })
 })
 
@@ -736,23 +726,20 @@ describe('reading aids', () => {
 })
 
 describe('front-page scene', () => {
-  it('sets the standing figure in front of the sphere, sized, with alt text', () => {
+  // 1면의 캐릭터는 전문성을 해친다는 지적(11/07) — 그림은 소개에만 둔다. 구체는 낱말을 피할 자리 없이 온전히 쓴다.
+  it('shows the sphere alone, with no character drawing on the front page', () => {
     const root = parse(html('index.html'))
-    const fig = root.querySelector('.lead .s-scene .s-scene-fig img')!
-    expect(fig.getAttribute('alt')).toBe('로봇 곁에 선 반창모')
-    expect(fig.getAttribute('width')).toBeTruthy()
-    expect(fig.getAttribute('height')).toBeTruthy()
-    expect(root.querySelector('.s-scene canvas.s-orb-canvas')!.getAttribute('data-avoid')).toBe('0,0.48,0.48,1')
-    // 밤 구역에 서는 그림은 원반을 지운 판이다
-    expect(fig.getAttribute('src')).toContain('full-night')
-    expect(fig.getAttribute('srcset')).toContain('full-night')
-    expect(html('index.html')).not.toContain('full-lead')
+    expect(root.querySelector('.lead .s-scene canvas.s-orb-canvas')).not.toBeNull()
+    expect(root.querySelector('.s-scene canvas.s-orb-canvas')!.getAttribute('data-avoid')).toBeUndefined()
+    expect(root.querySelector('.lead img')).toBeNull()
+    expect(html('index.html')).not.toMatch(/full-night|full-lead|s-scene-fig|s-fig-live/)
   })
   it('keeps the glow from widening the page on phones', () => {
     expect(siteCss()).toMatch(/\.lead\{[^}]*overflow-x:clip/)
   })
-  it('lets a drag on the figure reach the sphere', () => {
-    expect(siteCss()).toMatch(/\.s-scene-fig\{[^}]*pointer-events:none/)
+  it('carries no leftover rules or script for the figure', () => {
+    expect(siteCss()).not.toMatch(/\.s-scene-fig|\.s-fig-live|\.s-lid|\.s-nodes|\.s-wires|s-breathe|s-blink/)
+    expect(readFileSync('src/components/LeadScene.astro', 'utf8')).not.toMatch(/<script|full-night/)
   })
 })
 
@@ -1018,11 +1005,6 @@ describe('share preview', () => {
   })
 })
 
-describe('living figure', () => {
-  it('pauses the figure animations with a class the scene script toggles off-screen', () => {
-    expect(siteCss()).toMatch(/\.s-paused[^{]*\{[^}]*animation-play-state:\s*paused/)
-  })
-})
 
 describe('about page', () => {
   const about = () => parse(html('about/index.html'))
