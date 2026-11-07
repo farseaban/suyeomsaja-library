@@ -1037,20 +1037,20 @@ describe('about page', () => {
   const of = (sel: string, media = '') => rules(siteCss()).filter((r) => r.sel === sel && r.media === media).map((r) => r.body).join(';')
   const phone = 'media(max-width:760px)'
 
-  it('lifts the Kafka line onto the night, beside the page title', () => {
+  it('lifts who the author is onto the night, beside the page title, in place of the Kafka line', () => {
     const root = about()
-    const quote = root.querySelector('.s-top .s-hero > .wrap > .about-hero blockquote.s-about-quote')!
+    const quote = root.querySelector('.s-top .s-hero > .wrap > .about-hero .s-about-quote')!
     expect(quote).not.toBeNull()
-    expect(quote.querySelectorAll('p').map((p) => p.text)).toEqual(['책은 얼어붙은 바다를 깨뜨리는 도끼여야 한다.', '— 프란츠 카프카'])
+    expect(quote.querySelectorAll('p').map((p) => p.text)).toEqual(['교육자, 메이커, 프로그래머, 탐구자, 철학하는 사람'])
     // 밤 위의 글자는 종이용 보조 색(.s-muted)을 달지 않는다
     expect(quote.querySelector('.s-muted')).toBeNull()
-    expect(root.querySelectorAll('blockquote')).toHaveLength(1)
-    expect(root.querySelector('main blockquote')).toBeNull()
+    expect(root.querySelectorAll('blockquote')).toHaveLength(0)
+    expect(root.text).not.toContain('카프카')
     // 제목과 인용이 한 칸, 그림이 옆 칸
     const cols = root.querySelector('.about-hero')!.childNodes.filter((n) => n.nodeType === 1) as unknown as ReturnType<typeof parse>[]
     expect(cols).toHaveLength(2)
     expect(cols[0].querySelector('header.page-head h1')!.text).toBe('소개')
-    expect(cols[0].querySelector('blockquote.s-about-quote')).not.toBeNull()
+    expect(cols[0].querySelector('.s-about-quote')).not.toBeNull()
     expect(root.querySelectorAll('h1')).toHaveLength(1)
   })
   it('leaves the sentences on the paper, word for word', () => {
@@ -1059,7 +1059,6 @@ describe('about page', () => {
     expect(text.querySelectorAll('p').map((p) => p.text)).toEqual([
       '창의적 개인에서 널리 세상을 이롭게 하는 시민으로',
       '창의적인 개인이 넘쳐나는 세상을 꿈꿉니다. 누구나 창작자가 되어 서로 존중하고 소통하는 세상을 만들고자 합니다. 궁극적으로 창작자, 예술가가 가득한 시민 사회는 현대의 많은 사회 문제를 해결하는 교두보가 될 것임을 확신합니다.',
-      '교육자, 메이커, 프로그래머, 철학하는 사람',
     ])
     // 본문 칸은 머리띠와 같은 왼쪽 선(.wrap) — 가운데 720px 칸이 아니다
     expect(about().querySelector('main .wrap-narrow')).toBeNull()
@@ -1094,7 +1093,7 @@ describe('about page', () => {
   })
   it('scopes its own rules to elements it draws — a layout class with the page cid never matches', () => {
     const root = about()
-    const cid = Object.keys(root.querySelector('blockquote.s-about-quote')!.attributes).find((a) => a.startsWith('data-astro-cid-'))!
+    const cid = Object.keys(root.querySelector('.s-about-quote')!.attributes).find((a) => a.startsWith('data-astro-cid-'))!
     expect(cid).toBeTruthy()
     const mine = rules(siteCss()).filter((r) => r.sel.includes(`[${cid}]`))
     expect(mine.length).toBeGreaterThan(8)
@@ -1172,8 +1171,8 @@ describe('drawings in the build', () => {
     expect(root.querySelector('figure.s-about-fig img')!.getAttribute('alt')).toBe('반창모 캐릭터 그림')
     expect(root.querySelector('figure.s-about-fig figcaption')!.text).toBe('richa 그림')
     expect(root.text).toContain('누구나 창작자가 되어 서로 존중하고 소통하는 세상을 만들고자 합니다.')
-    expect(root.text).toContain('교육자, 메이커, 프로그래머, 철학하는 사람')
-    expect(root.text).toContain('얼어붙은 바다를 깨뜨리는 도끼')
+    expect(root.text).toContain('교육자, 메이커, 프로그래머, 탐구자, 철학하는 사람')
+    expect(root.querySelector('.about-hero')!.text).not.toContain('얼어붙은 바다를 깨뜨리는 도끼')
     expect(root.text).not.toContain('원 자료로 확인한')
   })
   it('emits only the approved drawings, with no metadata', () => {
