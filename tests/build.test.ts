@@ -60,7 +60,7 @@ describe('build output', () => {
   it('wraps posts in the site frame and marks only posts for search', () => {
     const post = html('posts/sample-econ/index.html')
     expect(post).toContain('수염사자의 서재')
-    expect(post).toContain(`© ${new Date().getFullYear()} 반창모`)
+    expect(post).toContain(`© ${new Date().getFullYear()} 수염사자`)
     expect(post).toContain('data-pagefind-body')
     expect(html('index.html')).not.toContain('data-pagefind-body')
   })
@@ -78,6 +78,12 @@ describe('build output', () => {
     const all = files.filter((f) => /\.(html|xml|js|css)$/.test(f)).map((f) => readFileSync(f, 'utf8')).join('\n')
     for (const bad of ['@gmail.com', 'googlesyndication', 'doubleclick', 'gtag(', 'google-analytics', 'giscus.app'])
       expect(all, bad).not.toContain(bad)
+  })
+  // 글쓴이 표기는 수염사자 하나다(11/07 사용자 결정). 옛 필명이 남거나, 소스의 작업 메모(HTML 주석)가 공개본에 실리면 안 된다.
+  it('names the author only as 수염사자 and ships no working notes in html comments', () => {
+    const html = files.filter((f) => /\.(html|xml|js)$/.test(f)).map((f) => readFileSync(f, 'utf8')).join('\n')
+    expect(html).not.toContain('반창모')
+    expect(files.filter((f) => f.endsWith('.html') && /<!--(?!\s*\[)/.test(readFileSync(f, 'utf8')))).toEqual([])
   })
 })
 
@@ -304,7 +310,7 @@ describe('site frame', () => {
       expect(foot.querySelector('nav.f-util')!.getAttribute('aria-label'), f).toBe('꼬리말 메뉴')
       expect(foot.querySelectorAll('.f-util a').map((a) => a.text), f).toEqual(['모든 글', '소개', '검색', 'RSS'])
       const base = foot.querySelector('.f-base')!.text
-      expect(base, f).toContain(`© ${new Date().getFullYear()} 반창모`)
+      expect(base, f).toContain(`© ${new Date().getFullYear()} 수염사자`)
       expect(base, f).toContain('richa 그림')
     }
   })
@@ -819,7 +825,7 @@ describe('post page', () => {
       // 글 템플릿의 클래스 이름을 밤 구역에서 다시 쓰지 않는다
       expect(head.querySelector('.kicker, .meta'), p.slug).toBeNull()
     }
-    expect(post('sample-econ').querySelector('.s-post-meta')!.text).toBe('2026-11-01 · 약 15분 분량 · 글 반창모')
+    expect(post('sample-econ').querySelector('.s-post-meta')!.text).toBe('2026-11-01 · 약 15분 분량 · 글 수염사자')
     expect(post('sample-philo').querySelector('.s-post-kicker')).toBeNull()
     expect(post('sample-nodesc').querySelector('.s-post-meta')).toBeNull()
   })
@@ -941,7 +947,7 @@ describe('author box', () => {
   it('closes every post with the author, the Notion vision line, credit and a link to 소개', () => {
     for (const slug of ['sample-econ', 'sample-nodesc', 'sample-philo']) {
       const box = parse(html(`posts/${slug}/index.html`)).querySelector('aside.s-author')!
-      expect(box.querySelector(`a[href="${BASE}about/"]`)!.text).toBe('반창모')
+      expect(box.querySelector(`a[href="${BASE}about/"]`)!.text).toBe('수염사자')
       expect(box.querySelector('.s-author-bio')!.text).toBe('창의적인 개인이 넘쳐나는 세상을 꿈꿉니다.')
       expect(box.text).toContain('richa 그림')
       expect(box.querySelector('img')!.getAttribute('width')).toBeTruthy()
@@ -1151,7 +1157,7 @@ describe('about page', () => {
 describe('drawings in the build', () => {
   it('puts the full drawing and its credit on 소개 without touching the text', () => {
     const root = parse(html('about/index.html'))
-    expect(root.querySelector('figure.s-about-fig img')!.getAttribute('alt')).toBe('반창모 캐릭터 그림')
+    expect(root.querySelector('figure.s-about-fig img')!.getAttribute('alt')).toBe('수염사자 캐릭터 그림')
     expect(root.querySelector('figure.s-about-fig figcaption')!.text).toBe('richa 그림')
     expect(root.text).toContain('누구나 창작자가 되어 서로 존중하고 소통하는 세상을 만들고자 합니다.')
     expect(root.text).toContain('교육자, 메이커, 프로그래머, 탐구자, 철학하는 사람')

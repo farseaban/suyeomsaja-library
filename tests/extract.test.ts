@@ -26,8 +26,8 @@ describe('extractPost', () => {
     expect(p.description.endsWith('…')).toBe(true)
   })
   it('reads the meta line as one clean string, and null when the post has none', () => {
-    expect(econ.metaLine).toBe('2026-11-01 · 약 15분 분량 · 글 반창모')
-    expect(extractPost(read('sample-philo')).metaLine).toBe('2026-10-20 · 약 9분 분량 · 글 반창모')
+    expect(econ.metaLine).toBe('2026-11-01 · 약 15분 분량 · 글 수염사자')
+    expect(extractPost(read('sample-philo')).metaLine).toBe('2026-10-20 · 약 9분 분량 · 글 수염사자')
     expect(extractPost(read('sample-nodesc')).metaLine).toBeNull()
     expect(extractPost('<article><h1>t</h1><div class="meta">\n  2026-01-02 ·\n  약 3분 </div></article>').metaLine).toBe('2026-01-02 · 약 3분')
   })

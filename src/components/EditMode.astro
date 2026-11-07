@@ -24,7 +24,7 @@ const { slug, editing, token, version } = Astro.props
 ) : (
   <a class="s-edit-open" href={url(`edit/${slug}`)}>편집</a>
 )}
-<!-- 번들하지 않는다 — 번들하면 공개 빌드에 파일로 실려 나간다. 개발 서버에서만 그려지고 거기엔 콘텐츠 보안 정책이 없다 -->
+{/* 번들하지 않는다 — 번들하면 공개 빌드에 파일로 실려 나간다. 개발 서버에서만 그려지고 거기엔 콘텐츠 보안 정책이 없다 */}
 <script is:inline>
   {
   const bar = document.querySelector('.s-edit-bar')
