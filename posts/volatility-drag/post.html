@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>방향을 맞힌 450억 달러 AI 펀드는 왜 한 달 만에 무너졌을까? — 출렁이는 수익률과 빚이 내 돈을 줄이는 산수</title>
+<meta name="description" content="기대수익이 플러스인데 왜 돈이 줄어들까요? 2026년 AI 헤지펀드 Situational Awareness의 붕괴를 사례로, 변동성 끌림과 레버리지가 복리 성장률을 어떻게 뒤집는지 원 자료와 계산으로 풀어 봅니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+    --key-bg:#FFF8E0; --caution-bg:#FDF0EA; --quote-bg:#F2F7FC;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:var(--key-bg);border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:var(--caution-bg);border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:var(--caution-bg)}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:var(--quote-bg);border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:var(--key-bg)}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<h1>방향을 맞힌 450억 달러 AI 펀드는 왜 한 달 만에 무너졌을까? — 출렁이는 수익률과 빚이 내 돈을 줄이는 산수</h1>
+<div class="meta">2026-11-01 · 약 11분 분량 · 글 수염사자</div>
+
+<p class="lead-quote">"AI는 결국 오른다잖아요. 그러면 빚을 내서라도 더 사는 게 맞지 않나요?"</p>
+<p>AI 이야기가 나오는 자리라면 한 번쯤 들어 봤을 말입니다. 틀린 말처럼 들리지도 않습니다. 오를 게 확실하다면 더 많이 사는 게 이득이고, 더 많이 사려면 돈을 빌리면 되니까요.</p>
+<p>2026년 여름, 이 논리를 가장 크게, 가장 정교하게 실행한 사람이 있었습니다. 2024년 6월 AI의 미래를 다룬 165쪽짜리 에세이 「Situational Awareness」로 이름을 알린 레오폴드 아셴브레너입니다. 에세이 제목을 그대로 딴 그의 헤지펀드는 2026년 7월 초 운용 자산이 약 450억 달러까지 불었습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>. 7월 24일 투자자 편지에 적힌 상반기 순수익은 439%였습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>. 1억 원을 넣었다면 반년 만에 5억 3,900만 원이 됐다는 뜻입니다.</p>
+<p>그리고 7월 한 달 동안 펀드는 가치의 약 3분의 2를 잃었습니다. 자기 돈 1달러당 약 3달러를 빌려 투자한 상태였습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>. 같은 시기 미국 S&amp;P 500 지수는 사상 최고치 근처에 머물러 있었습니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>.</p>
+<p>그리고 결정적으로 — <strong>AI가 결국 크게 성장한다는 그의 방향 판단이 틀렸다고 단정할 근거는 아직 없습니다.</strong> 방향을 맞혀도 망할 수 있다는 것, 이 글은 바로 그 이야기입니다.</p>
+<p>이 글은 "확신이 있으면 크게 걸어도 되지 않나"라고 생각해 본 분들을 위해 씁니다. 결론부터 말씀드리면, 수익률이 들쭉날쭉할수록 내 돈은 평균 수익률보다 느리게 불어나고, 빚은 그 격차를 제곱으로 키웁니다. 이 현상의 이름이 <strong>변동성 끌림(Volatility Drag)</strong>입니다.</p>
+<p>이 글은 투자 조언이 아니라, 중학교 수학으로 따라갈 수 있는 '돈의 산수' 해설입니다.</p>
+
+<h2>'평균 수익률'과 '내 돈이 불어나는 속도'는 다릅니다</h2>
+<p>질문을 바꿔 보겠습니다. "이 투자의 평균 수익률이 얼마인가"가 아니라 "이 투자를 실제로 해 나가면 내 돈이 1년에 몇 %씩 불어나는가"입니다. 둘은 같은 질문처럼 보이지만 답이 다릅니다.</p>
+<p>이유는 단순합니다. 수익률의 %는 언제나 '지금 남아 있는 돈'에 붙습니다. 100만 원이 50% 떨어지면 50만 원입니다. 여기서 50% 오르면 75만 원이지, 100만 원이 아닙니다. 원금을 되찾으려면 100%, 두 배가 올라야 합니다. <strong>손실은 같은 크기의 이익이 메울 수 있는 것보다 언제나 더 깊은 구멍을 팝니다.</strong></p>
+<p>그래서 금융에서는 평균을 두 가지로 구분합니다. 해마다의 수익률을 더해서 햇수로 나눈 <strong>산술 평균</strong>, 그리고 실제로 돈이 복리로 불어난 속도인 <strong>기하 평균</strong>(연평균 복리 성장률)입니다. 둘의 관계는 대략 이렇습니다.</p>
+<div class="key"><span class="label">공식 하나 —</span> 실제 복리 성장률 ≈ 산술 평균 수익률 − (변동성²) ÷ 2. 여기서 변동성은 수익률이 평균에서 얼마나 출렁이는지를 나타내는 표준편차입니다. 뒤에 빼는 항이 바로 '변동성 끌림', 출렁임 자체가 매기는 세금입니다.</div>
+<p>실제 데이터로도 맞아떨어집니다. 2007~2016년 S&amp;P 500의 연 수익률 산술 평균은 8.75%였지만, 실제 연평균 복리 수익률은 6.94%였습니다. 같은 기간 수익률 분산 3.56%의 절반인 1.78%포인트를 빼면 6.97%가 나와, 실제 값과 거의 같습니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>. 1만 달러를 넣었다면 산술 평균으로 계산한 기대 금액은 약 2만 3,100달러였지만 실제로 손에 쥔 돈은 약 1만 9,600달러였습니다<sup class="fn"><a id="cite-5b" href="#ref-5">[5]</a></sup>.</p>
+<p>비유하자면 이렇습니다. 평균 수익률은 지도 위에 그은 직선 거리이고, 복리 성장률은 실제로 걸어간 산길입니다. 길이 구불구불할수록, 즉 변동성이 클수록 직선 거리와 실제로 도착하는 지점 사이가 벌어집니다.</p>
+
+<h2>평균은 플러스인데 왜 돈이 줄어들까</h2>
+<p>공식만으로는 감이 잘 오지 않으니 게임 하나를 해 보겠습니다. 동전을 던져 앞면이면 가진 돈의 50%를 따고, 뒷면이면 40%를 잃습니다. 한 번 던질 때의 평균 수익률은 (+50% − 40%) ÷ 2 = <strong>+5%</strong>입니다. 해 볼 만한 게임처럼 보입니다.</p>
+<p>그런데 100만 원으로 앞, 뒤, 앞, 뒤 순서로 던져 보면 이렇게 됩니다.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 380" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">평균 +5% 동전 던지기, 실제로 걸어 보면</title>
+<desc id="d-2">앞면 +50%, 뒷면 −40%인 동전을 앞·뒤·앞·뒤 순서로 던지면 100만 원이 150만, 90만, 135만, 81만 원으로 줄어듭니다.</desc>
+<rect width="680" height="380" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">평균 +5% 동전 던지기, 실제로 걸어 보면</text>
+
+<line x1="70" y1="320.0" x2="530" y2="320.0" stroke="#E4E0DA"/>
+<text x="60" y="324.0" font-size="12" text-anchor="end" fill="#6E6B7B">50</text>
+<line x1="70" y1="260.0" x2="530" y2="260.0" stroke="#E4E0DA"/>
+<text x="60" y="264.0" font-size="12" text-anchor="end" fill="#6E6B7B">80</text>
+<line x1="70" y1="200.0" x2="530" y2="200.0" stroke="#E4E0DA"/>
+<text x="60" y="204.0" font-size="12" text-anchor="end" fill="#6E6B7B">110</text>
+<line x1="70" y1="140.0" x2="530" y2="140.0" stroke="#E4E0DA"/>
+<text x="60" y="144.0" font-size="12" text-anchor="end" fill="#6E6B7B">140</text>
+<line x1="70" y1="80.0" x2="530" y2="80.0" stroke="#E4E0DA"/>
+<text x="60" y="84.0" font-size="12" text-anchor="end" fill="#6E6B7B">170</text>
+<text x="70.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">시작</text>
+<text x="185.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">앞</text>
+<text x="300.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">뒤</text>
+<text x="415.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">앞</text>
+<text x="530.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">뒤</text>
+<polyline points="70.0,220.0 185.0,120.0 300.0,240.0 415.0,150.0 530.0,258.0" fill="none" stroke="#7466C2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="70.0" cy="220.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="185.0" cy="120.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="300.0" cy="240.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="415.0" cy="150.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="530.0" cy="258.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<text x="542.0" y="263.0" font-size="14" font-weight="700" fill="#7466C2">내 돈(만 원)</text>
+<text x="32" y="362" font-size="12" fill="#6E6B7B">그림: 직접 계산해 제작</text>
+</svg>
+  <figcaption>앞면 +50%, 뒷면 −40%인 동전을 앞·뒤·앞·뒤 순서로 던지면 100만 원이 150만, 90만, 135만, 81만 원으로 줄어듭니다. 평균은 +5%인데도 한 번 이기고 한 번 질 때마다 10%씩 줄어듭니다. 그림: 직접 계산해 제작.</figcaption>
+</figure>
+<p>앞과 뒤가 반반씩 나오는 '보통의' 경로에서 돈은 한 번에 약 5.1%씩 줄어듭니다(1.5 × 0.6 = 0.9이고, 0.9의 제곱근은 약 0.949). 이 게임의 평균이 +5%로 높게 나오는 이유는, 앞면이 연달아 터지는 드문 행운의 경로가 평균을 끌어올리기 때문입니다. 대부분의 사람이 실제로 걷는 길은 그 아래에 있습니다.</p>
+<p>여기서 한 가지, 꼭 짚고 넘어가겠습니다. 투자 설명에 나오는 '기대수익'은 대개 이 산술 평균입니다. 하지만 한 사람이 받는 건 평균이 아니라 자기가 걷게 된 단 하나의 경로입니다. 변동성이 커질수록 평균과 '가장 흔한 결과(중앙값)' 사이의 거리가 벌어집니다.</p>
+
+<h2>빚은 수익을 곱하기로, 끌림을 제곱으로 키웁니다</h2>
+<p>이제 레버리지를 얹어 보겠습니다. 레버리지는 빚을 내 투자 규모를 키우는 것입니다. 자기 돈 1에 빚 3을 더하면 4배 레버리지이고, 자산이 10% 움직이면 내 돈은 40% 움직입니다.</p>
+<p>공식에 넣어 보면 문제가 드러납니다. 레버리지를 L배로 올리면 기대수익도 L배가 됩니다. 그런데 변동성도 L배가 되니, 변동성의 제곱인 끌림은 <strong>L²배</strong>가 됩니다. 2배로 빌리면 수익은 2배, 끌림은 4배. 4배로 빌리면 수익은 4배, 끌림은 16배입니다.</p>
+<p>패트릭 보일이 이 사건을 다룬 영상에서 쓴 가정치로 계산해 보겠습니다. 기대수익 연 15%, 변동성 40%인 AI 주식 바구니가 있다고 합시다. 끌림은 0.4² ÷ 2 = 8%포인트, 실제 복리 성장률은 연 7%입니다. 꽤 좋은 투자입니다. 이걸 4배 레버리지로 굴리면 기대수익은 60%로 뛰지만 끌림은 128%포인트가 되어, 복리 성장률은 <strong>연 −68%</strong>가 됩니다.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 380" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">레버리지를 올릴수록 복리 성장률은?</title>
+<desc id="d-3">기대수익 15%, 변동성 40%인 자산에 레버리지를 걸면 복리 성장률은 약 1배에서 가장 높고, 약 1.9배를 넘으면 마이너스로 돌아서 4배에서는 연 −68%가 됩니다.</desc>
+<rect width="680" height="380" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">레버리지를 올릴수록 복리 성장률은?</text>
+
+<line x1="70" y1="320.0" x2="530" y2="320.0" stroke="#E4E0DA"/>
+<text x="60" y="324.0" font-size="12" text-anchor="end" fill="#6E6B7B">-75%</text>
+<line x1="70" y1="260.0" x2="530" y2="260.0" stroke="#E4E0DA"/>
+<text x="60" y="264.0" font-size="12" text-anchor="end" fill="#6E6B7B">-50%</text>
+<line x1="70" y1="200.0" x2="530" y2="200.0" stroke="#E4E0DA"/>
+<text x="60" y="204.0" font-size="12" text-anchor="end" fill="#6E6B7B">-25%</text>
+<line x1="70" y1="140.0" x2="530" y2="140.0" stroke="#E4E0DA"/>
+<text x="60" y="144.0" font-size="12" text-anchor="end" fill="#6E6B7B">0%</text>
+<line x1="70" y1="80.0" x2="530" y2="80.0" stroke="#E4E0DA"/>
+<text x="60" y="84.0" font-size="12" text-anchor="end" fill="#6E6B7B">25%</text>
+<text x="70.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">0배</text>
+<text x="127.5" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">0.5배</text>
+<text x="185.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">1배</text>
+<text x="242.5" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">1.5배</text>
+<text x="300.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">2배</text>
+<text x="357.5" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">2.5배</text>
+<text x="415.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">3배</text>
+<text x="472.5" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">3.5배</text>
+<text x="530.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">4배</text>
+<polyline points="70.0,140.0 127.5,126.8 185.0,123.2 242.5,129.2 300.0,144.8 357.5,170.0 415.0,204.8 472.5,249.2 530.0,303.2" fill="none" stroke="#7466C2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="70.0" cy="140.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="127.5" cy="126.8" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="185.0" cy="123.2" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="242.5" cy="129.2" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="300.0" cy="144.8" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="357.5" cy="170.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="415.0" cy="204.8" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="472.5" cy="249.2" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="530.0" cy="303.2" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<text x="542.0" y="308.2" font-size="14" font-weight="700" fill="#7466C2">연 복리 성장률(%)</text>
+<text x="32" y="362" font-size="12" fill="#6E6B7B">그림: 복리 성장률 ≈ 기대수익 − 변동성²/2 근사식으로 직접 계산(차입 이자 제외)[5]</text>
+</svg>
+  <figcaption>기대수익 15%, 변동성 40%인 자산에 레버리지를 걸면 복리 성장률은 약 1배에서 가장 높고, 약 1.9배를 넘으면 마이너스로 돌아서 4배에서는 연 −68%가 됩니다. 자료: 근사식[5]으로 직접 계산, 차입 이자는 제외.</figcaption>
+</figure>
+<p>그래프에서 보듯 레버리지와 성장률의 관계는 산 모양입니다. 조금 빌리면 성장이 빨라지지만, 정점을 넘으면 빌릴수록 오히려 느려지고, 어느 지점부터는 마이너스입니다. 이 가정치에서 정점은 약 0.94배, 성장률이 0이 되는 지점은 약 1.9배입니다. 4배는 정점의 네 배를 넘게 건 셈입니다.</p>
+<div class="key"><span class="label">핵심 —</span> 기대수익이 플러스여도, 변동성이 크고 빚까지 지면 '보통의 결과'는 손실이 됩니다. 나쁜 결과는 불운이 아니라 처음부터 산수 안에 들어 있습니다. 그리고 빚은 그 산수를 제곱으로 악화시킵니다.</div>
+<p>이 산 모양 곡선의 정점에는 이름이 있습니다. 1956년 벨 연구소의 존 켈리가 제시한 <strong>켈리 기준(Kelly criterion)</strong>으로, 반복되는 베팅에서 장기 복리 성장률을 최대로 만드는 베팅 비율입니다. 그런데 정점을 그대로 거는 '풀 켈리'조차 자산이 크게 출렁이고 파산 위험이 높아서, 실무에서는 그 절반이나 4분의 1만 거는 경우가 많습니다. 확률 추정이 틀릴 가능성에 대비하는 안전띠이기도 합니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>.</p>
+<p>롱텀캐피털매니지먼트(LTCM) 공동 창업자 출신인 빅터 하가니와 제임스 화이트는 2023년 책 『The Missing Billionaires』에서, 부자 가문들이 사라진 이유를 나쁜 투자 대상을 고른 탓이 아니라 투자 규모를 잘못 정한 탓으로 설명합니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>. 무엇을 사느냐보다 얼마나 사느냐가 더 결정적일 수 있다는 겁니다.</p>
+
+<h2>사례로 보기 — 같은 베팅을 두 번 한 펀드</h2>
+<p>다시 Situational Awareness로 돌아가 보겠습니다. 이 펀드는 AI 인프라 관련주(코어위브, 네비우스, 마이크론 등)를 사고, AI 때문에 밀려날 것으로 본 소프트웨어 기업(세일즈포스, 인튜이트 등)을 공매도했습니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>. 겉으로는 사고팔기를 함께 하는 '롱숏' 헤지펀드였습니다.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">진짜 헤지와 '같은 베팅 두 번'</title>
+<desc id="d-1">진짜 롱숏 헤지는 시장 전체가 흔들려도 양쪽 손익이 서로 상쇄되지만, 롱과 숏을 같은 전제로 고르면 그 전제가 흔들리는 순간 양쪽에서 동시에 돈을 잃습니다.</desc>
+<rect width="680" height="400" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">진짜 헤지와 '같은 베팅 두 번'</text>
+<rect x="32" y="70" width="296" height="290" rx="16" fill="#CDEBDD" stroke="#3F8F6E" stroke-width="1.5"/>
+<rect x="352" y="70" width="296" height="290" rx="16" fill="#F6CCD8" stroke="#B24E6E" stroke-width="1.5"/>
+<text x="180" y="106" font-size="18" font-weight="800" text-anchor="middle" fill="#3F8F6E">진짜 헤지</text>
+<text x="500" y="106" font-size="18" font-weight="800" text-anchor="middle" fill="#B24E6E">같은 베팅 두 번</text>
+<line x1="56" y1="122" x2="304" y2="122" stroke="#3F8F6E" stroke-opacity=".35"/>
+<line x1="376" y1="122" x2="624" y2="122" stroke="#B24E6E" stroke-opacity=".35"/>
+<g font-size="14" fill="#33313F">
+  <text x="56" y="164">좋은 회사 매수</text><text x="376" y="164">AI 수혜주 매수</text>
+  <text x="56" y="214">나쁜 회사 공매도</text><text x="376" y="214">AI 피해주 공매도</text>
+  <text x="56" y="264">시장 급락: 서로 상쇄</text><text x="376" y="264">시장 급락: 일부 상쇄</text>
+  <text x="56" y="314">남는 위험: 종목 고르기</text><text x="376" y="314">남는 위험: 'AI가 곧 온다'</text>
+</g>
+<g font-size="11" font-weight="700" fill="#6E6B7B" text-anchor="middle">
+  <circle cx="340" cy="159" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="163">롱</text>
+  <circle cx="340" cy="209" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="213">숏</text>
+  <circle cx="340" cy="259" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="263">충격</text>
+  <circle cx="340" cy="309" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="313">위험</text>
+</g>
+<text x="32" y="384" font-size="12" fill="#6E6B7B">자료: 맷 레빈의 설명(패트릭 보일 영상 인용)과 The Free Press(2026)[8]를 바탕으로 직접 제작</text>
+</svg>
+  <figcaption>진짜 롱숏 헤지는 시장 전체가 흔들려도 양쪽 손익이 서로 상쇄되지만, 롱과 숏을 같은 전제로 고르면 그 전제가 흔들리는 순간 양쪽에서 동시에 돈을 잃습니다.</figcaption>
+</figure>
+<p>문제는 롱과 숏이 모두 'AI가 곧, 크게 온다'는 하나의 전제에 걸려 있었다는 점입니다. 시장이 그 속도를 의심하기 시작한 7월 말, 그가 산 AI 종목들은 대부분 30% 넘게 떨어졌고 공매도한 소프트웨어 기업들은 비슷한 폭으로 올랐습니다<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>. 헤지의 두 다리가 같은 날 함께 꺾인 겁니다. 변동성을 줄여야 할 장치가 오히려 한 방향의 변동성을 키운 셈입니다.</p>
+<p>여기에 약 4배의 레버리지가 얹혀 있었습니다. 7월 한 달 손실은 약 67%였는데, 상반기에 5.39배가 된 돈이 3분의 1만 남으니 연초 대비로는 여전히 약 +78%였습니다(5.39 × 0.33 ≈ 1.78). 보도된 '연초 대비 약 80% 수익'과 맞아떨어집니다<sup class="fn"><a id="cite-3b" href="#ref-3">[3]</a></sup>. 숫자만 보면 아직 남는 장사처럼 보이지만, 고점의 돈이 다시 원래대로 돌아가려면 약 200%를 벌어야 합니다.</p>
+
+<h3>게임에서 쫓겨나면 회복을 받을 수 없습니다</h3>
+<p>빚을 낸 투자가 무서운 진짜 이유는 따로 있습니다. 가격이 떨어지면 돈을 빌려준 쪽이 담보를 더 넣으라고 요구합니다. 이게 <strong>마진콜</strong>입니다. 못 채우면 바닥에서 강제로 팔아야 하고, 그 매도가 가격을 더 끌어내립니다.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 460" width="100%" role="img" aria-labelledby="t-4 d-4" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-4">마진콜의 악순환</title>
+<desc id="d-4">빚을 낸 투자에서는 가격 하락이 담보 부족을 부르고, 마진콜에 따른 강제 매도가 가격을 더 떨어뜨려, 회복을 기다릴 기회 자체가 사라집니다.</desc>
+<defs><marker id="ah-4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6E6B7B"/></marker></defs>
+<rect width="680" height="460" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">마진콜의 악순환</text>
+<g stroke="#6E6B7B" stroke-width="2" fill="none" marker-end="url(#ah-4)">
+  <path d="M418,108 Q520,120 540,190"/>
+  <path d="M540,290 Q522,368 438,380"/>
+  <path d="M262,382 Q160,370 140,290"/>
+  <path d="M140,190 Q158,122 242,110"/>
+</g>
+<rect x="250" y="76" width="180" height="60" rx="30" fill="#D9D3F7" stroke="#7466C2" stroke-width="1.5"/>
+<rect x="460" y="210" width="180" height="60" rx="30" fill="#FBD9C6" stroke="#C06A45" stroke-width="1.5"/>
+<rect x="250" y="352" width="180" height="60" rx="30" fill="#CFE3F6" stroke="#3E7DB0" stroke-width="1.5"/>
+<rect x="40" y="210" width="180" height="60" rx="30" fill="#CDEBDD" stroke="#3F8F6E" stroke-width="1.5"/>
+<g font-size="15" font-weight="700" fill="#33313F" text-anchor="middle">
+  <text x="340" y="111">① 가격 하락</text>
+  <text x="550" y="245">② 담보 부족</text>
+  <text x="340" y="387">③ 마진콜·강제 매도</text>
+  <text x="130" y="245">④ 가격 추가 하락</text>
+</g>
+<text x="340" y="236" font-size="16" font-weight="800" text-anchor="middle" fill="#B24E6E">빚이 만든 하락 고리</text>
+<text x="340" y="258" font-size="12" text-anchor="middle" fill="#6E6B7B">끊을 지점: 처음부터 빚을 줄이기</text>
+<text x="32" y="446" font-size="12" fill="#6E6B7B">그림: 직접 제작 / 근거 [3][9]</text>
+</svg>
+  <figcaption>빚을 낸 투자에서는 가격 하락이 담보 부족을 부르고, 마진콜에 따른 강제 매도가 가격을 더 떨어뜨려, 회복을 기다릴 기회 자체가 사라집니다.</figcaption>
+</figure>
+<p>실제로 그렇게 됐습니다. 펀드는 7월 30일 새벽, 약 160억 달러 규모의 상장주식 대부분을 시타델에 시세보다 약 10% 싸게 넘겼습니다. 그런데 바로 이어진 다섯 거래일 동안 그가 들고 있던 핵심 종목 중 코어위브는 47%, 샌디스크는 33%, SK하이닉스는 19% 올랐습니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>. 시타델의 주력 펀드는 그달 2022년 이후 가장 좋은 월간 성과를 냈습니다<sup class="fn"><a id="cite-9b" href="#ref-9">[9]</a></sup>.</p>
+<p>숫자보다 중요한 게 하나 있습니다. 평균을 끌어올리는 '드문 행운의 경로'는 게임에 끝까지 남아 있는 사람에게만 옵니다. <strong>빚은 그 자리를 빼앗습니다.</strong> 회복은 왔지만, 그 회복을 받은 건 버틸 현금이 있던 쪽이었습니다.</p>
+<p>30년 넘게 대형 운용사 AQR을 이끌어 온 클리프 애스니스는 이 사건에 대한 기자의 질문에 짧게 답했습니다.</p>
+<blockquote class="quote">
+  <p>"절대 풀 켈리로 가지 마라."</p>
+  <cite>— 클리프 애스니스, 조 노세라에게 보낸 이메일, <i>The Free Press</i> 2026 (번역)<sup class="fn"><a id="cite-8c" href="#ref-8">[8]</a></sup></cite>
+</blockquote>
+<p>앞에서 본 곡선으로 말하면, 정점조차 다 걸지 말라는 뜻입니다. 정점을 네 배 넘게 걸어 놓고 결과가 좋기를 바라는 건, 확신의 문제가 아니라 산수의 문제였습니다.</p>
+
+<h2>내 돈에 적용하면 — 확신이 클수록 지켜야 할 것</h2>
+<p>이 사건은 450억 달러짜리 이야기지만, 원리는 몇백만 원짜리 계좌에도 똑같이 적용됩니다. 원리에서 나오는 점검 기준을 표로 정리해 보았습니다.</p>
+<table>
+  <thead><tr><th>점검할 것</th><th>왜 중요한가</th><th>스스로 던질 질문</th></tr></thead>
+  <tbody>
+    <tr class="hl"><td>빚의 크기</td><td>끌림은 레버리지의 제곱으로 커지고, 마진콜은 회복 전에 나를 내보냅니다</td><td>30% 떨어져도 강제로 팔지 않아도 되는가?</td></tr>
+    <tr><td>출렁임의 크기</td><td>같은 평균이라도 변동성이 크면 실제 복리 성장률이 낮아집니다</td><td>이 자산은 1년에 얼마나 출렁이는가?</td></tr>
+    <tr><td>한 전제에 몰린 정도</td><td>사는 것과 피하는 것이 같은 전제에 걸리면 분산이 아니라 집중입니다</td><td>그 전제가 틀리면 내 자산 중 몇 %가 함께 무너지는가?</td></tr>
+    <tr><td>내 직업·소득과의 겹침</td><td>직장과 투자가 같은 산업에 묶이면 나쁜 날이 한꺼번에 옵니다</td><td>내 일자리가 흔들리는 날 이 투자는 어떻게 되는가?</td></tr>
+  </tbody>
+</table>
+<div class="key"><span class="label">핵심 —</span> 이 표에서 읽어야 할 것은 '무엇을 살까'가 아니라 '얼마나, 무엇으로 살까'입니다. 좋은 자산을 골라도 크기를 잘못 정하면 결과가 뒤집힙니다.</div>
+<p>마지막 줄은 패트릭 보일이 영상에서 짚은 대목이기도 합니다. 이 펀드의 투자자 상당수는 이미 스타트업 지분과 연봉이 AI 붐에 묶인 실리콘밸리 사람들이었습니다. 그들에게 이 펀드는 위험을 나누는 장치가 아니라 같은 위험을 한 겹 더 얹는 장치였다는 지적입니다. 다만 이 부분은 영상 화자의 해석이며, 투자자 구성을 수치로 확인한 자료는 아닙니다.</p>
+<div class="caution">미리 말씀드려야 할 게 있습니다. 위 그래프의 기대수익 15%, 변동성 40%는 설명을 위한 가정치입니다. 실제 자산의 기대수익은 아무도 미리 알 수 없고, 변동성도 시기마다 달라집니다. 그러니 정점이 '0.94배'라는 숫자를 외우기보다, 곡선이 산 모양이라는 사실과 정점 너머가 내리막이라는 원리를 가져가시기 바랍니다.</div>
+
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>확신이 잘못은 아닙니다. 어떤 미래를 강하게 믿는 사람이 세상을 바꾸기도 합니다. 다만 확신은 '방향'에 대한 것이고, 투자의 결과는 '크기'에서 갈립니다.</p>
+    <p><strong>"평균은 모두의 것이지만, 경로는 나 한 사람의 것입니다."</strong> 내가 받는 건 평균 수익률이 아니라 내가 걷게 될 단 하나의 경로이고, 그 경로를 끝까지 걸을 수 있게 해 주는 건 빚이 아니라 여유입니다.</p>
+    <p>이렇게 말해 볼 수 있겠습니다. 동전은 기억이 없지만, 지갑은 기억이 있습니다. 이 사건은 그 단순한 산수를 450억 달러짜리 교재로 보여 줬습니다.</p>
+  </blockquote>
+</section>
+
+<hr>
+<p>정리하자면 이렇습니다. 수익률이 출렁일수록 실제 복리 성장률은 평균보다 낮아지고, 그 차이는 변동성의 제곱에 비례합니다. 빚은 수익을 곱하기로 키우지만 이 손실을 제곱으로 키워서, 어느 지점부터는 기대수익이 플러스여도 보통의 결과가 손실이 됩니다. 그리고 마진콜은 회복이 오기 전에 게임에서 나를 내보냅니다.</p>
+<p>오늘 내 계좌나 투자 계획을 하나 떠올리고, 이렇게 물어보시면 좋겠습니다. <strong>"내가 틀렸을 때, 나는 이 게임에 계속 남아 있을 수 있는가?"</strong></p>
+
+<p class="disclaimer">이 글은 수학 원리를 설명하기 위한 일반적인 정보이며, 특정 자산이나 투자 전략을 권유하지 않습니다. 실제 투자 판단은 본인의 재무 상황을 고려해 공인된 금융 전문가와 상의하세요. 사례의 수치는 2026년 7~9월 보도 기준이며, 보도마다 일부 수치(손실액, 남은 운용 규모 등)가 다릅니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">Wikipedia. Leopold Aschenbrenner (2026년 판, WSJ·CNBC 보도 인용). <a href="https://en.wikipedia.org/wiki/Leopold_Aschenbrenner">링크</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">Implicator.ai. Aschenbrenner's Situational Awareness, Citadel and AI losses, 2026 (FT·WSJ·CNBC 보도 종합, 해설 기사). <a href="https://www.implicator.ai/aschenbrenner-situational-awareness-citadel-ai-losses/">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">Cristian Dina. Situational Awareness ran two auctions at once. <i>The Next Web</i>, 2026-08-18 (WSJ 보도 인용, 해설 기사). <a href="https://thenextweb.com/news/situational-awareness-anthropic-stake-20-percent-discount-citadel">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Rajat Baijal. The Situational Awareness Collapse: Anatomy of a Leverage Crisis. Columbia University School of Professional Studies, 2026-09-01. <a href="https://sps.columbia.edu/news/situational-awareness-collapse-anatomy-leverage-crisis">링크</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">Kitces.com. Volatility Drag, Variance Drain, and Arithmetic vs Geometric Average Investment Returns (해설 기사). <a href="https://www.kitces.com/blog/volatility-drag-variance-drain-mean-arithmetic-vs-geometric-average-investment-returns/">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Wikipedia. Kelly criterion. <a href="https://en.wikipedia.org/wiki/Kelly_criterion">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Wikipedia. Victor Haghani (Haghani &amp; White, <i>The Missing Billionaires</i>, Wiley, 2023). 책 소개: <a href="https://elmwealth.com/missingbillionaires/">Elm Wealth</a> · <a href="https://en.wikipedia.org/wiki/Victor_Haghani">링크</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">Joe Nocera. How to Lose $35 Billion. <i>The Free Press</i>, 2026-08-04. <a href="https://www.thefp.com/p/how-to-lose-35-billion">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">The Daily Upside. Citadel's flagship fund posts best month in years after buying AI hedge fund's distressed book, 2026-08-06. <a href="https://www.thedailyupside.com/finance/hedge-funds/citadels-flagship-fund-posts-best-month-in-years-after-buying-ai-hedge-funds-distressed-book/">링크</a> <a class="back" href="#cite-9">↩</a></li>
+  </ol>
+</section>
+</article>
+</body>
+</html>

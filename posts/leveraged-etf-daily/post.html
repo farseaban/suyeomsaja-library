@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SK하이닉스 2배 ETF를 샀는데 왜 내 수익은 2배가 아닐까? — 매일 2배를 다시 맞추는 구조가 내 계좌에 하는 일</title>
+<meta name="description" content="방향을 맞히고도 레버리지 ETF에서 돈을 잃는 이유는 무엇일까요? 2026년 한국 단일종목 레버리지 ETF 사태를 사례로, 일일 재조정이 개인의 계좌와 시장 전체를 어떻게 흔드는지 원 자료와 계산으로 풀어 봅니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+    --key-bg:#FFF8E0; --caution-bg:#FDF0EA; --quote-bg:#F2F7FC;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:var(--key-bg);border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:var(--caution-bg);border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:var(--caution-bg)}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:var(--quote-bg);border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:var(--key-bg)}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<h1>SK하이닉스 2배 ETF를 샀는데 왜 내 수익은 2배가 아닐까? — 매일 2배를 다시 맞추는 구조가 내 계좌에 하는 일</h1>
+<div class="meta">2026-11-01 · 약 11분 분량 · 글 수염사자</div>
+
+<p class="lead-quote">"SK하이닉스는 어차피 오를 거잖아요. 그럼 2배짜리를 사면 두 배로 버는 거죠."</p>
+<p>2026년 여름, 이 말은 한국에서 가장 많이 실행된 투자 논리였을 겁니다. 5월 27일 삼성전자와 SK하이닉스의 하루 수익률을 두 배로 따라가는 단일종목 레버리지 상품이 처음 상장됐고, 상장 후 12거래일 동안 개인투자자는 8조 2,000억 원어치를 순매수했습니다. 같은 기간 순매수의 92.7%가 개인이었습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>방향도 맞았습니다. 코스피는 6월 19일 장중 9,385.59로 사상 최고치를 찍었습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>. 그런데 한 달도 안 돼 상황이 뒤집혔습니다. 골드만삭스 트레이딩 데스크는 7월 13일까지 120만 개가 넘는 개인 레버리지 계좌에 마진콜이 걸렸고, 그중 32만~36만 개는 강제로 청산됐다고 추정했습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>. 금융감독원 자료로는 상장일부터 8월 14일까지 이 상품들에서 개인이 본 손실이 실현·평가손을 합쳐 약 6조 3,000억 원이었습니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>.</p>
+<p>그리고 결정적으로 — <strong>이들 상당수는 "반도체가 AI 붐의 중심"이라는 큰 그림에서 틀리지 않았습니다.</strong> 상품이 약속하는 '2배'가 무엇의 2배인지를 놓쳤을 뿐입니다.</p>
+<p>이 글은 레버리지 ETF를 사 봤거나 살까 고민 중인 분들을 위해 씁니다. 결론부터 말씀드리면, 이 상품의 2배는 '내 보유 기간의 2배'가 아니라 '오늘 하루의 2배'이고, 그 하루가 쌓이는 방식 때문에 같은 방향을 맞혀도 결과가 크게 달라집니다. 이 상품의 정식 이름에 답이 들어 있습니다. <strong>일일 재조정 레버리지 ETF(Daily Leveraged ETF)</strong>입니다.</p>
+<p>금융 유튜버 패트릭 보일이 7월 18일 이 사태를 다룬 영상 「How to Be Right and Lose Everything」을 출발점으로 삼았고, 영상 이후 석 달 동안 벌어진 일도 함께 짚습니다.</p>
+
+<h2>'2배 상품'과 '2배 수익'은 다릅니다</h2>
+<p>질문을 바꿔 보겠습니다. "이 주식이 얼마나 오를까"가 아니라 "이 주식이 <em>어떤 길로</em> 오를까"입니다. 레버리지 ETF의 결과는 도착 지점보다 가는 길에 더 크게 좌우됩니다.</p>
+<p>미국 증권거래위원회(SEC)의 투자자 안내문에 나오는 예가 가장 간단합니다. 어떤 지수가 첫날 10% 떨어지고 둘째 날 10% 오르면, 이틀 뒤 지수는 1% 손실입니다. 이 지수를 하루 2배로 따라가는 ETF는 첫날 20% 떨어지고 둘째 날 20% 올라, 이틀 뒤 4% 손실입니다. 지수 손실의 2배가 아니라 4배입니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>. 같은 안내문은 실제 사례도 듭니다. 넉 달 동안 지수가 2% 오르는 사이 그 지수의 2배 ETF는 6% 떨어졌습니다<sup class="fn"><a id="cite-5b" href="#ref-5">[5]</a></sup>.</p>
+<p>이틀로는 감이 덜 오니 열흘로 늘려 보겠습니다. 주가가 하루 10% 오르고 다음 날 10% 내리기를 열흘 동안 되풀이한다고 해 봅시다. 하루 10%씩 출렁이는 건 2026년 여름의 SK하이닉스에는 특별한 일이 아니었습니다.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 380" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">하루씩 ±10% 오가는 장, 열흘 뒤</title>
+<desc id="d-1">기초 주식이 하루 +10%, 다음 날 −10%를 열흘 동안 되풀이하면 주식은 약 5% 줄지만, 매일 2배를 맞추는 ETF는 그 두 배인 10%가 아니라 약 18% 줄어듭니다.</desc>
+<rect width="680" height="380" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">하루씩 ±10% 오가는 장, 열흘 뒤</text>
+
+<line x1="70" y1="320.0" x2="530" y2="320.0" stroke="#E4E0DA"/>
+<text x="60" y="324.0" font-size="12" text-anchor="end" fill="#6E6B7B">0</text>
+<line x1="70" y1="260.0" x2="530" y2="260.0" stroke="#E4E0DA"/>
+<text x="60" y="264.0" font-size="12" text-anchor="end" fill="#6E6B7B">50</text>
+<line x1="70" y1="200.0" x2="530" y2="200.0" stroke="#E4E0DA"/>
+<text x="60" y="204.0" font-size="12" text-anchor="end" fill="#6E6B7B">100</text>
+<line x1="70" y1="140.0" x2="530" y2="140.0" stroke="#E4E0DA"/>
+<text x="60" y="144.0" font-size="12" text-anchor="end" fill="#6E6B7B">150</text>
+<line x1="70" y1="80.0" x2="530" y2="80.0" stroke="#E4E0DA"/>
+<text x="60" y="84.0" font-size="12" text-anchor="end" fill="#6E6B7B">200</text>
+<text x="70.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">시작</text>
+<text x="116.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">1</text>
+<text x="162.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">2</text>
+<text x="208.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">3</text>
+<text x="254.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">4</text>
+<text x="300.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">5</text>
+<text x="346.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">6</text>
+<text x="392.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">7</text>
+<text x="438.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">8</text>
+<text x="484.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">9</text>
+<text x="530.0" y="342" font-size="12" text-anchor="middle" fill="#6E6B7B">10일</text>
+<polyline points="70.0,200.0 116.0,188.0 162.0,201.2 208.0,189.3 254.0,202.4 300.0,190.6 346.0,203.6 392.0,192.0 438.0,204.8 484.0,193.3 530.0,206.0" fill="none" stroke="#7466C2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="70.0" cy="200.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="116.0" cy="188.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="162.0" cy="201.2" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="208.0" cy="189.3" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="254.0" cy="202.4" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="300.0" cy="190.6" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="346.0" cy="203.6" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="392.0" cy="192.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="438.0" cy="204.8" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="484.0" cy="193.3" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<circle cx="530.0" cy="206.0" r="4.5" fill="#FBF9F6" stroke="#7466C2" stroke-width="2.5"/>
+<text x="542.0" y="211.0" font-size="14" font-weight="700" fill="#7466C2">기초 주식</text>
+<polyline points="70.0,200.0 116.0,176.0 162.0,204.8 208.0,181.8 254.0,209.4 300.0,187.3 346.0,213.8 392.0,192.6 438.0,218.0 484.0,197.6 530.0,222.1" fill="none" stroke="#3F8F6E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="70.0" cy="200.0" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="116.0" cy="176.0" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="162.0" cy="204.8" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="208.0" cy="181.8" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="254.0" cy="209.4" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="300.0" cy="187.3" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="346.0" cy="213.8" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="392.0" cy="192.6" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="438.0" cy="218.0" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="484.0" cy="197.6" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<circle cx="530.0" cy="222.1" r="4.5" fill="#FBF9F6" stroke="#3F8F6E" stroke-width="2.5"/>
+<text x="542.0" y="227.1" font-size="14" font-weight="700" fill="#3F8F6E">일일 2배 ETF</text>
+<text x="32" y="362" font-size="12" fill="#6E6B7B">그림: 직접 계산해 제작(수수료·괴리 제외), 원리는 미국 SEC 투자자 안내[5]</text>
+</svg>
+
+  <figcaption>기초 주식이 하루 +10%, 다음 날 −10%를 열흘 동안 되풀이하면 주식은 약 5% 줄지만, 매일 2배를 맞추는 ETF는 그 두 배인 10%가 아니라 약 18% 줄어듭니다. 그림: 직접 계산해 제작(수수료 제외).</figcaption>
+</figure>
+<p>비유하자면 레버리지 ETF는 <strong>매일 밤 0으로 돌아가는 계기판</strong>입니다. 오늘 2배를 정확히 맞추고 나면, 내일은 오늘 끝난 자리에서 다시 2배를 시작합니다. 어제까지의 손익은 기억하지 않습니다. 그러니 주가가 제자리로 돌아와도 ETF는 제자리로 돌아오지 않습니다.</p>
+<p>반대 경우도 있습니다. 주가가 5일 연속 3%씩 오르면 주식은 약 15.9% 오르고, 2배 ETF는 약 33.8% 올라 2배(31.9%)보다 조금 더 법니다. 직접 계산한 값입니다. <strong>한 방향으로 곧게 가는 장에서는 2배보다 더, 오르내리는 장에서는 2배보다 훨씬 덜</strong> 벌게 됩니다. 문제는 2배짜리를 살 만큼 출렁이는 주식이 곧게 가는 일은 드물다는 점입니다.</p>
+
+<h2>왜 생기나 — 매일 저녁 '오르면 사고 내리면 파는' 기계</h2>
+<p>교과서적인 답은 "복리 때문"입니다. 틀린 말은 아닌데, 이것만으로는 시장 전체가 왜 흔들렸는지까지 설명되지 않습니다. 열쇠는 이 펀드가 2배를 유지하는 방법에 있습니다.</p>
+<p>자기 돈 100에 주식 노출 200을 가진 2배 펀드를 생각해 보겠습니다. 주가가 10% 오르면 노출은 220, 펀드 가치는 120이 되어 비율이 1.83배로 떨어집니다. 내일도 2배를 맞추려면 오늘 장 마감에 20어치를 더 사야 합니다. 주가가 10% 내리면 노출은 180, 펀드 가치는 80이라 비율이 2.25배로 올라가고, 20어치를 팔아야 합니다. <strong>오르면 사고, 내리면 파는 방향이 계산식 자체에 들어 있습니다.</strong></p>
+<p>민더 쳉과 아난스 마다반은 2009년 논문에서 이 매일의 재조정이 장 마감 무렵 변동성을 키울 수 있고, 수익 구조 안에 경로에 따라 값이 달라지는 옵션 같은 성질이 숨어 있어 장기 보유자에게는 가치를 깎을 수 있다고 분석했습니다. 그래서 거래 비용까지 감안하면 장기 투자자에게 맞지 않는 상품이라는 결론을 냈습니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>.</p>
+<div class="key"><span class="label">핵심 —</span> 일일 레버리지 ETF의 손실은 운이 나빠서가 아니라 설계에서 나옵니다. 매일 2배를 다시 맞추기 때문에 출렁일수록 손실이 쌓이고, 그 재조정 매매가 다시 출렁임을 키웁니다.</div>
+<p>출렁임이 수익을 갉아먹는 원리, 이른바 변동성 끌림은 앞선 글 「방향을 맞힌 450억 달러 AI 펀드는 왜 한 달 만에 무너졌을까?」에서 따로 다뤘습니다. 이 글에서는 그 원리가 한 나라 주식시장 전체에 어떻게 번졌는지를 보겠습니다.</p>
+
+<h2>개인의 상품이 시장 전체를 흔들 때</h2>
+<p>재조정 매매는 펀드 하나에서 끝나지 않습니다. 같은 구조의 펀드가 수조 원 단위로 쌓이면, 매일 장 마감에 같은 방향으로 같은 시각에 사고파는 거대한 주문이 생깁니다.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 460" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">장 마감 재조정의 되먹임 고리</title>
+<desc id="d-2">레버리지 ETF는 주가가 떨어진 날 장 마감에 주식을 팔아야 2배를 유지할 수 있고, 같은 구조의 펀드가 쌓이면 그 매도가 다음 하락을 부르는 고리가 됩니다. 오른 날에는 같은 고리가 매수 쪽으로 돕니다.</desc>
+<defs><marker id="ah-2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6E6B7B"/></marker></defs>
+<rect width="680" height="460" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">장 마감 재조정의 되먹임 고리</text>
+<g stroke="#6E6B7B" stroke-width="2" fill="none" marker-end="url(#ah-2)">
+  <path d="M418,108 Q520,120 540,190"/>
+  <path d="M540,290 Q520,370 418,382"/>
+  <path d="M262,382 Q160,370 140,290"/>
+  <path d="M140,190 Q160,120 262,108"/>
+</g>
+<rect x="250" y="76" width="180" height="60" rx="30" fill="#D9D3F7" stroke="#7466C2" stroke-width="1.5"/>
+<rect x="460" y="210" width="180" height="60" rx="30" fill="#FBD9C6" stroke="#C06A45" stroke-width="1.5"/>
+<rect x="250" y="352" width="180" height="60" rx="30" fill="#CFE3F6" stroke="#3E7DB0" stroke-width="1.5"/>
+<rect x="40" y="210" width="180" height="60" rx="30" fill="#CDEBDD" stroke="#3F8F6E" stroke-width="1.5"/>
+<g font-size="16" font-weight="700" fill="#33313F" text-anchor="middle">
+  <text x="340" y="112">① 주가 하락</text>
+  <text x="550" y="246">② 2배 초과</text>
+  <text x="340" y="388">③ 장 마감 매도</text>
+  <text x="130" y="246">④ 추가 하락</text>
+</g>
+<text x="340" y="236" font-size="16" font-weight="800" text-anchor="middle" fill="#B24E6E">정해진 시각의 매도</text>
+<text x="340" y="258" font-size="13" text-anchor="middle" fill="#6E6B7B">가격도, 의견도 묻지 않음</text>
+<text x="32" y="446" font-size="12" fill="#6E6B7B">그림: 직접 제작 / 근거 [6]</text>
+</svg>
+  <figcaption>레버리지 ETF는 주가가 떨어진 날 장 마감에 주식을 팔아야 2배를 유지할 수 있고, 같은 구조의 펀드가 쌓이면 그 매도가 다음 하락을 부르는 고리가 됩니다. 오른 날에는 같은 고리가 매수 쪽으로 돕니다.</figcaption>
+</figure>
+<p>패트릭 보일은 영상에서 블룸버그 보도를 인용해, 장이 거친 날에는 이런 재조정 매매가 SK하이닉스 전체 거래의 3분의 2까지 차지했다고 전했습니다. 골드만삭스는 SK하이닉스가 두 자릿수로 떨어진 어느 월요일, 레버리지 펀드들이 장 마감에 약 50억 달러어치를 팔아야 했다고 추정했다고도 전했습니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>. 다만 이 두 수치는 영상이 전한 2차 인용으로, 저는 원 보도를 직접 확인하지 못했습니다.</p>
+<p>원 자료로 확인되는 숫자도 이 상품이 얼마나 뜨거웠는지 보여 줍니다. 금융감독원 소비자경보에 따르면 상장 직후 이 상품들의 하루 평균 매매 회전율은 122.5%였습니다. 하루에 상장 주식 전체가 한 번 넘게 손바뀜했다는 뜻입니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 266" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">하루에 몇 번 손바뀜했나 (일평균 매매 회전율)</title>
+<desc id="d-3">상장 직후 삼성전자·SK하이닉스 단일종목 레버리지 상품의 일평균 회전율은 122.5%로, 국내 주식형 레버리지·인버스 ETF(30.2%)의 네 배, 현물 주식(1% 미만)의 백 배가 넘었습니다.</desc>
+<rect width="680" height="266" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">하루에 몇 번 손바뀜했나 (일평균 매매 회전율)</text>
+
+<text x="176" y="100" font-size="15" text-anchor="end" fill="#33313F">단일종목 레버리지</text>
+<rect x="190" y="84" width="400" height="24" rx="12" fill="#E4E0DA" opacity=".45"/>
+<rect x="190" y="84" width="400.0" height="24" rx="12" fill="#FBD9C6" stroke="#C06A45" stroke-width="1.5"/>
+<text x="600.0" y="101" font-size="15" font-weight="700" fill="#C06A45">122.5%</text>
+<text x="176" y="146" font-size="15" text-anchor="end" fill="#33313F">레버리지·인버스 ETF</text>
+<rect x="190" y="130" width="400" height="24" rx="12" fill="#E4E0DA" opacity=".45"/>
+<rect x="190" y="130" width="98.6" height="24" rx="12" fill="#E9E6F1" stroke="#9A96AA" stroke-width="1.5"/>
+<text x="298.6" y="147" font-size="15" font-weight="700" fill="#9A96AA">30.2%</text>
+<text x="176" y="192" font-size="15" text-anchor="end" fill="#33313F">현물 주식</text>
+<rect x="190" y="176" width="400" height="24" rx="12" fill="#E4E0DA" opacity=".45"/>
+<rect x="190" y="176" width="24.0" height="24" rx="12" fill="#E9E6F1" stroke="#9A96AA" stroke-width="1.5"/>
+<text x="217.3" y="193" font-size="15" font-weight="700" fill="#9A96AA">1% 미만</text>
+<text x="203.3" y="209" font-size="11" fill="#6E6B7B">막대는 1%로 표시</text>
+<text x="32" y="248" font-size="12" fill="#6E6B7B">자료: 금융감독원 소비자경보(2026-06-18) 보도[1]로 재구성</text>
+</svg>
+
+  <figcaption>상장 직후 단일종목 레버리지 상품의 하루 평균 회전율은 122.5%로, 국내 주식형 레버리지·인버스 ETF(30.2%)의 네 배, 현물 주식(1% 미만)의 백 배가 넘었습니다. 자료: 금융감독원 소비자경보 보도[1]로 재구성.</figcaption>
+</figure>
+<p>숫자보다 중요한 게 하나 있습니다. 같은 소비자경보는 5월 27일부터 6월 12일까지 이어진 하락장에서 삼성전자 레버리지 상품이 최대 35.9%(기초 주식 −18.0%), SK하이닉스 레버리지 상품이 최대 38.0%(기초 주식 −19.1%) 떨어졌다고 밝혔습니다<sup class="fn"><a id="cite-1c" href="#ref-1">[1]</a></sup>. 상장 3주 만에 3분의 1 넘게 잃은 겁니다. 이 상품을 산 사람의 92.7%가 개인이었고, 같은 기간 유동성공급자 등 기관은 8조 6,000억 원어치를 순매도했습니다. 출렁임의 위험이 대부분 개인 쪽에 쌓여 있었습니다.</p>
+
+<h3>규제는 어떻게 따라왔나</h3>
+<p>이찬진 금융감독원장은 6월 22일 기자 간담회에서 이 상품의 도입을 막지 못한 데 대해 깊이 후회한다는 취지로 말했습니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>. 금융위원회는 7월 16일부터 단일종목 레버리지 상품의 신규 상장을 잠정 중단하고 광고를 금지했으며, 매수 시 현금 3,000만 원 이상을 요구하는 기본예탁금 강화를 7월 31일로 앞당겼습니다. 순자산가치와 시장 가격의 차이(괴리율) 관리 기준도 3%에서 2%로 조였고, 최소 매매 단위를 1좌에서 20좌로 늘리는 방안도 검토한다고 밝혔습니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>.</p>
+<p>보일은 이를 두고 "카지노를 다 지어 놓고 교육 영상과 입장료를 붙인 격"이라고 꼬집었습니다<sup class="fn"><a id="cite-7d" href="#ref-7">[7]</a></sup>. 날카로운 농담이지만 한쪽 면만 본 평가이기도 합니다. 진입 문턱은 상품 구조를 바꾸지는 못해도, 구조를 모르는 사람이 소액으로 쉽게 들어오는 길은 좁힙니다. 효과가 어느 쪽이 컸는지는 아직 평가할 자료가 부족합니다.</p>
+
+<h2>영상 이후 석 달 — 맞은 것과 빗나간 것</h2>
+<p>보일의 영상에는 두 가지 큰 진단이 있었습니다. 하나는 한국 증시가 사실상 미국 빅테크 몇 곳의 AI 설비투자에 걸린 레버리지 베팅이라서, 그 지출에 의문이 생기면 "첫 진동은 실리콘밸리가 아니라 서울에서 느껴질 것"이라는 경고였습니다. 다른 하나는 수출로 번 달러가 해외에 머물고 개인들이 미국 주식을 사느라 원화가 흑자에도 약하다는 진단이었습니다<sup class="fn"><a id="cite-7b" href="#ref-7">[7]</a></sup>.</p>
+<p>첫째 경고는 10월에 상당 부분 현실이 됐습니다. 10월 30일 코스피는 3.48% 떨어진 5,730.74에 마감했는데, 알파벳과 아마존의 실적 발표 뒤 AI 인프라 비용과 투자 회수에 대한 의문이 커진 것이 배경으로 꼽혔습니다. 같은 날 SK하이닉스는 7.08% 떨어졌고, 15일에는 코스피가 하루에 7.57% 빠지기도 했습니다<sup class="fn"><a id="cite-10" href="#ref-10">[10]</a></sup>. 10월 한 달 하락률은 16.2%였습니다<sup class="fn"><a id="cite-11" href="#ref-11">[11]</a></sup>. 10월 30일 종가는 6월 19일 장중 고점보다 약 39% 낮습니다(직접 계산).</p>
+<p>둘째 진단은 반대로 움직였습니다. 원·달러 환율은 7월 초 1,550원대에서 10월 19일 1,330.3원으로 내려와, 2024년 10월 이후 가장 강한 원화가 됐습니다. 메모리 수출 급증으로 달러 공급이 늘어난 것이 이유로 꼽혔고, 1~8월 경상수지 흑자는 2,792억 달러로 지난해 같은 기간의 약 네 배였습니다<sup class="fn"><a id="cite-12" href="#ref-12">[12]</a></sup>.</p>
+<figure>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="100%" role="img" aria-labelledby="t-4 d-4" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-4">영상(7월)의 두 진단, 석 달 뒤</title>
+<desc id="d-4">영상이 나온 뒤 석 달 동안, AI 지출 의문이 서울 증시를 먼저 흔들 거라는 경고는 10월 코스피 급락으로 상당 부분 현실이 됐지만, 원화가 흑자에도 약하다는 진단은 원화 강세로 반대로 움직였습니다.</desc>
+<rect width="680" height="400" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">영상(7월)의 두 진단, 석 달 뒤</text>
+<rect x="32" y="70" width="296" height="290" rx="16" fill="#F6CCD8" stroke="#B24E6E" stroke-width="1.5"/>
+<rect x="352" y="70" width="296" height="290" rx="16" fill="#CFE3F6" stroke="#3E7DB0" stroke-width="1.5"/>
+<text x="180" y="106" font-size="18" font-weight="800" text-anchor="middle" fill="#B24E6E">AI 지출 의문과 증시</text>
+<text x="500" y="106" font-size="18" font-weight="800" text-anchor="middle" fill="#3E7DB0">흑자인데 약한 원화</text>
+<line x1="56" y1="122" x2="304" y2="122" stroke="#B24E6E" stroke-opacity=".35"/>
+<line x1="376" y1="122" x2="624" y2="122" stroke="#3E7DB0" stroke-opacity=".35"/>
+<g font-size="15" fill="#33313F">
+  <text x="56" y="164">"첫 진동은 서울에서"</text><text x="376" y="164">"수출 달러가 안 돌아온다"</text>
+  <text x="56" y="214">7월 중순: 고점 대비 약 −27%</text><text x="376" y="214">7월 초: 1,550원대</text>
+  <text x="56" y="264">10월: 한 달 −16.2%</text><text x="376" y="264">10월 19일: 1,330.3원</text>
+  <text x="56" y="314" font-weight="700">경고 쪽으로 움직임</text><text x="376" y="314" font-weight="700">진단과 반대로 움직임</text>
+</g>
+<g font-size="11" font-weight="700" fill="#6E6B7B" text-anchor="middle">
+  <circle cx="340" cy="159" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="163">진단</text>
+  <circle cx="340" cy="209" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="213">7월</text>
+  <circle cx="340" cy="259" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="263">10월</text>
+  <circle cx="340" cy="309" r="16" fill="#FBF9F6" stroke="#E4E0DA"/><text x="340" y="313">결과</text>
+</g>
+<text x="32" y="384" font-size="12" fill="#6E6B7B">자료: [3][7][11][12]로 재구성</text>
+</svg>
+  <figcaption>영상이 나온 뒤 석 달 동안, AI 지출 의문이 서울 증시를 먼저 흔들 거라는 경고는 10월 코스피 급락으로 상당 부분 현실이 됐지만, 원화가 흑자에도 약하다는 진단은 원화 강세로 반대로 움직였습니다.</figcaption>
+</figure>
+<p>여기서 분명히 해 두겠습니다. 석 달은 짧은 시간이고, 주가 하락과 원화 강세 모두 여러 원인이 겹친 결과입니다. 보일의 경고가 '맞았다'기보다는, 그가 지목한 의존 구조가 실제로 작동하는 모습이 한 번 관찰됐다고 보는 편이 정확합니다. 빅테크들이 지출을 실제로 줄였다는 자료는 아직 없습니다. 시장이 그 가능성을 먼저 가격에 반영했을 뿐입니다.</p>
+
+<h2>내 돈에 적용하면 — 방향보다 '크기'와 '길'</h2>
+<p>보일이 영상의 핵심 교훈으로 든 실험이 있습니다. 빅터 하가니와 리처드 듀이는 경제·금융을 공부한 학생과 젊은 금융 회사 직원 61명에게 25달러씩 주고, 앞면이 60% 나온다고 미리 알려 준 동전에 30분 동안 마음대로 걸게 했습니다. 확률이 분명히 유리한 게임이었는데도 28%가 파산했고, 상금 상한(250달러) 근처까지 간 사람은 21%였으며, 평균 지급액은 91달러였습니다<sup class="fn"><a id="cite-13" href="#ref-13">[13]</a></sup>. 매번 가진 돈의 10~20%만 거는 단순한 방법이었다면 약 95%가 상한에 닿았을 거라고 저자들은 추산합니다<sup class="fn"><a id="cite-13b" href="#ref-13">[13]</a></sup>.</p>
+<p>보일의 표현을 빌리면, 이들은 "추세는 정확히 맞혔고, 베팅 크기만 틀렸습니다." 레버리지 ETF에서는 여기에 '길'이 하나 더 붙습니다. 점검할 것을 표로 정리했습니다.</p>
+<table>
+  <thead><tr><th>점검할 것</th><th>왜 중요한가</th><th>스스로 던질 질문</th></tr></thead>
+  <tbody>
+    <tr class="hl"><td>보유 기간</td><td>2배는 하루짜리 약속입니다. 며칠만 지나도 2배에서 벗어납니다</td><td>나는 이걸 오늘 팔 계획인가, 몇 달 들고 갈 계획인가?</td></tr>
+    <tr><td>출렁임</td><td>오르내림이 클수록 같은 도착점에서도 손실이 쌓입니다</td><td>이 주식은 하루에 몇 %씩 움직이는가?</td></tr>
+    <tr><td>빚과의 결합</td><td>신용으로 레버리지 ETF를 사면 레버리지 위에 레버리지가 얹힙니다</td><td>얼마나 떨어지면 반대매매가 나가는가?</td></tr>
+    <tr><td>한 종목 집중</td><td>단일종목 상품은 분산이 전혀 없습니다</td><td>이 회사 하나가 틀리면 내 자산 중 몇 %가 함께 흔들리는가?</td></tr>
+  </tbody>
+</table>
+<div class="key"><span class="label">핵심 —</span> 이 표에서 읽어야 할 것은 '무엇을 살까'가 아닙니다. 같은 SK하이닉스라도 주식으로 들고 있는 것과 일일 2배 상품을 빚으로 들고 있는 것은 전혀 다른 내기입니다.</div>
+<div class="caution">미리 말씀드려야 할 게 있습니다. 위 열흘짜리 그림과 5일 연속 상승 예시는 원리를 보이려고 만든 가상의 경로입니다. 실제 상품은 운용 보수, 스와프 비용, 시장 가격과 순자산가치의 차이 때문에 계산보다 조금씩 더 불리하게 움직입니다.</div>
+
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>이 일을 "개미들이 무모했다"로 정리하고 싶지는 않습니다. 집값과 일자리 앞에서 느린 길이 막혀 보이는 사람에게 빠른 길이 유혹적인 건 당연합니다. 그리고 그들이 본 큰 그림은 대체로 맞았습니다.</p>
+    <p><strong>"방향은 맞힐지를 정하고, 크기와 길은 남을지를 정합니다."</strong> 레버리지 ETF는 방향만 보고 사기 쉬운 상품이지만, 실제 결과는 크기와 길에서 갈립니다.</p>
+    <p>그래서 상품 이름을 끝까지 읽는 습관 하나가 큰 차이를 만듭니다. '2배' 앞에 붙은 '일일'이라는 두 글자 말입니다.</p>
+  </blockquote>
+</section>
+
+<hr>
+<p>정리하자면 이렇습니다. 일일 레버리지 ETF의 2배는 하루짜리 약속이고, 매일 다시 맞추는 과정에서 출렁임이 손실로 쌓입니다. 같은 구조의 상품이 크게 불어나면 그 재조정 매매가 시장 전체의 출렁임을 키우고, 빚까지 얹힌 개인은 회복을 기다리기 전에 반대매매로 밀려납니다. 2026년 한국은 그 과정을 몇 달 만에 모두 보여 줬습니다.</p>
+<p>레버리지 상품을 사기 전에 이렇게 물어보시면 좋겠습니다. <strong>"이 주식이 오를까"가 아니라, "이 주식이 오르내리는 동안 나는 끝까지 남아 있을 수 있는가?"</strong></p>
+
+<p class="disclaimer">이 글은 금융 상품의 구조를 설명하기 위한 일반적인 정보이며, 특정 상품이나 투자 전략을 권유하지 않습니다. 실제 투자 판단은 본인의 재무 상황을 고려해 공인된 금융 전문가와 상의하세요. 2026년 사례의 수치는 7~10월 보도 기준이며, 일부는 추정치입니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">파이낸셜뉴스. 금감원, 삼성전자·SK하이닉스 단일종목 레버리지 상품 소비자경보('주의') 발령, 2026-06-18 (금융감독원 발표 보도). <a href="https://www.fnnews.com/news/202606181124576269">링크</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">The Korea Times. KOSPI slips from record high amid US-Iran uncertainty, 2026-06-19. <a href="https://www.koreatimes.co.kr/economy/20260619/kospi-slips-from-record-high-amid-us-iran-uncertainty">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">Investing.com. Korea's Leveraged Chip Trade Hits the Margin Call Wall, 2026-07-16 (골드만삭스 트레이딩 데스크 추정 인용, 해설 기사). <a href="https://www.investing.com/analysis/koreas-leveraged-chip-trade-hits-the-margin-call-wall-200684082">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Seoul Economic Daily. Retail Losses on Single-Stock Leveraged Products Top 6 Trillion Won, 2026-10-23 (금융감독원 국정감사 제출 자료 보도). <a href="https://en.sedaily.com/finance/2026/10/23/retail-losses-on-single-stock-leveraged-products-top-6">링크</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">U.S. Securities and Exchange Commission, Office of Investor Education and Advocacy. Updated Investor Bulletin: Leveraged and Inverse ETFs, 2023-08-29. <a href="https://www.investor.gov/news-alerts/investor-alerts/sec-finra-investor-alert-leveraged-inverse-etfs">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Cheng M, Madhavan A. The Dynamics of Leveraged and Inverse Exchange-Traded Funds. <i>Journal of Investment Management</i> 7(4), 2009. <a href="https://joim.com/dynamics-leveraged-inverse-exchange-traded-funds">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Patrick Boyle. How to Be Right and Lose Everything (YouTube 영상), 2026-07-18 (블룸버그·골드만삭스·FT 보도 인용, 해설). <a href="https://www.youtube.com/watch?v=nJtL9MBVj48">링크</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">경향신문 영문판. FSS Governor Lee Chan-jin on single-stock leverage ETFs, 2026-06-22. <a href="https://www.khan.co.kr/en/article/202606221837027">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">금융위원회. 단일종목 레버리지 상품(ETF·ETN) 기본예탁금 강화 조기시행 방안 안내(보도자료), 2026-07-24 (KDI 경제정보센터 게재본). <a href="https://eiec.kdi.re.kr/policy/materialView.do?num=284654">링크</a> <a class="back" href="#cite-9">↩</a></li>
+    <li id="ref-10">The Korea Times. KOSPI falls 3.48% as US tech earnings fuel AI investment concerns, 2026-10-30. <a href="https://www.koreatimes.co.kr/economy/others/20261030/kospi-falls-348-as-us-tech-earnings-fuel-ai-investment-concerns">링크</a> <a class="back" href="#cite-10">↩</a></li>
+    <li id="ref-11">Digital Today. October nightmare for KOSPI faces rebound test on U.S. midterms, 2026-10. <a href="https://www.digitaltoday.co.kr/en/view/122153/october-nightmare-kospi-us-midterm-elections-rebound-test">링크</a> <a class="back" href="#cite-11">↩</a></li>
+    <li id="ref-12">Seoul Economic Daily. Won Hits 2-Year High at 1,330 as Chip Exports Lift Current Account, 2026-10-20 (한국은행 통계 인용). <a href="https://en.sedaily.com/finance/2026/10/20/won-hits-2-year-high-at-1330-as-chip-exports-lift-current">링크</a> <a class="back" href="#cite-12">↩</a></li>
+    <li id="ref-13">Haghani V, Dewey R. Rational Decision-Making under Uncertainty: Observed Betting Patterns on a Biased Coin. SSRN, 2016. <a href="https://papers.ssrn.com/abstract=2856963">링크</a> · 결과 요약: <a href="https://elmwealth.com/?p=306">Elm Wealth</a> <a class="back" href="#cite-13">↩</a></li>
+  </ol>
+</section>
+</article>
+</body>
+</html>
