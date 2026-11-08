@@ -44,6 +44,22 @@ describe('build output', () => {
     expect(links.length).toBeGreaterThan(1)
     for (const l of links) expect(new URL(l).pathname.startsWith(BASE)).toBe(true)
   })
+  // 사용자 11/08: 검색 등록(Search Console·네이버)에 낼 사이트맵과 robots.txt
+  it('lists every post, shelf and the front page in the sitemap — and nothing private', () => {
+    const locs = [...html('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname)
+    const fx = loadPosts('tests/fixtures/posts')
+    expect(fx.length).toBeGreaterThan(0)
+    for (const p of fx) expect(locs).toContain(`${BASE}posts/${p.slug}/`)
+    for (const c of activeCategories(fx)) expect(locs).toContain(`${BASE}category/${c.slug}/`)
+    expect(locs).toContain(BASE)
+    expect(locs.filter((l) => /search|edit|404/.test(l))).toEqual([])
+    expect(new Set(locs).size).toBe(locs.length)
+  })
+  it('points robots.txt at the sitemap without blocking anything', () => {
+    const robots = html('robots.txt')
+    expect(robots).toMatch(new RegExp(`^Sitemap: https?://[^\\s]+${BASE}sitemap\\.xml$`, 'm'))
+    expect(robots).not.toMatch(/^Disallow:\s*\/\S*/m)
+  })
   it('keeps post css scoped — no bare body/h1/h2/:root/article rule in <style>', () => {
     const root = parse(html('posts/sample-econ/index.html'))
     const css = root.querySelectorAll('style').map((s) => s.textContent).join('\n')
