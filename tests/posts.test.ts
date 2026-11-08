@@ -117,4 +117,10 @@ describe('key box label', () => {
       .filter((s) => /<span class="label">\s*핵심\s*—/.test(readFileSync(join('posts', s, 'post.html'), 'utf8')))
     expect(hits).toEqual([])
   })
+  // 사용자 11/08: 서론마다 붙던 '그리고 결정적으로 —'도 같은 버릇이라 27곳에서 뺐다.
+  it('no post uses the "결정적으로" lead-in', () => {
+    const hits = readdirSync('posts').filter((s) => existsSync(join('posts', s, 'post.html')))
+      .filter((s) => /결정적으로/.test(readFileSync(join('posts', s, 'post.html'), 'utf8')))
+    expect(hits).toEqual([])
+  })
 })
