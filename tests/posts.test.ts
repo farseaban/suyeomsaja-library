@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { loadPosts, pickFeatured, activeCategories, seriesNames, neighbors, minutesLabel } from '../src/lib/posts'
@@ -107,5 +107,14 @@ describe('post date on the page', () => {
     for (const p of loadPosts('posts')) {
       if (p.metaLine && /^\d{4}-\d{2}-\d{2}/.test(p.metaLine)) expect(p.metaLine.slice(0, 10), p.slug).toBe(p.date)
     }
+  })
+})
+
+// 사용자 11/08: 상자마다 붙던 '핵심 —' 머리말은 AI 글 같아서 뺐다. 다시 들어오지 않게 막는다.
+describe('key box label', () => {
+  it('no post labels its key box "핵심 —"', () => {
+    const hits = readdirSync('posts').filter((s) => existsSync(join('posts', s, 'post.html')))
+      .filter((s) => /<span class="label">\s*핵심\s*—/.test(readFileSync(join('posts', s, 'post.html'), 'utf8')))
+    expect(hits).toEqual([])
   })
 })

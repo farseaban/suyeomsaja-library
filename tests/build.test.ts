@@ -142,7 +142,8 @@ describe('page head', () => {
 describe('site css stays out of posts', () => {
   const tpl = readFileSync('posts/anthropic-fair-value-loss/post.html', 'utf8')
   // kicker(연재 표시)는 공개 글에서 뺐지만 글 템플릿과 테스트용 글에는 남아 있어 함께 지킨다
-  const postClasses = [...new Set([...tpl.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)).concat('kicker'))].sort()
+  // label도 '핵심 —' 머리말을 뺀 뒤(11/08) 이 글에서 사라졌지만 다른 상자 머리말에 남아 있어 함께 지킨다
+  const postClasses = [...new Set([...tpl.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)).concat('kicker', 'label'))].sort()
   // 낱말 단위로 대조한다 — 부분 문자열로 보면 .s-post-meta·.s-label·.s-about-quote가 meta·label·quote에 걸린다
   const named = new RegExp(`\\.(${postClasses.join('|')})(?![\\w-])`)
   it('knows the thirteen class names of the post template', () => {
