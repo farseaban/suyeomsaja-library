@@ -50,7 +50,7 @@
    - DNS: `@`에 A 4개(185.199.108~111.153)와 AAAA 4개(2606:50c0:8000~8003::153), `www`에 CNAME `farseaban.github.io`, 계정 도메인 인증용 TXT `_github-pages-challenge-farseaban`. 모두 회색 구름(DNS only). 주황 구름이면 GitHub이 인증서를 못 받는다.
    - 사용자 도메인은 `public/CNAME`이 아니라 Pages 설정에 둔다(Actions 배포는 CNAME 파일을 읽지 않는다): `gh api -X PUT repos/farseaban/suyeomsaja-library/pages -f cname=suyeomsaja.com -F https_enforced=true`.
    - 옛 주소 `farseaban.github.io/suyeomsaja-library/…`는 GitHub이 같은 경로의 새 도메인으로 301 넘긴다. 댓글은 글 이름에 묶여 있어 주소가 바뀌어도 그 글에 남는다.
-9. **[승인]** 정식으로 공개할 때: 변수 `PUBLIC_ALLOW_INDEXING=true`를 넣고 다시 배포한다. 이 변수가 없으면 모든 쪽에 `noindex`가 붙어 검색에 나오지 않는다. 다만 주소를 아는 사람은 볼 수 있고, 저장소도 공개 상태다.
+9. **[완료 2026-11-08]** 정식으로 공개할 때: 변수 `PUBLIC_ALLOW_INDEXING=true`를 넣고 다시 배포한다. 이 변수가 없으면 모든 쪽에 `noindex`가 붙어 검색에 나오지 않는다. 다만 주소를 아는 사람은 볼 수 있고, 저장소도 공개 상태다.
    - 검색 등록은 11/08에 미리 해 두었다: Google Search Console(도메인 속성, Cloudflare TXT로 인증)·네이버 서치어드바이저(`SITE.naverVerification` 태그). 공개 날 Google은 Sitemaps에 `https://suyeomsaja.com/sitemap.xml`을 내고 URL 검사로 1면 색인을 요청한다. 네이버는 요청 → 사이트맵 제출(`sitemap.xml`)·RSS 제출(`rss.xml`).
 
 main 보호(2026-11-08): 저장소 규칙 "main 보호"가 원격 `main`의 강제 덮어쓰기와 삭제를 막는다(예외 없음). 평소 `git push origin publish:main`은 그대로 된다. 이력을 다시 써야 할 일이 생기면 Settings → Rules → Rulesets에서 잠시 끄고, 끝나면 다시 켠다.
