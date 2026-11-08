@@ -37,13 +37,13 @@ describe('published posts', () => {
 describe('field colours', () => {
   // 분야는 학문 이름이 아니라 독자가 얻으러 오는 것으로 묶는다(11/07 사용자 결정). 색은 분야마다 명시한다.
   const TABLE: [slug: string, name: string, color: string][] = [
+    ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
+    ['tech', 'AI와 기술의 현재', 'sky'],
+    ['economy', '돈과 세상의 원리', 'sky'],
     ['fact-check', '진실 혹은 거짓', 'peach'],
     ['learning', '일과 학습의 기술', 'butter'],
     ['philosophy', '철학의 아름다움', 'lav'],
     ['classics', '다시 보는 고전과 예술', 'rose'],
-    ['economy', '돈과 세상의 원리', 'sky'],
-    ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
-    ['tech', 'AI와 기술의 현재', 'sky'],
     ['nature', '인류와 생명의 수수께끼', 'mint'],
   ]
   it('assigns each of the eight shelves its colour, in the same menu order', () => {
@@ -64,7 +64,7 @@ describe('pickFeatured', () => {
 
 describe('lists', () => {
   it('shows only categories with posts, in config order', () => {
-    expect(activeCategories(posts).map((c) => c.name)).toEqual(['철학의 아름다움', '돈과 세상의 원리', '인류와 생명의 수수께끼'])
+    expect(activeCategories(posts).map((c) => c.name)).toEqual(['돈과 세상의 원리', '철학의 아름다움', '인류와 생명의 수수께끼'])
   })
   it('collects series names', () => expect(seriesNames(posts)).toEqual(['숫자 읽기 · 사례로 읽기', '자연 읽기']))
   it('finds date neighbors', () => {

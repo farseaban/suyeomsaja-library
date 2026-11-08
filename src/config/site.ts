@@ -16,13 +16,14 @@ export type Category = { slug: string; name: string; color: PaletteKey }
 // 이름만 보고 안에 무엇이 있을지 맞힐 수 있어야 한다 — 맞지 않는 글은 다른 서가로 보낸다.
 // 색은 분야마다 명시한다 — 뜻이 가까운 분야끼리 한 색(돈·AI 동향, 일과 학습·AI 생산성).
 const CATEGORY_LIST: [slug: string, name: string, color: PaletteKey][] = [
+  // AI와 경제 서가를 맨 앞에 둔다(사용자 11/08).
+  ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
+  ['tech', 'AI와 기술의 현재', 'sky'],
+  ['economy', '돈과 세상의 원리', 'sky'],
   ['fact-check', '진실 혹은 거짓', 'peach'],
   ['learning', '일과 학습의 기술', 'butter'],
   ['philosophy', '철학의 아름다움', 'lav'],
   ['classics', '다시 보는 고전과 예술', 'rose'],
-  ['economy', '돈과 세상의 원리', 'sky'],
-  ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
-  ['tech', 'AI와 기술의 현재', 'sky'],
   ['nature', '인류와 생명의 수수께끼', 'mint'],
 ]
 
