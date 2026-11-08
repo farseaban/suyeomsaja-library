@@ -223,9 +223,6 @@ a{color:inherit;-webkit-tap-highlight-color:color-mix(in srgb,var(--lav) 45%,tra
 /* 1면 히어로는 가로로 끌면 하늘이 돈다(sky.ts) — 세로 스크롤과 두 손가락 확대는 브라우저에 그대로 둔다 */
 .p-front .s-hero{padding-bottom:0;touch-action:pan-y pinch-zoom}
 .p-front .s-hero.s-hero-plain{padding-bottom:calc(262px*var(--glow))}
-.s-standfirst{margin:var(--sp-6) 0 0;font-size:19px;font-weight:500;line-height:1.65;color:var(--on-night-2)}
-.s-standfirst span{display:block}
-.s-standfirst span:first-child{color:var(--on-night)}
 .s-hero .empty{margin:0;padding:var(--sp-9) 0 var(--sp-7);font-size:22px;text-align:center;color:var(--on-night-2)}
 .lead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding:var(--sp-7) 0 calc(262px*var(--glow));overflow-x:clip}
 .s-lead-text{min-width:0;align-self:center}
@@ -262,10 +259,9 @@ a{color:inherit;-webkit-tap-highlight-color:color-mix(in srgb,var(--lav) 45%,tra
 }
 @media (max-width:760px){
   .p-front{--glow:.6}
-  /* 휴대폰 1면의 달은 사이트 설명 아래, 머리기사 위 줄 높이로 내려온다 */
+  /* 휴대폰 1면의 달은 머리기사 제목 옆 높이로 내려온다 */
   .p-front .s-sky-moon{top:189px}
-  .s-standfirst{margin-top:var(--sp-3);font-size:14.5px;line-height:1.6}
-  /* 첫 화면(390×664)에 설명 · 제목 · 주인공 얼굴이 함께 들어오게: 글 → 장면 순서, 장면은 날짜 줄 위로 32px 끌어올린다 */
+  /* 첫 화면(390×664)에 제목 · 주인공 얼굴이 함께 들어오게: 글 → 장면 순서, 장면은 날짜 줄 위로 32px 끌어올린다 */
   .lead{grid-template-columns:1fr;gap:0;padding:var(--sp-4) 0 calc(262px*var(--glow))}
   .lead h1{margin:10px 0 14px}
   /* 달 밑으로 제목 줄이 들어가지 않게 — 달은 틀 오른쪽 끝에서 37px 안쪽까지 온다(안쪽 페이지 제목과 같은 여백) */

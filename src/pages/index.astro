@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro'
 import { loadPosts, minutesLabel, pickFeatured } from '../lib/posts'
 import { url } from '../lib/url'
-import { SITE } from '../config/site'
 import Chip from '../components/Chip.astro'
 import Title from '../components/Title.astro'
 import SecHead from '../components/SecHead.astro'
@@ -13,14 +12,10 @@ const posts = loadPosts()
 const lead = pickFeatured(posts)
 const rest = posts.filter((p) => p !== lead).slice(0, 6)
 const when = (d: string) => d.replaceAll('-', '.')
-// 사이트 설명은 화면에서만 두 줄로 가른다 — 문자열 사본을 만들지 않는다(두 줄을 이으면 원문과 같은 글자다)
-const [standA, ...standRest] = SITE.description.split(' — ')
-const standB = standRest.join(' — ')
 const leadMin = lead ? minutesLabel(lead.minutes) : null
 ---
 <Base bodyClass="p-front" skyDrag heroPlain={!lead}>
   <div class="wrap" slot="hero">
-    <p class="s-standfirst s-serif"><span>{standA}</span>{standB && <Fragment>{' '}<span>— {standB}</span></Fragment>}</p>
     {!lead && <p class="empty s-serif">첫 글을 준비하고 있습니다.</p>}
     {lead && (
       <section class="lead">

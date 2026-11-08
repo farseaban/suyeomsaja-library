@@ -547,17 +547,13 @@ describe('front page', () => {
   const of = (sel: string, media = '') => rules(siteCss()).filter((r) => r.sel === sel && r.media === media).map((r) => r.body).join(';')
   const phone = 'media(max-width:760px)'
 
-  it('opens the hero with the site description on two lines, read from the site config', () => {
-    const stand = front().querySelector('.s-top .s-hero > .wrap > p.s-standfirst')!
-    const spans = stand.querySelectorAll('span')
-    expect(spans).toHaveLength(2)
-    expect(spans.map((s) => s.text).join(' ')).toBe(SITE.description)
-    expect(stand.text).toBe(SITE.description)
-    expect(spans[1].text.startsWith('— ')).toBe(true)
-    // 사용자 문구의 사본을 만들지 않는다
-    const src = readFileSync('src/pages/index.astro', 'utf8')
-    expect(src).not.toContain('얼어붙은')
-    expect(src).not.toContain('사고 실험')
+  // 사용자 11/08: 첫 화면 글씨가 많다는 평 — 사이트 소개 두 줄은 1면 머리에서 빼고 꼬리말·공유 설명에만 둔다
+  it('opens the hero straight with the lead — the site description stays in the footer only', () => {
+    const root = front()
+    expect(root.querySelector('.s-standfirst')).toBeNull()
+    expect(root.querySelector('.s-top .s-hero > .wrap')!.firstElementChild!.tagName).toBe('SECTION')
+    expect(root.querySelector('.footer')!.text.replace(/\s+/g, ' ')).toContain(SITE.description.split(' — ')[0])
+    expect(root.querySelector('meta[name="description"]')!.getAttribute('content')).toBe(SITE.description)
   })
   it('sets the lead in the hero — one h1, title in two lines, summary, date and reading time', () => {
     const root = front()
