@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI에게 길고 공손하게 물을수록 답이 좋아질까? — 예의와 길이 대신 챙겨야 할 네 가지와 고쳐 쓴 질문 한 벌</title>
+<meta name="description" content="AI에게 '부디', '감사하겠습니다'를 붙이면 답이 좋아질까. 공손함의 수준을 여덟 단계로 나눠 시험한 연구, 무례한 질문이 오히려 점수가 높았던 연구, 세 회사 모델이 어조에 거의 흔들리지 않았던 연구를 차례로 읽고, '단계별로 생각해 보자' 한 문장이 정답률을 네 배로 올린 논문과 모델 제작사들의 공식 안내서에서 실제로 답을 바꾸는 요소를 추립니다. 끝에 그대로 베껴 쓸 수 있는 고쳐 쓴 질문을 둡니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:#FFF8E0;border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:#FDF0EA;border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:#FDF0EA}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:#F2F7FC;border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:#FFF8E0}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<h1>AI에게 길고 공손하게 물을수록 답이 좋아질까? — 예의와 길이 대신 챙겨야 할 네 가지와 고쳐 쓴 질문 한 벌</h1>
+<div class="meta">2026-10-20 · 약 11분 분량 · 글 수염사자</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"안녕하세요, 바쁘신데 죄송합니다. 혹시 괜찮으시다면 기후변화에 대해 보다 자세하게 설명해 주시면 정말 감사하겠습니다."</p>
+<p>채팅창에 이렇게 쓰는 분이 많습니다. 사람에게 부탁할 때처럼 인사를 넣고, 양해를 구하고, 끝에 감사를 미리 붙입니다. 반대로 어차피 기계인데 뭐하러 예의를 차리느냐며 명령문 한 줄만 던지는 분도 있습니다. 두 쪽 다 같은 가정 위에 서 있습니다. 공손함이라는 변수가 답의 질을 어느 쪽으로든 움직인다는 가정입니다.</p>
+<p>이 가정은 실제로 시험됐습니다. 공손함의 수준을 여덟 단계로 나눠 세 언어로 돌린 연구가 있고, 아주 무례한 질문이 오히려 정답률이 높았다는 짧은 논문이 있고, 세 회사의 최신 모델이 어조에 거의 흔들리지 않았다는 후속 연구가 있습니다. 그리고 그 옆에는 질문에 한 문장을 더 붙였더니 정답률이 네 배로 뛴 논문이 있습니다. 그 한 문장은 인사말이 아니었습니다.</p>
+<p>미리 말씀드리면 결론은 이렇습니다. <strong>답을 바꾸는 것은 질문의 길이도 예의도 아니라, 질문 안에 무엇이 들어 있느냐입니다.</strong> 그 '무엇'이 정확히 어떤 것인지를, 근거가 있는 것만 골라 적겠습니다.</p>
+
+<!-- 2. 공손함 -->
+<h2>공손함은 점수를 올리지 않았다</h2>
+<p>2024년 일본 와세다대학과 이화학연구소 연구진은 질문의 공손함을 여덟 단계로 나눴습니다. 가장 공손한 8단계부터 가장 무례한 1단계까지인데, 1단계에는 "이 질문에 답해, 이 쓰레기야" 같은 욕설이 들어갑니다. 이 여덟 벌의 질문을 영어·중국어·일본어로 만들어 GPT-3.5, GPT-4, 그리고 메타(Meta)의 라마2 70B 모델에 던지고, 요약·객관식 시험·편견 측정의 세 과제로 점수를 매겼습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>영어 객관식 시험 결과를 보겠습니다. GPT-3.5는 가장 공손한 8단계에서 60.02점으로 가장 높았고, 가장 무례한 1단계에서 51.93점으로 뚝 떨어졌습니다. 8점 넘게 차이가 납니다. 그런데 중간 단계들은 57점에서 59점 사이에서 오르내렸을 뿐이라 이웃한 단계끼리는 통계적으로 구분되지 않았습니다. GPT-4는 더 평평했습니다. 가장 낮은 점수가 3단계의 73.86점, 가장 높은 점수가 4단계의 79.09점이었는데, 가장 공손한 8단계는 75.82점, 가장 무례한 1단계는 76.47점으로 둘이 거의 같았습니다. 저자들은 이를 두고 진보한 모델에서는 공손함의 영향이 더 작을 수 있다고 적었습니다. 라마2 70B만 달랐습니다. 공손할수록 점수가 올라가다가 1단계에서 28.44점으로 반토막이 났습니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">공손함 여덟 단계와 영어 객관식 시험 점수</title>
+<desc id="d-1">가장 공손한 8단계에서 가장 무례한 1단계까지 질문의 어조를 바꿨을 때 GPT-4는 74점에서 79점 사이에서 거의 평평했고, GPT-3.5는 57점에서 60점 사이를 오가다 1단계에서 52점으로 떨어졌으며, 라마2 70B는 55점에서 49점으로 서서히 내려오다 1단계에서 28점으로 급락했다.</desc>
+<rect width="680" height="400" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">공손함을 바꿔도 점수는 거의 그대로, 욕설만 예외</text>
+<text x="32" y="68" font-size="13" fill="#6E6B7B">영어 객관식 시험(MMLU) 정답률 · 왼쪽이 가장 공손, 오른쪽이 가장 무례</text>
+<g stroke="#E4E0DA" stroke-width="1">
+  <line x1="90" y1="268.6" x2="620" y2="268.6"/><line x1="90" y1="237.1" x2="620" y2="237.1"/>
+  <line x1="90" y1="205.7" x2="620" y2="205.7"/><line x1="90" y1="174.3" x2="620" y2="174.3"/>
+  <line x1="90" y1="142.9" x2="620" y2="142.9"/><line x1="90" y1="111.4" x2="620" y2="111.4"/>
+</g>
+<g font-size="12" fill="#6E6B7B" text-anchor="end">
+  <text x="80" y="272">30</text><text x="80" y="241">40</text><text x="80" y="209">50</text>
+  <text x="80" y="178">60</text><text x="80" y="147">70</text><text x="80" y="115">80</text>
+</g>
+<g font-size="12" fill="#6E6B7B" text-anchor="middle">
+  <text x="90" y="322">8단계</text><text x="165.7" y="322">7</text><text x="241.4" y="322">6</text><text x="317.1" y="322">5</text>
+  <text x="392.9" y="322">4</text><text x="468.6" y="322">3</text><text x="544.3" y="322">2</text><text x="620" y="322">1단계</text>
+  <text x="90" y="340" font-size="11">가장 공손</text><text x="620" y="340" font-size="11">가장 무례</text>
+</g>
+<polyline points="90,124.6 165.7,115.4 241.4,115.9 317.1,117.0 392.9,114.3 468.6,130.7 544.3,122.2 620,122.5" fill="none" stroke="#3E7DB0" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="90,174.2 165.7,179.6 241.4,180.7 317.1,180.3 392.9,181.0 468.6,176.0 544.3,183.3 620,199.6" fill="none" stroke="#7466C2" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="90,189.7 165.7,189.2 241.4,198.7 317.1,203.1 392.9,200.2 468.6,208.8 544.3,201.7 620,273.5" fill="none" stroke="#C06A45" stroke-width="3" stroke-linejoin="round"/>
+<g fill="#FBF9F6" stroke-width="2.5">
+  <circle cx="620" cy="122.5" r="4.5" stroke="#3E7DB0"/><circle cx="620" cy="199.6" r="4.5" stroke="#7466C2"/><circle cx="620" cy="273.5" r="4.5" stroke="#C06A45"/>
+  <circle cx="90" cy="124.6" r="4.5" stroke="#3E7DB0"/><circle cx="90" cy="174.2" r="4.5" stroke="#7466C2"/><circle cx="90" cy="189.7" r="4.5" stroke="#C06A45"/>
+</g>
+<g font-size="13" font-weight="700">
+  <text x="632" y="118" fill="#3E7DB0">GPT-4</text>
+  <text x="632" y="200" fill="#7466C2">GPT-3.5</text>
+  <text x="632" y="278" fill="#C06A45">라마2</text>
+</g>
+<g font-size="12" fill="#33313F">
+  <text x="96" y="110" >75.8</text><text x="96" y="166">60.0</text><text x="96" y="206">55.1</text>
+  <text x="586" y="108" text-anchor="end">76.5</text><text x="586" y="196" text-anchor="end">51.9</text><text x="586" y="290" text-anchor="end">28.4</text>
+</g>
+<text x="32" y="384" font-size="12" fill="#6E6B7B">자료: Yin 외(2024) 표 1의 영어 MMLU 점수[1]로 재구성 · 그림: 직접 제작</text>
+</svg>
+<figcaption>가장 공손한 8단계에서 가장 무례한 1단계까지 어조를 바꿨을 때 GPT-4는 74점에서 79점 사이에서 거의 평평했고, GPT-3.5는 57점에서 60점 사이를 오가다 1단계에서 52점으로 떨어졌으며, 라마2 70B는 서서히 내려오다 1단계에서 28점으로 급락했습니다.</figcaption>
+</figure>
+<p>이 연구의 결론은 두 문장으로 요약됩니다. 무례한 질문은 자주 나쁜 결과를 낳는다, 그러나 지나치게 공손한 말이 더 좋은 결과를 보장하지는 않는다. 저자들은 대부분의 조건에서 적당한 공손함이 가장 낫지만 그 '적당함'의 기준이 언어와 모델마다 다르다고 덧붙였습니다<sup class="fn"><a id="cite-1c" href="#ref-1">[1]</a></sup>.</p>
+<p>그런데 2025년 10월, 반대 방향의 결과가 나왔습니다. 미국 펜실베이니아 주립대 연구진은 수학·과학·역사 객관식 50문제를 다섯 가지 어조로 고쳐 써 250개 질문을 만들고 ChatGPT-4o에 열 번씩 돌렸습니다. 가장 공손한 질문은 "다음 문제를 풀어 주시면 감사하겠습니다" 식이고, 가장 무례한 질문은 "이 불쌍한 것아, 이걸 풀 줄은 아니?" 식이었습니다. 결과는 가장 공손한 쪽이 80.8%, 공손 81.4%, 중립 82.2%, 무례 82.8%, 가장 무례한 쪽이 84.8%였습니다. 무례할수록 정답률이 올라갔고, 그 차이는 통계적으로 유의했습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>.</p>
+<p>이 결과를 어떻게 읽어야 할까요. 저자들 스스로 한계를 적어 두었습니다. 문제가 50개뿐이고, 모델이 하나뿐이고, 객관식 정답률 하나만 쟀다는 것입니다. 논문은 학회 심사 중인 짧은 글이었고, 저자들은 무례한 말투를 권장하지 않는다고 따로 못 박았습니다. 공손한 질문이 왜 낮았는지에 대해서도 확정된 설명은 없고, 공손한 문구가 문장을 늘려 모델에게는 그저 처리할 글자가 늘어난 것일 수 있다는 추측만 있습니다<sup class="fn"><a id="cite-2b" href="#ref-2">[2]</a></sup>.</p>
+<p>두 달 뒤 세 번째 연구가 나왔습니다. 오픈AI(OpenAI)의 GPT-4o 미니, 구글(Google)의 제미나이 2.0 플래시, 메타의 라마 4 스카우트를 다국어 객관식 시험의 여섯 과목에서 아주 공손한 질문, 중립 질문, 아주 무례한 질문으로 비교했습니다. 중립과 공손이 무례보다 대체로 점수가 높았지만, 통계적으로 의미 있는 차이는 인문 과목 일부에서만 나왔습니다. 그마저 제미나이는 거의 영향을 받지 않았고, 과목을 묶어 보면 차이는 더 줄었습니다. 저자들의 표현은 현대 모델이 어조 변화에 "대체로 강건하다"는 것이었습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>.</p>
+<div class="key"><span class="label">핵심 —</span> 세 연구의 방향이 엇갈리지만 겹치는 부분은 분명합니다. 예의를 더 갖춘다고 답이 좋아지지 않았고, 효과가 있더라도 몇 점 안쪽이었으며, 최신 모델일수록 어조에 둔감했습니다. 욕설은 어떤 연구에서도 득이 되지 않았습니다. 공손함은 글 쓰는 사람의 품위를 위해 남겨 두면 되는 것이지, 답의 질을 조정하는 손잡이가 아닙니다.</div>
+
+<!-- 3. 풀이 -->
+<h2>길이가 아니라 '풀이'가 변수였다</h2>
+<p>그렇다면 질문에 무엇을 보태야 답이 달라질까요. 2022년 구글 리서치 연구진이 낸 논문이 이 질문에 큰 답을 냈습니다. 그들은 초등 수학 서술형 문제 모음(GSM8K)으로 5400억 개 매개변수를 가진 PaLM 모델을 시험했습니다. 보통 방식으로는 문제와 답만 적힌 예시 여덟 개를 보여 주고 새 문제를 냈습니다. 정답률은 18%였습니다. 그다음에는 같은 예시 여덟 개에 풀이 과정을 한두 줄씩 적어 넣었습니다. "로저는 공 5개를 갖고 있었다. 캔 2개에 3개씩이니 6개. 5 더하기 6은 11"처럼요. 그러자 정답률이 57%로 뛰었습니다. 18에서 57이니 세 배가 넘습니다. 이 수치는 정답지 수천 개로 따로 훈련시킨 모델이 내던 33%도, 거기에 검증기까지 붙인 55%도 넘어선 것이었습니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>. 연구진은 이 방식에 생각의 사슬(chain-of-thought)이라는 이름을 붙였습니다.</p>
+<p>단서가 하나 있습니다. 이 효과는 모델이 충분히 클 때만 나타났습니다. 매개변수가 1000억 개쯤 넘지 않으면 작은 모델은 그럴듯하지만 틀린 풀이를 늘어놓아 오히려 보통 방식보다 못했습니다<sup class="fn"><a id="cite-4b" href="#ref-4">[4]</a></sup>. 2022년 당시에는 큰 제약이었지만, 지금 우리가 쓰는 상용 모델은 모두 이 문턱을 넘은 쪽입니다.</p>
+<p>같은 해 도쿄대학과 구글 연구진은 더 놀라운 것을 보였습니다. 풀이 예시를 하나도 안 보여 주고, 답 자리에 "단계별로 생각해 보자(Let's think step by step)"라는 한 문장만 넣었습니다. 오픈AI의 당시 모델(text-davinci-002)로 다단계 산수 문제를 풀게 했더니 정답률이 17.7%에서 78.7%로 올랐습니다. 네 배가 넘습니다. 앞서 본 GSM8K에서는 10.4%에서 40.7%로 올랐습니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>.</p>
+<p>이 연구가 우리 질문에 특히 중요한 이유는 문구를 바꿔 가며 비교한 표가 있기 때문입니다. "단계별로 생각해 보자"는 78.7%였습니다. "생각해 보자"로 줄이면 57.5%로 내려갔습니다. "답에 들어가기 전에,"는 55.7%였습니다. 반면 "생각하지 마. 그냥 느껴."는 18.8%, "참 좋은 날이야."는 13.1%로, 아무것도 안 붙인 17.7%와 다를 바 없거나 더 낮았습니다<sup class="fn"><a id="cite-5b" href="#ref-5">[5]</a></sup>. 문장을 하나 더 붙인 것은 모두 같습니다. 길이가 같아도 그 문장이 모델에게 풀이를 적게 만드는 내용이냐 아니냐가 60점 넘는 차이를 냈습니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">질문 뒤에 붙인 한 문장에 따른 다단계 산수 정답률</title>
+<desc id="d-2">아무것도 붙이지 않으면 17.7퍼센트, 단계별로 생각해 보자를 붙이면 78.7퍼센트, 생각해 보자는 57.5퍼센트, 답에 들어가기 전에는 55.7퍼센트인 반면 생각하지 마 그냥 느껴는 18.8퍼센트, 참 좋은 날이야는 13.1퍼센트로 문장 하나를 더 붙여도 내용에 따라 결과가 갈렸다.</desc>
+<rect width="680" height="360" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">한 문장을 더 붙였다, 무엇을 붙였느냐가 갈랐다</text>
+<text x="32" y="68" font-size="13" fill="#6E6B7B">다단계 산수 문제(MultiArith) 정답률 · text-davinci-002</text>
+<g font-size="14" fill="#33313F">
+  <text x="32" y="112">(아무것도 안 붙임)</text>
+  <text x="32" y="152">"단계별로 생각해 보자"</text>
+  <text x="32" y="192">"생각해 보자"</text>
+  <text x="32" y="232">"답에 들어가기 전에,"</text>
+  <text x="32" y="272">"생각하지 마. 그냥 느껴."</text>
+  <text x="32" y="312">"참 좋은 날이야."</text>
+</g>
+<g>
+  <rect x="250" y="94" width="71" height="26" rx="6" fill="#E9E6F1" stroke="#9A96AA"/>
+  <rect x="250" y="134" width="315" height="26" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+  <rect x="250" y="174" width="230" height="26" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+  <rect x="250" y="214" width="223" height="26" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+  <rect x="250" y="254" width="75" height="26" rx="6" fill="#F6CCD8" stroke="#B24E6E"/>
+  <rect x="250" y="294" width="52" height="26" rx="6" fill="#F6CCD8" stroke="#B24E6E"/>
+</g>
+<g font-size="14" font-weight="700">
+  <text x="329" y="112" fill="#33313F">17.7%</text>
+  <text x="573" y="152" fill="#3F8F6E">78.7%</text>
+  <text x="488" y="192" fill="#3F8F6E">57.5%</text>
+  <text x="481" y="232" fill="#3F8F6E">55.7%</text>
+  <text x="333" y="272" fill="#B24E6E">18.8%</text>
+  <text x="310" y="312" fill="#B24E6E">13.1%</text>
+</g>
+<text x="32" y="346" font-size="12" fill="#6E6B7B">자료: Kojima 외(2022) 표 4[5]로 재구성, 영어 원문을 우리말로 옮김 · 그림: 직접 제작</text>
+</svg>
+<figcaption>아무것도 붙이지 않으면 17.7%, "단계별로 생각해 보자"를 붙이면 78.7%, "생각해 보자"는 57.5%, "답에 들어가기 전에,"는 55.7%인 반면, "생각하지 마. 그냥 느껴."는 18.8%, "참 좋은 날이야."는 13.1%였습니다. 문장 하나를 더 붙여도 내용에 따라 결과가 갈렸습니다.</figcaption>
+</figure>
+<p>여기서 첫 번째 실마리가 잡힙니다. 앞 절의 "부디 풀어 주시면 감사하겠습니다"와 이 절의 "단계별로 생각해 보자"는 둘 다 질문을 한 문장 늘립니다. 차이는 앞의 문장이 모델이 할 일을 하나도 바꾸지 않는 반면, 뒤의 문장은 답을 내기 전에 중간 과정을 적으라는 일거리를 준다는 데 있습니다. 그러니 이 효과는 모델이 공손함에 보답해서가 아니라, 중간 계산을 글로 적게 되어 생긴 것으로 읽힙니다.</p>
+
+<!-- 4. 한계 -->
+<h2>그러나 어디서나 통하는 것은 아니다</h2>
+<p>이쯤 되면 모든 질문 끝에 "단계별로 생각해 보자"를 붙이고 싶어집니다. 그 전에 두 가지를 더 봐야 합니다.</p>
+<p>첫째, 어떤 과제에서 통하느냐입니다. 2024년 한 연구진은 생각의 사슬을 쓴 논문 100편 넘게를 모아 분석하고, 14개 모델을 20개 자료로 직접 시험했습니다. 결론은 제목에 들어 있습니다. 이 기법은 수학과 기호 논리에서 주로 도움이 된다는 것입니다. 여러 과목이 섞인 객관식 시험에서는 바로 답하는 것과 거의 차이가 없었고, 차이가 난 문제는 문제나 답에 등호가 들어간 것, 곧 계산이 필요한 것들이었습니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>. 앞서 본 도쿄대 연구에서도 상식 추론 문제에서는 같은 문장이 점수를 올리지 못했습니다<sup class="fn"><a id="cite-5c" href="#ref-5">[5]</a></sup>. 글을 다듬어 달라거나 회의록을 요약해 달라는 요청에 "단계별로"를 붙여 봐야 얻을 것이 별로 없다는 뜻입니다.</p>
+<p>둘째, 모델이 바뀌었습니다. 논문들이 쓴 모델은 2022년 것입니다. 지금 모델 제작사들의 안내서는 다른 말을 합니다. 오픈AI는 자사의 추론 모델을 쓸 때 "생각의 사슬 프롬프트를 피하라"고 적습니다. 이 모델들은 내부에서 이미 추론을 하므로 "단계별로 생각하라"거나 추론을 설명하라고 지시하는 것이 불필요하다는 설명입니다. 같은 문서는 "프롬프트를 단순하고 직접적으로 유지하라"고도 합니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>. 앤스로픽(Anthropic)의 안내서도 비슷합니다. 사람이 손으로 짠 단계별 계획보다 "철저히 생각하라" 같은 일반 지시가 더 나은 추론을 낳는 경우가 많으며, 모델의 추론이 사람이 미리 정해 준 절차를 넘어서는 일이 잦다고 적습니다. 수동으로 단계별 풀이를 요구하는 방식은 생각 기능이 꺼져 있을 때의 대안으로만 남겨 두었습니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>.</p>
+<p>정리하면 "단계별로 생각해 보자"는 2022년에는 마법 같은 한 문장이었지만, 지금은 계산이나 논리 문제에서, 그것도 추론 기능이 없는 모델에서나 의미가 있는 문장이 됐습니다. 효과가 있던 시절의 기억으로 모든 질문에 붙이는 것은 공손한 인사말을 붙이는 것과 크게 다르지 않습니다.</p>
+
+<!-- 5. 공식 안내서 -->
+<h2>만드는 회사들이 한목소리로 권하는 것</h2>
+<p>그렇다면 지금 무엇을 넣어야 할까요. 오픈AI, 앤스로픽, 구글의 공식 안내서를 나란히 놓으면 표현은 달라도 같은 항목이 되풀이됩니다.</p>
+<p>첫째는 구체성입니다. 앤스로픽은 모델을 "똑똑하지만 회사의 관행과 업무 흐름을 전혀 모르는 신입 사원"으로 생각하라고 합니다. 원하는 결과물의 형식과 제약을 명시하고, 순서가 중요하면 번호를 매긴 단계로 지시하라는 것입니다. 이 문서가 제안하는 자가 검사법이 쓸 만합니다. 내 프롬프트를 이 일을 전혀 모르는 동료에게 보여 주고 따라 해 보라고 했을 때 그 동료가 헷갈리면 모델도 헷갈린다는 것입니다<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>. 구글의 문서도 "명확하고 구체적인 지시"를 첫 항목에 두고, 답의 형식을 표·목록·문단 중 무엇으로 받을지 미리 적으라고 합니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>.</p>
+<p>둘째는 맥락입니다. 앤스로픽 문서의 예가 인상적입니다. "말줄임표를 절대 쓰지 마"라고만 하는 것보다, "이 답은 음성 합성기가 소리 내어 읽을 것이라 말줄임표를 발음할 수 없으니 쓰지 마"라고 이유를 함께 주면 모델이 그 이유에서 다른 상황까지 일반화한다는 것입니다<sup class="fn"><a id="cite-8c" href="#ref-8">[8]</a></sup>. 누가 읽을 것인지, 어디에 쓸 것인지, 무엇이 성공인지가 맥락입니다. 오픈AI의 추론 모델 안내서는 이를 "최종 목표를 아주 구체적으로 밝히라"고 표현합니다<sup class="fn"><a id="cite-7b" href="#ref-7">[7]</a></sup>.</p>
+<p>셋째는 예시입니다. 여기서는 회사마다 온도가 다릅니다. 구글은 "프롬프트에 항상 예시를 넣기를 권한다"고 단정하고, 예시가 없는 프롬프트는 덜 효과적일 가능성이 크다고 적습니다. 다만 예시가 너무 많으면 모델이 예시를 그대로 베끼는 부작용이 생긴다고도 합니다<sup class="fn"><a id="cite-9b" href="#ref-9">[9]</a></sup>. 앤스로픽은 예시가 출력 형식과 어조를 잡는 가장 믿을 만한 방법이라며 서너 개에서 다섯 개를 권합니다<sup class="fn"><a id="cite-8d" href="#ref-8">[8]</a></sup>. 오픈AI는 추론 모델에 한해 "예시 없이 먼저 시도하고, 필요하면 예시를 넣으라"고 합니다. 예시가 불필요한 경우가 많고, 복잡한 형식이 필요할 때만 지시와 꼭 맞는 예시를 넣으라는 것입니다<sup class="fn"><a id="cite-7c" href="#ref-7">[7]</a></sup>.</p>
+<p>넷째는 구분입니다. 지시문, 참고 자료, 예시가 한 덩어리로 섞이면 모델이 어디까지가 자료이고 어디부터가 지시인지 헷갈립니다. 오픈AI는 마크다운 제목이나 XML 태그 같은 구분선을 쓰라 하고<sup class="fn"><a id="cite-7d" href="#ref-7">[7]</a></sup>, 앤스로픽도 지시·맥락·입력을 각각 다른 태그로 감싸면 오해가 줄어든다고 적습니다<sup class="fn"><a id="cite-8e" href="#ref-8">[8]</a></sup>.</p>
+<p>이 네 가지 목록에 없는 것을 눈여겨봐 주십시오. 인사말이 없습니다. "부디", "가능하시다면", "정말 감사하겠습니다"가 없습니다. 그리고 "단계별로"도 추론 모델 항목에서는 빠지라고 되어 있습니다. <strong>좋은 프롬프트는 길어서 좋은 것이 아니라, 모델이 모르는 정보를 담고 있어서 좋은 것입니다.</strong> 공손한 문구는 모델이 모르는 정보를 하나도 담고 있지 않습니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">같은 길이의 두 질문, 무엇이 들어 있느냐의 차이</title>
+<desc id="d-3">왼쪽 질문은 인사와 양해와 감사 인사로 채워져 모델이 모르는 정보가 없고, 오른쪽 질문은 목적과 독자, 형식과 분량, 맥락과 이유, 예시 한 줄의 네 가지로 채워져 있다. 두 질문의 길이는 비슷하다.</desc>
+<rect width="680" height="420" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">길이는 같다, 담긴 정보가 다르다</text>
+<rect x="32" y="70" width="300" height="300" rx="14" fill="#FFFFFF" stroke="#C9C5D6"/>
+<text x="182" y="98" font-size="15" font-weight="800" text-anchor="middle" fill="#6E6B7B">길고 공손한 질문</text>
+<g font-size="13" fill="#9A96AA">
+  <rect x="48" y="112" width="268" height="34" rx="8" fill="#E9E6F1"/><text x="60" y="134">안녕하세요, 바쁘신데 죄송합니다.</text>
+  <rect x="48" y="154" width="268" height="34" rx="8" fill="#E9E6F1"/><text x="60" y="176">혹시 괜찮으시다면</text>
+  <rect x="48" y="196" width="268" height="34" rx="8" fill="#CFE3F6"/><text x="60" y="218" fill="#33313F">기후변화에 대해 설명해 주세요</text>
+  <rect x="48" y="238" width="268" height="34" rx="8" fill="#E9E6F1"/><text x="60" y="260">보다 자세하게, 가능한 한 쉽게</text>
+  <rect x="48" y="280" width="268" height="34" rx="8" fill="#E9E6F1"/><text x="60" y="302">정말 감사하겠습니다. 잘 부탁드립니다.</text>
+</g>
+<text x="182" y="350" font-size="12" text-anchor="middle" fill="#6E6B7B">모델이 몰랐던 정보: 과제 한 줄뿐</text>
+<rect x="348" y="70" width="300" height="300" rx="14" fill="#FFFFFF" stroke="#3F8F6E"/>
+<text x="498" y="98" font-size="15" font-weight="800" text-anchor="middle" fill="#3F8F6E">짧지만 갖춘 질문</text>
+<g font-size="13" fill="#33313F">
+  <rect x="364" y="112" width="268" height="34" rx="8" fill="#CFE3F6"/><text x="376" y="134">기후변화에 대해 설명해 주세요</text>
+  <rect x="364" y="154" width="268" height="34" rx="8" fill="#D9D3F7"/><text x="376" y="176">독자: 환경 과학을 처음 배우는 중1</text>
+  <rect x="364" y="196" width="268" height="34" rx="8" fill="#F8E8B0"/><text x="376" y="218">형식: 300자 안팎, 원인 둘·영향 둘</text>
+  <rect x="364" y="238" width="268" height="34" rx="8" fill="#CDEBDD"/><text x="376" y="260">이유: 수업 읽기 자료, 용어는 풀어서</text>
+  <rect x="364" y="280" width="268" height="34" rx="8" fill="#FBD9C6"/><text x="376" y="302">예시: 원하는 어조의 문장 한 줄</text>
+</g>
+<text x="498" y="350" font-size="12" text-anchor="middle" fill="#3F8F6E">모델이 몰랐던 정보: 다섯 줄 전부</text>
+<text x="32" y="404" font-size="12" fill="#6E6B7B">자료: 오픈AI[7]·앤스로픽[8]·구글[9] 공식 안내서의 공통 항목으로 구성 · 그림: 직접 제작</text>
+</svg>
+<figcaption>왼쪽 질문은 인사와 양해와 감사로 채워져 모델이 모르는 정보가 과제 한 줄뿐이고, 오른쪽 질문은 독자·형식·이유·예시로 채워져 있습니다. 두 질문의 길이는 비슷합니다.</figcaption>
+</figure>
+
+<!-- 6. 바로 해 볼 수 있는 것 -->
+<h2>바로 해 볼 수 있는 것</h2>
+<p>앞에서 확인한 것만으로 질문 하나를 고쳐 보겠습니다. 어느 강의 자료에 나오는 "기후변화에 대한 설명을 작성해 줘"라는 예를 출발점으로 삼았습니다. 그 자료는 이 문장에 대상과 분량이 빠져 있다고 지적하고, 환경 과학을 처음 배우는 만 12~14세 학생에게 기후변화의 기본 개념을 설명하는 300자 분량의 글을 요청하는 쪽으로 고치라고 권합니다. 강의 한 편의 예시이니 그 자체가 근거는 아니지만, 공식 안내서들이 말하는 항목과 정확히 겹칩니다.</p>
+<blockquote class="quote">
+<p>고치기 전 — "안녕하세요, 바쁘신데 죄송합니다. 혹시 괜찮으시다면 기후변화에 대해 보다 자세하게, 가능한 한 쉽게 설명해 주시면 정말 감사하겠습니다. 잘 부탁드립니다."</p>
+<cite>모델이 새로 알게 된 것: 기후변화를 설명하라는 것 하나</cite>
+</blockquote>
+<blockquote class="quote">
+<p>고친 뒤 — "환경 과학을 처음 배우는 중학교 1학년 학생에게 나눠 줄 수업 읽기 자료를 만들고 있습니다. 기후변화의 원인 두 가지와 영향 두 가지를 300자 안팎으로 설명해 주세요. 전문 용어는 처음 나올 때 한 번 쉬운 말로 풀어 주고, 마지막 줄에는 학생이 스스로 생각해 볼 질문 하나를 붙여 주세요. 제가 원하는 어조는 이런 문장입니다. '지구는 두꺼운 이불을 덮은 것처럼 점점 더워지고 있어요.'"</p>
+<cite>모델이 새로 알게 된 것: 독자, 용도, 분량, 구성, 용어 처리, 마무리 형식, 어조의 예시</cite>
+</blockquote>
+<p>고친 질문이 더 깁니다. 그러나 늘어난 부분이 전부 모델이 몰랐던 정보입니다. 인사와 감사는 뺐습니다. 뺀 이유는 무례해지기 위해서가 아니라 그 자리에 더 필요한 문장을 넣기 위해서입니다. 존댓말은 그대로 두었습니다. 앞의 연구들을 보면 존댓말 자체가 답을 나쁘게 하지는 않았으니, 글 쓰는 사람의 습관대로 두면 됩니다.</p>
+<p>계산이나 논리 문제를 맡길 때는 한 줄을 더 붙일 수 있습니다. "풀이 과정을 먼저 보여 주고, 마지막에 답만 따로 한 줄로 적어 주세요." 2022년 논문들이 효과를 확인한 바로 그 지시입니다. 다만 쓰고 있는 것이 추론 기능이 있는 최신 모델이라면 제작사 안내서대로 이 줄을 빼고 먼저 시켜 보십시오. 답이 틀리면 그때 붙여도 늦지 않습니다. 반대로 글을 다듬거나 요약하는 일에는 처음부터 붙일 이유가 없습니다.</p>
+<p>마지막으로 보내기 전에 앤스로픽 문서의 검사법을 한 번 거치면 됩니다. 이 질문을 이 일을 전혀 모르는 동료에게 그대로 건넸을 때 그 동료가 되묻지 않고 일을 시작할 수 있을까. 되물을 것 같으면 그 되물음에 대한 답을 미리 적어 넣습니다. 그것이 전부입니다.</p>
+<div class="caution">한 가지 분명히 해 둘 것이 있습니다. 이 글에서 본 연구들은 모두 객관식 시험이나 산수 문제처럼 정답이 정해진 과제로 효과를 쟀습니다. 글쓰기나 상담처럼 정답이 없는 일에서 어조가 어떤 영향을 주는지는 이 연구들로는 알 수 없습니다. 그리고 무례한 질문이 점수가 높았다는 결과는 문제 50개와 모델 하나에서 나온 것이므로, 그것을 근거로 말투를 바꿀 이유는 없습니다.</div>
+
+<!-- 7. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>사람에게 부탁할 때 공손한 말은 상대의 마음을 움직여 일의 결과를 바꿉니다. 기계에게는 움직일 마음이 없으니 그 말은 결과에 닿지 않습니다. 그렇다고 기계에게 함부로 말하라는 뜻은 아닙니다. 말투는 결과가 아니라 말하는 사람을 만듭니다.</p>
+    <p><strong>"공손함은 사람을 위해 남겨 두고, 정보는 기계를 위해 채워 넣으십시오."</strong> 그 둘을 한 문장 안에서 바꿔치기하지 않는 것, 그것이 이 글에서 확인한 전부입니다.</p>
+    <p>오늘 보낼 질문 하나를 열어 보십시오. 인사말을 지우고 그 자리에 누가 읽을 것인지를 적어 보십시오. 답이 달라지는지는 직접 확인하시면 됩니다.</p>
+  </blockquote>
+</section>
+
+<!-- 8. 정리 -->
+<hr>
+<p>정리하자면 이렇습니다. 공손함을 여덟 단계로 바꿔 본 연구에서 최신 모델의 점수는 거의 움직이지 않았고, 무례한 쪽이 높았다는 연구는 표본이 작았으며, 세 회사 모델을 비교한 연구는 어조에 대체로 둔감하다고 결론지었습니다. 반면 질문에 "단계별로 생각해 보자" 한 문장을 붙였을 때 산수 정답률이 네 배가 된 것은 그 문장이 모델에게 풀이를 적게 만들었기 때문이고, 같은 길이의 다른 문장은 아무 효과가 없었습니다. 그 효과조차 수학과 논리에 한정되고, 추론 기능이 있는 최신 모델에서는 제작사들이 오히려 빼라고 합니다. 제작사 세 곳의 안내서가 공통으로 권하는 것은 구체성, 맥락, 예시, 구분이지 인사말이 아닙니다.</p>
+<p>그러니 질문이 길어져야 한다면, 늘어나는 부분이 모델이 몰랐던 정보인지만 확인하시면 됩니다.</p>
+
+<!-- 9. 꼬리 -->
+<p class="disclaimer">이 글에서 인용한 정답률 수치는 각 논문이 특정 시점의 특정 모델로 측정한 값이며, 모델은 빠르게 바뀝니다. 제작사의 안내서도 수시로 갱신되므로 인용하실 때는 최신 문서를 함께 확인하세요.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">Yin, Z., Wang, H., Horio, K., Kawahara, D., Sekine, S. Should We Respect LLMs? A Cross-Lingual Study on the Influence of Prompt Politeness on LLM Performance. <i>Proceedings of the Second Workshop on Social Influence in Conversations (SICon 2024)</i>, ACL, 2024 (arXiv:2402.14531). <a href="https://arxiv.org/abs/2402.14531">링크</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">Dobariya, O., Kumar, A. Mind Your Tone: Investigating How Prompt Politeness Affects LLM Accuracy (short paper). arXiv:2510.04950, 2025-10-06. <a href="https://arxiv.org/abs/2510.04950">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">Cai, H., Shen, B., Jin, L., Hu, L., Fan, X. Does Tone Change the Answer? Evaluating Prompt Politeness Effects on Modern LLMs: GPT, Gemini, and LLaMA. arXiv:2512.12812, 2025-12-14 (v2 2026-03-27). <a href="https://arxiv.org/abs/2512.12812">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., Zhou, D. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. <i>NeurIPS 2022</i> (arXiv:2201.11903). <a href="https://arxiv.org/abs/2201.11903">링크</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">Kojima, T., Gu, S. S., Reid, M., Matsuo, Y., Iwasawa, Y. Large Language Models are Zero-Shot Reasoners. <i>NeurIPS 2022</i> (arXiv:2205.11916). <a href="https://arxiv.org/abs/2205.11916">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Sprague, Z., Yin, F., Rodriguez, J. D., Jiang, D., Wadhwa, M., Singhal, P., Zhao, X., Ye, X., Mahowald, K., Durrett, G. To CoT or not to CoT? Chain-of-thought helps mainly on math and symbolic reasoning. <i>ICLR 2025</i> (arXiv:2409.12183). <a href="https://arxiv.org/abs/2409.12183">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">OpenAI. Reasoning best practices — How to prompt reasoning models effectively. OpenAI Developer Docs, 2026-11-08 열람. <a href="https://developers.openai.com/api/docs/guides/reasoning-best-practices">링크</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">Anthropic. Prompting best practices — Be clear and direct; Add context to improve performance; Use examples effectively; Use XML tags; Thinking. Claude Developer Platform Docs, 2026-11-08 열람. <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">링크</a> <a class="back" href="#cite-8">↩</a></li>
+    <li id="ref-9">Google. Prompt design strategies. Google AI Studio Docs, 2026-11-08 열람. <a href="https://aistudio.google.com/docs/prompting-strategies">링크</a> <a class="back" href="#cite-9">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>

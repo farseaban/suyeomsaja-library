@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI가 그럴듯하게 틀린 답을 할 때 어떻게 알아챌 수 있을까? — 지어낸 답이 나오는 이유와 확인하는 순서</title>
+<meta name="description" content="가짜 판례를 믿었다가 제재를 받은 뉴욕 변호사, 세종대왕의 맥북, 오픈AI가 스스로 밝힌 '찍기가 이기는 채점표', 참고문헌 636건과 1,600번의 뉴스 질문 실험을 따라가며 AI가 모르는 것을 왜 자신 있게 지어내는지, 어떤 질문이 특히 위험한지, 답을 받았을 때 무엇을 어떤 순서로 확인하면 되는지 정리합니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --paper:#FFFFFF; --card:#FBF9F6;
+    --lav:#D9D3F7; --lav-d:#7466C2; --mint:#CDEBDD; --mint-d:#3F8F6E;
+    --peach:#FBD9C6; --peach-d:#C06A45; --sky:#CFE3F6; --sky-d:#3E7DB0;
+    --butter:#F8E8B0; --butter-d:#A9861F; --rose:#F6CCD8; --rose-d:#B24E6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+       font-size:17px;line-height:1.85;word-break:keep-all;-webkit-font-smoothing:antialiased}
+  article{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em;letter-spacing:-.02em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  .meta b{color:var(--ink)}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--butter) 62%);font-weight:700}
+  a{color:var(--sky-d);text-underline-offset:3px}
+  ul,ol{padding-left:1.3em} li{margin:.3em 0}
+  .lead-quote{font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em 0}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--lav-d)}
+  .key{background:#FFF8E0;border-left:5px solid var(--butter-d);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .key .label{font-weight:800;color:var(--butter-d)}
+  .caution{background:#FDF0EA;border-left:5px solid var(--peach-d);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--lav);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px}
+  tr.hl td{background:#FDF0EA}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--sky-d);background:#F2F7FC;border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em;font-size:17px}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:#FFF8E0}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+<h1>AI가 그럴듯하게 틀린 답을 할 때 어떻게 알아챌 수 있을까? — 지어낸 답이 나오는 이유와 확인하는 순서</h1>
+<div class="meta">2026-08-19 · 약 12분 분량 · 글 수염사자</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"Is Varghese a real case?" — 바르기스 사건은 실제 판례입니까?</p>
+<p>2023년 봄, 뉴욕의 변호사 스티븐 슈워츠는 휴대전화로 챗GPT에 이렇게 물었습니다. 법원에 낸 서면에 인용한 판례가 실제로 있는 것인지 확인하려는 질문이었습니다. 챗GPT는 자신이 제시한 판례들이 '진짜'이며 웨스트로(Westlaw)와 렉시스넥시스(LexisNexis), 연방판례집에서 찾을 수 있다고 답했습니다. 그 서면에는 존재하지 않는 판결 여섯 건이 들어 있었습니다. 그해 6월 22일, 뉴욕 남부 연방지방법원의 케빈 카스텔 판사는 두 변호사와 소속 법률사무소에 5,000달러의 제재금을 함께 물리고, 의뢰인과 가짜 판결의 저자로 이름이 도용된 판사들에게 이 사실을 편지로 알리라고 명령했습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>이 사건은 흔히 'AI를 믿은 변호사의 실수'로 기억됩니다. 그런데 판결문을 읽어 보면 다른 대목이 눈에 들어옵니다. 슈워츠는 챗GPT가 준 '바르기스(Varghese) 대 중국남방항공' 판결의 전문을 찾아보려 했고, 찾지 못했습니다. 그런데도 "어딘가에 있을 것이다. 미공간 판결이거나, 항소됐거나, 접근이 어려운 자료겠지"라고 생각했다고 법정에서 진술했습니다. 판사는 가짜 판결문의 첫 부분만 읽었어도 앞뒤가 맞지 않고 법리 분석이 "횡설수설"임을 알 수 있었다고 썼습니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>. 틀린 답을 알아챌 기회는 있었습니다. 그 신호를 읽는 법을 몰랐을 뿐입니다.</p>
+<p>이 글은 그 신호를 읽는 법에 관한 글입니다. AI가 왜 모르는 것을 모른다고 하지 않고 그럴듯하게 지어내는지, 어떤 질문에서 특히 그런 일이 잦은지, 그리고 답을 받았을 때 무엇을 어떤 순서로 확인하면 되는지를 공개된 연구와 기록으로 따라갑니다. 미리 말씀드리면 — <strong>AI에게 "이게 진짜냐"고 되묻는 것은 확인이 아닙니다.</strong> 확인은 AI 바깥에서 해야 합니다.</p>
+
+<!-- 2. 세종대왕 -->
+<h2>세종대왕은 맥북을 던지지 않았다</h2>
+<p>우리말 사례부터 보겠습니다. 2023년 2월, 한국일보는 챗GPT에 "조선왕조실록에 기록된 세종대왕의 맥북프로 던짐 사건"을 물으면 어떤 답이 나오는지 보도했습니다. 챗GPT는 이렇게 답했습니다. "세종대왕의 맥북프로 던짐 사건은 조선왕조실록에 기록된 일화로, 15세기 세종대왕이 새로 개발한 훈민정음(한글)의 초고를 작성하던 중 문서 작성 중단에 대해 담당자에게 분노해 맥북프로와 함께 그를 방으로 던진 사건입니다." 같은 기사에는 '조선 중기의 티타늄 전차'를 묻자 17세기 후반에 왕족 보호용으로 만들어졌고 1654년의 어느 전투에 40여 대가 쓰였다는 기록까지 지어낸 답도 실렸습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>.</p>
+<p>눈여겨볼 것은 답의 꼴입니다. 세기가 있고, 맥락이 있고, 대수가 있습니다. 거짓말하는 사람이 내는 티가 없습니다. 기사에서 서울대 AI연구원장 장병탁 교수는 이 현상의 뿌리를 확률에서 찾았습니다. 챗GPT는 다음에 올 말을 확률로 고르는데, 그 확률을 극단적으로 줄이면 학습한 원문만 되풀이하게 되어 일반 검색과 다를 바가 없어진다는 것입니다<sup class="fn"><a id="cite-2b" href="#ref-2">[2]</a></sup>. 그럴듯하게 말하는 능력과 없는 것을 지어내는 버릇은 같은 기능의 두 얼굴입니다.</p>
+<p>한 달쯤 뒤인 3월, 새 모델 GPT-4에 같은 질문을 넣어 비교한 기사가 나왔습니다. 이전 모델은 사건이 2009년 1월 19일에 있었다는 식으로 또 지어냈고, GPT-4는 "세종대왕은 15세기 조선시대의 왕이었고, 맥북프로는 21세기에 등장한 애플(Apple)사의 노트북 컴퓨터"라며 역사적으로 불가능한 일이라고 답했습니다. 오픈AI(OpenAI)는 내부 평가에서 GPT-4가 이전 모델보다 사실에 입각한 답을 할 가능성이 40% 높게 나타났다고 밝히면서도, 문제가 완전히 해결된 것은 아니라고 덧붙였습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>. 모델이 좋아지면 가장 유명한 함정은 피해 갑니다. 그러나 함정이 생기는 구조는 그대로입니다. 그 구조를 오픈AI 연구진이 2025년에 스스로 설명했습니다.</p>
+
+<!-- 3. 왜 -->
+<h2>모른다고 하면 0점, 찍으면 가끔 정답</h2>
+<p>2025년 9월, 오픈AI의 아담 칼라이 연구진은 「언어모델은 왜 환각을 일으키는가(Why Language Models Hallucinate)」라는 논문을 냈습니다. 논문의 첫 장면은 저자 자신의 생일입니다. 공개된 최신 모델에 "아담 타우만 칼라이의 생일이 언제인가. 안다면 일-월 형식으로만 답하라"고 세 번 물었더니 세 번 모두 다른 날짜가 나왔고, 셋 다 틀렸습니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>. 모르면 비워 둘 수 있게 질문을 던졌는데도 모델은 비우지 않았습니다.</p>
+<p>저자들의 설명은 시험장 비유로 요약됩니다. 학생은 모르는 객관식 문제를 만나면 찍습니다. 빈칸은 확실한 0점이고, 찍으면 가끔은 맞기 때문입니다. 언어모델도 같은 처지에 놓여 있다는 것입니다. 모델의 성능은 대부분 정답이면 1점, 아니면 0점인 시험으로 측정되고, 그 시험에서 "모르겠다"는 답은 틀린 답과 똑같이 0점을 받습니다. 논문의 표현을 빌리면 모델은 "좋은 수험생이 되도록 최적화"되어 있고, 그런 채점 아래서는 모른다는 답이 가장 큰 벌을 받고 자신만만한 추측이 최선의 전략이 됩니다<sup class="fn"><a id="cite-4b" href="#ref-4">[4]</a></sup>. 지어내는 것은 고장이 아니라 채점표가 가르친 습관입니다.</p>
+<p>어떤 사실을 지어내기 쉬운지도 짚어 둡니다. 저자들은 학습 자료에 딱 한 번만 나타나는 사실의 비율이 환각의 하한선을 정한다고 봅니다. 어떤 사람의 생일처럼 규칙이 없어 외우는 수밖에 없는 사실이 그렇습니다. 학습 자료에 한 번 스친 생일을 모델이 익혔을 리 없는데, 질문의 꼴은 자주 본 질문과 똑같으니 답의 꼴만 익숙하게 만들어 냅니다<sup class="fn"><a id="cite-4c" href="#ref-4">[4]</a></sup>.</p>
+<p>채점을 바꾸면 행동이 바뀐다는 것은 수치로도 드러났습니다. 오픈AI가 2025년 8월에 공개한 GPT-5 시스템 카드에는 짧은 사실을 묻는 문제 모음 '심플QA(SimpleQA)'의 결과가 실려 있습니다. 이전 모델 o4-mini는 정답률 24%, 오답률 75%였습니다. 둘을 더하면 99%입니다. 100문제 중 99문제에 어떻게든 답을 했고, 모른다고 비운 문제는 1문제꼴이라는 뜻입니다. 새 모델 gpt-5-thinking-mini는 정답률 22%, 오답률 26%였습니다. 더하면 48%이고, 나머지 52문제는 답하지 않았습니다. 정답은 두 문제 줄었고 오답은 75문제에서 26문제로 줄었습니다. 시스템 카드는 이를 답을 삼가는 행동의 뚜렷한 개선이라고 적었습니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>. 독자에게 중요한 것은 그 반대편입니다. 답을 삼가지 않는 모델은 100문제 중 75문제를 자신 있게 틀립니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">심플QA에서 두 모델의 정답·오답·무응답 비율</title>
+<desc id="d-1">o4-mini는 100문제 중 24문제를 맞히고 75문제를 틀렸으며 1문제만 답하지 않았다. gpt-5-thinking-mini는 22문제를 맞히고 26문제를 틀렸으며 52문제는 답하지 않았다. 정답은 두 문제 차이지만 오답은 75문제에서 26문제로 줄었다.</desc>
+<rect width="680" height="300" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">답을 삼가는 모델과 삼가지 않는 모델</text>
+<text x="32" y="70" font-size="14" fill="#6E6B7B">짧은 사실 문제 100개를 풀었을 때, 정답·오답·무응답의 몫</text>
+<g font-size="15" font-weight="700" fill="#33313F">
+  <text x="32" y="124">o4-mini</text>
+  <text x="32" y="196">gpt-5-thinking-mini</text>
+</g>
+<g font-size="12" fill="#6E6B7B">
+  <text x="32" y="144">2025년 4월 모델</text>
+  <text x="32" y="216">2025년 8월 모델</text>
+</g>
+<rect x="200" y="104" width="107" height="34" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+<rect x="307" y="104" width="336" height="34" rx="6" fill="#F6CCD8" stroke="#B24E6E"/>
+<rect x="643" y="104" width="5" height="34" rx="2" fill="#E9E6F1" stroke="#9A96AA"/>
+<rect x="200" y="176" width="99" height="34" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+<rect x="299" y="176" width="116" height="34" rx="6" fill="#F6CCD8" stroke="#B24E6E"/>
+<rect x="415" y="176" width="233" height="34" rx="6" fill="#E9E6F1" stroke="#9A96AA"/>
+<g font-size="14" font-weight="800" text-anchor="middle">
+  <text x="253" y="126" fill="#3F8F6E">정답 24</text>
+  <text x="475" y="126" fill="#B24E6E">오답 75</text>
+  <text x="249" y="198" fill="#3F8F6E">정답 22</text>
+  <text x="357" y="198" fill="#B24E6E">오답 26</text>
+  <text x="531" y="198" fill="#6E6B7B">답하지 않음 52</text>
+</g>
+<text x="655" y="98" font-size="11" text-anchor="end" fill="#6E6B7B">무응답 1</text>
+<g font-size="13" fill="#6E6B7B">
+  <rect x="200" y="240" width="14" height="14" rx="3" fill="#CDEBDD" stroke="#3F8F6E"/><text x="220" y="252">정답</text>
+  <rect x="270" y="240" width="14" height="14" rx="3" fill="#F6CCD8" stroke="#B24E6E"/><text x="290" y="252">오답(환각)</text>
+  <rect x="380" y="240" width="14" height="14" rx="3" fill="#E9E6F1" stroke="#9A96AA"/><text x="400" y="252">답하지 않음</text>
+</g>
+<text x="32" y="284" font-size="12" fill="#6E6B7B">자료: OpenAI GPT-5 System Card(2025) 표 8의 정답률·환각률[5]로 재구성 · 무응답은 100에서 둘을 뺀 값</text>
+</svg>
+<figcaption>o4-mini는 100문제 중 24문제를 맞히고 75문제를 틀렸으며 1문제만 답하지 않았습니다. gpt-5-thinking-mini는 22문제를 맞히고 26문제를 틀렸으며 52문제는 답하지 않았습니다. 정답은 두 문제 차이지만 오답은 75문제에서 26문제로 줄었습니다.</figcaption>
+</figure>
+<div class="key"><span class="label">핵심 —</span> AI가 그럴듯하게 틀리는 것은 드문 오작동이 아닙니다. 모른다는 답에 0점을 주는 채점표 아래서 자란 습관입니다. 그래서 답이 유창하다는 것, 자신 있다는 것, 세부가 구체적이라는 것은 어느 것도 맞다는 신호가 아닙니다. 맞는 답과 지어낸 답은 겉모습이 같습니다.</div>
+
+<!-- 4. 어떤 질문 -->
+<h2>어떤 질문이 위험한가</h2>
+<p>모든 질문이 똑같이 위험하지는 않습니다. 공개된 연구들은 같은 자리를 가리킵니다. 이름과 날짜, 숫자, 출처, 그리고 최근 일입니다.</p>
+<h3>출처 — 열 건 중 두 건은 없는 논문</h3>
+<p>2023년 미국 맨해튼대 도서관의 윌리엄 월터스와 뉴욕시립대의 에스더 와일더는 챗GPT에 42개 주제로 짧은 문헌 연구를 쓰게 하고, 거기 붙은 참고문헌 636건을 하나하나 데이터베이스에서 찾아보았습니다. 2023년 4월 첫 주의 일입니다. 이전 모델 GPT-3.5가 든 참고문헌은 55%가 존재하지 않는 문헌이었고, GPT-4는 18%였습니다. GPT-4라도 참고문헌 100건을 들면 18건은 세상에 없는 글이라는 뜻입니다. 실제로 있는 문헌을 든 경우에도 GPT-3.5는 43%, GPT-4는 24%에서 권·호·쪽수나 연도 같은 서지 사항이 틀렸습니다. 저자들은 지어낸 참고문헌이 언뜻 보기에 정당해 보인다고 적었습니다. 대부분 실제 학술지와 출판사의 이름을 달고 있었기 때문입니다. 링크가 붙었다고 안심할 수도 없습니다. GPT-3.5의 경우 지어낸 논문에 링크가 붙은 비율이 18%로, 실제 논문에 링크가 붙은 비율 6%보다 오히려 높았습니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>.</p>
+<h3>법률 사실 — 하급심일수록, 아주 오래되거나 아주 최근일수록</h3>
+<p>2024년 스탠퍼드대와 예일대의 매슈 달 연구진은 미국 연방 판례에 관해 확인 가능한 질문을 모델들에 던졌습니다. 어느 법원이 냈는지, 누가 썼는지, 핵심 판시가 무엇인지 같은 질문입니다. 무작위로 뽑은 연방 판례에 대한 답에서 환각은 GPT-4가 58%, 라마 2(Llama 2)가 88%였습니다. 틀리는 자리도 고르지 않았습니다. 연방대법원 판례에서 가장 적었고 항소법원, 지방법원으로 내려갈수록 늘었습니다. 대법원 판례 중에서도 가장 오래된 것과 가장 최근 것에서 많았습니다. 발견이 둘 더 있습니다. 질문에 틀린 전제를 심어 두면, 예컨대 실제로는 뒤집힌 적 없는 판례를 두고 "왜 뒤집혔는가"라고 물으면, 모델은 전제를 바로잡기보다 거기에 맞춰 답하는 경향을 보였습니다. 그리고 모델은 자기가 언제 틀리는지 몰랐습니다. 저자들의 표현으로 모델들은 실제 환각률에 비해 자신의 확신을 체계적으로 과대평가했습니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>.</p>
+<h3>최근 일 — 검색이 붙어도</h3>
+<p>최근 사건은 학습 자료에 없으니 웹을 검색하는 AI라면 다르지 않을까요. 2025년 3월 컬럼비아대 토우 디지털저널리즘센터는 챗GPT 서치, 퍼플렉시티, 제미나이, 그록 등 검색형 AI 여덟 종에 기사 본문 일부를 주고 제목·언론사·날짜·주소를 맞히게 했습니다. 언론사 20곳에서 기사 10건씩 200건을 고르고 도구 여덟 개에 물었으니 모두 1,600번입니다. 전체의 60% 넘게가 틀렸습니다. 퍼플렉시티는 37%, 그록 3는 94%가 틀렸습니다. 더 눈에 띄는 것은 태도였습니다. 챗GPT는 200건 중 134건을 틀렸는데 확신이 없다는 표현을 쓴 것은 15번뿐이었고 답을 거절한 적은 한 번도 없었습니다. 그록 3가 제시한 기사 주소 200개 중 154개는 없는 페이지로 이어졌습니다. 유료판이 무료판보다 더 많이 맞혔지만 더 많이 틀리기도 했습니다. 모른다고 하는 대신 단정했기 때문입니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">연구들이 공통으로 가리키는 환각이 몰리는 네 자리</title>
+<desc id="d-2">고유명사와 날짜는 생일처럼 외울 수밖에 없는 사실이라 위험하고, 참고문헌은 GPT-4도 18퍼센트가 지어낸 것이었으며, 하급심 판례와 아주 오래되거나 최근인 사건에서 법률 환각이 늘었고, 최근 뉴스는 검색형 AI 여덟 종이 60퍼센트 넘게 틀렸다.</desc>
+<rect width="680" height="330" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">환각이 몰리는 네 자리</text>
+<text x="32" y="70" font-size="14" fill="#6E6B7B">설명의 흐름이 아니라, 흐름 속에 박힌 고정된 사실에서 틀린다</text>
+<g font-size="15" font-weight="700">
+  <rect x="32" y="92" width="300" height="100" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/>
+  <text x="52" y="122" fill="#3E7DB0">이름·날짜</text>
+  <text x="52" y="146" font-size="13" font-weight="400" fill="#33313F">규칙이 없어 외울 수밖에 없는 사실.</text>
+  <text x="52" y="166" font-size="13" font-weight="400" fill="#33313F">저자 생일을 세 번 물으니 세 번 다 틀린 날짜 [4]</text>
+  <rect x="348" y="92" width="300" height="100" rx="14" fill="#F6CCD8" stroke="#B24E6E"/>
+  <text x="368" y="122" fill="#B24E6E">참고문헌·인용</text>
+  <text x="368" y="146" font-size="13" font-weight="400" fill="#33313F">GPT-4가 든 참고문헌 100건 중 18건은 없는 글,</text>
+  <text x="368" y="166" font-size="13" font-weight="400" fill="#33313F">있는 글도 4건 중 1건은 권·호·쪽수가 틀림 [6]</text>
+  <rect x="32" y="208" width="300" height="100" rx="14" fill="#F8E8B0" stroke="#A9861F"/>
+  <text x="52" y="238" fill="#A9861F">하급심·변두리의 법률 사실</text>
+  <text x="52" y="262" font-size="13" font-weight="400" fill="#33313F">대법원보다 항소법원, 지방법원에서 더 틀리고</text>
+  <text x="52" y="282" font-size="13" font-weight="400" fill="#33313F">아주 오래되거나 아주 최근인 판례에서 더 틀림 [7]</text>
+  <rect x="348" y="208" width="300" height="100" rx="14" fill="#D9D3F7" stroke="#7466C2"/>
+  <text x="368" y="238" fill="#7466C2">최근 일·기사 주소</text>
+  <text x="368" y="262" font-size="13" font-weight="400" fill="#33313F">검색형 AI 여덟 종, 1,600번 중 60% 넘게 오답.</text>
+  <text x="368" y="282" font-size="13" font-weight="400" fill="#33313F">그록 3의 주소 200개 중 154개는 없는 페이지 [8]</text>
+</g>
+<text x="32" y="322" font-size="12" fill="#6E6B7B">자료: Kalai 등(2025)[4]·Walters &amp; Wilder(2023)[6]·Dahl 등(2024)[7]·Tow Center(2025)[8] · 그림: 직접 제작</text>
+</svg>
+<figcaption>이름과 날짜는 외울 수밖에 없는 사실이라 위험하고, 참고문헌은 GPT-4도 18%가 지어낸 것이었으며, 하급심 판례와 아주 오래되거나 최근인 사건에서 법률 환각이 늘었고, 최근 뉴스는 검색형 AI 여덟 종이 60% 넘게 틀렸습니다.</figcaption>
+</figure>
+<p>네 자리의 공통점이 있습니다. 모두 '그럴듯한 다른 값'이 무수히 존재하는 사실입니다. 생일은 365개 중 하나이고, 쪽수는 수백 개 중 하나이고, 판례 번호는 수만 개 중 하나입니다. 모델이 정답을 모를 때 그 자리를 채울 후보는 얼마든지 있고, 어느 것을 넣어도 문장은 자연스럽습니다. 반대로 어떤 개념이 무엇인지 설명하는 일은 답의 꼴이 느슨해서 조금 어긋나도 틀렸다고 하기 어렵습니다. 환각이 유독 사실의 좁은 자리에 몰리는 이유입니다.</p>
+
+<!-- 5. 확인하는 순서 -->
+<h2>확인하는 순서</h2>
+<p>앞의 증거를 거꾸로 읽으면 확인 절차가 나옵니다. 다섯 단계이고, 확인은 모두 AI 바깥에서 합니다.</p>
+<p>첫째, 질문 자체를 의심합니다. 세종대왕의 맥북도, 뒤집힌 적 없는 판례도 질문 안에 거짓 전제가 있었습니다. 모델은 전제를 바로잡기보다 따라가는 경향이 있습니다<sup class="fn"><a id="cite-7b" href="#ref-7">[7]</a></sup>. "X 사건에 대해 설명해 줘"보다 "X 사건이 실제로 있었는지부터 따져 줘"가 낫고, 가장 안전한 것은 그 사건이 있었는지를 AI 밖에서 먼저 찾아보는 것입니다.</p>
+<p>둘째, 답에 들어 있는 고유명사·숫자·날짜·인용을 따로 표시합니다. 환각은 설명의 흐름보다 거기에 몰립니다. 외울 수밖에 없는 사실<sup class="fn"><a id="cite-4d" href="#ref-4">[4]</a></sup>, 서지 사항<sup class="fn"><a id="cite-6b" href="#ref-6">[6]</a></sup>, 하급심 판례와 최신 사건<sup class="fn"><a id="cite-7c" href="#ref-7">[7]</a></sup><sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>이 위험하다는 것이 연구들의 공통된 결론입니다. 표시한 항목이 글의 뼈대라면, 그 글은 아직 쓸 수 없는 글입니다.</p>
+<p>셋째, 출처를 요구하고 직접 엽니다. 여는 것이 핵심입니다. 제목과 저자, 학술지 이름이 그럴듯한 것은 증거가 아닙니다. 월터스와 와일더가 본 가짜 참고문헌은 대부분 실제 학술지의 이름을 달고 있었습니다<sup class="fn"><a id="cite-6c" href="#ref-6">[6]</a></sup>. 링크가 붙어 있어도 눌러 보아야 합니다. 그록 3의 링크 넷 중 셋은 없는 페이지였습니다<sup class="fn"><a id="cite-8c" href="#ref-8">[8]</a></sup>. 슈워츠 변호사가 가짜 판례의 전문을 찾지 못한 그 순간이 바로 멈춰야 할 순간이었습니다<sup class="fn"><a id="cite-1c" href="#ref-1">[1]</a></sup>. 출처가 열리지 않으면 그 주장은 없는 것으로 칩니다.</p>
+<p>넷째, 출처가 열리면 숫자와 인용을 원문에서 대조합니다. 존재하는 문헌이어도 네 건 중 한 건에서 권·호·쪽수나 연도가 틀렸다는 결과를 기억하면<sup class="fn"><a id="cite-6d" href="#ref-6">[6]</a></sup>, 출처가 실재한다는 확인만으로는 끝이 아닙니다. 인용문은 원문에서 그 문장을 찾아야 하고, 수치는 원문의 표에서 같은 수를 보아야 합니다. 이 글의 심플QA 숫자도 블로그 요약이 아니라 시스템 카드의 표에서 옮겼습니다.</p>
+<p>다섯째, AI에게 "진짜냐"고 되묻는 것을 확인으로 치지 않습니다. 슈워츠 변호사는 그렇게 했고, 챗GPT는 진짜라고 답했습니다<sup class="fn"><a id="cite-1d" href="#ref-1">[1]</a></sup>. 달 연구진의 결과처럼 모델은 자기가 언제 틀리는지 잘 모릅니다<sup class="fn"><a id="cite-7d" href="#ref-7">[7]</a></sup>. 대신 쓸 수 있는 것은 질문의 틀을 바꾸는 일입니다. 오픈AI 연구진은 모델 평가 지침에 "확신이 이 정도를 넘을 때만 답하고, 아니면 모른다고 하라"는 기준을 명시하자고 제안했습니다<sup class="fn"><a id="cite-4e" href="#ref-4">[4]</a></sup>. 같은 문장을 질문 앞에 붙여 볼 수는 있습니다. 다만 그것이 일상 질문에서 얼마나 효과가 있는지는 이 논문이 검증한 범위 밖이고, 모른다는 답을 받았다고 해서 나머지 답이 참이 되는 것도 아닙니다. 그래도 모른다고 답할 자리를 열어 두는 것은, 찍는 쪽이 이기는 시험장을 조금이라도 바꾸는 일입니다.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">AI 답을 받은 뒤 확인하는 다섯 단계</title>
+<desc id="d-3">질문의 전제를 의심하고, 답 속의 이름·숫자·날짜·인용을 표시하고, 출처를 요구해 직접 열고, 열린 원문에서 숫자와 인용을 대조하며, AI에게 진짜냐고 되묻는 것은 확인으로 치지 않는다.</desc>
+<rect width="680" height="260" rx="18" fill="#FBF9F6"/>
+<text x="32" y="44" font-size="20" font-weight="700" fill="#33313F">확인은 AI 바깥에서 — 다섯 단계</text>
+<defs><marker id="ah-3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#9A96AA"/></marker></defs>
+<g font-size="14" font-weight="700" text-anchor="middle">
+  <rect x="24" y="76" width="116" height="96" rx="14" fill="#CFE3F6" stroke="#3E7DB0"/><text x="82" y="106" fill="#3E7DB0">1. 전제 의심</text><text x="82" y="130" font-size="12" font-weight="400" fill="#33313F">그 사건이 있었나</text><text x="82" y="150" font-size="12" font-weight="400" fill="#33313F">부터 밖에서 확인</text>
+  <rect x="154" y="76" width="116" height="96" rx="14" fill="#D9D3F7" stroke="#7466C2"/><text x="212" y="106" fill="#7466C2">2. 표시</text><text x="212" y="130" font-size="12" font-weight="400" fill="#33313F">이름·숫자·날짜·</text><text x="212" y="150" font-size="12" font-weight="400" fill="#33313F">인용에 밑줄</text>
+  <rect x="284" y="76" width="116" height="96" rx="14" fill="#F8E8B0" stroke="#A9861F"/><text x="342" y="106" fill="#A9861F">3. 출처 열기</text><text x="342" y="130" font-size="12" font-weight="400" fill="#33313F">링크를 누르고</text><text x="342" y="150" font-size="12" font-weight="400" fill="#33313F">전문을 찾는다</text>
+  <rect x="414" y="76" width="116" height="96" rx="14" fill="#CDEBDD" stroke="#3F8F6E"/><text x="472" y="106" fill="#3F8F6E">4. 원문 대조</text><text x="472" y="130" font-size="12" font-weight="400" fill="#33313F">숫자는 표에서,</text><text x="472" y="150" font-size="12" font-weight="400" fill="#33313F">인용은 문장에서</text>
+  <rect x="544" y="76" width="116" height="96" rx="14" fill="#F6CCD8" stroke="#B24E6E"/><text x="602" y="106" fill="#B24E6E">5. 되묻기 금지</text><text x="602" y="130" font-size="12" font-weight="400" fill="#33313F">"진짜냐"는 질문은</text><text x="602" y="150" font-size="12" font-weight="400" fill="#33313F">확인이 아니다</text>
+</g>
+<g fill="none" stroke="#9A96AA" stroke-width="1.8" marker-end="url(#ah-3)">
+  <path d="M142 124 L150 124"/><path d="M272 124 L280 124"/><path d="M402 124 L410 124"/><path d="M532 124 L540 124"/>
+</g>
+<text x="340" y="206" font-size="13" text-anchor="middle" fill="#6E6B7B">3단계에서 출처가 열리지 않으면 그 주장은 없는 것으로 친다</text>
+<text x="32" y="242" font-size="12" fill="#6E6B7B">자료: Mata v. Avianca 판결문[1]·Kalai 등[4]·Walters &amp; Wilder[6]·Dahl 등[7]·Tow Center[8]에서 끌어낸 절차 · 그림: 직접 제작</text>
+</svg>
+<figcaption>질문의 전제를 의심하고, 답 속의 이름·숫자·날짜·인용을 표시하고, 출처를 요구해 직접 열고, 열린 원문에서 숫자와 인용을 대조하며, AI에게 진짜냐고 되묻는 것은 확인으로 치지 않습니다.</figcaption>
+</figure>
+<div class="caution">어디에 이 절차를 쓸지도 정해 두면 좋습니다. 글의 초안을 잡거나 긴 문서를 요약하거나 모르는 분야의 개념을 처음 익힐 때 AI의 틀린 답은 비용이 작습니다. 법원에 내는 서면, 환자에게 하는 설명, 돈이 걸린 계산, 남의 이름이 들어가는 글은 다릅니다. 카스텔 판사의 판결문은 AI를 쓴 것 자체를 나무라지 않았습니다. "신뢰할 수 있는 인공지능 도구의 도움을 받는 것에 본질적으로 부적절한 점은 없다"고 썼습니다. 문제 삼은 것은 그 결과물의 정확성을 책임지는 문지기 역할을 변호사가 버렸다는 점이었습니다<sup class="fn"><a id="cite-1e" href="#ref-1">[1]</a></sup>.</div>
+
+<!-- 6. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>2023년 12월의 한 강연 자료에 챗GPT 화면 하나가 실려 있습니다. "AI 챗봇 특허를 보유한 글로벌 기업이 어디인가"라는 물음에 챗GPT는 모른다고 답하고, 미국과 유럽 특허청의 데이터베이스를 직접 찾아보라고 안내합니다. 화면 한 장이라 일반화할 근거는 못 됩니다. 그래도 좋은 답이 어떤 꼴인지는 보여 줍니다. 좋은 답은 때로 답이 아니라 찾아볼 곳입니다.</p>
+    <p><strong>"AI의 답은 결론이 아니라 확인할 목록입니다."</strong> 어느 경영 강연 자료에는 생성형 AI 활용의 성패가 답변의 한계를 아는 사용자의 숙련도에 달려 있다는 말이 나옵니다. 그 숙련도는 질문을 잘 쓰는 기술이 아니라, 답에서 무엇을 의심하고 어디서 확인할지를 아는 습관에 가깝습니다.</p>
+    <p>그래서 한 가지 습관만 권합니다. AI가 준 답을 어딘가에 옮겨 쓰기 전에, 그 안의 숫자 하나와 이름 하나를 골라 원문을 열어 보십시오. 둘 다 맞으면 나머지도 조금 더 믿을 수 있고, 하나라도 틀리면 나머지 전부를 다시 보아야 합니다.</p>
+  </blockquote>
+</section>
+
+<!-- 7. 정리 -->
+<hr>
+<p>정리하자면 이렇습니다. AI는 모르는 것을 모른다고 하지 않고 그럴듯하게 채웁니다. 모른다는 답에 0점을 주는 채점표가 그렇게 가르쳤기 때문이고, 오픈AI 자신이 그렇게 설명했습니다. 채점을 바꾼 모델은 오답을 75문제에서 26문제로 줄였지만, 그것은 답을 삼가는 법을 배운 결과이지 다 아는 모델이 된 것이 아닙니다. 지어낸 답은 이름과 날짜, 숫자, 출처, 최근 일처럼 그럴듯한 다른 값이 무수히 있는 자리에 몰립니다. 그래서 확인은 그 자리에 집중하고, 반드시 AI 바깥에서 합니다. 전제를 의심하고, 표시하고, 출처를 열고, 원문과 대조하고, 되묻기를 확인으로 치지 않는 것입니다.</p>
+<p>슈워츠 변호사에게는 판례의 전문이 검색되지 않던 순간이 있었습니다. 그 순간을 "어딘가에 있겠지"로 넘기느냐, "없는 것으로 친다"로 멈추느냐가 이 글의 전부입니다.</p>
+
+<!-- 8. 꼬리 -->
+<p class="disclaimer">이 글은 일반적인 정보 제공을 위한 것입니다. 법률·의료·재무처럼 틀린 답의 비용이 큰 분야에서 AI의 답을 쓰실 때는 해당 분야 전문가의 확인을 거치세요. 이 글에 인용한 모델별 수치는 특정 시점, 특정 문제 모음에서 나온 결과이며 모델이 바뀌면 달라집니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">United States District Court, S.D.N.Y. <i>Mata v. Avianca, Inc.</i>, No. 22-cv-1461 (PKC), Opinion and Order on Sanctions (Document 54), 2023-06-22. <a href="https://storage.courtlistener.com/recap/gov.uscourts.nysd.575368/gov.uscourts.nysd.575368.54.0.pdf">판결문(PDF)</a> <a class="back" href="#cite-1">↩</a></li>
+    <li id="ref-2">김도형. "세종대왕 맥북 던짐 사건 알려줘" 물었더니... 챗GPT의 엉뚱 답변 '밈'으로 유행 중. <i>한국일보</i>, 2023-02-23. <a href="https://v.daum.net/v/20230223043158373">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">뉴스1(김승준). "세종대왕은 맥북을 사용할 수 없습니다"…헛소리 줄고 강력해진 GPT4. <i>파이낸셜뉴스</i> 전재, 2023-03-15. <a href="https://www.fnnews.com/news/202303151037473909">링크</a> <a class="back" href="#cite-3">↩</a></li>
+    <li id="ref-4">Kalai, A. T., Nachum, O., Vempala, S. S., Zhang, E. Why Language Models Hallucinate. arXiv:2509.04664, 2025-09-04. <a href="https://arxiv.org/abs/2509.04664">초록</a> <a href="https://arxiv.org/html/2509.04664">본문</a> <a class="back" href="#cite-4">↩</a></li>
+    <li id="ref-5">OpenAI. GPT-5 System Card, 2025-08, 표 8 "SimpleQA evaluations"(정답률·환각률). <a href="https://cdn.openai.com/gpt-5-system-card.pdf">PDF</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">Walters, W. H., Wilder, E. I. Fabrication and errors in the bibliographic citations generated by ChatGPT. <i>Scientific Reports</i> 13, 14045, 2023. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10484980/">링크</a> <a class="back" href="#cite-6">↩</a></li>
+    <li id="ref-7">Dahl, M., Magesh, V., Suzgun, M., Ho, D. E. Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models. <i>Journal of Legal Analysis</i> 16(1), 64–93, 2024 (arXiv:2401.01301). <a href="https://arxiv.org/abs/2401.01301">초록</a> <a href="https://arxiv.org/html/2401.01301v2">본문</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">Jaźwińska, K., Chandrasekar, A. AI Search Has A Citation Problem. <i>Columbia Journalism Review</i>, Tow Center for Digital Journalism, 2025-03-06. <a href="https://www.cjr.org/tow_center/we-compared-eight-ai-search-engines-theyre-all-bad-at-citing-news.php">링크</a> <a class="back" href="#cite-8">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>
