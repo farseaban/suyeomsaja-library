@@ -46,7 +46,10 @@
 5. **[승인]** giscus.app에서 저장소를 넣고 받은 값을 변수로 넣는다: `PUBLIC_GISCUS_REPO=farseaban/suyeomsaja-library`, `PUBLIC_GISCUS_REPO_ID`, `PUBLIC_GISCUS_CATEGORY_ID`.
 6. **[승인]** Actions 탭에서 `deploy`를 수동 실행하고, `https://farseaban.github.io/suyeomsaja-library/`를 확인한다.
 7. **[승인]** `.github/workflows/deploy.yml`의 `on:`에 `push: { branches: [main] }`를 추가한다.
-8. **[승인]** 도메인을 샀다면: `public/CNAME`에 도메인 한 줄, 변수 `SITE_URL=https://<도메인>`·`BASE_PATH=/`, DNS에 GitHub Pages 레코드를 넣는다. 댓글은 글 이름에 묶여 있어 주소가 바뀌어도 그 글에 남는다.
+8. **[완료 2026-11-08]** 도메인 `suyeomsaja.com`(Cloudflare 등록·DNS). 현재 값은 변수 `SITE_URL=https://suyeomsaja.com`·`BASE_PATH=/`이다. 위 3단계의 github.io 값은 첫 공개 때 기록이다.
+   - DNS: `@`에 A 4개(185.199.108~111.153)와 AAAA 4개(2606:50c0:8000~8003::153), `www`에 CNAME `farseaban.github.io`, 계정 도메인 인증용 TXT `_github-pages-challenge-farseaban`. 모두 회색 구름(DNS only). 주황 구름이면 GitHub이 인증서를 못 받는다.
+   - 사용자 도메인은 `public/CNAME`이 아니라 Pages 설정에 둔다(Actions 배포는 CNAME 파일을 읽지 않는다): `gh api -X PUT repos/farseaban/suyeomsaja-library/pages -f cname=suyeomsaja.com -F https_enforced=true`.
+   - 옛 주소 `farseaban.github.io/suyeomsaja-library/…`는 GitHub이 같은 경로의 새 도메인으로 301 넘긴다. 댓글은 글 이름에 묶여 있어 주소가 바뀌어도 그 글에 남는다.
 9. **[승인]** 정식으로 공개할 때: 변수 `PUBLIC_ALLOW_INDEXING=true`를 넣고 다시 배포한다. 이 변수가 없으면 모든 쪽에 `noindex`가 붙어 검색에 나오지 않는다. 다만 주소를 아는 사람은 볼 수 있고, 저장소도 공개 상태다.
 
 계정 이름 `farseaban`은 Pages 기본 주소·저장소 URL·댓글 화면에 드러난다(설계서 7절).
