@@ -11,6 +11,9 @@ describe('localImages', () => {
     expect(localImages('<p>x</p><figure><img src="img/a.jpg" alt="a"></figure><img src="img/b-2.webp" alt="b">')).toEqual(['a.jpg', 'b-2.webp'])
   })
   it('is empty for a post without images', () => expect(localImages('<p>x</p><svg></svg>')).toEqual([]))
+  it('drops any name that is not a plain file in img/', () => {
+    expect(localImages('<img src="img/../../etc/passwd" alt="a"><img src="../x.jpg" alt="b"><img src="img/ok.jpg" alt="c">')).toEqual(['ok.jpg'])
+  })
 })
 
 describe('findCreditProblems', () => {
@@ -69,6 +72,10 @@ describe('a post with images', () => {
   it('stops the build when the image is too heavy for phones', () => {
     const d = postDir(good.replace('</article>', `${fig}</article>`), { 'a.jpg': 600 * 1024 })
     expect(() => loadPosts(d)).toThrow(/글 "pic".*a\.jpg/)
+  })
+  it('stops the build when a second src points outside the post folder', () => {
+    const d = postDir(good.replace('</article>', '<figure><img src="img/a.jpg" src="img/../../../../etc/hosts" alt="a"><figcaption><span class="credit">CC0 · <a href="https://x.org">출처</a></span></figcaption></figure></article>'), { 'a.jpg': 1000 })
+    expect(() => loadPosts(d)).toThrow(/글 "pic"/)
   })
   it('stops the build when the credit line is missing', () => {
     const d = postDir(good.replace('</article>', '<figure><img src="img/a.jpg" alt="a"><figcaption>x</figcaption></figure></article>'), { 'a.jpg': 1000 })

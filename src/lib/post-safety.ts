@@ -17,7 +17,7 @@ const URL_ATTRS = new Set(['href', 'xlink:href', 'src', 'action', 'data', 'poste
 const ALLOWED_SCHEMES = new Set(['http', 'https', 'mailto'])
 // 그림은 이 속성만 쓴다 — srcset·sizes는 바깥 주소를 부를 수 있어 받지 않는다
 const IMG_ATTRS = new Set(['src', 'alt', 'width', 'height', 'loading', 'decoding', 'class'])
-const IMG_SRC = /^img\/[a-z0-9][a-z0-9-]*\.(jpg|jpeg|png|webp)$/
+export const IMG_SRC = /^img\/[a-z0-9][a-z0-9-]*\.(jpg|jpeg|png|webp)$/
 const NAMED_ENTITIES: Record<string, string> = { colon: ':', tab: '\t', newline: '\n', lpar: '(', rpar: ')', amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" }
 
 type Attr = { name: string; value: string }
@@ -132,6 +132,13 @@ export function findUnsafe(articleHtml: string, css: string): string[] {
     if (!ALLOWED_TAGS.has(tag.name)) hits.push(`허용하지 않은 태그 <${tag.name}>`)
     if (!tag.closed) hits.push(`닫히지 않은 태그 <${tag.name}>`)
     if (tag.name === 'img') hits.push(...unsafeImg(tag))
+    // 같은 속성을 두 번 쓰면 브라우저는 앞의 것을, 다른 파서는 뒤의 것을 읽을 수 있다 — 검사와 사용이 갈라지지 않게 막는다
+    const seen = new Set<string>()
+    for (const { name } of tag.attrs) {
+      const attr = name.toLowerCase()
+      if (seen.has(attr)) hits.push(`<${tag.name}>의 ${attr} 속성이 두 번 나온다`)
+      seen.add(attr)
+    }
     for (const { name, value } of tag.attrs) {
       const attr = name.toLowerCase()
       if (attr.startsWith('on') || BLOCKED_ATTRS.has(attr)) hits.push(`<${tag.name}>의 ${attr} 속성`)

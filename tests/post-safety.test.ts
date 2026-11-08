@@ -60,6 +60,9 @@ describe('post body: what must be refused', () => {
     ['image without alt text', '<img src="img/a.jpg">'],
     ['image with empty alt text', '<img src="img/a.jpg" alt="">'],
     ['image of an unknown type', '<img src="img/a.svg" alt="x">'],
+    ['image with a second src that a different parser would read', '<img src="img/a.jpg" src="img/../../../etc/passwd" alt="x">'],
+    ['image with a second src in capitals', '<img src="img/a.jpg" SRC="../x.jpg" alt="x">'],
+    ['any tag with a repeated attribute', '<a href="#ref-1" href="javascript:alert(1)">x</a>'],
   ]
   for (const [name, html] of hostile) {
     it(`refuses ${name}`, () => {
