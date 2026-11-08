@@ -4,6 +4,7 @@ import { loadPosts, minutesLabel, pickFeatured } from '../lib/posts'
 import { url } from '../lib/url'
 import Chip from '../components/Chip.astro'
 import Title from '../components/Title.astro'
+import { splitTitle } from '../lib/title'
 import SecHead from '../components/SecHead.astro'
 import Shelf from '../components/Shelf.astro'
 import LeadScene from '../components/LeadScene.astro'
@@ -39,7 +40,7 @@ const leadMin = lead ? minutesLabel(lead.minutes) : null
             return (
               <article class="cell">
                 <p class={`s-band s-cat-${p.color}`}><a class="s-band-cat" href={url(`category/${p.categorySlug}`)}>{p.category}</a>{min && <Fragment>{' '}<span class="s-band-min">{min}</span></Fragment>}</p>
-                <h3 class="s-serif" style={`view-transition-name:t-${p.slug}`}><a href={url(`posts/${p.slug}`)}><Title title={p.title} /></a></h3>
+                <h3 class="s-serif" style={`view-transition-name:t-${p.slug}`}><a href={url(`posts/${p.slug}`)}><Title title={splitTitle(p.title).q} /></a></h3>
                 <p class="sum">{p.description}</p>
               </article>
             )

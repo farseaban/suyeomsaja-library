@@ -8,6 +8,7 @@ import { metaChunks } from './image-meta'
 import { cardVersion } from '../src/lib/card'
 import { activeCategories, loadPosts } from '../src/lib/posts'
 import { SITE } from '../src/config/site'
+import { splitTitle } from '../src/lib/title'
 
 const OUT = 'dist-test'
 const BASE = '/suyeomsaja-library/'
@@ -455,9 +456,9 @@ describe('field marks and lists', () => {
       expect(chip.getAttribute('class')).toBe(`s-chip s-cat-${cats[i].color}`)
       expect(chip.getAttribute('href')).toBe(`${BASE}category/${cats[i].slug}/`)
       expect(s.querySelector('.shelf-h > .shelf-n')!.text).toBe(`${mine.length}편`)
-      // 서가는 글 제목 색인이다 — 가르지 않은 원제목, 최대 3편, 화면 전환 이름 없음
+      // 서가는 글 제목 색인이다 — 질문 줄만(사용자 11/08), 최대 3편, 화면 전환 이름 없음
       const links = s.querySelectorAll('ul > li > a')
-      expect(links.map((a) => a.text)).toEqual(mine.slice(0, 3).map((p) => p.title))
+      expect(links.map((a) => a.text)).toEqual(mine.slice(0, 3).map((p) => splitTitle(p.title).q))
       expect(links.map((a) => a.getAttribute('href'))).toEqual(mine.slice(0, 3).map((p) => `${BASE}posts/${p.slug}/`))
       for (const a of links) expect(a.getAttribute('style') ?? '').not.toContain('view-transition-name')
     })
@@ -587,9 +588,10 @@ describe('front page', () => {
       expect(cat.text, p.slug).toBe(p.category)
       expect(cat.getAttribute('href'), p.slug).toBe(`${BASE}category/${p.categorySlug}/`)
       expect(band.querySelector('.s-band-min')!.text, p.slug).toBe(`약 ${p.minutes}분`)
-      // 칸 제목은 h3(구역 머리가 h2), 두 줄로 가르되 글자는 원제목 그대로
+      // 칸 제목은 h3(구역 머리가 h2). 1면에서는 질문 줄만 — 부제는 글 쪽에 둔다(사용자 11/08: 1면 글씨 줄이기)
       const t = cell.querySelector('h3 a')!
-      expect(t.text, p.slug).toBe(p.title)
+      expect(t.text, p.slug).toBe(splitTitle(p.title).q)
+      expect(t.querySelector('.s-tc'), p.slug).toBeNull()
       expect(t.getAttribute('href'), p.slug).toBe(`${BASE}posts/${p.slug}/`)
       expect(cell.querySelector('h3')!.getAttribute('style'), p.slug).toContain(`view-transition-name:t-${p.slug}`)
       expect(cell.querySelector('.sum')!.text, p.slug).toBe(p.description)
@@ -685,8 +687,10 @@ describe('front page', () => {
     expect(of('.s-scene')).toMatch(/margin:00calc\(-196px\*var\(--glow\)\)auto/)
     expect(of('.s-scene', phone)).toMatch(/width:min\(300px,84%\)/)
     expect(of('.s-scene', phone)).toMatch(/margin:-32px-6pxcalc\(-200px\*var\(--glow\)\)auto/)
-    // 휴대폰 첫 화면: 요약은 3줄에서 자른다
-    expect(of('.lead .sum', phone)).toMatch(/-webkit-line-clamp:3/)
+    // 휴대폰 첫 화면: 머리기사 요약은 숨긴다 — 제목·부제·날짜로 끝난다(사용자 11/08)
+    expect(of('.lead .sum', phone)).toMatch(/display:none/)
+    // 최근 글 칸 요약은 넓은 화면에서도 두 줄
+    expect(of('.cell .sum')).toMatch(/-webkit-line-clamp:2/)
   })
   it('lights the sphere for the night ground', () => {
     expect(of('.s-orb-canvas')).toMatch(/background:radial-gradient\(closest-side,rgba\(200,192,244,\.2\d?\),rgba\(200,192,244,\.07\)62%,transparent74%\)/)
