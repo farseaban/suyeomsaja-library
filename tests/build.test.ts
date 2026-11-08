@@ -55,6 +55,11 @@ describe('build output', () => {
     expect(locs.filter((l) => /search|edit|404/.test(l))).toEqual([])
     expect(new Set(locs).size).toBe(locs.length)
   })
+  it('carries the Naver ownership tag on the front page', () => {
+    const tag = parse(html('index.html')).querySelector('meta[name="naver-site-verification"]')
+    expect(tag?.getAttribute('content')).toBe(SITE.naverVerification)
+    expect(SITE.naverVerification).toMatch(/^[0-9a-f]{40}$/)
+  })
   it('points robots.txt at the sitemap without blocking anything', () => {
     const robots = html('robots.txt')
     expect(robots).toMatch(new RegExp(`^Sitemap: https?://[^\\s]+${BASE}sitemap\\.xml$`, 'm'))

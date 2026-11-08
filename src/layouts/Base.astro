@@ -37,6 +37,7 @@ const fullTitle = title ? `${title} — ${SITE.name}` : SITE.name
   <title>{fullTitle}</title>
   <meta name="description" content={description}>
   {blocksIndexing(import.meta.env.PUBLIC_ALLOW_INDEXING) && <meta name="robots" content="noindex, nofollow">}
+  <meta name="naver-site-verification" content={SITE.naverVerification}>
   <meta property="og:title" content={title ?? SITE.name}>
   <meta property="og:description" content={description}>
   <meta property="og:type" content={ogType}>

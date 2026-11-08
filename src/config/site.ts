@@ -5,6 +5,8 @@ export const SITE = {
   // 글 끝 글쓴이 상자의 한 줄 소개(사용자 노션 Vision 원문 그대로)와 그림 표기
   bio: '창의적인 개인이 넘쳐나는 세상을 꿈꿉니다.',
   artCredit: 'richa 그림',
+  // 네이버 서치어드바이저 소유 확인 태그 값(사용자 11/08). 비밀 값이 아니다 — 누구나 페이지 소스에서 본다
+  naverVerification: 'fb9c09fb2debaad2964ac9032934e0eb71ba1be6',
 }
 
 export const PALETTE = ['lav', 'mint', 'peach', 'sky', 'butter', 'rose'] as const
