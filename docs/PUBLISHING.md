@@ -52,6 +52,8 @@
    - 옛 주소 `farseaban.github.io/suyeomsaja-library/…`는 GitHub이 같은 경로의 새 도메인으로 301 넘긴다. 댓글은 글 이름에 묶여 있어 주소가 바뀌어도 그 글에 남는다.
 9. **[승인]** 정식으로 공개할 때: 변수 `PUBLIC_ALLOW_INDEXING=true`를 넣고 다시 배포한다. 이 변수가 없으면 모든 쪽에 `noindex`가 붙어 검색에 나오지 않는다. 다만 주소를 아는 사람은 볼 수 있고, 저장소도 공개 상태다.
 
+main 보호(2026-11-08): 저장소 규칙 "main 보호"가 원격 `main`의 강제 덮어쓰기와 삭제를 막는다(예외 없음). 평소 `git push origin publish:main`은 그대로 된다. 이력을 다시 써야 할 일이 생기면 Settings → Rules → Rulesets에서 잠시 끄고, 끝나면 다시 켠다.
+
 계정 이름 `farseaban`은 Pages 기본 주소·저장소 URL·댓글 화면에 드러난다(설계서 7절).
 
 ## 그림 넣기 (2026-11-08)
