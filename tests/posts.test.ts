@@ -37,7 +37,7 @@ describe('published posts', () => {
 describe('field colours', () => {
   // 분야는 학문 이름이 아니라 독자가 얻으러 오는 것으로 묶는다(11/07 사용자 결정). 색은 분야마다 명시한다.
   const TABLE: [slug: string, name: string, color: string][] = [
-    ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
+    ['ai-work', '진짜 생산성을 늘리는 AI기술', 'butter'],
     ['tech', 'AI와 기술의 현재', 'sky'],
     ['economy', '돈과 세상의 원리', 'sky'],
     ['fact-check', '진실 혹은 거짓', 'peach'],

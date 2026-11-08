@@ -19,7 +19,7 @@ export type Category = { slug: string; name: string; color: PaletteKey }
 // 색은 분야마다 명시한다 — 뜻이 가까운 분야끼리 한 색(돈·AI 동향, 일과 학습·AI 생산성).
 const CATEGORY_LIST: [slug: string, name: string, color: PaletteKey][] = [
   // AI와 경제 서가를 맨 앞에 둔다(사용자 11/08).
-  ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
+  ['ai-work', '진짜 생산성을 늘리는 AI기술', 'butter'],
   ['tech', 'AI와 기술의 현재', 'sky'],
   ['economy', '돈과 세상의 원리', 'sky'],
   ['fact-check', '진실 혹은 거짓', 'peach'],
