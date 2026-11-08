@@ -4,6 +4,7 @@
 
 1. `posts/<slug>/` 폴더를 만든다. slug는 영문 소문자·숫자·하이픈만 쓴다(예: `anthropic-fair-value-loss`).
 2. `expert-explainer-blog` 스킬이 만든 완성 HTML을 **그대로** `post.html`로 넣는다. 내용은 고치지 않는다.
+   - 예외: 노란 상자(`div.key`) 앞의 `핵심 —` 머리말은 넣지 않는다. 스킬 템플릿에는 남아 있지만 AI 글 같아서 뺐다(사용자 11/08). 테스트가 막는다.
 3. `meta.json`을 쓴다. 분야 이름은 `src/config/site.ts` 목록에 있는 그대로 쓰고, `featured`는 1면 대표로 세울 때만 넣는다.
    ```json
    { "category": "경제", "date": "2026-11-01" }
