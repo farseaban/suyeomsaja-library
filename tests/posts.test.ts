@@ -42,10 +42,11 @@ describe('field colours', () => {
     ['philosophy', '철학의 아름다움', 'lav'],
     ['classics', '다시 보는 고전과 예술', 'rose'],
     ['economy', '돈과 세상의 원리', 'sky'],
-    ['tech', '진짜 생산성을 늘리는 AI의 모든 것', 'sky'],
+    ['ai-work', '진짜 생산성을 늘리는 AI의 모든 것', 'butter'],
+    ['tech', 'AI와 기술의 현재', 'sky'],
     ['nature', '인류와 생명의 수수께끼', 'mint'],
   ]
-  it('assigns each of the seven shelves its colour, in the same menu order', () => {
+  it('assigns each of the eight shelves its colour, in the same menu order', () => {
     expect(CATEGORIES.map((c) => [c.slug, c.name, c.color])).toEqual(TABLE)
   })
   it('uses palette colours only', () => {
