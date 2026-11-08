@@ -21,7 +21,7 @@ const CATEGORY_LIST: [slug: string, name: string, color: PaletteKey][] = [
   ['philosophy', '철학의 아름다움', 'lav'],
   ['classics', '다시 보는 고전과 예술', 'rose'],
   ['economy', '돈과 세상의 원리', 'sky'],
-  ['tech', 'AI와 기술의 현재', 'sky'],
+  ['tech', '진짜 생산성을 늘리는 AI의 모든 것', 'sky'],
   ['nature', '인류와 생명의 수수께끼', 'mint'],
 ]
 
