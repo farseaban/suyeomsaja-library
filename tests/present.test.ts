@@ -156,7 +156,10 @@ describe('presentPost — block order', () => {
   })
   it('real posts do carry 680-wide diagrams and one table of sentences', () => {
     const real = files.filter((f) => f.startsWith('posts/')).map((f) => [f, presentPost(extractPost(readFileSync(f, 'utf8')).articleHtml).body] as const)
-    expect(real.filter(([, b]) => b.includes('s-fig-scroll')).length).toBe(real.length)
+    // 사용자 11/08: 다른 블로그에서 옮겨 온 시·에세이는 도해가 없다. 도해가 있는 글은 빠짐없이 감싸개를 받는다
+    const withSvg = real.filter(([, b]) => b.includes('<svg'))
+    expect(withSvg.length).toBeGreaterThanOrEqual(30)
+    expect(withSvg.filter(([, b]) => !b.includes('s-fig-scroll')).map(([f]) => f)).toEqual([])
     expect(real.filter(([, b]) => b.includes('data-prose')).map(([f]) => f)).toEqual(['posts/misattributed-quotes/post.html'])
   })
 })
