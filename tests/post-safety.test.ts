@@ -52,6 +52,14 @@ describe('post body: what must be refused', () => {
     ['style attribute with entities hiding url(', '<p style="background:&#117;rl(https://evil.example/x)">x</p>'],
     ['srcdoc attribute', '<div srcdoc="&lt;script&gt;"></div>'],
     ['formaction attribute', '<div formaction="https://evil.example"></div>'],
+    ['image from a protocol-relative address', '<img src="//evil.example/x.png" alt="x">'],
+    ['image climbing out of its folder', '<img src="img/../../x.png" alt="x">'],
+    ['image outside the img folder', '<img src="x.png" alt="x">'],
+    ['image from a data address', '<img src="data:image/png;base64,AAAA" alt="x">'],
+    ['image with srcset, which can call out', '<img src="img/a.jpg" srcset="https://evil.example/x.png 2x" alt="x">'],
+    ['image without alt text', '<img src="img/a.jpg">'],
+    ['image with empty alt text', '<img src="img/a.jpg" alt="">'],
+    ['image of an unknown type', '<img src="img/a.svg" alt="x">'],
   ]
   for (const [name, html] of hostile) {
     it(`refuses ${name}`, () => {
@@ -93,6 +101,7 @@ describe('post body and css: what must pass', () => {
     ['relative link', '<a href="../other/">x</a>'],
     ['mail link', '<a href="mailto:a@example.org">x</a>'],
     ['svg figure', '<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" role="img" aria-labelledby="a"><title id="a">t</title><desc>d</desc><defs><marker id="m" orient="auto"><path d="M0 0"/></marker></defs><g><rect width="1" height="1" fill="#FFF"/><text x="1" y="1">글<tspan>자</tspan></text></g></svg><figcaption>캡션</figcaption></figure>'],
+    ['local image in the post folder', '<figure><img src="img/socrates-death.jpg" alt="그림" width="1200" height="800" loading="lazy" decoding="async"><figcaption>캡션</figcaption></figure>'],
     ['table', '<table><thead><tr><th>a</th></tr></thead><tbody><tr><td>b</td></tr></tbody></table>'],
   ]
   for (const [name, html] of fine) {

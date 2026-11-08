@@ -49,3 +49,11 @@
 9. **[승인]** 정식으로 공개할 때: 변수 `PUBLIC_ALLOW_INDEXING=true`를 넣고 다시 배포한다. 이 변수가 없으면 모든 쪽에 `noindex`가 붙어 검색에 나오지 않는다. 다만 주소를 아는 사람은 볼 수 있고, 저장소도 공개 상태다.
 
 계정 이름 `farseaban`은 Pages 기본 주소·저장소 URL·댓글 화면에 드러난다(설계서 7절).
+
+## 그림 넣기 (2026-11-08)
+
+- 쓸 수 있는 그림: 저작권이 끝난 것(퍼블릭 도메인·CC0)과 출처를 밝히면 되는 것(CC BY·CC BY-SA). 비영리(NC)·변경 금지(ND)는 쓰지 않는다.
+- 파일은 `posts/<글>/img/` 아래에 내려받아 둔다(jpg·png·webp, 한 장 500KB 이하 — 긴 변 1600px 안팎). 바깥 주소에서 직접 부르지 않는다.
+- 본문에는 `<figure><img src="img/<파일>" alt="…" width height loading="lazy"><figcaption>설명 <span class="credit">작가, 「작품」, 연도, 소장처 · 라이선스 · <a href="https://…">출처</a></span></figcaption></figure>`.
+- `npm run check:post`와 빌드가 주소·대체 글(alt)·출처 줄·파일 크기를 검사한다.
+- 편집 모드(/edit/) 미리보기에서는 그림이 보이지 않는다(상대 주소). 공개 페이지에서 확인한다.

@@ -2,9 +2,11 @@
 import { readFileSync } from 'node:fs'
 import { extractPost } from '../src/lib/extract'
 import { findUnsafe } from '../src/lib/post-safety'
+import { checkImages } from '../src/lib/images'
+import { dirname } from 'node:path'
 
 const { articleHtml, css } = extractPost(readFileSync(process.argv[2], 'utf8'))
-const hits = findUnsafe(articleHtml, css)
+const hits = [...findUnsafe(articleHtml, css), ...checkImages(dirname(process.argv[2]), articleHtml).problems.map((p) => `그림 ${p}`)]
 if (hits.length) {
   for (const hit of hits) console.log('  ✗ 안전:', hit)
   process.exit(1)

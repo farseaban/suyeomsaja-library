@@ -5,8 +5,9 @@ import { parseMeta, type PostMeta } from './meta'
 import { extractPost, type ExtractedPost } from './extract'
 import { scopeCss } from './scope-css'
 import { findUnsafe } from './post-safety'
+import { checkImages } from './images'
 
-export type Post = PostMeta & ExtractedPost & { slug: string; categorySlug: string; color: PaletteKey; scopedCss: string; cardPath: string | null }
+export type Post = PostMeta & ExtractedPost & { slug: string; categorySlug: string; color: PaletteKey; scopedCss: string; cardPath: string | null; images: string[] }
 
 export function loadPosts(dir = process.env.POSTS_DIR ?? 'posts'): Post[] {
   if (!existsSync(dir)) return []
@@ -32,10 +33,14 @@ export function loadPosts(dir = process.env.POSTS_DIR ?? 'posts'): Post[] {
       }
       const unsafe = findUnsafe(parts.articleHtml, parts.css)
       if (unsafe.length) throw new Error(`글 "${slug}": 안전하지 않은 내용 — ${unsafe.join(', ')}`)
+      const images = checkImages(join(dir, slug), parts.articleHtml)
+      if (images.problems.length) throw new Error(`글 "${slug}": 그림 — ${images.problems.join(', ')}`)
       const cat = categoryByName(meta.category) as Category
       // 공유 카드는 npm run cards로 미리 그려 둔 것 — 없으면 사이트 카드를 쓴다
       const card = join(dir, slug, 'card.png')
-      return { ...meta, ...parts, slug, categorySlug: cat.slug, color: cat.color, scopedCss: scopeCss(parts.css), cardPath: existsSync(card) ? card : null }
+      // 날짜는 meta.json 한 곳에서 정한다 — 글 머리 메타 줄의 날짜는 meta.json 날짜로 바꿔 보인다
+      const metaLine = parts.metaLine?.replace(/^\d{4}-\d{2}-\d{2}/, meta.date) ?? null
+      return { ...meta, ...parts, metaLine, slug, categorySlug: cat.slug, color: cat.color, scopedCss: scopeCss(parts.css), cardPath: existsSync(card) ? card : null, images: images.paths }
     })
   return posts.sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug))
 }

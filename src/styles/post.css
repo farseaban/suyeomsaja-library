@@ -35,6 +35,10 @@
 /* ── 도해 ── */
 .s-post .post-body figure{margin:44px 0}
 .s-post .post-body figcaption{font-size:var(--t-13);line-height:1.65;margin:12px 0 0;padding-left:12px;border-left:2px solid var(--line);max-width:36em;color:var(--sub)}
+/* 그림(명화·사진) — 글 폴더 img/의 파일. 출처 줄은 캡션 아래 작은 글자로 */
+.s-post .post-body figure img{display:block;width:100%;height:auto;border-radius:var(--radius-s)}
+.s-post .post-body figcaption .credit{display:block;margin-top:4px;font-size:.92em;color:var(--sub)}
+.s-post .post-body figcaption .credit a{color:inherit}
 /* 도해 안 글자: 선·도형용 -d 색으로 쓴 글자를 같은 계열의 글자용 -ink 색으로 바꾼다(대비).
    fill 속성 값을 글자 그대로 맞춰 잡는 방식이라, 새 글에서 fill 표기가 달라지면(축약 hex, rgb(), style 속성) 조용히 빠진다 — 그때는 이 목록에 더한다 */
 .s-post .post-body svg text[fill="#A9861F" i],.s-post .post-body svg tspan[fill="#A9861F" i],.s-post .post-body svg g[fill="#A9861F" i] text:not([fill]){fill:var(--butter-ink)}

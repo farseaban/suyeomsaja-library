@@ -6,6 +6,8 @@ const ALLOWED_TAGS = new Set([
   'em', 'figcaption', 'figure', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'ins', 'kbd', 'li', 'mark', 'ol', 'p',
   'pre', 'q', 's', 'section', 'small', 'span', 'strong', 'sub', 'sup', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead',
   'tr', 'u', 'ul',
+  // 그림 — 글 폴더의 img/ 안에 내려받아 둔 파일만(아래 IMG 규칙). 바깥 주소를 부르면 방문자 정보가 새고, 원 사이트가 그림을 바꿀 수 있다
+  'img',
   // 도해(SVG) — animate·set·use·image·foreignObject는 링크를 바꾸거나 바깥 파일을 부를 수 있어 넣지 않는다
   'circle', 'clippath', 'defs', 'desc', 'ellipse', 'g', 'line', 'lineargradient', 'marker', 'mask', 'path', 'pattern',
   'polygon', 'polyline', 'radialgradient', 'rect', 'stop', 'svg', 'text', 'textpath', 'title', 'tspan',
@@ -13,6 +15,9 @@ const ALLOWED_TAGS = new Set([
 const BLOCKED_ATTRS = new Set(['srcdoc', 'formaction'])
 const URL_ATTRS = new Set(['href', 'xlink:href', 'src', 'action', 'data', 'poster', 'background', 'ping', 'manifest'])
 const ALLOWED_SCHEMES = new Set(['http', 'https', 'mailto'])
+// 그림은 이 속성만 쓴다 — srcset·sizes는 바깥 주소를 부를 수 있어 받지 않는다
+const IMG_ATTRS = new Set(['src', 'alt', 'width', 'height', 'loading', 'decoding', 'class'])
+const IMG_SRC = /^img\/[a-z0-9][a-z0-9-]*\.(jpg|jpeg|png|webp)$/
 const NAMED_ENTITIES: Record<string, string> = { colon: ':', tab: '\t', newline: '\n', lpar: '(', rpar: ')', amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" }
 
 type Attr = { name: string; value: string }
@@ -106,6 +111,19 @@ function unsafeCss(css: string): string[] {
   return hits
 }
 
+function unsafeImg(tag: Tag): string[] {
+  const hits: string[] = []
+  const get = (n: string) => tag.attrs.find((a) => a.name.toLowerCase() === n)?.value
+  for (const { name } of tag.attrs) {
+    const attr = name.toLowerCase()
+    if (!IMG_ATTRS.has(attr) && !attr.startsWith('on')) hits.push(`<img>의 ${attr} 속성(허용 목록 밖)`)
+  }
+  const src = decodeEntities(get('src') ?? '')
+  if (!IMG_SRC.test(src)) hits.push(`<img> 주소 "${src.slice(0, 40)}" — 글 폴더의 img/ 안 jpg·png·webp만 쓴다`)
+  if (!(get('alt') ?? '').trim()) hits.push('<img>에 대체 글(alt)이 없다')
+  return hits
+}
+
 /** 글 본문과 머리 CSS에서 막아야 할 것을 찾아 이유 목록으로 돌려준다. 빈 목록이면 통과. */
 export function findUnsafe(articleHtml: string, css: string): string[] {
   const { tags, bogus } = readTags(articleHtml)
@@ -113,6 +131,7 @@ export function findUnsafe(articleHtml: string, css: string): string[] {
   for (const tag of tags) {
     if (!ALLOWED_TAGS.has(tag.name)) hits.push(`허용하지 않은 태그 <${tag.name}>`)
     if (!tag.closed) hits.push(`닫히지 않은 태그 <${tag.name}>`)
+    if (tag.name === 'img') hits.push(...unsafeImg(tag))
     for (const { name, value } of tag.attrs) {
       const attr = name.toLowerCase()
       if (attr.startsWith('on') || BLOCKED_ATTRS.has(attr)) hits.push(`<${tag.name}>의 ${attr} 속성`)

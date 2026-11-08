@@ -100,3 +100,12 @@ describe('minutesLabel', () => {
     expect(minutesLabel(0)).toBeNull()
   })
 })
+
+describe('post date on the page', () => {
+  // 날짜는 meta.json 한 곳에서 정한다. 글 머리의 메타 줄에 적힌 날짜가 다르면 meta.json 쪽으로 맞춰 보인다
+  it('shows the meta.json date even when the html meta line says otherwise', () => {
+    for (const p of loadPosts('posts')) {
+      if (p.metaLine && /^\d{4}-\d{2}-\d{2}/.test(p.metaLine)) expect(p.metaLine.slice(0, 10), p.slug).toBe(p.date)
+    }
+  })
+})
