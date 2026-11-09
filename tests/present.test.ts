@@ -159,7 +159,9 @@ describe('presentPost — block order', () => {
     // 사용자 11/08: 다른 블로그에서 옮겨 온 시·에세이는 도해가 없다. 도해가 있는 글은 빠짐없이 감싸개를 받는다
     const withSvg = real.filter(([, b]) => b.includes('<svg'))
     expect(withSvg.length).toBeGreaterThanOrEqual(30)
-    expect(withSvg.filter(([, b]) => !b.includes('s-fig-scroll')).map(([f]) => f)).toEqual([])
+    // 감싸개는 넓은 도해(viewBox 폭 600 이상)만 받는다 — 세로형 도해(예: 폭 420)는 폰에서도 밀어 볼 필요가 없다(11/10)
+    const hasWide = (b: string) => [...b.matchAll(/<svg[^>]*viewBox="[\d.]+ [\d.]+ ([\d.]+) /g)].some((m) => Number(m[1]) >= 600)
+    expect(withSvg.filter(([, b]) => hasWide(b) && !b.includes('s-fig-scroll')).map(([f]) => f)).toEqual([])
     expect(real.filter(([, b]) => b.includes('data-prose')).map(([f]) => f)).toEqual(['posts/misattributed-quotes/post.html'])
   })
 })
