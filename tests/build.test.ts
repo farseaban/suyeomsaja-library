@@ -1224,9 +1224,11 @@ describe('content security policy', () => {
   it('names only the outside hosts the site really uses', () => {
     const csp = policy(pages()[0])
     // 이 빌드는 댓글 설정이 없다 — 댓글이 켜졌을 때의 허용은 csp.test.ts가 본다
-    expect(directive(csp, 'script-src').match(/https:\/\/\S+/g)).toBeNull()
+    // 방문 통계 토큰이 있으면 Cloudflare 분석 주소 둘만 더 열린다
+    const cf = SITE.cfAnalyticsToken !== ''
+    expect(directive(csp, 'script-src').match(/https:\/\/\S+/g)).toEqual(cf ? ['https://static.cloudflareinsights.com'] : null)
     expect(directive(csp, 'frame-src')).toBe("frame-src 'none'")
-    expect(directive(csp, 'connect-src')).toBe("connect-src 'self'")
+    expect(directive(csp, 'connect-src')).toBe(cf ? "connect-src 'self' https://cloudflareinsights.com" : "connect-src 'self'")
     expect(csp).not.toMatch(/https:(?!\/\/)|\*/)
   })
   it('shuts the doors that do not need to be open', () => {

@@ -13,11 +13,17 @@ describe('content security policy text', () => {
     expect(csp).toMatch(/style-src [^;]*https:\/\/giscus\.app/)
     expect(csp).toContain('frame-src https://giscus.app')
   })
-  it('never allows inline scripts, with or without comments', () => {
-    for (const on of [false, true]) {
-      const script = buildCsp(on).split('; ').find((d) => d.startsWith('script-src ')) ?? ''
+  it('never allows inline scripts, with or without comments or analytics', () => {
+    for (const on of [false, true]) for (const a of [false, true]) {
+      const script = buildCsp(on, a).split('; ').find((d) => d.startsWith('script-src ')) ?? ''
       expect(script).not.toContain("'unsafe-inline'")
       expect(script).not.toContain("'unsafe-eval'")
     }
+  })
+  it('opens Cloudflare analytics hosts only when analytics is on', () => {
+    expect(buildCsp(false)).not.toContain('cloudflareinsights')
+    const on = buildCsp(false, true)
+    expect(on).toContain("script-src 'self' 'wasm-unsafe-eval' https://static.cloudflareinsights.com")
+    expect(on).toContain("connect-src 'self' https://cloudflareinsights.com")
   })
 })

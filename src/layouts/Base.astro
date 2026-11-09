@@ -24,13 +24,15 @@ const { title, description = SITE.description, ogType = 'website', bodyClass, da
 const dawnStyle = dawn ? `--s-dawn:var(--${dawn});--s-accent:var(--${dawn}-d);--s-accent-ink:var(--${dawn}-ink);--s-accent-tint:var(--${dawn})` : undefined
 const og = Astro.props.ogImage ?? { path: 'og-card.png', version: '', alt: `밤하늘 아래 로봇 곁에 선 ${SITE.author}와 ${SITE.name}` }
 const fullTitle = title ? `${title} — ${SITE.name}` : SITE.name
+// 방문 통계는 공개 빌드에서 토큰이 있을 때만 싣는다 — 개발 서버·편집 모드의 방문은 세지 않는다
+const analyticsOn = import.meta.env.PROD && SITE.cfAnalyticsToken !== ''
 ---
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   {/* 공개 빌드에만 건다. 개발 서버와 편집 모드는 인라인 스크립트로 돈다 */}
-  {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={buildCsp(giscusOn)} />}
+  {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={buildCsp(giscusOn, analyticsOn)} />}
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#212029">
   <meta name="color-scheme" content="only light">
@@ -54,6 +56,7 @@ const fullTitle = title ? `${title} — ${SITE.name}` : SITE.name
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap">
   <slot name="head" />
+  {analyticsOn && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: SITE.cfAnalyticsToken })}></script>}
 </head>
 <body class={bodyClass} style={dawnStyle}>
   <a class="s-skip" href="#main">본문으로</a>
