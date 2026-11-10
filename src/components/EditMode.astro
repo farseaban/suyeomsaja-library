@@ -1,6 +1,7 @@
 ---
 import { url } from '../lib/url'
 // 내 컴퓨터 전용 편집 모드(`npm run edit`). 글 페이지의 '편집'은 편집 화면(/edit/<글>/)으로 가고, 거기서 문장을 고쳐 칸을 벗어나면 post.html에 저장한다.
+// 굵게·밑줄(속성 없는 꾸밈)·인용 상자 바꾸기·문단 빼기(글자를 다 지움)도 된다(사용자 11/10).
 interface Props { slug: string; editing: boolean; token?: string; version?: string }
 const { slug, editing, token, version } = Astro.props
 ---
@@ -14,10 +15,15 @@ const { slug, editing, token, version } = Astro.props
   [data-edit]:hover{outline-color:var(--lav-d)}
   [data-edit]:focus{outline:2px solid var(--lav-d);background:color-mix(in srgb,var(--lav) 30%,transparent)}
   [data-edit].s-edit-bad{outline:2px solid var(--rose-d)}
+  .s-edit-btn{font:inherit;color:var(--paper);background:transparent;border:1px solid color-mix(in srgb,var(--paper) 40%,transparent);border-radius:999px;padding:2px 10px;cursor:pointer}
+  .s-edit-btn:hover{background:color-mix(in srgb,var(--paper) 15%,transparent)}
 </style>
 {editing ? (
   <div class="s-edit-bar" data-slug={slug} data-token={token} data-version={version}>
-    <span>편집 중 · 문장을 눌러 고치세요. 칸을 벗어나면 저장됩니다.</span>
+    <span>편집 중 · 칸을 벗어나면 저장 · 글자를 다 지우면 문단째 빠집니다</span>
+    <button type="button" class="s-edit-btn" data-fmt="strong" title="굵게(⌘B)"><b>굵게</b></button>
+    <button type="button" class="s-edit-btn" data-fmt="u" title="밑줄(⌘U)"><u>밑줄</u></button>
+    <button type="button" class="s-edit-btn" data-op="quote" title="고르던 문단을 인용 상자로 바꾸거나 풉니다">인용</button>
     <output class="s-edit-state" aria-live="polite"></output>
     <a href={url(`posts/${slug}`)}>끝내기</a>
   </div>
@@ -32,30 +38,74 @@ const { slug, editing, token, version } = Astro.props
   if (bar && state) {
     const slug = bar.dataset.slug
     const say = (s) => (state.textContent = s)
+    let current = null
+    const post = async (payload) => {
+      const res = await fetch('/__edit/save', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-edit-token': bar.dataset.token ?? '' },
+        body: JSON.stringify({ slug, version: bar.dataset.version, ...payload }),
+      }).catch(() => null)
+      const body = res ? await res.json().catch(() => ({})) : { error: '편집 서버에 닿지 않는다' }
+      return { ok: !!res?.ok, body, status: res?.status }
+    }
+    // 굵게·기울임·밑줄 — 고른 글자를 감싸고, 이미 그 꾸밈 안이면 푼다. 서버는 속성 없는 꾸밈만 받는다
+    const SAME = { strong: ['STRONG', 'B'], em: ['EM', 'I'], u: ['U'] }
+    const toggle = (name) => {
+      const sel = getSelection()
+      if (!current || !sel || !sel.rangeCount) return
+      const range = sel.getRangeAt(0)
+      if (!current.contains(range.commonAncestorContainer)) return
+      let n = range.commonAncestorContainer
+      for (; n && n !== current; n = n.parentNode) if (n.nodeType === 1 && SAME[name].includes(n.nodeName)) break
+      if (n && n !== current) { n.replaceWith(...n.childNodes); return }
+      if (range.collapsed) return
+      const w = document.createElement(name)
+      w.appendChild(range.extractContents())
+      range.insertNode(w)
+      sel.removeAllRanges(); const r = document.createRange(); r.selectNodeContents(w); sel.addRange(r)
+    }
+    for (const btn of bar.querySelectorAll('.s-edit-btn')) {
+      // 단추를 눌러도 글 칸의 커서·선택이 사라지지 않게
+      btn.addEventListener('mousedown', (e) => e.preventDefault())
+      btn.addEventListener('click', async () => {
+        if (btn.dataset.fmt) return toggle(btn.dataset.fmt)
+        if (!current) return say('먼저 문단을 누르세요')
+        if (current.innerHTML !== current.dataset.shown) return say('먼저 칸을 벗어나 저장한 뒤 누르세요')
+        say('바꾸는 중…')
+        const { ok, body, status } = await post({ op: 'quote', index: Number(current.dataset.edit), before: current.textContent })
+        if (ok) location.reload(); else say(`못 바꿈 — ${body.error ?? status}`)
+      })
+    }
     for (const el of document.querySelectorAll('article [data-edit]')) {
-      // 굵게·링크·각주 같은 원래 꾸밈은 두고, 새 꾸밈이나 붙여 넣은 서식은 들이지 않는다
-      try { el.contentEditable = 'plaintext-only' } catch { el.contentEditable = 'true' }
-      let shown = el.innerHTML, text = el.textContent ?? ''
+      el.contentEditable = 'true'
+      el.dataset.shown = el.innerHTML
+      let text = el.textContent ?? ''
+      el.addEventListener('focus', () => (current = el))
       // 링크를 눌러도 이동하지 않고 고치게 한다
       el.addEventListener('click', (e) => { if (e.target.closest('a')) e.preventDefault() })
+      // 붙여 넣기는 글자만 — 다른 곳의 서식이 따라 들어오지 않게
+      el.addEventListener('paste', (e) => {
+        e.preventDefault()
+        document.execCommand('insertText', false, (e.clipboardData?.getData('text/plain') ?? '').replace(/\s*\n\s*/g, ' '))
+      })
       el.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); el.blur() }
-        if (e.key === 'Escape') { el.innerHTML = shown; el.blur() }
+        if (e.key === 'Escape') { el.innerHTML = el.dataset.shown; el.blur() }
+        const mod = e.metaKey || e.ctrlKey
+        const fmt = mod && { b: 'strong', i: 'em', u: 'u' }[e.key.toLowerCase()]
+        if (fmt) { e.preventDefault(); toggle(fmt) }
       })
       el.addEventListener('blur', async () => {
-        if (el.innerHTML === shown) return
-        say('저장 중…')
-        const res = await fetch('/__edit/save', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json', 'x-edit-token': bar.dataset.token ?? '' },
-          body: JSON.stringify({ slug, index: Number(el.dataset.edit), before: text, after: el.innerHTML, version: bar.dataset.version }),
-        }).catch(() => null)
-        const body = res ? await res.json().catch(() => ({})) : { error: '편집 서버에 닿지 않는다' }
-        if (res?.ok) {
-          shown = el.innerHTML; text = el.textContent ?? ''; bar.dataset.version = body.version
+        if (el.innerHTML === el.dataset.shown) return
+        const removing = (el.textContent ?? '').trim() === ''
+        say(removing ? '문단 빼는 중…' : '저장 중…')
+        const { ok, body, status } = await post({ index: Number(el.dataset.edit), before: text, after: el.innerHTML })
+        if (ok && removing) return location.reload()
+        if (ok) {
+          el.dataset.shown = el.innerHTML; text = el.textContent ?? ''; bar.dataset.version = body.version
           el.classList.remove('s-edit-bad'); say('저장됨')
         } else {
-          el.classList.add('s-edit-bad'); say(`저장 못 함 — ${body.error ?? res?.status}`)
+          el.classList.add('s-edit-bad'); say(`저장 못 함 — ${body.error ?? status}`)
         }
       })
     }

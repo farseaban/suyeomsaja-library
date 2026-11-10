@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { parse } from 'node-html-parser'
-import { markBlocks, applyEdit, readBlock, fileVersion } from '../src/lib/edit'
+import { markBlocks, applyEdit, readBlock, fileVersion, toggleQuote } from '../src/lib/edit'
 import { extractPost } from '../src/lib/extract'
 import { addHeadingIds } from '../src/lib/toc'
 
@@ -69,7 +69,9 @@ describe('applyEdit', () => {
     for (const bad of ['<a href="&#106;avascript:x()">각주</a>', '<form action="//x">a</form>', '<base href="//x">', '<svg><a href="x">a</a></svg>', '마지막 <font>문단</font>'])
       expect(() => applyEdit(DOC, 6, '마지막 문단', bad), bad).toThrow(/글자만/)
     expect(() => applyEdit(DOC, 1, '첫 문단 굵게와 각주1.', '첫 문단 <strong>굵게</strong>와 각주<sup><a href="javascript:x()">1</a></sup>.')).toThrow(/글자만/)
-    expect(() => applyEdit(DOC, 1, '첫 문단 굵게와 각주1.', '첫 문단 굵게와 각주<sup><a href="#fn1">1</a></sup>.')).toThrow(/글자만/)
+    // 굵게는 빼도 된다(11/10) — 각주·링크는 여전히 못 뺀다
+    expect(applyEdit(DOC, 1, '첫 문단 굵게와 각주1.', '첫 문단 굵게와 각주<sup><a href="#fn1">1</a></sup>.')).toContain('<p>첫 문단 굵게와 각주<sup>')
+    expect(() => applyEdit(DOC, 1, '첫 문단 굵게와 각주1.', '첫 문단 <strong>굵게</strong>와 각주1.')).toThrow(/글자만/)
   })
   it('accepts ordinary prose that merely looks like code', () => {
     expect(applyEdit(DOC, 6, '마지막 문단', 'javascript: 언어의 역사, onclick = 누름')).toContain('<p>javascript: 언어의 역사, onclick = 누름</p>')
@@ -78,6 +80,46 @@ describe('applyEdit', () => {
     const doc = '<article><h1>t</h1><p>글 <svg><text>도해</text></svg></p></article>'
     expect(markBlocks(doc)).not.toContain('data-edit="1"')
     expect(() => applyEdit(doc, 1, '글 도해', '글 도해')).toThrow(/없/)
+  })
+})
+
+
+// 사용자 11/10: 노란 상자도 고치고, 굵게·밑줄을 넣고 빼고, 인용으로 바꾸고, 다 지운 문단은 칸째 뺀다
+describe('editing beyond words (11/10)', () => {
+  const D = `<article>
+<h1>t</h1>
+<p>하나</p>
+<div class="key">노란 상자 <strong>굵게</strong></div>
+<div class="meta">날짜</div>
+<blockquote class="quote"><p>인용 문단</p></blockquote>
+<blockquote class="quote"><p>출처 있는 인용</p><cite>누구</cite></blockquote>
+<p>마지막</p>
+</article>`
+  it('counts the yellow and caution boxes as blocks, but not the meta line', () => {
+    const got = [...markBlocks(D).matchAll(/<(\w+)[^>]*data-edit="(\d+)"/g)].map((m) => m[1])
+    expect(got).toEqual(['h1', 'p', 'div', 'p', 'p', 'p'])
+    expect(applyEdit(D, 2, '노란 상자 굵게', '고친 상자 <strong>굵게</strong>')).toContain('<div class="key">고친 상자 <strong>굵게</strong></div>')
+  })
+  it('lets bold, italic and underline come and go', () => {
+    expect(applyEdit(D, 1, '하나', '<strong>하</strong>나')).toContain('<p><strong>하</strong>나</p>')
+    expect(applyEdit(D, 1, '하나', '<em>하</em><u>나</u>')).toContain('<p><em>하</em><u>나</u></p>')
+    expect(applyEdit(D, 2, '노란 상자 굵게', '노란 상자 굵게')).toContain('<div class="key">노란 상자 굵게</div>')
+  })
+  it('still refuses formatting that carries attributes', () => {
+    for (const bad of ['<b style="x">하</b>나', '<u onclick="x()">하</u>나', '<strong class="x">하</strong>나'])
+      expect(() => applyEdit(D, 1, '하나', bad), bad).toThrow(/글자만/)
+  })
+  it('removes an emptied paragraph outright, with the quote that held only it', () => {
+    expect(applyEdit(D, 1, '하나', '')).toBe(D.replace('<p>하나</p>\n', ''))
+    expect(applyEdit(D, 3, '인용 문단', '<br>')).toBe(D.replace('<blockquote class="quote"><p>인용 문단</p></blockquote>\n', ''))
+    expect(applyEdit(D, 2, '노란 상자 굵게', '')).not.toContain('class="key"')
+    expect(() => applyEdit(D, 0, 't', '')).toThrow(/제목/)
+  })
+  it('wraps a paragraph in a quote and unwraps a bare quote, but not one with a source line', () => {
+    expect(toggleQuote(D, 1, '하나')).toContain('<blockquote class="quote"><p>하나</p></blockquote>')
+    expect(toggleQuote(D, 3, '인용 문단')).toContain('\n<p>인용 문단</p>\n')
+    expect(() => toggleQuote(D, 4, '출처 있는 인용')).toThrow(/출처/)
+    expect(() => toggleQuote(D, 2, '노란 상자 굵게')).toThrow(/문단만/)
   })
 })
 

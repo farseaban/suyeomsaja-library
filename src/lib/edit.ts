@@ -4,9 +4,16 @@ import { parse, HTMLElement, CommentNode, type Node } from 'node-html-parser'
 // 내 컴퓨터 전용 편집 모드 — 글에서 고칠 수 있는 글자 덩어리(문단·제목·항목·표 칸·그림 설명).
 // 화면과 post.html이 같은 순서로 덩어리를 세므로, 화면의 n번째 덩어리가 파일의 n번째 덩어리다.
 const BLOCK = new Set(['h1', 'h2', 'h3', 'h4', 'p', 'li', 'td', 'th', 'dt', 'dd', 'figcaption'])
+// 노란 상자(div.key)·주의 상자(div.caution)는 글자가 div에 바로 들어 있어서 따로 센다(사용자 11/10)
+const BOX = /(^|\s)(key|caution)(\s|$)/
+// 칸 안에서 새로 넣거나 뺄 수 있는 꾸밈 — 속성 없는 것만(사용자 11/10)
+const FORMAT = new Set(['strong', 'b', 'em', 'i', 'u'])
+// 글자를 다 지우면 칸째 빠지는 덩어리. 제목(h1)과 표 칸은 빠지면 틀이 깨지므로 남긴다
+const REMOVABLE = new Set(['p', 'li', 'div', 'figcaption', 'h2', 'h3', 'h4', 'dt', 'dd'])
 
 const text = (s: string) => s.replace(/\s+/g, ' ').trim()
 const tag = (el: HTMLElement) => el.rawTagName?.toLowerCase() ?? ''
+const isBlock = (el: HTMLElement) => BLOCK.has(tag(el)) || (tag(el) === 'div' && BOX.test(el.getAttribute('class') ?? ''))
 
 function blocks(root: HTMLElement): HTMLElement[] {
   const out: HTMLElement[] = []
@@ -15,7 +22,7 @@ function blocks(root: HTMLElement): HTMLElement[] {
     if (tag(el) === 'svg') return [false, true]
     let inner = false, svg = false
     for (const c of el.childNodes) if (c instanceof HTMLElement) { const [b, s] = walk(c); inner ||= b; svg ||= s }
-    const mine = BLOCK.has(tag(el))
+    const mine = isBlock(el)
     // 안에 덩어리를 품은 덩어리(문단 든 항목 등)는 안쪽 것만, 도해를 품은 덩어리는 아예 세지 않는다
     if (mine && !inner && !svg) out.push(el)
     return [mine || inner, svg]
@@ -62,9 +69,11 @@ function locate(postHtml: string, index: number) {
 }
 
 // 꾸밈의 뼈대 — 요소 이름·속성·주석의 순서. 글자는 뺀다.
+// 속성 없는 굵게·기울임·밑줄은 뼈대에서 투명하다 — 새로 넣거나 빼도 같은 뼈대로 본다
 function skeleton(html: string): string {
   const walk = (n: Node): string => {
     if (n instanceof HTMLElement) {
+      if (FORMAT.has(tag(n)) && Object.keys(n.attributes).length === 0) return n.childNodes.map(walk).join('')
       const attrs = Object.entries(n.attributes).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k.toLowerCase()}=${JSON.stringify(v)}`)
       return `<${tag(n)} ${attrs.join(' ')}>${n.childNodes.map(walk).join('')}</>`
     }
@@ -80,13 +89,38 @@ export function readBlock(postHtml: string, index: number): { text: string; inne
 }
 
 // post.html의 n번째 덩어리 안쪽만 갈아 끼운다. 나머지 바이트는 그대로 두고, 바뀌는 것은 글자뿐이다.
+// 칸을 통째로 들어낸다. 그 칸만 감싸던 인용(blockquote)은 함께 들어낸다. 뒤따르는 줄바꿈도 하나 지운다
+function removeBlock(postHtml: string, el: HTMLElement): string {
+  let target = el
+  const parent = el.parentNode as HTMLElement | null
+  if (parent && tag(parent) === 'blockquote' && parent.childNodes.every((c) => c === el || (!(c instanceof HTMLElement) && text(c.text) === '')))
+    target = parent
+  const [start, end] = target.range
+  const tail = postHtml.slice(end).match(/^[ \t]*\r?\n/)
+  return postHtml.slice(0, start) + postHtml.slice(end + (tail ? tail[0].length : 0))
+}
+
 export function applyEdit(postHtml: string, index: number, before: string, after: string): string {
   const { el, all, open, close } = locate(postHtml, index)
   if (text(el.textContent) !== text(before)) throw new Error('파일이 화면과 다르게 바뀌었다 — 새로고침한 뒤 다시 고쳐 주세요')
   const source = postHtml.slice(open, close)
+  // 글자를 다 지운 칸은 빈 <p></p>로 남기지 않고 칸째 들어낸다(사용자 11/10)
+  // 빈 칸으로 치는 것은 띄어쓰기·줄바꿈·빈 꾸밈뿐이다 — 글자 없는 다른 태그(<base> 등)는 아래 꾸밈 검사로 막는다
+  const emptied = after.replace(/<br\s*\/?>|&nbsp;|\u00a0|\s|<\/?(strong|b|em|i|u)>/gi, '') === ''
+  if (emptied && REMOVABLE.has(tag(el))) {
+    const out = removeBlock(postHtml, el)
+    const now = blocks(parse(out, { comment: true }).querySelector('article') as HTMLElement)
+    const rest = all.filter((_, i) => i !== index)
+    if (now.length !== rest.length || !now.every((b, i) => text(b.textContent) === text(rest[i].textContent)))
+      throw new Error('저장 뒤 확인에 실패해 저장하지 않았다 — 저에게 알려 주세요')
+    return out
+  }
+  if (tag(el) === 'h1' && emptied) throw new Error('제목은 비울 수 없다')
   // 브라우저가 띄어쓰기를 &nbsp;로, 빈 칸 끝을 <br>로 바꿔 보내므로 원문에 없던 것이면 되돌린다
   let clean = /&nbsp;| /.test(source) ? after : after.replace(/&nbsp;| /g, ' ')
   if (!/<br\s*\/?>\s*$/i.test(source)) clean = clean.replace(/(\s*<br\s*\/?>)+\s*$/i, '')
+  // 글자 없는 꾸밈 껍데기는 지운다(원문의 b·i는 그대로 둔다 — 편집 화면은 strong·em·u만 새로 만든다)
+  for (let prev = ''; prev !== clean; ) { prev = clean; clean = clean.replace(/<(strong|em|u)><\/\1>/g, '') }
   // 꾸밈(굵게·링크·각주)은 원래 그대로여야 한다 — 새 요소·빠진 요소·바뀐 속성은 받지 않는다.
   // 이 검사가 스크립트·이벤트 속성·javascript: 주소 같은 것이 글에 들어가는 길도 막는다.
   if (skeleton(clean) !== skeleton(source)) throw new Error('글자만 고칠 수 있다 — 꾸밈·문단·링크는 바꿀 수 없으니 저에게 말로 시켜 주세요')
@@ -96,5 +130,27 @@ export function applyEdit(postHtml: string, index: number, before: string, after
   const now = blocks(parse(out, { comment: true }).querySelector('article') as HTMLElement)
   const ok = now.length === all.length && now.every((b, i) => text(b.textContent) === (i === index ? text(parse(clean).textContent) : text(all[i].textContent)))
   if (!ok) throw new Error('저장 뒤 확인에 실패해 저장하지 않았다 — 저에게 알려 주세요')
+  return out
+}
+
+// 문단 하나를 인용 상자(blockquote.quote)로 감싸거나, 그 문단만 감싼 인용을 푼다(사용자 11/10)
+export function toggleQuote(postHtml: string, index: number, before: string): string {
+  const { el, all } = locate(postHtml, index)
+  if (text(el.textContent) !== text(before)) throw new Error('파일이 화면과 다르게 바뀌었다 — 새로고침한 뒤 다시 고쳐 주세요')
+  if (tag(el) !== 'p') throw new Error('문단만 인용으로 바꿀 수 있다')
+  const parent = el.parentNode as HTMLElement
+  const [start, end] = el.range
+  let out: string
+  if (tag(parent) === 'blockquote') {
+    const others = parent.childNodes.filter((c) => c !== el && (c instanceof HTMLElement || text(c.text) !== ''))
+    if (others.length) throw new Error('출처 줄이 붙은 인용은 풀 수 없다 — 저에게 말로 시켜 주세요')
+    const [ps, pe] = parent.range
+    out = postHtml.slice(0, ps) + postHtml.slice(start, end) + postHtml.slice(pe)
+  } else if (['article', 'section'].includes(tag(parent))) {
+    out = postHtml.slice(0, start) + '<blockquote class="quote">' + postHtml.slice(start, end) + '</blockquote>' + postHtml.slice(end)
+  } else throw new Error('상자나 목록 안의 문단은 인용으로 바꿀 수 없다')
+  const now = blocks(parse(out, { comment: true }).querySelector('article') as HTMLElement)
+  if (now.length !== all.length || !now.every((b, i) => text(b.textContent) === text(all[i].textContent)))
+    throw new Error('저장 뒤 확인에 실패해 저장하지 않았다 — 저에게 알려 주세요')
   return out
 }
