@@ -3,6 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { randomBytes, timingSafeEqual } from 'node:crypto'
 import { applyEdit, toggleQuote, fileVersion } from '../lib/edit'
+import { loadViews, saveViews, mergeDays, fetchDays, readToken, todayUtc } from '../lib/views'
 
 type Req = { method?: string; headers: Record<string, string | string[] | undefined> }
 
@@ -47,6 +48,12 @@ export default function editMode(): AstroIntegration {
       },
       'astro:server:setup': ({ server }) => {
         if (!on) return
+        // 편집 서버를 켤 때 조회수를 한 번 새로 받아 둔다(실패해도 편집에는 지장 없다)
+        void (async () => {
+          const store = loadViews(), cf = readToken()
+          if (!store.account || !cf) return
+          try { saveViews({ ...mergeDays(store, await fetchDays(cf, store.account, todayUtc())), updated: new Date().toISOString() }) } catch {}
+        })()
         const token = randomBytes(32).toString('hex')
         // 편집 화면이 같은 프로세스에서 읽어 페이지에 심는다
         process.env.SUYEOMSAJA_EDIT_TOKEN = token

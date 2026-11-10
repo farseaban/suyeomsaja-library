@@ -2,8 +2,9 @@
 import { url } from '../lib/url'
 // 내 컴퓨터 전용 편집 모드(`npm run edit`). 글 페이지의 '편집'은 편집 화면(/edit/<글>/)으로 가고, 거기서 문장을 고쳐 칸을 벗어나면 post.html에 저장한다.
 // 굵게·밑줄(속성 없는 꾸밈)·인용 상자 바꾸기·문단 빼기(글자를 다 지움)도 된다(사용자 11/10).
-interface Props { slug: string; editing: boolean; token?: string; version?: string }
-const { slug, editing, token, version } = Astro.props
+interface Props { slug: string; editing: boolean; token?: string; version?: string; views?: { today: number; d7: number; d30: number; total: number; updated: string } }
+const { slug, editing, token, version, views } = Astro.props
+const viewsAt = views ? new Date(views.updated).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''
 ---
 <style is:inline>
   .s-edit-open,.s-edit-bar{position:fixed;z-index:50;font:600 14px/1.4 var(--sans);border-radius:999px;box-shadow:0 4px 18px rgba(0,0,0,.14)}
@@ -16,6 +17,7 @@ const { slug, editing, token, version } = Astro.props
   [data-edit]:focus{outline:2px solid var(--lav-d);background:color-mix(in srgb,var(--lav) 30%,transparent)}
   [data-edit].s-edit-bad{outline:2px solid var(--rose-d)}
   .s-edit-btn{font:inherit;color:var(--paper);background:transparent;border:1px solid color-mix(in srgb,var(--paper) 40%,transparent);border-radius:999px;padding:2px 10px;cursor:pointer}
+  .s-edit-views{color:var(--paper);opacity:.75;white-space:nowrap}
   .s-edit-btn:hover{background:color-mix(in srgb,var(--paper) 15%,transparent)}
 </style>
 {editing ? (
@@ -24,6 +26,7 @@ const { slug, editing, token, version } = Astro.props
     <button type="button" class="s-edit-btn" data-fmt="strong" title="굵게(⌘B)"><b>굵게</b></button>
     <button type="button" class="s-edit-btn" data-fmt="u" title="밑줄(⌘U)"><u>밑줄</u></button>
     <button type="button" class="s-edit-btn" data-op="quote" title="고르던 문단을 인용 상자로 바꾸거나 풉니다">인용</button>
+    {views && <span class="s-edit-views" title={`조회수(페이지뷰) · ${viewsAt} 기준 · 이 맥에서만 보임`}>조회 {views.total} · 7일 {views.d7} · 오늘 {views.today}</span>}
     <output class="s-edit-state" aria-live="polite"></output>
     <a href={url(`posts/${slug}`)}>끝내기</a>
   </div>

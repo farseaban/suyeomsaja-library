@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { markBlocks, fileVersion } from '../../lib/edit'
 import { loadPosts } from '../../lib/posts'
+import { loadViews, summarize, postPath, todayUtc } from '../../lib/views'
 
 // 내 컴퓨터 전용 편집 화면 — `npm run edit`이 비밀값을 만든 개발 서버에서만 페이지가 생기고, 빌드에서는 한 장도 만들지 않는다.
 const token = process.env.SUYEOMSAJA_EDIT_TOKEN
@@ -18,6 +19,9 @@ const post = loadPosts().find((p) => p.slug === Astro.params.slug)!
 const version = fileVersion(readFileSync(join(process.env.POSTS_DIR ?? 'posts', post.slug, 'post.html'), 'utf8'))
 // 각주 말풍선·도해 그리기 같은 꾸밈은 돌리지 않는다 — 꾸밈이 바꾼 글자가 원문에 섞여 저장되지 않게
 const body = markBlocks(addHeadingIds(post.articleHtml).html)
+// 이 글의 조회수 — 이 맥의 .superpowers/views.json에서만 읽는다(공개 빌드에는 편집 화면이 없다)
+const viewStore = loadViews()
+const views = viewStore.updated ? { ...(summarize(viewStore, todayUtc())[postPath(post.slug)] ?? { today: 0, d7: 0, d30: 0, total: 0 }), updated: viewStore.updated } : undefined
 ---
 <Base title={`편집 — ${post.title}`}>
   <style is:inline set:html={post.scopedCss} slot="head" />
@@ -25,5 +29,5 @@ const body = markBlocks(addHeadingIds(post.articleHtml).html)
   <div class="s-post" style={`--s-accent:var(--${post.color}-d)`}>
     <div class="post-body"><article set:html={body} /></div>
   </div>
-  <EditMode slug={post.slug} editing={true} token={token} version={version} />
+  <EditMode slug={post.slug} editing={true} token={token} version={version} views={views} />
 </Base>

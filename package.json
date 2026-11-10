@@ -10,7 +10,8 @@
     "build:test": "POSTS_DIR=tests/fixtures/posts OUT_DIR=dist-test SITE_URL=http://localhost:4321 BASE_PATH=/suyeomsaja-library/ astro build && pagefind --site dist-test",
     "preview": "astro preview",
     "test": "vitest run",
-    "check:post": "sh -c 'python3 tools/check_post.py \"$0\"/post.html; a=$?; vite-node tools/check-post-safety.ts \"$0\"/post.html; b=$?; [ $a -eq 0 ] && [ $b -eq 0 ]'"
+    "check:post": "sh -c 'python3 tools/check_post.py \"$0\"/post.html; a=$?; vite-node tools/check-post-safety.ts \"$0\"/post.html; b=$?; [ $a -eq 0 ] && [ $b -eq 0 ]'",
+    "views": "vite-node tools/views.ts"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",
