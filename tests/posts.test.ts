@@ -43,10 +43,11 @@ describe('field colours', () => {
     ['fact-check', '진실 혹은 거짓', 'peach'],
     ['learning', '일과 학습의 기술', 'butter'],
     ['philosophy', '철학의 아름다움', 'lav'],
+    ['books', '책이 건넨 문장', 'rose'],
     ['classics', '다시 보는 고전과 예술', 'rose'],
     ['nature', '인류와 생명의 수수께끼', 'mint'],
   ]
-  it('assigns each of the eight shelves its colour, in the same menu order', () => {
+  it('assigns each of the nine shelves its colour, in the same menu order', () => {
     expect(CATEGORIES.map((c) => [c.slug, c.name, c.color])).toEqual(TABLE)
   })
   it('uses palette colours only', () => {

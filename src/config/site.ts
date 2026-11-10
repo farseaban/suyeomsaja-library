@@ -27,6 +27,8 @@ const CATEGORY_LIST: [slug: string, name: string, color: PaletteKey][] = [
   ['fact-check', '진실 혹은 거짓', 'peach'],
   ['learning', '일과 학습의 기술', 'butter'],
   ['philosophy', '철학의 아름다움', 'lav'],
+  // 책 한 권을 중심에 놓고 쓴 서평(사용자 11/10). 작품·예술 현상을 여러 자료로 다루는 글은 '고전과 예술'로 — 이웃 분야라 같은 색
+  ['books', '책이 건넨 문장', 'rose'],
   ['classics', '다시 보는 고전과 예술', 'rose'],
   ['nature', '인류와 생명의 수수께끼', 'mint'],
 ]
