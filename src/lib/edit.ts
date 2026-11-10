@@ -154,3 +154,27 @@ export function toggleQuote(postHtml: string, index: number, before: string): st
     throw new Error('저장 뒤 확인에 실패해 저장하지 않았다 — 저에게 알려 주세요')
   return out
 }
+
+// 고르던 칸 바로 뒤에 새 문단을 넣는다(사용자 11/10). 칸이 상자·인용·그림·목록 안에 있으면 그 덩어리 뒤에 넣는다.
+// 새 문단은 글자와 속성 없는 꾸밈만 받는다. 돌려주는 index는 새 문단의 덩어리 번호다
+export const NEW_PARAGRAPH = '(새 문단)'
+export function insertParagraph(postHtml: string, index: number, before: string, content = NEW_PARAGRAPH): { html: string; index: number } {
+  const { el, all } = locate(postHtml, index)
+  if (text(el.textContent) !== text(before)) throw new Error('파일이 화면과 다르게 바뀌었다 — 새로고침한 뒤 다시 고쳐 주세요')
+  if (skeleton(content) !== '' || text(parse(content).textContent) === '') throw new Error('새 문단에는 글자만 넣을 수 있다')
+  if (tag(el) === 'h1') throw new Error('제목 뒤에는 문단을 넣을 수 없다 — 본문 문단을 고른 뒤 누르세요')
+  let anchor: HTMLElement = el
+  while (anchor.parentNode && !['article', 'section'].includes(tag(anchor.parentNode as HTMLElement))) anchor = anchor.parentNode as HTMLElement
+  if (!anchor.parentNode) throw new Error('넣을 자리를 찾지 못했다')
+  // 참고문헌·필자 한마디 같은 꼬리 묶음 안에는 넣지 않는다
+  const holder = anchor.parentNode as HTMLElement
+  if (tag(holder) === 'section' && /(^|\s)refs(\s|$)/.test(holder.getAttribute('class') ?? '')) throw new Error('참고문헌 안에는 문단을 넣을 수 없다')
+  const end = anchor.range[1]
+  const html = postHtml.slice(0, end) + `\n<p>${content}</p>` + postHtml.slice(end)
+  const now = blocks(parse(html, { comment: true }).querySelector('article') as HTMLElement)
+  const added = now.findIndex((b, i) => i >= all.length || text(b.textContent) !== text(all[i].textContent))
+  const ok = now.length === all.length + 1 && added >= 0 && text(now[added].textContent) === text(parse(content).textContent) &&
+    now.every((b, i) => i === added || text(b.textContent) === text(all[i < added ? i : i - 1].textContent))
+  if (!ok) throw new Error('저장 뒤 확인에 실패해 저장하지 않았다 — 저에게 알려 주세요')
+  return { html, index: added }
+}

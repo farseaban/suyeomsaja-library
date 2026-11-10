@@ -2,7 +2,7 @@ import type { AstroIntegration } from 'astro'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { randomBytes, timingSafeEqual } from 'node:crypto'
-import { applyEdit, toggleQuote, fileVersion } from '../lib/edit'
+import { applyEdit, toggleQuote, insertParagraph, fileVersion } from '../lib/edit'
 import { loadViews, saveViews, mergeDays, fetchDays, readToken, todayUtc } from '../lib/views'
 
 type Req = { method?: string; headers: Record<string, string | string[] | undefined> }
@@ -24,12 +24,18 @@ export function allowSave(req: Req, token: string): boolean {
 type SaveBody = { slug: unknown; index: unknown; before: unknown; after: unknown; version: unknown; op?: unknown }
 
 // 편집 화면이 그려질 때의 파일 판과 지금 파일이 같을 때만 저장한다(다른 데서 꾸밈만 고친 경우까지 지킨다)
-export function saveEdit(dir: string, { slug, index, before, after, version, op }: SaveBody): { version: string } {
+export function saveEdit(dir: string, { slug, index, before, after, version, op }: SaveBody): { version: string; index?: number } {
   if (typeof slug !== 'string' || !/^[a-z0-9-]+$/.test(slug)) throw new Error('글 이름이 이상하다')
   const file = join(dir, slug, 'post.html')
   if (!existsSync(file)) throw new Error('그 글이 없다')
   const html = readFileSync(file, 'utf8')
   if (version !== fileVersion(html)) throw new Error('파일이 화면과 다르게 바뀌었다 — 새로고침한 뒤 다시 고쳐 주세요')
+  // op 'insert': 고르던 칸 뒤에 새 문단을 넣고 그 번호를 돌려준다
+  if (op === 'insert') {
+    const r = insertParagraph(html, Number(index), String(before))
+    writeFileSync(file, r.html)
+    return { version: fileVersion(r.html), index: r.index }
+  }
   // op 'quote': 문단을 인용 상자로 감싸거나 푼다. 그 밖에는 칸 안의 글자를 고친다(다 지우면 칸째 빠진다)
   const out = op === 'quote' ? toggleQuote(html, Number(index), String(before)) : applyEdit(html, Number(index), String(before), String(after))
   writeFileSync(file, out)

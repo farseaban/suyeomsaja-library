@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { parse } from 'node-html-parser'
-import { markBlocks, applyEdit, readBlock, fileVersion, toggleQuote } from '../src/lib/edit'
+import { markBlocks, applyEdit, readBlock, fileVersion, toggleQuote, insertParagraph } from '../src/lib/edit'
 import { extractPost } from '../src/lib/extract'
 import { addHeadingIds } from '../src/lib/toc'
 
@@ -114,6 +114,21 @@ describe('editing beyond words (11/10)', () => {
     expect(applyEdit(D, 3, '인용 문단', '<br>')).toBe(D.replace('<blockquote class="quote"><p>인용 문단</p></blockquote>\n', ''))
     expect(applyEdit(D, 2, '노란 상자 굵게', '')).not.toContain('class="key"')
     expect(() => applyEdit(D, 0, 't', '')).toThrow(/제목/)
+  })
+  it('inserts a new paragraph after the chosen block, or after the box, quote or figure that holds it', () => {
+    const a = insertParagraph(D, 1, '하나')
+    expect(a.html).toContain('<p>하나</p>\n<p>(새 문단)</p>')
+    expect(a.index).toBe(2)
+    const b = insertParagraph(D, 3, '인용 문단')
+    expect(b.html).toContain('<blockquote class="quote"><p>인용 문단</p></blockquote>\n<p>(새 문단)</p>')
+    expect(b.index).toBe(4)
+    expect(insertParagraph(D, 2, '노란 상자 굵게').html).toContain('</div>\n<p>(새 문단)</p>\n<div class="meta">')
+  })
+  it('refuses markup or an empty text in a new paragraph, and a spot after the title', () => {
+    expect(() => insertParagraph(D, 1, '하나', '<a href="x">링크</a>')).toThrow(/글자만/)
+    expect(() => insertParagraph(D, 1, '하나', '<br>')).toThrow(/글자만/)
+    expect(() => insertParagraph(D, 0, 't')).toThrow(/제목/)
+    expect(insertParagraph(D, 1, '하나', '새 <strong>굵은</strong> 문단').html).toContain('<p>새 <strong>굵은</strong> 문단</p>')
   })
   it('wraps a paragraph in a quote and unwraps a bare quote, but not one with a source line', () => {
     expect(toggleQuote(D, 1, '하나')).toContain('<blockquote class="quote"><p>하나</p></blockquote>')

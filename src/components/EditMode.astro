@@ -1,7 +1,7 @@
 ---
 import { url } from '../lib/url'
 // 내 컴퓨터 전용 편집 모드(`npm run edit`). 글 페이지의 '편집'은 편집 화면(/edit/<글>/)으로 가고, 거기서 문장을 고쳐 칸을 벗어나면 post.html에 저장한다.
-// 굵게·밑줄(속성 없는 꾸밈)·인용 상자 바꾸기·문단 빼기(글자를 다 지움)도 된다(사용자 11/10).
+// 굵게·밑줄(속성 없는 꾸밈)·인용 상자 바꾸기·문단 추가·문단 빼기(글자를 다 지움)도 된다(사용자 11/10).
 interface Props { slug: string; editing: boolean; token?: string; version?: string; views?: { today: number; d7: number; d30: number; total: number; updated: string } }
 const { slug, editing, token, version, views } = Astro.props
 const viewsAt = views ? new Date(views.updated).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''
@@ -25,6 +25,7 @@ const viewsAt = views ? new Date(views.updated).toLocaleString('ko-KR', { timeZo
     <span>편집 중 · 칸을 벗어나면 저장 · 글자를 다 지우면 문단째 빠집니다</span>
     <button type="button" class="s-edit-btn" data-fmt="strong" title="굵게(⌘B)"><b>굵게</b></button>
     <button type="button" class="s-edit-btn" data-fmt="u" title="밑줄(⌘U)"><u>밑줄</u></button>
+    <button type="button" class="s-edit-btn" data-op="insert" title="고르던 문단 뒤에 새 문단을 넣습니다">문단</button>
     <button type="button" class="s-edit-btn" data-op="quote" title="고르던 문단을 인용 상자로 바꾸거나 풉니다">인용</button>
     {views && <span class="s-edit-views" title={`조회수(페이지뷰) · ${viewsAt} 기준 · 이 맥에서만 보임`}>조회 {views.total} · 7일 {views.d7} · 오늘 {views.today}</span>}
     <output class="s-edit-state" aria-live="polite"></output>
@@ -75,9 +76,21 @@ const viewsAt = views ? new Date(views.updated).toLocaleString('ko-KR', { timeZo
         if (!current) return say('먼저 문단을 누르세요')
         if (current.innerHTML !== current.dataset.shown) return say('먼저 칸을 벗어나 저장한 뒤 누르세요')
         say('바꾸는 중…')
-        const { ok, body, status } = await post({ op: 'quote', index: Number(current.dataset.edit), before: current.textContent })
-        if (ok) location.reload(); else say(`못 바꿈 — ${body.error ?? status}`)
+        const op = btn.dataset.op
+        const { ok, body, status } = await post({ op, index: Number(current.dataset.edit), before: current.textContent })
+        if (!ok) return say(`못 바꿈 — ${body.error ?? status}`)
+        // 새 문단은 다시 그린 뒤 그 칸을 골라 둔다 — 바로 타자를 치면 '(새 문단)'이 바뀐다
+        if (op === 'insert') location.hash = `edit-${body.index}`
+        location.reload()
       })
+    }
+    const focusFromHash = () => {
+      const m = location.hash.match(/^#edit-(\d+)$/)
+      const el = m && document.querySelector(`article [data-edit="${m[1]}"]`)
+      if (!el) return
+      el.scrollIntoView({ block: 'center' }); el.focus()
+      const r = document.createRange(); r.selectNodeContents(el); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r)
+      history.replaceState(null, '', location.pathname)
     }
     for (const el of document.querySelectorAll('article [data-edit]')) {
       el.contentEditable = 'true'
@@ -112,6 +125,7 @@ const viewsAt = views ? new Date(views.updated).toLocaleString('ko-KR', { timeZo
         }
       })
     }
+    focusFromHash()
   }
   }
 </script>
