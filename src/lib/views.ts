@@ -43,9 +43,10 @@ export type PathViews = { today: number; d7: number; d30: number; total: number 
 
 // 주소별 합계. today는 기준일 하루, d7·d30은 기준일을 포함한 최근 7·30일
 export function summarize(store: ViewsStore, today: string): Record<string, PathViews> {
-  const out: Record<string, PathViews> = {}
+  const out: Record<string, PathViews> = Object.create(null)
   for (const [date, day] of Object.entries(store.days)) {
     for (const [path, { views }] of Object.entries(day)) {
+      if (!SAFE_PATH.test(path)) continue
       const p = (out[path] ??= { today: 0, d7: 0, d30: 0, total: 0 })
       p.total += views
       if (date === today) p.today += views
@@ -57,6 +58,8 @@ export function summarize(store: ViewsStore, today: string): Record<string, Path
 }
 
 export const postPath = (slug: string) => `/posts/${slug}/`
+// 받아 들이는 주소 — '/'로 시작하고 보이는 ASCII만(한글 주소는 %로 인코딩돼 온다). 제어 문자·__proto__ 같은 키는 막는다
+export const SAFE_PATH = /^\/(?!.*(__proto__|constructor|prototype))[\x21-\x7e]{0,300}$/
 
 // 키체인(서비스 suyeomsaja-cf-analytics, 계정 token)에서 읽는다. 없으면 환경변수 CF_ANALYTICS_TOKEN
 export function readToken(): string | undefined {
@@ -81,11 +84,14 @@ export async function fetchDays(token: string, account: string, today: string, d
   if (!res.ok || body.errors?.length) throw new Error(`Cloudflare 응답 오류: ${body.errors?.map((e) => e.message).join('; ') ?? res.status}`)
   const rows: { count: number; sum: { visits: number }; dimensions: { requestPath: string; date: string } }[] =
     body.data?.viewer?.accounts?.[0]?.rumPageloadEventsAdaptiveGroups ?? []
-  const out: Record<string, Day> = {}
-  for (let i = 0; i < days; i++) out[shift(today, -i)] = {}
+  const out: Record<string, Day> = Object.create(null)
+  for (let i = 0; i < days; i++) out[shift(today, -i)] = Object.create(null)
   for (const r of rows) {
-    const day = (out[r.dimensions.date] ??= {})
-    const p = (day[r.dimensions.requestPath] ??= { views: 0, visits: 0 })
+    // 주소는 방문자 쪽에서 꾸며 보낼 수 있다(분석 토큰은 공개값) — 날짜 꼴, 보이는 ASCII 주소만 받는다
+    const { date, requestPath: path } = r.dimensions
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !SAFE_PATH.test(path) || !(date in out)) continue
+    const day = out[date]
+    const p = (day[path] ??= { views: 0, visits: 0 })
     p.views += r.count
     p.visits += r.sum.visits
   }

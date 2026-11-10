@@ -13,6 +13,10 @@ describe('views store (11/10 — 조회수는 이 맥에만)', () => {
     expect(summarize(store, '2026-11-10')['/posts/a/']).toEqual({ today: 1, d7: 3, d30: 3, total: 8 })
     expect(summarize(store, '2026-11-10')['/']).toEqual({ today: 3, d7: 3, d30: 3, total: 3 })
   })
+  it('ignores forged paths (control characters, prototype keys) when summing', () => {
+    const bad: ViewsStore = { days: { '2026-11-10': { '/ok/': { views: 1, visits: 1 }, '/\u001b[2J': { views: 9, visits: 9 }, '/__proto__/': { views: 9, visits: 9 } } } }
+    expect(Object.keys(summarize(bad, '2026-11-10'))).toEqual(['/ok/'])
+  })
   it('replaces fetched days wholesale but keeps older days Cloudflare no longer returns', () => {
     const next = mergeDays(store, { '2026-11-10': { '/posts/a/': { views: 4, visits: 2 } } })
     expect(next.days['2026-11-10']).toEqual({ '/posts/a/': { views: 4, visits: 2 } })
