@@ -709,7 +709,7 @@ describe('knowledge sphere', () => {
     expect(cv).toHaveLength(1)
     expect(cv[0].getAttribute('aria-hidden')).toBe('true')
     const fields = JSON.parse(cv[0].getAttribute('data-fields')!)
-    expect(fields).toHaveLength(9)
+    expect(fields).toHaveLength(10)
     expect(fields.find((f: { slug: string }) => f.slug === 'economy').words).toContain('공정가치')
     for (const f of files.filter((f) => f.endsWith('.html') && !f.endsWith(`${OUT}/index.html`)))
       expect(readFileSync(f, 'utf8')).not.toContain('s-orb')

@@ -13,7 +13,7 @@ describe('joinBase', () => {
 })
 
 describe('CATEGORIES', () => {
-  it('gives the last shelf its own pastel pair', () => expect(CATEGORIES.at(-1)!.color).toBe('mint'))
+  it('gives the nature shelf its own pastel pair', () => expect(CATEGORIES.find((c) => c.slug === 'nature')!.color).toBe('mint'))
   it('has unique names and slugs', () => {
     expect(new Set(CATEGORIES.map((c) => c.name)).size).toBe(CATEGORIES.length)
     expect(new Set(CATEGORIES.map((c) => c.slug)).size).toBe(CATEGORIES.length)

@@ -31,6 +31,8 @@ const CATEGORY_LIST: [slug: string, name: string, color: PaletteKey][] = [
   ['books', '책이 건넨 문장', 'rose'],
   ['classics', '다시 보는 고전과 예술', 'rose'],
   ['nature', '인류와 생명의 수수께끼', 'mint'],
+  // 필자가 직접 쓴 짧은 수필·생각(사용자 11/10). 각주·도해 없이 올려도 된다. 대신 써 주지 않는다 — 필자의 글을 다듬어 올릴 뿐. 생각의 결이 가까운 철학과 같은 색
+  ['margins', '여백에 적은 생각', 'lav'],
 ]
 
 export const CATEGORIES: Category[] = CATEGORY_LIST.map(([slug, name, color]) => ({ slug, name, color }))
