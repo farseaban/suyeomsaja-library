@@ -875,11 +875,12 @@ describe('post page', () => {
     const after = root.querySelector('.post-after')!.toString()
     expect(after.indexOf('class="tags"')).toBeLessThan(after.indexOf('class="pn"'))
   })
-  it('lists other posts of the field without chips, under a section head that links to the field', () => {
+  // 사용자 11/10: 같은 분야 글 대신 '함께 읽을 글'(분야를 넘나들어 칩을 단다), 머리의 링크는 이 글의 분야로
+  it('lists posts to read next with chips, under a section head that links to the field', () => {
     const src = readFileSync('src/pages/posts/[slug].astro', 'utf8')
-    expect(src).toMatch(/<SecHead title=\{`\$\{post\.category\}의 다른 글`\}/)
+    expect(src).toContain('<SecHead title="함께 읽을 글"')
     expect(src).toContain('모두 보기 →')
-    expect(src).toMatch(/<PostRow post=\{p\} showCat=\{false\} \/>/)
+    expect(src).toMatch(/<PostRow post=\{p\} \/>/)
     expect(siteCss()).not.toMatch(/\.more\{/)
   })
   it('hangs the folding contents on a reading bar, with a slot for the section being read', () => {

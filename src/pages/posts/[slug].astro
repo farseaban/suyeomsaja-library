@@ -13,6 +13,7 @@ import { presentPost } from '../../lib/present'
 import { loadPosts, neighbors, seriesLabel, seriesPosition, type Post } from '../../lib/posts'
 import { url } from '../../lib/url'
 import { cardVersion } from '../../lib/card'
+import { relatedPosts } from '../../lib/related'
 import { SITE } from '../../config/site'
 
 export function getStaticPaths() {
@@ -26,7 +27,8 @@ const { prev, next } = neighbors(all, post.slug)
 const pos = seriesPosition(all, post.slug)
 // 표현 변환(공개 글 페이지에서만): 글머리를 본문에서 떼어 밤 구역에 올리고, 도해·문장형 표에 휴대폰용 표시를 단다. 글 원문은 그대로다
 const { body, toc, titleHtml } = presentPost(post.articleHtml)
-const sameCat = all.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3)
+// 함께 읽을 글(사용자 11/10): meta.json의 related를 먼저, 나머지는 본문이 비슷한 글로 — 분야를 넘나든다
+const related = relatedPosts(all, post, 3)
 ---
 <Base title={post.title} description={post.description} ogType="article" bodyClass="p-post" dawn={post.color} ogImage={post.cardPath ? { path: `posts/${post.slug}/card.png`, version: cardVersion(post), alt: `${post.category} · ${post.title} — ${SITE.name}` } : undefined}>
   <style is:inline set:html={post.scopedCss} slot="head" />
@@ -44,17 +46,17 @@ const sameCat = all.filter((p) => p.category === post.category && p.slug !== pos
   </div>
   <PostEnhance color={post.color} />
   {process.env.SUYEOMSAJA_EDIT_TOKEN && <EditMode slug={post.slug} editing={false} />}
-  {/* 글 끝: 글쓴이 → 분야·코너 → 같은 분야 글 → 이전·다음 → 댓글 */}
+  {/* 글 끝: 글쓴이 → 분야·코너 → 함께 읽을 글 → 이전·다음 → 댓글 */}
   <AuthorBox />
   <div class="wrap-narrow post-after">
     <p class="tags">
       <Chip name={post.category} slug={post.categorySlug} color={post.color} />
       {pos && <a class="s-label" href={url(`series/${encodeURIComponent(pos.name)}`)}>{seriesLabel(pos)}</a>}
     </p>
-    {sameCat.length > 0 && (
+    {related.length > 0 && (
       <section class="s-sec">
-        <SecHead title={`${post.category}의 다른 글`} more={{ href: url(`category/${post.categorySlug}`), text: '모두 보기 →' }} />
-        <ul class="rows">{sameCat.map((p) => <PostRow post={p} showCat={false} />)}</ul>
+        <SecHead title="함께 읽을 글" more={{ href: url(`category/${post.categorySlug}`), text: `${post.category} 모두 보기 →` }} />
+        <ul class="rows">{related.map((p) => <PostRow post={p} />)}</ul>
       </section>
     )}
     {(prev || next) && (
