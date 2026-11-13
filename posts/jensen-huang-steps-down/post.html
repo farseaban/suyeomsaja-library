@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>젠슨 황은 왜 자기가 세운 회사에서 물러났을까? — 리더의 사생활이 회사의 문제가 되는 선</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800&family=Noto+Serif+KR:wght@700;900&display=swap">
+<style>
+  /* 단일 칼럼 롱폼 해설, 본문 폭 약 65자 */
+  :root{
+    --bg:#FFFFFF; --ink:#33313F; --sub:#6E6B7B; --line:#E4E0DA; --card:#FBF9F6;
+    --accent:#7466C2; --link:#3E7DB0; --mark:#F8E8B0;
+    --key-bg:#FFF8E0; --key-bar:#A9861F; --warn-bg:#FDF0EA; --warn-bar:#C06A45;
+    --quote-bg:#F2F7FC; --quote-bar:#3E7DB0; --th:#D9D3F7; --hl:#FDF0EA;
+    --serif:'Noto Serif KR','Nanum Myeongjo',serif;
+    --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#1B1A22; --ink:#E9E6F1; --sub:#A8A4B8; --line:#3A3746; --card:#24222D;
+    --accent:#B3A8F0; --link:#8EBBE6; --mark:#5A4A12;
+    --key-bg:#2B2617; --key-bar:#D8B44A; --warn-bg:#2E211B; --warn-bar:#E0916A;
+    --quote-bg:#1E2833; --quote-bar:#8EBBE6; --th:#3A3456; --hl:#2E211B; color-scheme:dark } }
+  :root[data-theme="dark"]{
+    --bg:#1B1A22; --ink:#E9E6F1; --sub:#A8A4B8; --line:#3A3746; --card:#24222D;
+    --accent:#B3A8F0; --link:#8EBBE6; --mark:#5A4A12;
+    --key-bg:#2B2617; --key-bar:#D8B44A; --warn-bg:#2E211B; --warn-bar:#E0916A;
+    --quote-bg:#1E2833; --quote-bar:#8EBBE6; --th:#3A3456; --hl:#2E211B; color-scheme:dark }
+  *{box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.85;word-break:keep-all;
+       padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+  article{max-width:680px;margin:0 auto;padding-block:40px 80px}
+  h1,h2,h3{font-family:var(--serif);text-wrap:balance;letter-spacing:-.01em}
+  h1{font-size:30px;line-height:1.35;margin:.3em 0 .5em}
+  .meta{font-size:14px;color:var(--sub);margin-bottom:28px}
+  h2{font-size:23px;line-height:1.4;margin:2.4em 0 .8em;padding-bottom:.35em;border-bottom:2px solid var(--line)}
+  h3{font-size:19px;margin:1.8em 0 .6em}
+  p{margin:0 0 1.15em}
+  strong{background:linear-gradient(transparent 62%,var(--mark) 62%);font-weight:700}
+  a{color:var(--link);text-underline-offset:3px}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .lead-quote{font-family:var(--serif);font-size:21px;font-weight:700;margin:0 0 .8em}
+  figure{margin:2em auto;max-width:460px}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:14px;color:var(--sub);margin-top:.6em;line-height:1.6}
+  sup.fn{font-size:.68em;line-height:0;margin-left:1px}
+  sup.fn a{text-decoration:none;font-weight:700;color:var(--accent)}
+  .key{background:var(--key-bg);border-left:5px solid var(--key-bar);border-radius:10px;padding:16px 20px;margin:1.6em 0}
+  .caution{background:var(--warn-bg);border-left:5px solid var(--warn-bar);border-radius:10px;padding:14px 20px;margin:1.6em 0;font-size:16px}
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:15px;margin:1.4em 0}
+  th{background:var(--th);text-align:left;padding:10px 12px}
+  td{border-bottom:1px solid var(--line);padding:10px 12px;vertical-align:top}
+  tr.hl td{background:var(--hl)}
+  blockquote.quote{margin:1.6em 0;padding:16px 22px;border-left:4px solid var(--quote-bar);background:var(--quote-bg);border-radius:0 10px 10px 0}
+  blockquote.quote p{margin:0 0 .4em}
+  blockquote.quote cite{font-style:normal;font-size:14px;color:var(--sub)}
+  .expert-note blockquote{margin:0;padding:22px 26px;background:var(--card);border-radius:14px;border:1px solid var(--line)}
+  .expert-note blockquote p:last-child{margin-bottom:0}
+  hr{border:0;border-top:1px dashed var(--line);margin:2.6em 0}
+  .disclaimer{font-size:14px;color:var(--sub);background:var(--card);padding:12px 16px;border-radius:10px}
+  .refs{font-size:14px;line-height:1.7;margin-top:2.4em}
+  .refs h3{font-size:16px}
+  .refs li:target{background:var(--key-bg)}
+  .refs a.back{text-decoration:none;margin-left:4px}
+  @media (max-width:520px){ body{font-size:16px} h1{font-size:25px} h2{font-size:20px} }
+</style>
+</head>
+<body>
+<article>
+
+<h1>젠슨 황은 왜 자기가 세운 회사에서 물러났을까? — 리더의 사생활이 회사의 문제가 되는 선</h1>
+<div class="meta">2026-11-13 · 약 11분 분량 · 글 수염사자</div>
+
+<!-- 1. 도입 -->
+<p class="lead-quote">"사과까지 했는데, 왜 물러나야 했을까?"</p>
+<p>2026년 11월 12일 목요일, 캘리포니아 샌타클래라에서 보도자료 한 장이 나왔습니다. 제목은 'CEO 교체 발표'였습니다. 젠슨 황이 사장, 최고경영자(CEO), 이사 자리에서 모두 즉시 물러난다는 내용이었습니다. 최고재무책임자(CFO) 콜레트 크레스(Colette Kress)가 임시 CEO를 맡고, 회사 역사상 처음으로 이사회 의장 자리가 생겼습니다<sup class="fn"><a id="cite-1" href="#ref-1">[1]</a></sup>.</p>
+<p>보도자료에는 물러나는 이유가 없었습니다. 그는 1993년 회사를 세운 뒤 줄곧 CEO였습니다<sup class="fn"><a id="cite-2" href="#ref-2">[2]</a></sup>. 33년을 이끈 사람의 퇴장문인데, 정작 그 자신의 말은 한 줄도 실리지 않았습니다<sup class="fn"><a id="cite-3" href="#ref-3">[3]</a></sup>. 이사회는 그의 "헤아릴 수 없는 공헌"에 감사한다고만 적었습니다<sup class="fn"><a id="cite-1b" href="#ref-1">[1]</a></sup>.</p>
+<p>나흘 전만 해도 분위기는 달랐습니다. 그는 직원들에게 불륜을 털어놓고 사과했고, 이사회는 그를 믿는다고 밝혔습니다. 필자는 <a href="../jensen-huang-apology/">앞선 글</a>에서 그 사과 이메일을 탁월한 위기 대응이라고 평했습니다. 사과는 잘했습니다. 그런데도 그는 떠났습니다.</p>
+<p><strong>사과로 덮을 수 있는 것은 사생활까지였고, 그를 둘러싼 의혹은 이미 사생활의 울타리를 넘어 있었습니다.</strong></p>
+
+<!-- 2. 사실관계 -->
+<h2>2주 동안 무슨 일이 있었나?</h2>
+<p>시작은 10월 29일 뉴욕타임스(The New York Times) 보도였습니다. 미 정보당국이 싱가포르 기업 메가스피드(Megaspeed)의 임원 앨리스 황을 중국 정부를 위해 일한 인물로 판단했고, 그녀가 엔비디아(NVIDIA) CEO 젠슨 황과 가까워졌다는 내용이었습니다. 두 사람은 친척이 아닙니다. 젠슨 황은 블룸버그(Bloomberg) 인터뷰에서 둘의 교류는 메가스피드와 관련된 일이었고 "완전히 정상적"이었다고 답했습니다<sup class="fn"><a id="cite-4" href="#ref-4">[4]</a></sup>.</p>
+<p>11월 8일 일요일, 그는 태도를 바꿨습니다. 직원 전체에게 보낸 이메일에서 아내에게 충실하지 못했고 변명의 여지가 없다고 썼습니다<sup class="fn"><a id="cite-5" href="#ref-5">[5]</a></sup>. 같은 날 이사회는 독립 조사를 시작했습니다. 다만 국가안보나 회사 기밀이 침해됐다고 볼 이유는 없다고 했고, "젠슨과 그의 경영진을 신뢰한다"고 덧붙였습니다<sup class="fn"><a id="cite-6" href="#ref-6">[6]</a></sup>. 조사는 뉴욕 남부지검장 대행을 지낸 준 김(Joon H. Kim) 변호사와 법률회사 왁텔 립턴(Wachtell, Lipton, Rosen &amp; Katz)이 맡았습니다<sup class="fn"><a id="cite-7" href="#ref-7">[7]</a></sup>.</p>
+<p>사흘 뒤인 11월 11일, 두 번째 보도가 나왔습니다. 뉴욕타임스는 회사 직원 다섯 명을 인용해, 그가 자신에게 직접 보고하던 엔비디아 임원과도 연인 관계였다고 전했습니다<sup class="fn"><a id="cite-8" href="#ref-8">[8]</a></sup>. 두 사람이 올해 3월 새너제이의 한 호텔에서 다정하게 있는 모습이 카메라에 찍혔다는 내용도 있었습니다. 그날 밤 월스트리트저널(The Wall Street Journal)은 이사회가 그를 내보낼 준비를 한다고 보도했습니다. 주가는 시간외 거래에서 9% 넘게 빠졌습니다<sup class="fn"><a id="cite-9" href="#ref-9">[9]</a></sup>. 로이터(Reuters)는 이와 별개로 또 다른 직원과의 관계를 보도했습니다<sup class="fn"><a id="cite-10" href="#ref-10">[10]</a></sup>.</p>
+<p>그리고 다음 날 그는 물러났습니다. 회사는 사임이라고 발표했습니다. 그러나 CNBC는 사정을 아는 사람을 인용해, 이사회가 전날 밤 그를 내보내기로 정했다고 전했습니다. 두 번째 불륜 보도가 분위기를 돌려놓았다는 것입니다. 주가는 장중 52주 최저가까지 떨어졌다가 4.3% 하락으로 마감했습니다<sup class="fn"><a id="cite-3b" href="#ref-3">[3]</a></sup>.</p>
+
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 520" width="100%" role="img" aria-labelledby="t-1 d-1" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-1">첫 보도에서 퇴진까지 2주</title>
+<desc id="d-1">10월 29일 첩보 의혹 보도와 부인, 11월 8일 불륜 인정과 이사회의 신뢰 표명, 11월 11일 직속 임원과의 관계 보도, 11월 12일 사임으로 이어졌고, 11월 17일에는 실적 발표가 잡혀 있습니다.</desc>
+<rect width="420" height="520" rx="18" fill="#FBF9F6"/>
+<text x="24" y="42" font-size="20" font-weight="700" fill="#33313F">첫 보도에서 퇴진까지 2주</text>
+<line x1="92" y1="78" x2="92" y2="470" stroke="#E4E0DA" stroke-width="3"/>
+<g font-size="15" font-weight="700" fill="#6E6B7B" text-anchor="end">
+  <text x="74" y="104">10.29</text>
+  <text x="74" y="184">11.08</text>
+  <text x="74" y="264">11.11</text>
+  <text x="74" y="358">11.12</text>
+  <text x="74" y="444">11.17</text>
+</g>
+<g fill="#E9E6F1" stroke="#9A96AA" stroke-width="2">
+  <circle cx="92" cy="99" r="8"/><circle cx="92" cy="179" r="8"/><circle cx="92" cy="259" r="8"/><circle cx="92" cy="439" r="8"/>
+</g>
+<circle cx="92" cy="353" r="11" fill="#F6CCD8" stroke="#B24E6E" stroke-width="2.5"/>
+<g font-size="15" fill="#33313F">
+  <text x="114" y="96" font-weight="700">NYT 첩보 의혹 보도</text>
+  <text x="114" y="118" font-size="13" fill="#6E6B7B">블룸버그에서 "완전히 정상" 부인</text>
+  <text x="114" y="176" font-weight="700">직원 이메일로 불륜 인정·사과</text>
+  <text x="114" y="198" font-size="13" fill="#6E6B7B">이사회 조사 시작, "신뢰한다"</text>
+  <text x="114" y="256" font-weight="700">NYT, 직속 임원과의 관계 보도</text>
+  <text x="114" y="278" font-size="13" fill="#6E6B7B">WSJ "이사회가 퇴진 준비"</text>
+</g>
+<rect x="108" y="320" width="292" height="68" rx="12" fill="#F6CCD8" stroke="#B24E6E" stroke-width="1.5"/>
+<text x="122" y="348" font-size="16" font-weight="800" fill="#B24E6E">CEO·이사 자리에서 사임</text>
+<text x="122" y="372" font-size="13" fill="#33313F">크레스 임시 CEO·첫 이사회 의장</text>
+<g font-size="15" fill="#33313F">
+  <text x="114" y="436" font-weight="700">3분기 실적 발표 예정</text>
+  <text x="114" y="458" font-size="13" fill="#6E6B7B">의회 증언 날짜는 협상 중</text>
+</g>
+<text x="24" y="502" font-size="12" fill="#6E6B7B">자료: [1]–[10] 원문·보도로 재구성</text>
+</svg>
+<figcaption>10월 29일 첩보 의혹 보도와 부인, 11월 8일 불륜 인정과 이사회의 신뢰 표명, 11월 11일 직속 임원과의 관계 보도를 거쳐 11월 12일 사임에 이르기까지 꼭 2주가 걸렸습니다.</figcaption>
+</figure>
+
+<div class="caution">여기 나오는 관계와 첩보 의혹은 모두 보도와 정보당국의 판단으로 알려진 것입니다. 앨리스 황이 무엇을 빼냈는지는 공개 보도로 확인되지 않았고, 연방수사국(FBI)과 의회, 이사회의 조사가 진행 중입니다<sup class="fn"><a id="cite-10b" href="#ref-10">[10]</a></sup>.</div>
+
+<!-- 3. 왜 돌아섰나 -->
+<h2>사과는 통했는데, 이사회는 왜 사흘 만에 돌아섰을까?</h2>
+<p>두 날짜를 나란히 놓으면 묘한 점이 보입니다. 11월 8일에 드러난 상대는 정보당국이 의심하는 인물이었습니다. 듣기에는 이쪽이 훨씬 무겁습니다. 그런데도 이사회는 그날 그를 신뢰한다고 했습니다<sup class="fn"><a id="cite-6b" href="#ref-6">[6]</a></sup>. 사흘 뒤의 보도는 회사 안의 관계였습니다. 이사회는 그다음 날 밤 그를 내보내기로 했습니다<sup class="fn"><a id="cite-3c" href="#ref-3">[3]</a></sup>.</p>
+<p>무엇이 달랐을까요? 첫 번째 일에서 이사회가 붙든 것은 기밀이 새지 않았다는 판단이었습니다. 조사는 남았지만, 회사가 입은 피해는 아직 확인되지 않았다는 입장이었지요. 두 번째 일은 확인할 피해를 따질 필요가 없었습니다. 직속 부하와의 관계는 그 자체로 회사 규칙의 문제이기 때문입니다. 뉴욕타임스는 엔비디아에도 많은 회사처럼 상급자가 부하 직원과 관계를 맺지 못하게 하는 규칙이 있다고 전했습니다<sup class="fn"><a id="cite-8b" href="#ref-8">[8]</a></sup>.</p>
+<p>필자는 이 차이에서 세 가지를 읽습니다. 높은 자리가 사람에게서 무엇을 가리는지, 사생활과 회사 일 사이의 선이 어디에 있는지, 그리고 그 선을 넘은 사람이 이제 어디로 가는지입니다.</p>
+
+<!-- 4. 공감 -->
+<h2>높은 자리에 오르면 왜 남의 눈이 잘 안 보일까?</h2>
+<p>심리학에는 이마에 글자를 쓰는 실험이 있습니다. 손가락으로 자기 이마에 알파벳 E를 써 보라고 합니다. 마주 선 사람이 바로 읽게 하려면, 내 쪽에서는 뒤집힌 모양으로 써야 합니다. 내 쪽에서 반듯하게 쓰면 상대에게는 거꾸로 보입니다.</p>
+<p>2006년 애덤 갈린스키(Adam Galinsky) 연구팀은 참가자를 힘이 센 조건과 약한 조건에 무작위로 나눈 뒤 이 과제를 시켰습니다. 힘이 센 조건의 사람들은 자기 쪽에서 읽히는 E를 쓸 가능성이 거의 세 배였습니다. 남의 표정에서 감정을 읽는 정확도도 떨어졌습니다<sup class="fn"><a id="cite-11" href="#ref-11">[11]</a></sup>.</p>
+<p>2014년 캐나다 연구팀은 뇌를 들여다봤습니다. 참가자에게 남에게 힘을 썼던 때, 남이 자신에게 힘을 썼던 때, 또는 어제 있었던 일을 글로 쓰게 했습니다. 그다음 누군가 고무공을 쥐는 영상을 보여 주며 뇌 반응을 쟀습니다. 남의 동작을 볼 때 내 뇌도 따라 울리는 반응, 공감과 이어진 부위의 신호였습니다. 힘을 떠올린 사람은 이 신호가 약해졌고, 무력함을 떠올린 사람은 강해졌습니다<sup class="fn"><a id="cite-12" href="#ref-12">[12]</a></sup>.</p>
+<p>직속 부하와의 관계를 떠올리면 이 연구가 남의 일 같지 않습니다. 위에서 보면 두 어른이 합의한 일입니다. 아래에서 보면 다릅니다. 와튼스쿨(Wharton School)의 스테퍼니 크리어리(Stephanie Creary) 교수는 CEO와 직원의 관계가 "비대칭적인 권력 관계"를 만든다고 말합니다. 그 직원이 자기 일에 대해 하는 말이 모두 CEO와 얽혀 버리고, 판단의 공정함이 의심받게 된다는 것입니다<sup class="fn"><a id="cite-13" href="#ref-13">[13]</a></sup>.</p>
+<p>게다가 엔비디아는 결정이 한 사람에게 몰린 회사였습니다. 젠슨 황에게 직접 보고하는 사람이 약 60명이었고, 최고운영책임자(COO)도 없었습니다<sup class="fn"><a id="cite-14" href="#ref-14">[14]</a></sup>. 그런 구조에서 동료들은 그 임원에게 회의에서 반대할 수 있었을까요? 그 임원의 인사 평가는 믿을 만했을까요? 이런 질문은 위에서 잘 보이지 않습니다. 이마에 쓴 E처럼요.</p>
+<p>다만 이 연구들을 부풀려 읽어서는 안 됩니다. 실험실에서 몇 분 동안 만든 기분의 효과이고, 실제 CEO를 오래 지켜본 연구는 아닙니다. 그런데 바로 그 점이 희망이기도 합니다. 글 한 편 쓰는 사이에 생긴 변화라면, 거꾸로도 움직일 수 있다는 뜻이니까요.</p>
+<p>버클리 대학의 대커 켈트너(Dacher Keltner)는 권력이 "공감의 결핍"을 부른다고 쓰면서, 해법은 연습의 말로 내놓습니다. 질문하라, 귀 기울여 들어라, 남에게 호기심을 가져라, 감사를 표현하라<sup class="fn"><a id="cite-15" href="#ref-15">[15]</a></sup>. 2013년 미국 공영라디오(NPR)는 아랫사람을 잊어 가는 권력자도 코칭으로 공감을 되찾을 수 있다는 연구 흐름을 소개했습니다<sup class="fn"><a id="cite-16" href="#ref-16">[16]</a></sup>. <strong>승진은 공감을 연습해야 할 이유가 하나 더 생기는 일입니다.</strong></p>
+
+<!-- 5. 서양은 관대한가 -->
+<h2>서양은 정말 사생활에 너그러울까?</h2>
+<p>이런 일이 터지면 흔히 나오는 말이 있습니다. 서양은 일과 사생활을 나눠 보고, 아시아보다 너그럽다는 말입니다. 반은 맞고 반은 틀립니다.</p>
+<p>퓨리서치센터(Pew Research Center)는 2025년 25개 나라 성인에게 기혼자의 불륜을 도덕적으로 받아들일 수 있는지 물었습니다. 받아들일 수 없다는 답의 중앙값은 77%였습니다. 프랑스는 53%, 독일은 55%로 가장 낮은 축이었습니다. 그런데 미국은 90%였습니다. 영국은 81%, 한국은 83%, 일본은 65%였습니다<sup class="fn"><a id="cite-17" href="#ref-17">[17]</a></sup>.</p>
+
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 412" width="100%" role="img" aria-labelledby="t-2 d-2" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-2">불륜을 받아들일 수 없다는 비율</title>
+<desc id="d-2">2025년 퓨리서치센터 조사에서 기혼자의 불륜을 도덕적으로 받아들일 수 없다고 답한 비율은 미국 90%, 한국 83%, 영국 81%, 일본 65%, 독일 55%, 프랑스 53%였고, 25개국 중앙값은 77%였습니다.</desc>
+<rect width="420" height="412" rx="18" fill="#FBF9F6"/>
+<text x="24" y="42" font-size="20" font-weight="700" fill="#33313F">불륜을 받아들일 수 없다는 비율</text>
+<rect x="24" y="66" width="13" height="13" rx="3" fill="#D9D3F7" stroke="#7466C2" stroke-width="1.5"/>
+<text x="44" y="78" font-size="13" fill="#6E6B7B">미국·유럽</text>
+<rect x="124" y="66" width="13" height="13" rx="3" fill="#CDEBDD" stroke="#3F8F6E" stroke-width="1.5"/>
+<text x="144" y="78" font-size="13" fill="#6E6B7B">아시아</text>
+<line x1="296.2" y1="92" x2="296.2" y2="354" stroke="#9A96AA" stroke-width="1.5" stroke-dasharray="5 4"/>
+<g font-size="15" font-weight="700" fill="#33313F">
+  <text x="24" y="119">미국</text>
+  <text x="24" y="163">한국</text>
+  <text x="24" y="207">영국</text>
+  <text x="24" y="251">일본</text>
+  <text x="24" y="295">독일</text>
+  <text x="24" y="339">프랑스</text>
+</g>
+<g stroke-width="1.5">
+  <rect x="96" y="100" width="234" height="26" rx="6" fill="#D9D3F7" stroke="#7466C2"/>
+  <rect x="96" y="144" width="215.8" height="26" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+  <rect x="96" y="188" width="210.6" height="26" rx="6" fill="#D9D3F7" stroke="#7466C2"/>
+  <rect x="96" y="232" width="169" height="26" rx="6" fill="#CDEBDD" stroke="#3F8F6E"/>
+  <rect x="96" y="276" width="143" height="26" rx="6" fill="#D9D3F7" stroke="#7466C2"/>
+  <rect x="96" y="320" width="137.8" height="26" rx="6" fill="#D9D3F7" stroke="#7466C2"/>
+</g>
+<g font-size="14" font-weight="700" fill="#33313F">
+  <text x="338" y="119">90%</text>
+  <text x="319.8" y="163">83%</text>
+  <text x="314.6" y="207">81%</text>
+  <text x="302" y="251">65%</text>
+  <text x="247" y="295">55%</text>
+  <text x="241.8" y="339">53%</text>
+</g>
+<text x="296.2" y="374" font-size="13" fill="#6E6B7B" text-anchor="middle">25개국 중앙값 77%</text>
+<text x="24" y="398" font-size="12" fill="#6E6B7B">자료: [17] 퓨리서치센터, 2026년 3월 발표</text>
+</svg>
+<figcaption>기혼자의 불륜을 도덕적으로 받아들일 수 없다고 답한 비율은 미국이 90%로 가장 높은 축이었고 프랑스는 53%, 독일은 55%였으며, 아시아 안에서도 한국 83%와 일본 65%로 크게 갈렸습니다.</figcaption>
+</figure>
+
+<p>'서양'이라는 한 단어로 묶기에는 차이가 너무 큽니다. 프랑스와 독일에서는 받아들일 수 없다고 답하지 않은 사람이 절반 가까이 됩니다. 반대로 미국에서는 열 명 중 아홉이 그렇게 답했습니다. 아시아도 마찬가지입니다. 한국과 일본 사이에는 18%포인트의 차이가 있습니다.</p>
+<p>그러니 리더의 사생활을 일과 떼어 보는 전통은 분명 있지만, 그것을 '서양'의 것이라 부르기는 어렵습니다. 그리고 엔비디아는 미국 회사입니다. 미국 회사는 이 문제를 또 다른 방식으로 다룹니다. 도덕이 아니라 규칙으로요.</p>
+
+<!-- 6. 선 -->
+<h2>어디서부터는 사생활이 아닐까?</h2>
+<p>2019년 맥도날드(McDonald's) 이사회는 CEO 스티브 이스터브룩(Steve Easterbrook)을 해고했습니다. 상대는 부하 직원이었고, 관계는 서로 합의한 것이었습니다. 문제가 된 것은 직속이든 아니든 부하 직원과 사귀거나 성관계를 맺지 못하게 한 회사 규칙이었습니다. 2018년 인텔(Intel)의 브라이언 크르재니치(Brian Krzanich)도 직원과의 관계가 관리자 규칙을 어겼다는 이유로 물러났습니다. 2012년 베스트바이(Best Buy), 2005년 보잉(Boeing)의 CEO도 직원과의 관계로 자리를 떠났습니다<sup class="fn"><a id="cite-13b" href="#ref-13">[13]</a></sup>.</p>
+<p>이 규칙은 결혼 생활의 충실함을 묻지 않습니다. 위아래가 있는 관계 그 자체를 묻습니다. 도덕의 규칙이 아니라 권력의 규칙인 셈입니다. 미국의 여론이 불륜에 엄격한 것과는 또 다른 이야기입니다.</p>
+<p>젠슨 황에게 보도된 두 관계는 모두 이 울타리 밖에 있습니다. 직속 임원과의 관계는 회사 안 공정함의 문제입니다. 정보당국이 의심하는 인물과의 관계는 그보다 넓게 번집니다. 메가스피드는 2024년 미국 당국이 중국 기업들의 첨단 칩 수출 통제 우회를 도왔다는 의심으로 들여다본 회사였습니다<sup class="fn"><a id="cite-4b" href="#ref-4">[4]</a></sup>. 하원 외교위원장 브라이언 매스트(Brian Mast)는 젠슨 황이 의회에 나와 증언하기로 했고 날짜를 협상 중이라고 말했습니다<sup class="fn"><a id="cite-3d" href="#ref-3">[3]</a></sup>.</p>
+
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 512" width="100%" role="img" aria-labelledby="t-3 d-3" font-family="'Pretendard','Noto Sans KR','Noto Sans CJK KR','Apple SD Gothic Neo',sans-serif">
+<title id="t-3">그 관계는 누구에게 닿는가</title>
+<desc id="d-3">배우자에게 충실하지 못한 일은 가족에게 닿고, 직속 임원과의 관계는 회사의 직원과 주주에게, 정보당국이 의심하는 인물과의 관계는 나라의 안보에까지 닿아, 바깥 겹으로 갈수록 사생활이라는 말이 통하지 않게 됩니다.</desc>
+<rect width="420" height="512" rx="18" fill="#FBF9F6"/>
+<text x="24" y="42" font-size="20" font-weight="700" fill="#33313F">그 관계는 누구에게 닿는가</text>
+<rect x="24" y="64" width="372" height="400" rx="16" fill="#FBD9C6" stroke="#C06A45" stroke-width="1.5"/>
+<text x="40" y="92" font-size="15" font-weight="800" fill="#C06A45">③ 정보당국이 의심하는 인물과의 관계</text>
+<text x="40" y="114" font-size="13" fill="#33313F">닿는 곳: 나라 — 안보·수출 통제 조사</text>
+<rect x="44" y="132" width="332" height="312" rx="14" fill="#F8E8B0" stroke="#A9861F" stroke-width="1.5"/>
+<text x="60" y="160" font-size="15" font-weight="800" fill="#A9861F">② 직속 임원과의 관계</text>
+<text x="60" y="182" font-size="13" fill="#33313F">닿는 곳: 회사 — 권력 차이·공정함</text>
+<rect x="64" y="200" width="292" height="176" rx="12" fill="#CDEBDD" stroke="#3F8F6E" stroke-width="1.5"/>
+<text x="80" y="230" font-size="15" font-weight="800" fill="#3F8F6E">① 배우자에게 충실하지 못한 일</text>
+<text x="80" y="252" font-size="13" fill="#33313F">닿는 곳: 가족</text>
+<text x="80" y="292" font-size="14" fill="#33313F">여기까지는 '사생활'이라는 말이</text>
+<text x="80" y="314" font-size="14" fill="#33313F">통하는 사회도 있다</text>
+<text x="80" y="352" font-size="13" fill="#6E6B7B">11.08 사과 뒤에도 이사회는 신뢰</text>
+<text x="60" y="414" font-size="13" fill="#6E6B7B">11.11 보도 다음 날 이사회가 돌아섬</text>
+<text x="24" y="494" font-size="12" fill="#6E6B7B">그림: 직접 제작 · 사실관계는 [3]–[10]</text>
+</svg>
+<figcaption>배우자에게 충실하지 못한 일은 가족에게 닿지만, 직속 임원과의 관계는 회사의 직원과 주주에게, 정보당국이 의심하는 인물과의 관계는 나라의 안보에까지 닿아서, 바깥 겹으로 갈수록 사생활이라는 말이 통하지 않게 됩니다.</figcaption>
+</figure>
+
+<p>배우자를 속인 일은 가족에게 닿습니다. 직속 임원과의 관계는 그 아래서 일하는 직원과 주주에게 닿습니다. 정보당국이 의심하는 인물과의 관계는 나라의 안보에까지 닿습니다. <strong>사생활인지 아닌지는 무슨 일을 했느냐보다, 그 일이 누구에게 닿느냐로 갈립니다.</strong></p>
+
+<!-- 7. 전망 -->
+<h2>그는 다시 돌아올 수 있을까?</h2>
+<p>여기서부터는 필자의 전망입니다.</p>
+<p>필자는 젠슨 황을 데려가려는 시도가 많을 것이라고 봅니다. 그는 이미 한 회사의 CEO를 넘어선 상징이기 때문입니다. 33년 동안 엔비디아를 이끌었고, 회사의 큰 결정은 그의 손에 모여 있었습니다. 트럼프 행정부는 인공지능 문제에서 그의 조언에 기대 왔습니다. 지분 3.56%를 가진 개인 최대 주주이기도 합니다<sup class="fn"><a id="cite-14b" href="#ref-14">[14]</a></sup>.</p>
+<p>선례도 있습니다. 직원과의 관계로 2018년 6월 인텔을 떠난 크르재니치는 그해 11월 CDK 글로벌(CDK Global)의 사장 겸 CEO가 되었습니다<sup class="fn"><a id="cite-18" href="#ref-18">[18]</a></sup>. 다섯 달 만이었습니다. 이유는 다르지만, 2023년 11월 오픈AI(OpenAI) 이사회가 "한결같이 솔직하지 않았다"며 해고한 샘 올트먼(Sam Altman)에게는 사흘 만에 마이크로소프트(Microsoft)가 새 인공지능 연구 조직의 CEO 자리를 내밀었습니다<sup class="fn"><a id="cite-19" href="#ref-19">[19]</a></sup>.</p>
+<p>물론 변수가 남아 있습니다. 의회 증언과 연방수사국 조사의 결과에 따라 이야기는 완전히 달라질 수 있습니다. 첩보 의혹이 사실로 드러난다면 그를 부르려는 손은 크게 줄어들 것입니다. 하지만 의혹이 개인의 잘못으로 정리된다면, 그를 원하는 회사와 투자자는 적지 않을 것이라고 필자는 봅니다. 엔비디아는 그를 내보낼 수 있었지만, 세상은 아직 그를 엔비디아의 얼굴로 기억하고 있으니까요.</p>
+
+<!-- 8. 필자 한마디 -->
+<section class="expert-note">
+  <h2>필자 한마디</h2>
+  <blockquote>
+    <p>높은 자리에 오를수록 내 말에 반대하는 사람은 줄어듭니다. 웃어 주는 얼굴은 늘고, 불편한 표정은 숨겨집니다. 그러니 공감은 저절로 자라지 않습니다. 오히려 저절로 줄어듭니다.</p>
+    <p><strong>"승진한 사람일수록 공감을 연습해야 합니다."</strong> 자기 일이 아래에서 어떻게 보일지 먼저 묻는 습관, 이마에 E를 쓸 때 상대 쪽에서 읽히게 쓰는 습관 말입니다.</p>
+    <p>젠슨 황의 사과는 훌륭했습니다. 하지만 사과는 이미 일어난 일을 다룰 뿐입니다. 보도가 사실이라면, 그 관계가 아래에서 그리고 바깥에서 어떻게 보일지를 그가 먼저 물었어야 했습니다. 그랬다면 사과할 일 자체가 줄었을지도 모릅니다.</p>
+  </blockquote>
+</section>
+
+<hr>
+
+<p class="disclaimer">2026년 11월 13일까지 공개된 원문과 보도를 바탕으로 한 개인적 분석입니다. 보도된 관계와 첩보 의혹은 조사가 진행 중입니다.</p>
+
+<section class="refs">
+  <h3>참고문헌</h3>
+  <ol>
+    <li id="ref-1">NVIDIA. NVIDIA Announces CEO Transition, 2026-11-12 (보도자료, SEC 8-K 첨부). <a href="https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm">링크</a> <a class="back" href="#cite-1">↩</a><a class="back" href="#cite-1b">↩</a></li>
+    <li id="ref-2">NVIDIA. Board of Directors: Jensen Huang (회사 소개 이력). <a href="https://www.nvidia.com/en-us/about-nvidia/board-of-directors/jensen-huang/">링크</a> <a class="back" href="#cite-2">↩</a></li>
+    <li id="ref-3">CNBC. Nvidia CEO Jensen Huang resigns: Live updates, 2026-11-12 (실시간 기사). <a href="https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html">링크</a> <a class="back" href="#cite-3">↩</a><a class="back" href="#cite-3b">↩</a><a class="back" href="#cite-3c">↩</a><a class="back" href="#cite-3d">↩</a></li>
+    <li id="ref-4">SF Standard. Nvidia launches probe as Jensen Huang admits affair with suspected Chinese spy, 2026-11-08 (뉴욕타임스 10월 29일 보도·블룸버그 인터뷰 인용, 해설 기사). <a href="https://sfstandard.com/2026/11/08/nvidia-jensen-huang-affair-board-investigation-chinese-spy/">링크</a> <a class="back" href="#cite-4">↩</a><a class="back" href="#cite-4b">↩</a></li>
+    <li id="ref-5">NVIDIA Newsroom. A Message to Our Company, 2026-11-08 (이메일 원문). <a href="https://nvidianews.nvidia.com/news/a-message-to-our-company">링크</a> <a class="back" href="#cite-5">↩</a></li>
+    <li id="ref-6">CNBC. Read Huang's email to his staff and statement from Nvidia's board of directors, 2026-11-08 (이사회 성명 전문 수록). <a href="https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-email-board-of-directors-statement.html">링크</a> <a class="back" href="#cite-6">↩</a><a class="back" href="#cite-6b">↩</a></li>
+    <li id="ref-7">NBC News. Ex-prosecutor to probe Jensen Huang Chinese spy affair for Nvidia, 2026-11. <a href="https://www.nbcnews.com/business/corporations/ex-prosecutor-probe-jensen-huang-chinese-spy-affair-nvidia-rcna608628">링크</a> <a class="back" href="#cite-7">↩</a></li>
+    <li id="ref-8">TechCrunch. Jensen Huang accused of having another affair — with an Nvidia exec, 2026-11-11 (뉴욕타임스 보도 인용, 해설 기사). <a href="https://techcrunch.com/2026/11/11/jensen-huang-accused-of-having-another-affair-with-a-nvidia-exec/">링크</a> <a class="back" href="#cite-8">↩</a><a class="back" href="#cite-8b">↩</a></li>
+    <li id="ref-9">CNBC. Nvidia board meeting to decide CEO Jensen Huang's fate stretches into evening, 2026-11-11 (뉴욕타임스·월스트리트저널 보도 인용). <a href="https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html">링크</a> <a class="back" href="#cite-9">↩</a></li>
+    <li id="ref-10">Al Jazeera. Nvidia CEO Jensen Huang resigns amid spy scandal and market loss, 2026-11-12 (로이터 보도 인용, 해설 기사). <a href="https://www.aljazeera.com/news/2026/11/12/ai-titan-jensen-huang-out-as-nvidia-ceo">링크</a> <a class="back" href="#cite-10">↩</a><a class="back" href="#cite-10b">↩</a></li>
+    <li id="ref-11">Galinsky AD, Magee JC 등. Power and Perspectives Not Taken. <i>Psychological Science</i>, 2006년 12월호 (미국심리과학회 보도자료로 확인). <a href="https://www.psychologicalscience.org/news/releases/study-gives-us-a-new-perspective-on-the-powerful.html">링크</a> <a class="back" href="#cite-11">↩</a></li>
+    <li id="ref-12">Hogeveen J, Inzlicht M, Obhi SS. Power changes how the brain responds to others. <i>Journal of Experimental Psychology: General</i> 143(2), 755–762, 2014 (미국심리과학회 해설로 확인). <a href="https://www.psychologicalscience.org/uncategorized/power-can-chill-the-minds-capacity-for-empathy-researchers-find.html">링크</a> <a class="back" href="#cite-12">↩</a></li>
+    <li id="ref-13">Knowledge at Wharton. Workplace Romance: Did McDonald’s Make the Right Call?, 2019-11-08. <a href="https://knowledge.wharton.upenn.edu/article/mcdonalds-ceo-fired">링크</a> <a class="back" href="#cite-13">↩</a><a class="back" href="#cite-13b">↩</a></li>
+    <li id="ref-14">Herrera S. Nvidia built itself around one man. A scandal is testing that bet. <i>Fortune</i>, 2026-11-09. <a href="https://fortune.com/2026/11/09/nvidia-power-built-around-jensen-huang-scandal-testing-formula/">링크</a> <a class="back" href="#cite-14">↩</a><a class="back" href="#cite-14b">↩</a></li>
+    <li id="ref-15">Keltner D. How to Find Your Power—and Avoid Abusing It. <i>Greater Good Magazine</i>, 2016-05-17 (『The Power Paradox』 발췌). <a href="https://greatergood.berkeley.edu/article/item/how_to_find_your_power_avoid_abusing_it">링크</a> <a class="back" href="#cite-15">↩</a></li>
+    <li id="ref-16">Benderev C. When Power Goes To Your Head, It May Shut Out Your Heart. NPR (WUNC 게재), 2013-08-10. <a href="https://www.wunc.org/2013-08-10/when-power-goes-to-your-head-it-may-shut-out-your-heart">링크</a> <a class="back" href="#cite-16">↩</a></li>
+    <li id="ref-17">Pew Research Center. In 25-Country Survey, Americans Especially Likely To View Fellow Citizens as Morally Bad, 2026-03-05 (2025년 1~5월 조사). <a href="https://www.pewresearch.org/religion/2026/03/05/in-25-country-survey-americans-especially-likely-to-view-fellow-citizens-as-morally-bad/">링크</a> <a class="back" href="#cite-17">↩</a></li>
+    <li id="ref-18">CDK Global. Proxy Statement (Form DEF 14A), 2019 (크르재니치 선임·이력). <a href="https://www.sec.gov/Archives/edgar/data/1609702/000114036119018305/nc10004858x1_def14a.htm">링크</a> <a class="back" href="#cite-18">↩</a></li>
+    <li id="ref-19">TechCrunch. Microsoft hires ex-OpenAI leaders Sam Altman and Greg Brockman to lead new AI team, 2023-11-20. <a href="https://techcrunch.com/2023/11/20/openai-co-founders-sam-altman-and-greg-brockman-to-join-microsoft/">링크</a> <a class="back" href="#cite-19">↩</a></li>
+  </ol>
+</section>
+
+</article>
+</body>
+</html>
